@@ -1,0 +1,162 @@
+---
+import { render } from 'astro:content';
+import type { InferGetStaticPropsType } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import { publishedCaseStudies } from '../../utils/content';
+import { contentPath } from '../../utils/publication';
+import { canonicalUrl } from '../../utils/seo';
+import {
+  breadcrumbSchema,
+  organizationSchema,
+} from '../../utils/structured-data';
+export async function getStaticPaths() {
+  return (await publishedCaseStudies()).map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const path = contentPath('caseStudies', entry.id);
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: entry.data.title, path },
+];
+const image = entry.data.featuredImage;
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  path={path}
+  indexable={true}
+  image={image}
+  schema={[
+    organizationSchema(),
+    breadcrumbSchema(breadcrumbs),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: entry.data.title,
+      description: entry.data.description,
+      url: canonicalUrl(path),
+      datePublished: entry.data.publishedDate.toISOString(),
+      ...(entry.data.updatedDate
+        ? { dateModified: entry.data.updatedDate.toISOString() }
+        : {}),
+      creator: { '@id': `${new URL(canonicalUrl('/')).origin}/#organization` },
+    },
+  ]}
+>
+  <article class="container">
+    <header class="article-header prose">
+      <Breadcrumbs items={breadcrumbs} />
+      <h1>{entry.data.title}</h1>
+      <p class="lead">{entry.data.summary}</p>
+      <p>
+        {entry.data.client} · {entry.data.industry}
+      </p>
+      <p>
+        Published{' '}
+        <time datetime={entry.data.publishedDate.toISOString()}>
+          {entry.data.publishedDate.toISOString().slice(0, 10)}
+        </time>
+      </p>
+      {entry.data.updatedDate && (
+        <p>
+          Updated{' '}
+          <time datetime={entry.data.updatedDate.toISOString()}>
+            {entry.data.updatedDate.toISOString().slice(0, 10)}
+          </time>
+        </p>
+      )}
+      {image && (
+        <img
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          decoding="async"
+        />
+      )}
+    </header>
+    <div class="prose article-body">
+      <section>
+        <h2>Business context</h2>
+        <p>{entry.data.context}</p>
+      </section>
+      <section>
+        <h2>The challenge</h2>
+        <p>{entry.data.challenge}</p>
+        <ul>
+          {entry.data.constraints.map((constraint) => (
+            <li>{constraint}</li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <h2>Our role and approach</h2>
+        <p>{entry.data.role}</p>
+        <p>{entry.data.strategy}</p>
+      </section>
+      <section>
+        <h2>What we built</h2>
+        <p>{entry.data.solution}</p>
+        <p>Timeline: {entry.data.timeline}</p>
+        <ul>
+          {entry.data.technologies.map((technology) => (
+            <li>{technology}</li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <h2>Before and after</h2>
+        <h3>Before</h3>
+        <p>{entry.data.before}</p>
+        <h3>After</h3>
+        <p>{entry.data.after}</p>
+      </section>
+      <Content />
+      {entry.data.results.length > 0 && (
+        <section>
+          <h2>Documented results</h2>
+          <ul>
+            {entry.data.results.map((result) => (
+              <li>
+                <p>{result.claim}</p>
+                <p>Source: {result.source}</p>
+                {result.methodology && <p>{result.methodology}</p>}
+                {result.measuredAt && (
+                  <p>
+                    Measured{' '}
+                    <time datetime={result.measuredAt.toISOString()}>
+                      {result.measuredAt.toISOString().slice(0, 10)}
+                    </time>
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {entry.data.gallery.map((media) => (
+        <img
+          src={media.src}
+          alt={media.alt}
+          width={media.width}
+          height={media.height}
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
+      {entry.data.testimonial && (
+        <figure>
+          <blockquote>{entry.data.testimonial.quote}</blockquote>
+          <figcaption>{entry.data.testimonial.attribution}</figcaption>
+        </figure>
+      )}
+    </div>
+  </article>
+</BaseLayout>

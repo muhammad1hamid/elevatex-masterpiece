@@ -1,0 +1,66 @@
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.65;
+}
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+h1 {
+  font-size: var(--text-h1);
+  letter-spacing: -0.045em;
+  max-width: 20ch;
+}
+h2 {
+  font-size: var(--text-h2);
+  letter-spacing: -0.025em;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h1 em {
+  font-family: var(--font-display);
+  color: var(--color-gold-soft);
+  font-weight: 400;
+}
+p {
+  max-width: 68ch;
+}
+.lead {
+  font-size: var(--text-lead);
+  color: var(--color-muted);
+  max-width: 48ch;
+}
+.eyebrow {
+  color: var(--color-gold);
+  font-size: var(--text-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.prose {
+  max-width: var(--container-reading);
+  margin-inline: auto;
+}
+.prose > * + * {
+  margin-block-start: var(--space-6);
+}
+.prose h2,
+.prose h3 {
+  margin-block-start: var(--space-12);
+}
+.prose ul,
+.prose ol {
+  padding-inline-start: var(--space-6);
+}
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.prose pre {
+  overflow-x: auto;
+  padding: var(--space-4);
+}

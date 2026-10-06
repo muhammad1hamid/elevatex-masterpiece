@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/private/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Allow important pages
+Allow: /web-development
+Allow: /ai-chatbots
+Allow: /landing-pages
+Allow: /portfolio
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /locations/
+
+# Sitemaps
+Sitemap: https://elevatexlab.com/sitemap.xml
+Sitemap: https://elevatexlab.com/sitemap-pages.xml
+Sitemap: https://elevatexlab.com/sitemap-blog.xml
+Sitemap: https://elevatexlab.com/sitemap-images.xml
+
+# Crawl delay for bots
+Crawl-delay: 1

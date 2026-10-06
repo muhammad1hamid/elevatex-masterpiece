@@ -1,0 +1,44 @@
+:root {
+  color-scheme: dark;
+  --color-bg: #0c0c0b;
+  --color-surface: #171716;
+  --color-text: #f3f0e9;
+  --color-muted: #b5b3ad;
+  --color-gold: #d6be8c;
+  --color-gold-soft: #e8d7b3;
+  --color-silver: #c9cacb;
+  --color-border: #41413b;
+  --color-glow: rgb(214 190 140 / 12%);
+  --color-focus: #f2d496;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: 'Segoe UI', Helvetica, Arial, sans-serif;
+  --text-small: 0.875rem;
+  --text-body: 1rem;
+  --text-lead: clamp(1.0625rem, 0.95rem + 0.5vw, 1.375rem);
+  --text-h1: clamp(2.5rem, 1.3rem + 4.8vw, 6.25rem);
+  --text-h2: clamp(1.75rem, 1.3rem + 2vw, 3rem);
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-section: clamp(4rem, 10vw, 9rem);
+  --container-max: 80rem;
+  --container-reading: 46rem;
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --radius-small: 0.25rem;
+  --radius-medium: 0.5rem;
+  --shadow-soft: 0 1rem 3rem rgb(0 0 0 / 20%);
+  --glow-soft: 0 0 2rem var(--color-glow);
+  --duration-fast: 160ms;
+  --duration-normal: 280ms;
+  --duration-slow: 600ms;
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Documentation tokens; CSS variables cannot be used in media-query conditions. */
+  --breakpoint-tablet: 48rem;
+  --breakpoint-desktop: 64rem;
+}

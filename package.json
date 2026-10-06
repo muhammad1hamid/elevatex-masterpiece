@@ -1,0 +1,48 @@
+{
+  "name": "elevatex-masterpiece",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro build && node scripts/write-hosting-headers.mjs",
+    "preview": "astro preview --host 127.0.0.1",
+    "check": "astro check",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "playwright test",
+    "test:all-browsers": "playwright test --config playwright.cross-browser.config.ts",
+    "qa": "npm run check && npm run lint && npm run format:check && npm run test:publication && npm run build && npm test",
+    "cloudflare:check": "wrangler deploy --dry-run",
+    "migration:audit": "node scripts/audit-live-site.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
+    "test:publication": "node scripts/check-publication-build.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.6"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.6.4",
+    "eslint": "10.12.0",
+    "eslint-plugin-astro": "3.2.1",
+    "globals": "17.13.0",
+    "prettier": "3.9.9",
+    "prettier-plugin-astro": "1.1.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1",
+    "wrangler": "4.148.0"
+  },
+  "overrides": {
+    "miniflare": {
+      "sharp": "0.35.5"
+    }
+  }
+}

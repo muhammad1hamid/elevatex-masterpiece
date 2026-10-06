@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-CtsdN8tR.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ELEVATE X - Modern Web Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JM4P8TH346"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JM4P8TH346');
+    </script>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/outfit/v11/QGYqz_wNahGiZ0EiAEVFH1AJsw.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v30/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDYbtXK-F2qO0isEw.woff2" as="font" type="font/woff2" crossorigin>
+    <script type="module" crossorigin src="/assets/index-CL936xLA.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Do2ZLwmt.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

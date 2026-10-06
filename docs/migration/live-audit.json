@@ -1,0 +1,203 @@
+{
+  "capturedAt": "2026-10-06T18:37:16.059Z",
+  "method": "HTTP and advertised sitemap inventory; no search-console/backlink data",
+  "resources": [
+    {
+      "url": "https://elevatexlab.com/",
+      "finalUrl": "https://www.elevatexlab.com/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "title": "ELEVATE X - Modern Web Solutions",
+      "canonical": null,
+      "hasEmptyRoot": true
+    },
+    {
+      "url": "https://www.elevatexlab.com/",
+      "finalUrl": "https://www.elevatexlab.com/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "title": "ELEVATE X - Modern Web Solutions",
+      "canonical": null,
+      "hasEmptyRoot": true
+    },
+    {
+      "url": "https://www.elevatexlab.com/robots.txt",
+      "finalUrl": "https://www.elevatexlab.com/robots.txt",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://www.elevatexlab.com/sitemap.xml",
+      "finalUrl": "https://www.elevatexlab.com/sitemap.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://www.elevatexlab.com/sitemap-pages.xml",
+      "finalUrl": "https://www.elevatexlab.com/sitemap-pages.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://www.elevatexlab.com/sitemap-blog.xml",
+      "finalUrl": "https://www.elevatexlab.com/sitemap-blog.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://www.elevatexlab.com/sitemap-images.xml",
+      "finalUrl": "https://www.elevatexlab.com/sitemap-images.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/web-development",
+      "finalUrl": "https://www.elevatexlab.com/web-development",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/ai-chatbots",
+      "finalUrl": "https://www.elevatexlab.com/ai-chatbots",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/landing-pages",
+      "finalUrl": "https://www.elevatexlab.com/landing-pages",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/portfolio",
+      "finalUrl": "https://www.elevatexlab.com/portfolio",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/about",
+      "finalUrl": "https://www.elevatexlab.com/about",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/contact",
+      "finalUrl": "https://www.elevatexlab.com/contact",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/blog",
+      "finalUrl": "https://www.elevatexlab.com/blog",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/locations/lahore",
+      "finalUrl": "https://www.elevatexlab.com/locations/lahore",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/locations/karachi",
+      "finalUrl": "https://www.elevatexlab.com/locations/karachi",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/locations/islamabad",
+      "finalUrl": "https://www.elevatexlab.com/locations/islamabad",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/blog/web-development-trends-2025",
+      "finalUrl": "https://www.elevatexlab.com/blog/web-development-trends-2025",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/blog/ai-chatbots-business-growth",
+      "finalUrl": "https://www.elevatexlab.com/blog/ai-chatbots-business-growth",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    },
+    {
+      "url": "https://elevatexlab.com/blog/landing-page-conversion-optimization",
+      "finalUrl": "https://www.elevatexlab.com/blog/landing-page-conversion-optimization",
+      "status": 404,
+      "contentType": "text/plain; charset=utf-8",
+      "title": null,
+      "canonical": null,
+      "hasEmptyRoot": false
+    }
+  ],
+  "advertisedUrls": [
+    "https://www.elevatexlab.com/",
+    "https://elevatexlab.com/",
+    "https://elevatexlab.com/web-development",
+    "https://elevatexlab.com/ai-chatbots",
+    "https://elevatexlab.com/landing-pages",
+    "https://elevatexlab.com/portfolio",
+    "https://elevatexlab.com/about",
+    "https://elevatexlab.com/contact",
+    "https://elevatexlab.com/blog",
+    "https://elevatexlab.com/locations/lahore",
+    "https://elevatexlab.com/locations/karachi",
+    "https://elevatexlab.com/locations/islamabad",
+    "https://elevatexlab.com/blog/web-development-trends-2025",
+    "https://elevatexlab.com/blog/ai-chatbots-business-growth",
+    "https://elevatexlab.com/blog/landing-page-conversion-optimization"
+  ]
+}

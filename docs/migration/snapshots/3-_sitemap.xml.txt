@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://elevatexlab.com/sitemap-pages.xml</loc>
+    <lastmod>2025-01-27</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://elevatexlab.com/sitemap-blog.xml</loc>
+    <lastmod>2025-01-27</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://elevatexlab.com/sitemap-images.xml</loc>
+    <lastmod>2025-01-27</lastmod>
+  </sitemap>
+</sitemapindex>

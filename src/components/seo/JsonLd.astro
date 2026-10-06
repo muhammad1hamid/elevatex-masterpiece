@@ -1,0 +1,9 @@
+---
+import { serializeJsonLd, type JsonLd } from '../../utils/structured-data';
+interface Props {
+  data: JsonLd | JsonLd[];
+}
+const { data } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={serializeJsonLd(data)} />

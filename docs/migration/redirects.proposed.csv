@@ -1,0 +1,9 @@
+source,destination,status,activation_gate
+/web-development,/services/web-development/,301,review content and publish target
+/ai-chatbots,/services/ai-chatbots/,301,review content and publish target
+/landing-pages,/services/landing-pages/,301,review content and publish target
+/portfolio,/work/,301,migrate verified work and publish target
+/blog,/insights/,301,review article inventory and publish target
+/blog/web-development-trends-2025,/insights/web-development-trends-2025/,301,review and preserve article before publishing target
+/blog/ai-chatbots-business-growth,/insights/ai-chatbots-business-growth/,301,review and preserve article before publishing target
+/blog/landing-page-conversion-optimization,/insights/landing-page-conversion-optimization/,301,review and preserve article before publishing target

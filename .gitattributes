@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.woff2 binary
+*.avif binary
+*.webp binary
+*.png binary
+# Preserve whitespace in captured legacy responses as audit evidence.
+docs/migration/snapshots/** -whitespace

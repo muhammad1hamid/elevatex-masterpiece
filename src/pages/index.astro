@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site, services, staticPages } from '../data/site';
+import {
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+} from '../utils/structured-data';
+---
+
+<BaseLayout
+  title="Premium Digital Systems For Serious Growth"
+  description={site.description}
+  path="/"
+  indexable={staticPages.find((page) => page.path === '/')?.indexable ?? false}
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    webPageSchema({
+      title: site.headline,
+      description: site.description,
+      path: '/',
+    }),
+  ]}
+>
+  <div class="container foundation-intro">
+    <p class="eyebrow">ElevateX · Foundation preview</p>
+    <h1>
+      Premium Digital Systems
+      <br />
+      For Serious <em>Growth.</em>
+    </h1>
+    <p class="lead">{site.description}</p>
+  </div>
+  <section
+    class="container services-overview"
+    id="services"
+    aria-labelledby="services-heading"
+  >
+    <p class="eyebrow">Our focus</p>
+    <h2 id="services-heading">Core services</h2>
+    <ul class="service-list">
+      {services.map((service, index) => (
+        <li>
+          <span class="service-number" aria-hidden="true">
+            0{index + 1}
+          </span>
+          <span>{service.name}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

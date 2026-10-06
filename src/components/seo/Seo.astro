@@ -1,0 +1,59 @@
+---
+import { site } from '../../data/site';
+import { canIndex, canonicalUrl, pageTitle } from '../../utils/seo';
+import type { JsonLd as JsonLdType } from '../../utils/structured-data';
+import JsonLd from './JsonLd.astro';
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  indexable?: boolean;
+  type?: 'website' | 'article';
+  image?:
+    { src: string; alt: string; width: number; height: number } | undefined;
+  schema?: JsonLdType[];
+}
+const {
+  title,
+  description,
+  path,
+  indexable = false,
+  type = 'website',
+  image,
+  schema = [],
+} = Astro.props;
+const canonical = canonicalUrl(path);
+const fullTitle = pageTitle(title);
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta
+  name="robots"
+  content={
+    canIndex(indexable)
+      ? 'index, follow, max-image-preview:large'
+      : 'noindex, follow'
+  }
+/>
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={site.locale} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+{image && (
+  <>
+    <meta property="og:image" content={new URL(image.src, site.origin).href} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta name="twitter:image" content={new URL(image.src, site.origin).href} />
+    <meta name="twitter:image:alt" content={image.alt} />
+  </>
+)}
+{schema.length > 0 && <JsonLd data={schema} />}

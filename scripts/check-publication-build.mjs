@@ -79,6 +79,9 @@ try {
     await assert.rejects(access(`${output}/insights/${slug}/index.html`));
   }
   const robots = await readFile(`${output}/robots.txt`, 'utf8');
+  for (const destination of ['services', 'work', 'about', 'contact']) {
+    await assert.rejects(access(`${output}/${destination}/index.html`));
+  }
   assert.match(robots, /User-agent: OAI-SearchBot\nAllow: \//);
   assert.match(robots, /User-agent: GPTBot\nAllow: \//);
   assert.match(

@@ -23,7 +23,10 @@
     "test:publication": "node scripts/check-publication-build.mjs"
   },
   "dependencies": {
-    "astro": "7.3.6"
+    "@fontsource-variable/bodoni-moda": "5.3.0",
+    "@fontsource-variable/instrument-sans": "5.3.0",
+    "astro": "7.3.6",
+    "gsap": "3.15.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
@@ -34,6 +37,7 @@
     "eslint": "10.12.0",
     "eslint-plugin-astro": "3.2.1",
     "globals": "17.13.0",
+    "lighthouse": "13.5.0",
     "prettier": "3.9.9",
     "prettier-plugin-astro": "1.1.0",
     "typescript": "6.0.3",

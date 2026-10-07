@@ -1,8 +1,110 @@
-<header class="site-header container">
-  <a class="wordmark" href="/" aria-label="ElevateX home">
-    Elevate<span>X</span>
-  </a>
-  <nav aria-label="Primary">
-    <a href="/#services">Our services</a>
-  </nav>
+---
+import '../../styles/header.css';
+
+interface Props {
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+const currentPath = Astro.url.pathname;
+const navigation = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services/' },
+  { label: 'Work', href: '/work/' },
+  { label: 'About', href: '/about/' },
+  { label: 'Contact', href: '/contact/' },
+];
+const isCurrent = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<header
+  class:list={['global-header', { 'is-overlay': overlay }]}
+  data-site-header
+>
+  <div class="global-header__inner">
+    <a
+      class="global-header__brand"
+      href="/"
+      aria-label="ElevateX home"
+      data-hero-logo
+    >
+      Elevate<span class="global-header__brand-x">X</span>
+    </a>
+
+    <nav class="global-header__navigation" aria-label="Primary">
+      {navigation.map(({ href, label }) => (
+        <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
+          {label}
+        </a>
+      ))}
+    </nav>
+
+    <a class="global-header__call" href="/contact/">
+      <span>Book a Call</span>
+      <svg
+        width="19"
+        height="19"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M4 12h15m-6-6 6 6-6 6"
+          stroke="currentColor"
+          stroke-width="1.5"
+        />
+      </svg>
+    </a>
+
+    <details class="global-header__mobile" data-mobile-menu>
+      <summary
+        class="global-header__menu-toggle"
+        aria-label="Open menu"
+        aria-controls="mobile-navigation"
+        data-menu-toggle
+      >
+        <span class="global-header__menu-line" aria-hidden="true"></span>
+        <span class="global-header__menu-line" aria-hidden="true"></span>
+      </summary>
+      <nav
+        id="mobile-navigation"
+        class="global-header__mobile-navigation"
+        aria-label="Mobile"
+      >
+        {navigation.map(({ href, label }) => (
+          <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>
+            {label}
+          </a>
+        ))}
+        <a class="global-header__mobile-call" href="/contact/">
+          <span>Book a Call</span>
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 12h15m-6-6 6 6-6 6"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+          </svg>
+        </a>
+      </nav>
+    </details>
+  </div>
 </header>
+
+<script>
+  import { initializeNavigation } from '../../scripts/navigation';
+
+  let cleanup = initializeNavigation();
+  document.addEventListener('astro:before-swap', () => cleanup());
+  document.addEventListener('astro:page-load', () => {
+    cleanup();
+    cleanup = initializeNavigation();
+  });
+</script>

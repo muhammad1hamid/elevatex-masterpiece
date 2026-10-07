@@ -1,0 +1,93 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+// Preview handoffs only. Production routes require approved page content.
+export const getStaticPaths = (() => {
+  if (import.meta.env.DEPLOYMENT_ENV === 'production') return [];
+
+  return [
+    { destination: 'services', target: '/#services', external: false },
+    {
+      destination: 'work',
+      target: 'https://www.elevatexlab.com/#work',
+      external: true,
+    },
+    {
+      destination: 'about',
+      target: 'https://www.elevatexlab.com/#home',
+      external: true,
+    },
+    {
+      destination: 'contact',
+      target: 'https://www.elevatexlab.com/#contact',
+      external: true,
+    },
+  ].map(({ destination, ...props }) => ({
+    params: { destination },
+    props,
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  target: string;
+  external: boolean;
+}
+
+const { target, external } = Astro.props;
+const label = external
+  ? 'Continue to the current ElevateX website'
+  : 'Continue to ElevateX services';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <title>Continue to ElevateX</title>
+  </head>
+  <body>
+    <main>
+      <h1>Continue to ElevateX</h1>
+      <p>
+        <a href={target}>{label}</a>
+      </p>
+    </main>
+  </body>
+</html>
+
+<style>
+  html {
+    color-scheme: dark;
+    font-family: system-ui, sans-serif;
+    background: #0c0c0b;
+    color: #f3f0e9;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  main {
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: 4rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  a {
+    color: #e8d7b3;
+    text-underline-offset: 0.25em;
+  }
+
+  a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 5px;
+  }
+</style>

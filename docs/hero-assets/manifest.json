@@ -1,0 +1,174 @@
+{
+  "generated": "2026-10-07",
+  "assets": [
+    {
+      "name": "laptop",
+      "original": {
+        "width": 1918,
+        "height": 820
+      },
+      "visibleBounds": {
+        "left": 74,
+        "top": 17,
+        "width": 1770,
+        "height": 772
+      },
+      "crop": {
+        "left": 70,
+        "top": 13,
+        "width": 1778,
+        "height": 780
+      },
+      "transparentPixels": 540229,
+      "translucentPixels": 1031943,
+      "outputs": [
+        {
+          "filename": "hero-laptop-640.avif",
+          "width": 640,
+          "height": 281,
+          "bytes": 14961
+        },
+        {
+          "filename": "hero-laptop-640.webp",
+          "width": 640,
+          "height": 281,
+          "bytes": 30936
+        },
+        {
+          "filename": "hero-laptop-1200.avif",
+          "width": 1200,
+          "height": 526,
+          "bytes": 31956
+        },
+        {
+          "filename": "hero-laptop-1200.webp",
+          "width": 1200,
+          "height": 526,
+          "bytes": 74090
+        }
+      ]
+    },
+    {
+      "name": "pedestal",
+      "original": {
+        "width": 2172,
+        "height": 724
+      },
+      "visibleBounds": {
+        "left": 62,
+        "top": 265,
+        "width": 2048,
+        "height": 382
+      },
+      "crop": {
+        "left": 58,
+        "top": 261,
+        "width": 2056,
+        "height": 390
+      },
+      "transparentPixels": 883599,
+      "translucentPixels": 687711,
+      "outputs": [
+        {
+          "filename": "hero-pedestal-800.avif",
+          "width": 800,
+          "height": 120,
+          "bytes": 20155
+        },
+        {
+          "filename": "hero-pedestal-800.webp",
+          "width": 800,
+          "height": 120,
+          "bytes": 37874
+        },
+        {
+          "filename": "hero-pedestal-1600.avif",
+          "width": 1600,
+          "height": 241,
+          "bytes": 58536
+        },
+        {
+          "filename": "hero-pedestal-1600.webp",
+          "width": 1600,
+          "height": 241,
+          "bytes": 120348
+        }
+      ]
+    },
+    {
+      "name": "smoke",
+      "original": {
+        "width": 2172,
+        "height": 724
+      },
+      "visibleBounds": {
+        "left": 18,
+        "top": 110,
+        "width": 2120,
+        "height": 594
+      },
+      "crop": {
+        "left": 14,
+        "top": 106,
+        "width": 2128,
+        "height": 602
+      },
+      "transparentPixels": 615241,
+      "translucentPixels": 957287,
+      "outputs": [
+        {
+          "filename": "smoke-small.webp",
+          "width": 384,
+          "height": 109,
+          "bytes": 15832
+        },
+        {
+          "filename": "smoke.webp",
+          "width": 768,
+          "height": 217,
+          "bytes": 47330
+        }
+      ]
+    },
+    {
+      "name": "floor",
+      "original": {
+        "width": 2172,
+        "height": 724
+      },
+      "crop": {
+        "left": 0,
+        "top": 120,
+        "width": 2172,
+        "height": 420
+      },
+      "transparency": "opaque floor surface",
+      "outputs": [
+        {
+          "filename": "hero-floor-800.avif",
+          "width": 800,
+          "height": 155,
+          "bytes": 10467
+        },
+        {
+          "filename": "hero-floor-800.webp",
+          "width": 800,
+          "height": 155,
+          "bytes": 16830
+        },
+        {
+          "filename": "hero-floor-1600.avif",
+          "width": 1600,
+          "height": 309,
+          "bytes": 34397
+        },
+        {
+          "filename": "hero-floor-1600.webp",
+          "width": 1600,
+          "height": 309,
+          "bytes": 55562
+        }
+      ]
+    }
+  ]
+}

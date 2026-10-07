@@ -5,7 +5,8 @@ import Footer from '../components/global/Footer.astro';
 import SkipLink from '../components/ui/SkipLink.astro';
 import { site } from '../data/site';
 import '../styles/global.css';
-type Props = SeoProps;
+type Props = SeoProps & { hero?: boolean };
+const { hero = false, ...seoProps } = Astro.props;
 ---
 
 <!doctype html>
@@ -14,11 +15,13 @@ type Props = SeoProps;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0c0c0b" />
-    <Seo {...Astro.props} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Seo {...seoProps} />
+    <slot name="head" />
   </head>
   <body>
     <SkipLink />
-    <Header />
+    <Header overlay={hero} />
     <main id="main-content" tabindex="-1">
       <slot />
     </main>

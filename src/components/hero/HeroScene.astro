@@ -1,0 +1,157 @@
+---
+import HeroHalo from './HeroHalo.astro';
+---
+
+<div class="hero__scene" aria-hidden="true">
+  <div class="hero__background"></div>
+  <div class="hero__top-light"></div>
+  <div class="hero__architecture">
+    <div class="hero__side-light hero__side-light--outer-left"></div>
+    <div class="hero__side-light hero__side-light--inner-left"></div>
+    <div class="hero__side-light hero__side-light--inner-right"></div>
+    <div class="hero__side-light hero__side-light--outer-right"></div>
+  </div>
+  <div class="hero__floor">
+    <picture class="hero__floor-texture">
+      <source
+        type="image/avif"
+        srcset="/images/hero/hero-floor-800.avif 800w, /images/hero/hero-floor-1600.avif 1600w"
+        sizes="100vw"
+      />
+      <img
+        src="/images/hero/hero-floor-1600.webp"
+        srcset="/images/hero/hero-floor-800.webp 800w, /images/hero/hero-floor-1600.webp 1600w"
+        sizes="100vw"
+        width="1600"
+        height="309"
+        alt=""
+        decoding="async"
+        fetchpriority="low"
+      />
+    </picture>
+  </div>
+  <div class="hero__stage">
+    <div class="hero__smoke-position hero__smoke-position--left">
+      <img
+        class="hero__smoke hero__smoke--left"
+        src="/images/hero/smoke.webp"
+        srcset="/images/hero/smoke-small.webp 384w, /images/hero/smoke.webp 768w"
+        sizes="(max-width: 767px) 65vw, 704px"
+        width="768"
+        height="217"
+        alt=""
+        decoding="async"
+        fetchpriority="low"
+      />
+    </div>
+    <div class="hero__smoke-position hero__smoke-position--right">
+      <img
+        class="hero__smoke hero__smoke--right"
+        src="/images/hero/smoke.webp"
+        srcset="/images/hero/smoke-small.webp 384w, /images/hero/smoke.webp 768w"
+        sizes="(max-width: 767px) 65vw, 704px"
+        width="768"
+        height="217"
+        alt=""
+        decoding="async"
+        fetchpriority="low"
+      />
+    </div>
+    <HeroHalo />
+    <div class="hero__reflection" data-hero-reflection></div>
+    <div class="hero__pedestal-position">
+      <div class="hero__pedestal" data-hero-pedestal>
+        <picture>
+          <source
+            type="image/avif"
+            srcset="/images/hero/hero-pedestal-800.avif 800w, /images/hero/hero-pedestal-1600.avif 1600w"
+            sizes="(max-width: 767px) 104vw, (max-width: 1023px) 90vw, 980px"
+          />
+          <img
+            src="/images/hero/hero-pedestal-1600.webp"
+            srcset="/images/hero/hero-pedestal-800.webp 800w, /images/hero/hero-pedestal-1600.webp 1600w"
+            sizes="(max-width: 767px) 104vw, (max-width: 1023px) 90vw, 980px"
+            width="1600"
+            height="241"
+            alt=""
+            decoding="async"
+          />
+        </picture>
+        <svg
+          class="hero__rim"
+          viewBox="0 0 1000 140"
+          fill="none"
+          aria-hidden="true"
+          data-hero-rim
+        >
+          <defs>
+            <filter
+              id="rim-diffusion"
+              x="-10%"
+              y="-100%"
+              width="120%"
+              height="300%"
+            >
+              <feGaussianBlur stdDeviation="4" />
+            </filter>
+          </defs>
+          <g class="hero__rim-breath">
+            <ellipse
+              cx="500"
+              cy="68"
+              rx="486"
+              ry="47"
+              stroke="#e8b97e"
+              stroke-width="7"
+              filter="url(#rim-diffusion)"
+              opacity=".6"
+            />
+            <ellipse
+              cx="500"
+              cy="68"
+              rx="486"
+              ry="47"
+              stroke="#fff0d9"
+              stroke-width="2"
+            />
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="hero__laptop-position">
+      <div class="hero__laptop" data-hero-laptop>
+        <picture>
+          <source
+            type="image/avif"
+            srcset="/images/hero/hero-laptop-640.avif 640w, /images/hero/hero-laptop-1200.avif 1200w"
+            sizes="(max-width: 767px) 88vw, (max-width: 1023px) 64vw, 600px"
+          />
+          <img
+            src="/images/hero/hero-laptop-1200.webp"
+            srcset="/images/hero/hero-laptop-640.webp 640w, /images/hero/hero-laptop-1200.webp 1200w"
+            sizes="(max-width: 767px) 88vw, (max-width: 1023px) 64vw, 600px"
+            width="1200"
+            height="526"
+            alt=""
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
+      </div>
+    </div>
+    <div class="hero__smoke-position hero__smoke-position--front">
+      <img
+        class="hero__smoke hero__smoke--front"
+        src="/images/hero/smoke.webp"
+        srcset="/images/hero/smoke-small.webp 384w, /images/hero/smoke.webp 768w"
+        sizes="(max-width: 767px) 65vw, 704px"
+        width="768"
+        height="217"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
+      />
+    </div>
+  </div>
+</div>

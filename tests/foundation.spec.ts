@@ -13,7 +13,9 @@ test('primary content and metadata are delivered in static HTML', async ({
   expect(html).toContain('AI Automation');
   expect(html).toContain(`href="${site.origin}/"`);
   expect(html).toContain('noindex, follow');
-  expect(html).not.toMatch(/<script[^>]+(?:src=|type="module")/);
+  expect(html).not.toMatch(
+    /<astro-island\b|<canvas\b|spline-viewer|react-dom|three\.js/i,
+  );
 });
 
 test('preview crawling and hosting headers remain non-indexable', async ({
@@ -72,8 +74,9 @@ test('page works with JavaScript disabled and reduced motion', async ({
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await page.getByRole('link', { name: 'Our services' }).click();
-  await expect(page.locator('#services')).toBeInViewport();
+  await expect(
+    page.getByRole('link', { name: 'See Our Work', exact: true }),
+  ).toHaveAttribute('href', '/work/');
   await context.close();
 });
 
@@ -97,7 +100,9 @@ test('no console errors, missing resources, or broken internal links', async ({
       links.map((link) => link.getAttribute('href') ?? '/'),
     )) {
     const [path, fragment] = href.split('#');
-    expect((await request.get(path || '/')).ok()).toBe(true);
+    const linkedPage = await request.get(path || '/', { maxRedirects: 0 });
+    expect(linkedPage.status()).toBeGreaterThanOrEqual(200);
+    expect(linkedPage.status()).toBeLessThan(400);
     if (fragment)
       await expect(page.locator(`[id="${fragment}"]`)).toHaveCount(1);
   }
@@ -109,6 +114,7 @@ for (const width of [
 ]) {
   test(`layout remains usable at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
     expect(
       await page.evaluate(

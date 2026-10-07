@@ -1,4 +1,4 @@
-name: Foundation quality
+name: ElevateX quality
 on:
   push:
   pull_request:
@@ -17,8 +17,9 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run qa
+      - run: npm run test:all-browsers -- --project=firefox --project=webkit
       - name: Upload failure evidence
         if: failure()
         uses: actions/upload-artifact@v4

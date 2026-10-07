@@ -7,7 +7,7 @@ Read this file before modifying this repository. Preserve working code and make 
 - ElevateX is a premium digital systems agency: **Premium Digital Systems For Serious Growth.**
 - Supporting proposition: **We help ambitious businesses grow with high-converting websites, AI systems, and smart chatbots.**
 - The commercial services are Web Development, AI Automation, AI Chatbots, and Landing Pages. Do not advertise SEO/AEO/GEO as services without confirmation.
-- Current stage: foundation only. Do not build the complete site or implement the cinematic hero, intro, laptop/platform, smoke, glow choreography, or detailed hero composition until the dedicated Hero Master Prompt arrives.
+- Current stage: primary hero implementation authorized by the Hero Master Prompt and locked Image A received 2026-10-07. Match that reference; build semantic HTML, independent transparent assets, CSS/SVG studio lighting and a short GSAP entrance. The complete site and unrelated homepage sections remain outside this stage.
 - Use concrete, concise copy. Never fabricate clients, team members, contact details, testimonials, awards, statistics, locations, pricing, or results.
 
 ## Architecture and cost
@@ -24,7 +24,7 @@ Read this file before modifying this repository. Preserve working code and make 
 
 - Dark, cinematic, editorial, minimal: black, charcoal, graphite, silver, off-white, restrained champagne/gold.
 - Prefer negative space, precise medium-weight typography, real proof, and purposeful composition. Avoid card grids everywhere, neon, purple/blue SaaS gradients, excessive glass, generic blobs, and ultra-bold type.
-- At most one editorial/display family and one readable body family. Self-host licensed WOFF2, subset and preload only what is critical; reserve suitable font metrics. Foundation uses system fallbacks until font selection is approved.
+- At most one editorial/display family and one readable body family. The approved hero fonts are self-hosted Bodoni Moda Variable (normal and italic) and Instrument Sans Variable. Use licensed Latin WOFF2 subsets and preload only critical styles; reserve suitable font metrics.
 - Mobile requires its own composition. Future hero order: logo/menu, headline, copy, primary CTA, secondary CTA, visual. Reduce imagery, fog, reflections and motion on small screens.
 
 ## Motion and performance

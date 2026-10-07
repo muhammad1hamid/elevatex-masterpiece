@@ -12,6 +12,7 @@ export default defineConfig(
       '.wrangler/**',
       'node_modules/**',
       'test-results/**',
+      'artifacts/**',
       'playwright-report/**',
       'docs/migration/snapshots/**',
     ],

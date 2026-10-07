@@ -1,0 +1,54 @@
+<div class="hero__halo-position">
+  <div class="hero__halo" data-hero-halo>
+    <svg
+      class="hero__halo-art"
+      viewBox="0 0 720 300"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <filter
+          id="halo-diffusion"
+          x="-20%"
+          y="-30%"
+          width="140%"
+          height="170%"
+        >
+          <feGaussianBlur stdDeviation="6" />
+        </filter>
+        <linearGradient id="halo-champagne" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="#e9c394" />
+          <stop offset=".75" stop-color="#fff3df" />
+          <stop offset="1" stop-color="#fbdcaa" />
+        </linearGradient>
+      </defs>
+      <g class="hero__halo-breath">
+        <path
+          d="M16 282 A344 260 0 0 1 704 282"
+          stroke="#e8b676"
+          stroke-width="14"
+          opacity=".48"
+          filter="url(#halo-diffusion)"
+          pathLength="1"
+          data-arc-path
+        />
+        <path
+          d="M16 282 A344 260 0 0 1 704 282"
+          stroke="#ebc798"
+          stroke-width="5"
+          opacity=".3"
+          pathLength="1"
+          data-arc-path
+        />
+        <path
+          d="M16 282 A344 260 0 0 1 704 282"
+          stroke="url(#halo-champagne)"
+          stroke-width="2.6"
+          pathLength="1"
+          data-arc-path
+        />
+      </g>
+    </svg>
+  </div>
+</div>

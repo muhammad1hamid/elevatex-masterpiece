@@ -5,5 +5,6 @@ dist
 package-lock.json
 playwright-report
 test-results
+artifacts
 docs/migration/snapshots
 docs/migration/live-audit.json

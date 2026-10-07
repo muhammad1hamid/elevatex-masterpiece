@@ -270,6 +270,10 @@ test('first session presents the platform before the laptop and does not replay 
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
+  // Drive the entrance clock explicitly: shared CI runners can skip animation
+  // frames or reach the fail-open watchdog before an intermediate sample.
+  await page.clock.install({ time: new Date('2026-10-07T00:00:00Z') });
+  await page.clock.pauseAt(new Date('2026-10-07T00:00:01Z'));
   await page.addInitScript(() => {
     const frames: { pedestalY: number; laptopOpacity: number }[] = [];
     Object.defineProperty(window, '__heroFrames', { value: frames });
@@ -291,6 +295,8 @@ test('first session presents the platform before the laptop and does not replay 
   await page.goto('/');
   const hero = page.locator('[data-hero-root]');
   await expect(hero).toHaveAttribute('data-intro', 'first');
+  await expect(hero).toHaveAttribute('data-motion', 'entering');
+  await page.clock.runFor(3000);
   await expect(hero).toHaveAttribute('data-motion', 'ambient', {
     timeout: 5000,
   });

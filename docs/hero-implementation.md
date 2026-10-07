@@ -95,6 +95,8 @@ Reports: `artifacts/hero-lighthouse/mobile-final.report.html` and `.json`. The f
 
 Local Firefox/WebKit installation was attempted but the browser CDNs timed out across all retries, so those engines were not verified locally. The GitHub quality workflow now installs and runs Chromium, Firefox and WebKit; inspect the workflow run for its independent result. Playwright WebKit does not replace testing real Safari. Production caching, real network/device behavior, manual screen-reader review and field Core Web Vitals remain unverified.
 
+The initial GitHub run passed Chromium and both additional engines, but one WebKit entrance-sampling check needed a retry. That sequence check now advances Playwright's controlled clock while preserving the platform-before-laptop assertions. CI also fails on flaky tests, so a retry can no longer turn an intermittent check into a successful quality gate. Real-time fallback, pause and reduced-motion checks remain separate.
+
 ## Remaining differences and launch work
 
 The laptop and stone are reconstructed artwork. Camera notch, screen artwork, mineral veins, smoke and floor reflections differ from Image A; Bodoni Moda has its own letterforms. Lighting is composed from CSS/SVG, so photographic diffusion is an approximation. Original separated artwork or original 3D camera/material files would be needed for pixel-identical reconstruction. No unverified result statistic from the reference is included.

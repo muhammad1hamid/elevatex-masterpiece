@@ -7,7 +7,7 @@ Read this file before modifying this repository. Preserve working code and make 
 - ElevateX is a premium digital systems agency: **Premium Digital Systems For Serious Growth.**
 - Supporting proposition: **We help ambitious businesses grow with high-converting websites, AI systems, and smart chatbots.**
 - The commercial services are Web Development, AI Automation, AI Chatbots, and Landing Pages. Do not advertise SEO/AEO/GEO as services without confirmation.
-- Current stage: primary hero implementation authorized by the Hero Master Prompt and locked Image A received 2026-10-07. Match that reference; build semantic HTML, independent transparent assets, CSS/SVG studio lighting and a short GSAP entrance. The complete site and unrelated homepage sections remain outside this stage.
+- Current stage: Master Prompt #23 authorizes redesigning the single shared global footer, following the attached screenshot's navigation structure and the prompt's cinematic CTA, arc and oversized wordmark. Preserve page-specific CTAs and all main page content. Reuse verified navigation and the confirmed WhatsApp contact; omit unavailable social/email/legal destinations. Retain the existing design tokens, accessible static HTML and finite optional motion. The Contact backend remains deferred. Changes remain local until publication is authorized; no production cutover.
 - Use concrete, concise copy. Never fabricate clients, team members, contact details, testimonials, awards, statistics, locations, pricing, or results.
 
 ## Architecture and cost
@@ -24,7 +24,7 @@ Read this file before modifying this repository. Preserve working code and make 
 
 - Dark, cinematic, editorial, minimal: black, charcoal, graphite, silver, off-white, restrained champagne/gold.
 - Prefer negative space, precise medium-weight typography, real proof, and purposeful composition. Avoid card grids everywhere, neon, purple/blue SaaS gradients, excessive glass, generic blobs, and ultra-bold type.
-- At most one editorial/display family and one readable body family. The approved hero fonts are self-hosted Bodoni Moda Variable (normal and italic) and Instrument Sans Variable. Use licensed Latin WOFF2 subsets and preload only critical styles; reserve suitable font metrics.
+- Approved typography uses self-hosted Outfit Variable for clean geometric headings and Instrument Sans Variable for body copy. Bodoni Moda italic remains only as the approved hero accent. Use licensed Latin WOFF2 subsets and preload only critical styles; reserve suitable font metrics. Reuse centralized section spacing, container, radius, border and motion tokens while retaining the approved heading hierarchy.
 - Mobile requires its own composition. Future hero order: logo/menu, headline, copy, primary CTA, secondary CTA, visual. Reduce imagery, fog, reflections and motion on small screens.
 
 ## Motion and performance

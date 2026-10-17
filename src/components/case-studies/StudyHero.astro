@@ -1,0 +1,101 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import StudyMedia from './StudyMedia.astro';
+interface Props {
+  context: StudyContext;
+  breadcrumbs: { name: string; path: string }[];
+}
+const { context, breadcrumbs } = Astro.props;
+const { study, prefix: p, name } = context,
+  h = study.hero;
+const target =
+  study.sections.find((s) => s.type === 'overview')?.id ??
+  study.sections[0]!.id;
+---
+
+<section
+  id={h.id}
+  class={`${p}-hero`}
+  aria-labelledby={h.titleId}
+  data-hero-variant={h.variant}
+  data-hero-motion={h.motion}
+>
+  <div class={`container ${p}-hero__copy`}>
+    <Breadcrumbs items={breadcrumbs} />
+    <p class={`${p}-kicker`}>{h.eyebrow}</p>
+    <h1 id={h.titleId}>{name}.</h1>
+    <p class={`${p}-hero__statement`}>
+      {h.statement.map((line, index) => (
+        <>
+          {index > 0 && <br />}
+          {index === 0 ? line : <span>{line}</span>}
+        </>
+      ))}
+    </p>
+    <p class={`${p}-lead`}>{h.description}</p>
+    <div class={`${p}-actions`}>
+      <a class={`${p}-button`} href={`#${target}`}>
+        Explore the Project <span aria-hidden="true">↓</span>
+      </a>
+      <a
+        class={`${p}-button ${p}-button--quiet`}
+        href={context.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Live Website <span aria-hidden="true">↗</span>
+        <span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    </div>
+    <p class={`${p}-classification`}>
+      {context.classification}
+      {h.classificationSeparator === 'slash' ? ' / ' : ' · '}
+      {h.classificationSuffix}
+    </p>
+  </div>
+  {h.variant === 'portrait-arch' && h.image ? (
+    <>
+      <div class={`container ${p}-hero__stage`}>
+        <div class={`${p}-hero__margin`} aria-hidden="true">
+          <span>{h.margins?.start[0]}</span>
+          <i></i>
+          <span>{h.margins?.start[1]}</span>
+        </div>
+        <StudyMedia
+          context={context}
+          image={h.image}
+          eager
+          class={`${p}-hero__portrait`}
+        />
+        <div
+          class={`${p}-hero__margin ${p}-hero__margin--end`}
+          aria-hidden="true"
+        >
+          <span>{h.margins?.end[0]}</span>
+          <i></i>
+          <span>
+            {h.margins?.end.slice(1).map((line, index) => (
+              <>
+                {index > 0 && <br />}
+                {line}
+              </>
+            ))}
+          </span>
+        </div>
+      </div>
+    </>
+  ) : (
+    h.image && (
+      <div class={`${p}-hero__visual`}>
+        {h.artLabel && <p class={`${p}-art-label`}>{h.artLabel}</p>}
+        <StudyMedia context={context} image={h.image} eager />
+      </div>
+    )
+  )}
+  {h.indexLink && (
+    <a class={`${p}-hero__index`} href={h.indexLink.href}>
+      {h.indexLink.label} <span aria-hidden="true">↓</span>
+    </a>
+  )}
+</section>

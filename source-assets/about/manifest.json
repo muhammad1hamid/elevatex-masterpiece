@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-15",
+  "classification": "ILLUSTRATIVE_EDITORIAL_ART",
+  "credit": "User-supplied generated artwork, edited using the built-in ImageGen tool. These imagined spaces and structures do not document agency premises, staff, projects, locations or business outcomes.",
+  "sourcePolicy": "Original supplied PNG files are retained unchanged. Edited PNG files are separate siblings. Only the edited derivatives are published as responsive images.",
+  "visualReview": "Inspected each supplied original and each generated edit. Mountain/landscape imagery inside monitors and panels has been replaced by architectural geometry. Original scene framing, materials, lighting and major physical objects are preserved.",
+  "outputs": {
+    "directory": "public/images/about",
+    "requestedWidths": [480, 800, 1200, 1448],
+    "mobileWidths": [480, 800, 864],
+    "formats": {
+      "avif": {
+        "quality": 55,
+        "effort": 5
+      },
+      "webp": {
+        "quality": 82,
+        "effort": 5
+      }
+    },
+    "upscaling": false
+  },
+  "images": [
+    {
+      "key": "hero",
+      "originalInput": "C:/Users/sahar/Downloads/ChatGPT Image Oct 15, 2026, 05_03_24 PM-1.png",
+      "filename": "midnight_skyline_luxury_studio",
+      "generatedOutput": "C:/Users/sahar/.codex/generated_images/01a13f7d-add4-73d1-8146-c5feae112c10/exec-97b9a512-915c-4236-a7e1-c6b1f737056a.png",
+      "caption": "Illustrative art direction / Imagined studio, materials and architectural design study.",
+      "mobile": {
+        "crop": {
+          "left": 240,
+          "top": 6,
+          "width": 864,
+          "height": 1080
+        },
+        "focus": "Desk, monitor, chair and warm architectural lighting."
+      },
+      "source": "source-assets/about/midnight_skyline_luxury_studio.png",
+      "editedSource": "source-assets/about/midnight_skyline_luxury_studio-architectural.png",
+      "alt": "",
+      "edit": {
+        "tool": "image_gen.imagegen",
+        "mode": "built-in precise-object-edit",
+        "prompt": "Use case: precise-object-edit. Asset type: illustrative cinematic About-page artwork, not a photograph of an actual office. Edit target: the supplied wide luxury workspace image with one central monitor and a skyline through the window. Primary request: replace ONLY the mountain landscape currently displayed inside the central computer screen with a refined abstract black-and-graphite architectural design study: restrained silver thin-line geometric building plans, a few overlapping orthogonal volumes and minimal material swatches, no words or logos. Keep the monitor's exact perspective, frame, reflections and luminance plausible. Invariants: preserve the entire image composition, desk, chair, books, camera, shelving, marble slab wall artwork, lights, window view, plants, architecture, palette, materials, dark gold illumination and camera position almost exactly. Change no pixels outside the screen content if possible. No mountains or landscape photographs may remain inside the screen. Do not introduce new text, branding, people, new objects or watermarks. Preserve original wide 4:3 framing and resolution if supported.",
+        "transparentBackground": false
+      },
+      "original": {
+        "path": "source-assets/about/midnight_skyline_luxury_studio.png",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 2534014,
+        "sha256": "b8532673cd9a87c0a6a2d32d75633867db980e364f1032d527686c2000945278"
+      },
+      "edited": {
+        "path": "source-assets/about/midnight_skyline_luxury_studio-architectural.png",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 2349527,
+        "sha256": "14337341b8e1aebf900f8074ab9c6b8f42601e75a91c127272fe6e4180752674"
+      },
+      "optimized": [
+        {
+          "path": "public/images/about/hero-480.avif",
+          "width": 480,
+          "height": 360,
+          "bytes": 19383,
+          "sha256": "7e94960c551339cb117ffaeed24ada09ef711bbe7666fd3a14d4947fd772d318"
+        },
+        {
+          "path": "public/images/about/hero-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 34224,
+          "sha256": "b653808d2f77569c95b83f628018b116452221d332c1f5186a5b07abaf46661f"
+        },
+        {
+          "path": "public/images/about/hero-800.avif",
+          "width": 800,
+          "height": 600,
+          "bytes": 48072,
+          "sha256": "ff9bfcc7a2d569d852cee6d9d83662161853d7927d80e3dadb7cc51245053c33"
+        },
+        {
+          "path": "public/images/about/hero-800.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 85346,
+          "sha256": "52f8e9038c145c8ad518fccb7ee2a6d04d669f469cc44999e1871258a21c5d69"
+        },
+        {
+          "path": "public/images/about/hero-1200.avif",
+          "width": 1200,
+          "height": 900,
+          "bytes": 91680,
+          "sha256": "d16fb823d5d6d88d59fdde4f8a89e0d7113ea747edc01bdd83b217c9c655fc7f"
+        },
+        {
+          "path": "public/images/about/hero-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 156864,
+          "sha256": "e638d34d265c6446105c48bdd3bb8146d9b5e09aebb4b07b7dfc4abb3ceecb42"
+        },
+        {
+          "path": "public/images/about/hero-1448.avif",
+          "width": 1448,
+          "height": 1086,
+          "bytes": 118044,
+          "sha256": "171f6ae1a6ef4d0bfe1d842f63b6b53b80c5a3e699d82b3613c9b5642405491f"
+        },
+        {
+          "path": "public/images/about/hero-1448.webp",
+          "width": 1448,
+          "height": 1086,
+          "bytes": 204504,
+          "sha256": "34151bfeaa621a0945439ccaa9cd5db3bf3cde324160a5f7cf0117869990164a"
+        },
+        {
+          "path": "public/images/about/hero-mobile-480.avif",
+          "width": 480,
+          "height": 600,
+          "bytes": 28973,
+          "sha256": "f6acedc5a88dac9d653920236c6dfa77631692d724d85fabe87109c72db10390"
+        },
+        {
+          "path": "public/images/about/hero-mobile-480.webp",
+          "width": 480,
+          "height": 600,
+          "bytes": 49832,
+          "sha256": "f013a17fb0b02d769a0a35b2aa78be00d4ce7fdad588d9593fd1444a654cfed7"
+        },
+        {
+          "path": "public/images/about/hero-mobile-800.avif",
+          "width": 800,
+          "height": 1000,
+          "bytes": 61987,
+          "sha256": "38a97d8bf6f0bf2c3ed6869376496af8616569c46456d7c2a7c4a21a81466175"
+        },
+        {
+          "path": "public/images/about/hero-mobile-800.webp",
+          "width": 800,
+          "height": 1000,
+          "bytes": 107912,
+          "sha256": "a33a2e637e3de2e673198166c7d4dcf78158a13c041967d5dd165ee3bbffa34c"
+        },
+        {
+          "path": "public/images/about/hero-mobile-864.avif",
+          "width": 864,
+          "height": 1080,
+          "bytes": 68633,
+          "sha256": "a28a8105d0b2edfed136b16272913a436b1f4ff6e95f8591ea5b8163cf82e287"
+        },
+        {
+          "path": "public/images/about/hero-mobile-864.webp",
+          "width": 864,
+          "height": 1080,
+          "bytes": 119800,
+          "sha256": "df089cb784774699fdf455ff08108864bea4c11d21593453ae71bbf8cea57be1"
+        }
+      ]
+    },
+    {
+      "key": "workspace",
+      "originalInput": "C:/Users/sahar/Downloads/ChatGPT Image Oct 15, 2026, 05_03_27 PM-2.png",
+      "filename": "moody_designer_developer_workspace",
+      "generatedOutput": "C:/Users/sahar/.codex/generated_images/01a13f7d-add4-73d1-8146-c5feae112c10/exec-a8ead1bc-a6c1-4e1a-8c0a-e5a384681635.png",
+      "caption": "Illustrative art direction / Imagined design and development workspace.",
+      "source": "source-assets/about/moody_designer_developer_workspace.png",
+      "editedSource": "source-assets/about/moody_designer_developer_workspace-architectural.png",
+      "alt": "",
+      "edit": {
+        "tool": "image_gen.imagegen",
+        "mode": "built-in precise-object-edit",
+        "prompt": "Use case: precise-object-edit. Asset type: illustrative cinematic About-page workspace artwork, not proof of actual premises or staff. Edit target: supplied dual-monitor designer and developer workspace. Primary request: remove EVERY mountain/landscape image from BOTH monitor displays, including the big central mountain image, smaller image thumbnails, design-preview canvases on the left display, the tall white responsive-page preview on the right display and all its tiny thumbnails. Replace only those image regions with coordinated abstract black/graphite architectural geometry: orthogonal building volumes, restrained silver wireframe design plans, simple charcoal material studies, no landscape shapes and no words or logos. Keep existing screen UI and code visually intact where they are not mountain images, with credible monitor perspective and brightness. Invariants: keep both monitor frames, desk, chair, lamp, shelves, books, plants, background, window lights, all physical objects, the camera angle and crop, dark materials, restrained champagne light and composition almost exactly. Do not add people, branding, readable text, objects, scenery or watermarks. No mountains anywhere on either screen.",
+        "transparentBackground": false
+      },
+      "original": {
+        "path": "source-assets/about/moody_designer_developer_workspace.png",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 2023568,
+        "sha256": "aa960ca6a10b072a0c02d71f1c7542e25a0df13b9d2e4c455b90e7b7a0fe1593"
+      },
+      "edited": {
+        "path": "source-assets/about/moody_designer_developer_workspace-architectural.png",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 1892861,
+        "sha256": "567530fd09569ef09caa10da7e737dd3bb92bb62073c7559985e543c280ea690"
+      },
+      "optimized": [
+        {
+          "path": "public/images/about/workspace-480.avif",
+          "width": 480,
+          "height": 360,
+          "bytes": 16324,
+          "sha256": "fa7f26605ebbc0a00ce8e5a3be80760c4676c6bb6abecc39a71cd429ee21815f"
+        },
+        {
+          "path": "public/images/about/workspace-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 28852,
+          "sha256": "ae09736efcdf718d0dd86030260d381217e66f2049443cec557048b42ab83b0e"
+        },
+        {
+          "path": "public/images/about/workspace-800.avif",
+          "width": 800,
+          "height": 600,
+          "bytes": 35105,
+          "sha256": "f8ebd83a47d8f7a227887345f888660a3897a69aa814c1985828556ebde0a658"
+        },
+        {
+          "path": "public/images/about/workspace-800.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 60548,
+          "sha256": "afebfe17683c496de745f886eff28aeebfd8c66708ecb4785df7f527b8975b69"
+        },
+        {
+          "path": "public/images/about/workspace-1200.avif",
+          "width": 1200,
+          "height": 900,
+          "bytes": 61023,
+          "sha256": "d02ac56e968a06caa0ea3203fa72ea276e9e8b24405ca6e7d6bd9e52f5fff5f7"
+        },
+        {
+          "path": "public/images/about/workspace-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 104648,
+          "sha256": "96f4e4429af03bcc45e37db61eb10b299053a8f91b9356befb74b27fe166e7b3"
+        },
+        {
+          "path": "public/images/about/workspace-1448.avif",
+          "width": 1448,
+          "height": 1086,
+          "bytes": 77459,
+          "sha256": "925be9f3af9a1bbb59ad48943123b37800b0883ec915fc62e82b7d2bf36d8278"
+        },
+        {
+          "path": "public/images/about/workspace-1448.webp",
+          "width": 1448,
+          "height": 1086,
+          "bytes": 131606,
+          "sha256": "d8f637ecb8e8e5eb0b0fe54d9b453f1ce047dc9d18afb967141db73ac8c78faf"
+        },
+        {
+          "path": "public/images/about/workspace-mobile-480.avif",
+          "width": 480,
+          "height": 600,
+          "bytes": 21185,
+          "sha256": "04f6563dfee278297d44163c4ed93d7e3c755039e53350de5ef247e8aa9b79f7"
+        },
+        {
+          "path": "public/images/about/workspace-mobile-480.webp",
+          "width": 480,
+          "height": 600,
+          "bytes": 35616,
+          "sha256": "6cb1ceaafc61fbb659bd13dc0104ecc8d4153b414affd61ac4e58cc8320436af"
+        },
+        {
+          "path": "public/images/about/workspace-mobile-800.avif",
+          "width": 800,
+          "height": 1000,
+          "bytes": 42644,
+          "sha256": "d11180e9cec268a4a821b5a06b636efbd756317162f82b95a5e09c59ba5cbd9a"
+        },
+        {
+          "path": "public/images/about/workspace-mobile-800.webp",
+          "width": 800,
+          "height": 1000,
+          "bytes": 70970,
+          "sha256": "4574dc93fa76c7b6858d7d9de0e167e88b06b0e75eb99f517f97205cc636c0e1"
+        },
+        {
+          "path": "public/images/about/workspace-mobile-864.avif",
+          "width": 864,
+          "height": 1080,
+          "bytes": 46475,
+          "sha256": "417f499d19ddc171f8f88f09e68a09a71f90bb378ff650c4fc5a3f8d8a0369ca"
+        },
+        {
+          "path": "public/images/about/workspace-mobile-864.webp",
+          "width": 864,
+          "height": 1080,
+          "bytes": 77856,
+          "sha256": "481aaec9836a9237e44490083a239a09265c35706ff4a11c2d475940ce5425d9"
+        }
+      ],
+      "mobile": {
+        "crop": {
+          "left": 245,
+          "top": 3,
+          "width": 864,
+          "height": 1080
+        },
+        "focus": "Design and development monitors, desk and warm lighting; 42% horizontal and centered vertical crop focus."
+      }
+    },
+    {
+      "key": "philosophy",
+      "originalInput": "C:/Users/sahar/Downloads/ChatGPT Image Oct 15, 2026, 05_03_29 PM-3.png",
+      "filename": "futuristic_architectural_design_diorama",
+      "generatedOutput": "C:/Users/sahar/.codex/generated_images/01a13f7d-add4-73d1-8146-c5feae112c10/exec-da7210c8-fbc1-41ec-856f-e0f77680bdda.png",
+      "caption": "Illustrative art direction / Conceptual architecture, geometry and material study.",
+      "mobile": {
+        "crop": {
+          "left": 548,
+          "top": 6,
+          "width": 864,
+          "height": 1080
+        },
+        "focus": "Architectural building structure, material planes and wireframe."
+      },
+      "source": "source-assets/about/futuristic_architectural_design_diorama.png",
+      "editedSource": "source-assets/about/futuristic_architectural_design_diorama-architectural.png",
+      "alt": "",
+      "edit": {
+        "tool": "image_gen.imagegen",
+        "mode": "built-in precise-object-edit",
+        "prompt": "Use case: precise-object-edit. Asset type: illustrative architectural diorama for an About page, not an actual building or agency office. Edit target: the supplied black and graphite layered architectural diorama with thin champagne linework and an illuminated modern building structure. Primary request: replace ALL mountain/rock/landscape imagery in the display panels with abstract architectural and design studies. The large left panel with rocky mountain contours must become a flat graphite material study with restrained orthogonal grid or abstract geometric plan, the tall center panel with a rocky gorge must become a black/graphite relief of clean rectangular architectural forms, and the small lower front panel showing rocky stairs must become clean geometric architectural planes. Also remove mountain/landscape motifs from any small inset panel. Retain any genuine abstract marble/material slabs as flat material studies. The scene must have no mountains, hills, natural terrain, rocky ridgelines or mountain contour maps. Invariants: preserve the full diorama composition, overlapping vertical panels and glass edges, main small modern building structure, wireframe architectural volume on the right, stairs as built architecture, podiums, sphere, plant, reflective floor, camera angle, lighting, palette and materials almost exactly. Change only the imagery within affected panels; replace it with refined black, charcoal and graphite geometry with thin muted silver/champagne drafting lines. No text, logos, new objects, people or watermarks. Preserve the original wide 4:3 framing.",
+        "transparentBackground": false
+      },
+      "original": {
+        "path": "source-assets/about/futuristic_architectural_design_diorama.png",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 2123547,
+        "sha256": "d77f29152a2a0448e30e8f105c888fc3c62bcad05c6aedcf9c38c287d15d1dad"
+      },
+      "edited": {
+        "path": "source-assets/about/futuristic_architectural_design_diorama-architectural.png",
+        "width": 1448,
+        "height": 1086,
+        "bytes": 2053814,
+        "sha256": "9bd13c12f267c4828fb588e9539b8dab15a14a4852d7d975454848979ff4e46c"
+      },
+      "optimized": [
+        {
+          "path": "public/images/about/philosophy-480.avif",
+          "width": 480,
+          "height": 360,
+          "bytes": 11830,
+          "sha256": "c9d41947455833d07c4dbcf476c4c087c759c8c37f185f8e77063f7ee4293521"
+        },
+        {
+          "path": "public/images/about/philosophy-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 20182,
+          "sha256": "ae44b2333b775137f3093d216fd2fae304e6c0b58eae8cf1be144fadd72b9b35"
+        },
+        {
+          "path": "public/images/about/philosophy-800.avif",
+          "width": 800,
+          "height": 600,
+          "bytes": 26915,
+          "sha256": "ca82df5491c71bff58de0f658df7cd4e323ac572850ec8aafcbb4cdfe3d73d91"
+        },
+        {
+          "path": "public/images/about/philosophy-800.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 47914,
+          "sha256": "8c5fa3359e3c43d80f878a0285c0c58d6cde2167aa884822e035eaee77521f1b"
+        },
+        {
+          "path": "public/images/about/philosophy-1200.avif",
+          "width": 1200,
+          "height": 900,
+          "bytes": 52579,
+          "sha256": "6121d833d031c2e8706a78113a0efaf0ada5313a02022b7154ccde79e38e1fb1"
+        },
+        {
+          "path": "public/images/about/philosophy-1200.webp",
+          "width": 1200,
+          "height": 900,
+          "bytes": 91078,
+          "sha256": "d62b891878f732d3df698ae587721afd0c1ebbbe799dc991a4946c1c05e86b68"
+        },
+        {
+          "path": "public/images/about/philosophy-1448.avif",
+          "width": 1448,
+          "height": 1086,
+          "bytes": 70024,
+          "sha256": "ecbaf3e78e84969bc51313a560a5cad27d5f525170ad7d5542d923b69d25103a"
+        },
+        {
+          "path": "public/images/about/philosophy-1448.webp",
+          "width": 1448,
+          "height": 1086,
+          "bytes": 120628,
+          "sha256": "4566f5d7ca55767ea1b769d6ed9c3e25f367f8a1b4c29a1a3fae0530c1d2d4a8"
+        },
+        {
+          "path": "public/images/about/philosophy-mobile-480.avif",
+          "width": 480,
+          "height": 600,
+          "bytes": 17624,
+          "sha256": "7e3ec1fed638de3cbc56dfd667a8e827f96a3a2d6292c6d09084f056b01b50ed"
+        },
+        {
+          "path": "public/images/about/philosophy-mobile-480.webp",
+          "width": 480,
+          "height": 600,
+          "bytes": 30478,
+          "sha256": "c6432e59a9b4e5df3b9d20d1057a662ed2930732a40529a5634e882996245a86"
+        },
+        {
+          "path": "public/images/about/philosophy-mobile-800.avif",
+          "width": 800,
+          "height": 1000,
+          "bytes": 38944,
+          "sha256": "44eaca16688c900f276ca63b9d084db7447f6d907b6c68525316329220637519"
+        },
+        {
+          "path": "public/images/about/philosophy-mobile-800.webp",
+          "width": 800,
+          "height": 1000,
+          "bytes": 66690,
+          "sha256": "441d17099534509deee94d4a59ba6895337920873f2634e7c720e70b3ebdce8d"
+        },
+        {
+          "path": "public/images/about/philosophy-mobile-864.avif",
+          "width": 864,
+          "height": 1080,
+          "bytes": 43856,
+          "sha256": "8f2089e7c0e29f952ea5740288074c74bb861b7214dc7d4df65910a47e251127"
+        },
+        {
+          "path": "public/images/about/philosophy-mobile-864.webp",
+          "width": 864,
+          "height": 1080,
+          "bytes": 75962,
+          "sha256": "58694a7742f476c546218cc7af0c98daa026630a5bd297e3ca80b8f2e5b2f05e"
+        }
+      ]
+    }
+  ]
+}

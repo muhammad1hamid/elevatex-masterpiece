@@ -1,0 +1,193 @@
+{
+  "slug": "apex",
+  "liveUrl": "https://apex-detailing-studio-phi.vercel.app/",
+  "capturedAt": "2026-10-15T09:18:16.213Z",
+  "images": [
+    {
+      "key": "hero",
+      "source": "source-assets/apex/midnight_911_in_a_luxury_studio.png",
+      "referenceId": "midnight_911_in_a_luxury_studio.png",
+      "widths": [480, 800, 1448],
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Supplied automotive study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    {
+      "key": "studio",
+      "source": "source-assets/apex/luxury_black_car_detailing_studio.png",
+      "referenceId": "luxury_black_car_detailing_studio.png",
+      "widths": [480, 800, 1448],
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Imagined detailing studio.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    {
+      "key": "macro",
+      "source": "source-assets/apex/glossy_black_coupe_in_led_studio.png",
+      "referenceId": "glossy_black_coupe_in_led_studio.png",
+      "widths": [480, 800, 1448],
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Surface, water and reflection study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    {
+      "key": "cockpit",
+      "source": "source-assets/apex/luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "referenceId": "luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "widths": [480, 800, 1448],
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Interior materials study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    {
+      "key": "polishing",
+      "source": "source-assets/apex/polishing_a_glossy_black_sports_car.png",
+      "referenceId": "polishing_a_glossy_black_sports_car.png",
+      "widths": [480, 800, 1448],
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Polishing study; the depicted person is not identified as studio staff.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    {
+      "key": "closing",
+      "source": "source-assets/apex/glossy_black_sports_car_in_a_luxury_garage.png",
+      "referenceId": "glossy_black_sports_car_in_a_luxury_garage.png",
+      "widths": [480, 800, 1448],
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Closing rear-angle study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    {
+      "key": "desktop",
+      "source": "artifacts/apex/source/desktop.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers concept homepage, with Protect Your Investment, Restore The Shine and Drive With Confidence headings and quote and transformation actions.",
+      "caption": "Actual website capture / desktop · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "full-page",
+      "source": "artifacts/apex/source/full-page.png",
+      "widths": [800],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Complete Classic Detailers concept homepage with service, process, gallery and quote sections. Demo business claims are unverified.",
+      "caption": "Actual website capture / full page · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "services",
+      "source": "artifacts/apex/source/services.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers service section presenting ceramic coating, paint protection film, paint correction and interior services.",
+      "caption": "Actual website capture / services · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "contact",
+      "source": "artifacts/apex/source/contact.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers demo contact interface; business information shown has not been independently verified.",
+      "caption": "Actual website capture / contact · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "quote",
+      "source": "artifacts/apex/source/quote.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers quote interface at the vehicle selection step.",
+      "caption": "Actual website capture / quote · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "large-desktop",
+      "source": "artifacts/apex/source/large-desktop.png",
+      "widths": [640, 1000, 1920],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers concept homepage at 1920 by 1080 pixels.",
+      "caption": "Actual website capture / large desktop · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "tablet",
+      "source": "artifacts/apex/source/tablet.png",
+      "widths": [768],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers tablet homepage at 768 pixels.",
+      "caption": "Actual website capture / tablet · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "mobile",
+      "source": "artifacts/apex/source/mobile.png",
+      "widths": [390],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers mobile homepage at 390 pixels, with compact navigation and stacked quote and transformation actions.",
+      "caption": "Actual website capture / mobile · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "mobile-menu",
+      "source": "artifacts/apex/source/mobile-menu.png",
+      "widths": [390],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers open mobile menu with services, transformations, process, showroom, quote and contact destinations.",
+      "caption": "Actual website capture / mobile menu · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "quote-service",
+      "source": "artifacts/apex/source/quote-service.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers quote interface after selecting Sedan, showing service choices.",
+      "caption": "Actual website capture / quote service · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "quote-summary",
+      "source": "artifacts/apex/source/quote-summary.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers quote interface at its final step; no contact information was sent.",
+      "caption": "Actual website capture / quote summary · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "process-grid",
+      "source": "artifacts/apex/source/process-grid.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers six-stage process after selecting the grid layout.",
+      "caption": "Actual website capture / process grid · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "showroom-filter",
+      "source": "artifacts/apex/source/showroom-filter.png",
+      "widths": [640, 1000, 1440],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers showroom after selecting the PPF filter.",
+      "caption": "Actual website capture / showroom filter · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome."
+    },
+    {
+      "key": "interface-detail",
+      "source": "artifacts/apex/source/interface-detail.png",
+      "widths": [640, 1080],
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Unmodified crop of the real Classic Detailers hero showing its Cinzel serif headline, supporting copy and quote actions.",
+      "caption": "Actual website capture / Unmodified hero typography and action crop.",
+      "credit": "Crop from the retained 1440 by 900 browser capture."
+    }
+  ]
+}

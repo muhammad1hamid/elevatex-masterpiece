@@ -1,0 +1,36 @@
+---
+import type { ProcessStep } from '../../data/processSteps';
+interface Props {
+  step: ProcessStep;
+}
+const { step } = Astro.props;
+---
+
+<li
+  class="process-chapter"
+  data-process-chapter={step.id}
+  id={`process-${step.id}`}
+>
+  <span
+    class="process-chapter__node"
+    aria-hidden="true"
+    data-process-node
+  ></span>
+  <p class="process-chapter__index" aria-hidden="true">
+    {step.number} <span>/ {step.id === 'launch' ? 'Launch' : step.title}</span>
+  </p>
+  <h3>{step.title}</h3>
+  <p class="process-chapter__micro">{step.eyebrow}</p>
+  <p class="process-chapter__description">{step.description}</p>
+  <ul
+    class="process-chapter__details"
+    aria-label={`${step.title} considerations`}
+  >
+    {step.details.map((detail) => (
+      <li>{detail}</li>
+    ))}
+  </ul>
+  <p class="process-chapter__outcome">
+    <span>Outcome</span> / {step.outcome}
+  </p>
+</li>

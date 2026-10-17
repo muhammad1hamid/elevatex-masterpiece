@@ -1,0 +1,464 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WebDevHero from '../../components/services/WebDevHero.astro';
+import SelectedWebWork from '../../components/services/SelectedWebWork.astro';
+import WebBuildProcess from '../../components/services/WebBuildProcess.astro';
+import ServiceFAQ from '../../components/services/ServiceFAQ.astro';
+import ServiceCTA from '../../components/services/ServiceCTA.astro';
+import ServiceActions from '../../components/services/ServiceActions.astro';
+import {
+  webDevelopment,
+  websiteProblems,
+  websiteTypes,
+  technicalStandards,
+  deliverableGroups,
+  technologyApproach,
+  webDevelopmentFAQs,
+} from '../../data/services/web-development';
+import { staticPages } from '../../data/site';
+import {
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+  serviceSchema,
+  breadcrumbSchema,
+} from '../../utils/structured-data';
+import '../../styles/web-development.css';
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Web Development', path: webDevelopment.path },
+];
+---
+
+<BaseLayout
+  title={webDevelopment.title}
+  description={webDevelopment.description}
+  path={webDevelopment.path}
+  image={webDevelopment.image}
+  indexable={
+    staticPages.find((page) => page.path === webDevelopment.path)?.indexable ??
+    false
+  }
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    webPageSchema({
+      title: webDevelopment.title,
+      description: webDevelopment.description,
+      path: webDevelopment.path,
+    }),
+    serviceSchema({
+      name: 'Web Development',
+      description: webDevelopment.description,
+      path: webDevelopment.path,
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </Fragment>
+  <article class="web-service" data-web-development>
+    <WebDevHero />
+
+    <section
+      class="web-quality"
+      id="web-quality"
+      aria-label="Website project principles"
+    >
+      <ul class="container">
+        {[
+          'Responsive by default',
+          'Performance-focused',
+          'SEO-ready foundations',
+          'Built around your business',
+        ].map((label) => (
+          <li>
+            <span aria-hidden="true"></span>
+            {label}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section
+      class="web-problems web-service__section"
+      id="web-problems"
+      aria-labelledby="web-problems-heading"
+    >
+      <div class="container web-service__split">
+        <header data-web-reveal>
+          <p class="web-service__eyebrow">Why websites underperform / 03</p>
+          <h2 id="web-problems-heading">
+            A website can look good <br />
+            and still <em>fail its job.</em>
+          </h2>
+          <p class="web-service__lead">
+            Visitors need to understand your offer, find what matters, and know
+            what to do next. Friction anywhere in that journey can make the
+            website harder to use.
+          </p>
+          <div class="web-problems__rule" aria-hidden="true">
+            <span>Message</span>
+            <i></i>
+            <span>Experience</span>
+            <i></i>
+            <span>Action</span>
+          </div>
+        </header>
+        <ol class="web-problems__list">
+          {websiteProblems.map((problem, index) => (
+            <li data-web-reveal>
+              <span class="web-service__number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3>{problem.title}</h3>
+                <p>{problem.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section
+      class="web-types web-service__section"
+      id="web-types"
+      aria-labelledby="web-types-heading"
+    >
+      <div class="container">
+        <header class="web-service__section-intro" data-web-reveal>
+          <div>
+            <p class="web-service__eyebrow">What we build / 04</p>
+            <h2 id="web-types-heading">
+              Different businesses. <br />
+              <em>Different websites.</em>
+            </h2>
+          </div>
+          <p>
+            We shape the pages, content, and functionality around the job your
+            website needs to do.
+          </p>
+        </header>
+        <ol class="web-types__list">
+          {websiteTypes.map((type, index) => (
+            <li data-web-reveal>
+              <span class="web-service__number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3>{type.title}</h3>
+              <p>{type.description}</p>
+              <div
+                class="web-types__mini"
+                data-layout={type.visual}
+                aria-hidden="true"
+              >
+                <div class="web-types__mini-chrome">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                <div class="web-types__mini-layout">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <SelectedWebWork />
+    <WebBuildProcess />
+
+    <section
+      class="web-technical web-service__section"
+      id="web-technical"
+      aria-labelledby="web-technical-heading"
+    >
+      <div class="container">
+        <header class="web-service__section-intro" data-web-reveal>
+          <div>
+            <p class="web-service__eyebrow">Built beyond the surface / 07</p>
+            <h2 id="web-technical-heading">
+              Good design is only part <br />
+              of a <em>good website.</em>
+            </h2>
+          </div>
+          <p>
+            Behind the interface, we consider how the website loads, works
+            across devices, can be used by different people, and stays
+            manageable over time.
+          </p>
+        </header>
+        <div class="web-technical__body">
+          <dl class="web-technical__standards">
+            {technicalStandards.map((standard) => (
+              <div data-web-reveal>
+                <dt>{standard.title}</dt>
+                <dd>{standard.description}</dd>
+              </div>
+            ))}
+          </dl>
+          <figure class="web-anatomy" data-web-reveal>
+            <div class="web-anatomy__chrome" aria-hidden="true">
+              <span>Page architecture</span>
+              <span>&lt;/&gt;</span>
+            </div>
+            <div class="web-anatomy__body" aria-hidden="true">
+              <div class="web-anatomy__tree">
+                <span>&lt;html&gt;</span>
+                <span>&nbsp;&nbsp;&lt;header&gt;</span>
+                <span>&nbsp;&nbsp;&lt;main&gt;</span>
+                <span class="web-anatomy__active">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&lt;section&gt;
+                </span>
+                <span>&nbsp;&nbsp;&lt;footer&gt;</span>
+                <span>&lt;/html&gt;</span>
+              </div>
+              <div class="web-anatomy__screen">
+                <i></i>
+                <i></i>
+                <div>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <i></i>
+              </div>
+              <div class="web-anatomy__layers">
+                <span>Readable structure</span>
+                <span>Right-sized media</span>
+                <span>Usable controls</span>
+              </div>
+            </div>
+            <figcaption>
+              Illustrative website anatomy. Structure, media, and interaction
+              considered together.
+            </figcaption>
+          </figure>
+        </div>
+        <p class="web-service__scope">
+          The technical approach and checks are agreed around each website’s
+          requirements.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="web-redesign web-service__section"
+      id="web-redesign"
+      aria-labelledby="web-redesign-heading"
+    >
+      <div class="container web-service__split">
+        <figure class="web-redesign__visual" data-web-reveal>
+          <div class="web-redesign__comparison" aria-hidden="true">
+            <div class="web-redesign__wire">
+              <span>Structure</span>
+              <i></i>
+              <i></i>
+              <div>
+                <i></i>
+                <i></i>
+              </div>
+            </div>
+            <span class="web-redesign__arrow">→</span>
+            <div class="web-redesign__resolved">
+              <span>Experience</span>
+              <div>
+                <p>
+                  A clearer
+                  <br />
+                  way forward.
+                </p>
+                <i></i>
+              </div>
+              <span class="web-redesign__button">Next step →</span>
+              <div class="web-redesign__thumbnails">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+            </div>
+          </div>
+          <figcaption>Conceptual layout refinement</figcaption>
+        </figure>
+        <div data-web-reveal>
+          <p class="web-service__eyebrow">Already have a website? / 08</p>
+          <h2 id="web-redesign-heading">
+            Keep what works. <br />
+            <em>Improve what doesn’t.</em>
+          </h2>
+          <p class="web-service__lead">
+            A redesign can begin with a review of your current website. We can
+            preserve useful content and structure, then improve the
+            presentation, mobile experience, performance, or enquiry journey
+            where needed.
+          </p>
+          <p class="web-redesign__migration">
+            Existing pages, domain settings, and important URLs are reviewed
+            before changes are planned.
+          </p>
+          <ServiceActions
+            primaryLabel="Discuss a Redesign"
+            secondary={false}
+            source="webdev_redesign_cta"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="web-deliverables web-service__section"
+      id="web-deliverables"
+      aria-labelledby="web-deliverables-heading"
+    >
+      <div class="container">
+        <header class="web-service__section-intro" data-web-reveal>
+          <div>
+            <p class="web-service__eyebrow">What a project can include / 09</p>
+            <h2 id="web-deliverables-heading">
+              A complete experience, <br />
+              <em>with a defined scope.</em>
+            </h2>
+          </div>
+          <p>
+            The exact scope is defined before the project begins, so you know
+            what is included before development starts.
+          </p>
+        </header>
+        <ol class="web-deliverables__index">
+          {deliverableGroups.map((group, index) => (
+            <li data-web-reveal>
+              <span class="web-service__number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section
+      class="web-technology web-service__section"
+      id="web-technology"
+      aria-labelledby="web-technology-heading"
+    >
+      <div class="container">
+        <header class="web-technology__intro" data-web-reveal>
+          <p class="web-service__eyebrow">The right tools for the job / 10</p>
+          <h2 id="web-technology-heading">
+            Technology should support <br />
+            <em>the project.</em>
+          </h2>
+          <p>
+            We choose the approach around what the website needs to do, how it
+            should perform, and how you want to maintain it.
+          </p>
+        </header>
+        <ol class="web-technology__layers">
+          {technologyApproach.map((layer, index) => (
+            <li data-web-reveal>
+              <span class="web-service__number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3>{layer.title}</h3>
+              <p>{layer.description}</p>
+              {index < technologyApproach.length - 1 && (
+                <span class="web-technology__connector" aria-hidden="true">
+                  →
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+        <aside class="web-technology__related">
+          <p>Planning a connected customer experience?</p>
+          <a class="web-service__text-link" href="/#ai-automation-heading">
+            Explore AI Automation<span aria-hidden="true">→</span>
+          </a>
+          <a class="web-service__text-link" href="/#ai-chatbots-heading">
+            Explore AI Chatbots<span aria-hidden="true">→</span>
+          </a>
+          <a class="web-service__text-link" href="/#landing-pages-heading">
+            Explore Landing Pages<span aria-hidden="true">→</span>
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <ServiceFAQ
+      items={webDevelopmentFAQs}
+      id="web-faq"
+      name="web-development-faq"
+      eyebrow="Website questions / 11"
+      heading="A few things you may be wondering."
+      lead="Clear answers about scope, timing, updates, and the practical details of a website project."
+    />
+    <ServiceCTA
+      id="web-cta"
+      eyebrow="Ready to build? / 12"
+      heading="Your website should do more than simply exist."
+      emphasis="Let’s build one with purpose."
+      supporting="Tell us what you want to create, improve, or replace and we’ll help you define the right next step."
+      source="webdev_final_start_project"
+    />
+  </article>
+</BaseLayout>
+<script>
+  const eligibleMotion = matchMedia(
+    '(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
+  );
+  const listeners = new AbortController();
+  let started = false;
+
+  async function enhance() {
+    if (!eligibleMotion.matches || started || listeners.signal.aborted) return;
+    started = true;
+    try {
+      const { initSectionReveal } =
+        await import('../../scripts/animations/section-reveal');
+      if (listeners.signal.aborted) return;
+      initSectionReveal('[data-web-development]', '[data-web-reveal]', {
+        distance: 12,
+        duration: 600,
+      });
+    } catch {
+      // The server-rendered page remains complete if enhancement cannot load.
+      started = false;
+    }
+  }
+
+  eligibleMotion.addEventListener(
+    'change',
+    () => {
+      void enhance();
+    },
+    { signal: listeners.signal },
+  );
+  document.addEventListener(
+    'astro:before-swap',
+    () => {
+      listeners.abort();
+    },
+    { once: true },
+  );
+  void enhance();
+</script>

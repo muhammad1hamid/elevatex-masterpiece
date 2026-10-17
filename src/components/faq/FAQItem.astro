@@ -1,0 +1,35 @@
+---
+import type { FAQEntry } from '../../data/faqs';
+
+interface Props {
+  faq: FAQEntry;
+}
+
+const { faq } = Astro.props;
+---
+
+<li class="faq-item">
+  <details name="elevatex-faq" open={faq.featured}>
+    <summary>
+      <span class="faq-item__number">{faq.number}</span>
+      <span class="faq-item__question">{faq.question}</span>
+      <span class="faq-item__indicator" aria-hidden="true"></span>
+    </summary>
+    <div class="faq-item__answer">
+      <p>{faq.answer}</p>
+      {faq.tags.length > 0 && (
+        <ul class="faq-item__tags" aria-label="Related ElevateX services">
+          {faq.tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )}
+      {faq.cta && (
+        <a class="faq-item__cta" href={faq.cta.href}>
+          {faq.cta.label}
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
+    </div>
+  </details>
+</li>

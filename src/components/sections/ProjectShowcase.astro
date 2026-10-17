@@ -1,0 +1,62 @@
+---
+import type { FeaturedProject } from '../../utils/content';
+interface Props {
+  project: FeaturedProject;
+  index: number;
+}
+const { project, index } = Astro.props;
+const sizes =
+  index === 1
+    ? '(min-width: 1440px) 434px, (min-width: 1024px) 34vw, (min-width: 768px) 680px, 90vw'
+    : '(min-width: 1440px) 363px, (min-width: 1024px) 28vw, (min-width: 768px) 680px, 90vw';
+---
+
+<article
+  class:list={['project', { 'project--featured': index === 1 }]}
+  data-proof-reveal
+>
+  <a
+    class="project__link"
+    href={project.href}
+    aria-labelledby={`${project.id}-title ${project.id}-action`}
+  >
+    <figure class="project__figure">
+      <div class="project__frame">
+        <div class="project__chrome" aria-hidden="true">
+          <span class="project__chrome-marks">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+          <span>{project.category}</span>
+          <span class="project__chrome-index">0{index + 1}</span>
+        </div>
+        <picture>
+          <source type="image/avif" srcset={project.avifSrcSet} sizes={sizes} />
+          <img
+            src={project.image.src}
+            srcset={project.webpSrcSet}
+            sizes={sizes}
+            alt={project.image.alt}
+            width={project.image.width}
+            height={project.image.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+      <figcaption class="project__caption">
+        <p class="project__type">{project.typeLabel}</p>
+        <h3 id={`${project.id}-title`}>{project.title}</h3>
+        <p class="project__category">
+          {project.industry} <span aria-hidden="true">·</span>{' '}
+          {project.serviceNames.join(' / ')}
+        </p>
+        <p class="project__description">{project.description}</p>
+        <span class="project__action" id={`${project.id}-action`}>
+          View Project <span aria-hidden="true">↗</span>
+        </span>
+      </figcaption>
+    </figure>
+  </a>
+</article>

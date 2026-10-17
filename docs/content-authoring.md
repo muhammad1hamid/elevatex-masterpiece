@@ -1,10 +1,10 @@
 # Content authoring
 
-Collections are intentionally empty. Do not create fake sample articles, clients or statistics to fill layouts. Templates below live in documentation and are never routed or included in a sitemap.
+Insights now has three substantive, source-reviewed local entries and a shared publishing system. Evidence-backed client case studies remain unpublished. The case-studies collection holds owner-confirmed concept previews and three published cinematic concept studies: Qadeer Jewellers, Infinity Salon and Apex Detailing Studio. Use [the Insights publishing guide](INSIGHTS_PUBLISHING_GUIDE.md) for articles and [the cinematic case-study guide](CASE_STUDY_GUIDE.md) for project studies. Do not create fake sample articles, clients or statistics to fill layouts. Templates below live in documentation and are never routed or included in a sitemap.
 
 ## Insight template
 
-Create `src/content/insights/approved-slug.md` when verified content exists. Replace all bracketed values. Use H2 and H3 in the body; the layout renders the H1, author and dates.
+Create `src/content/insights/approved-slug.md` or `.mdx` when verified content exists. The filename supplies the stable article URL; no separate slug is maintained. Replace all bracketed values. Use H2 and H3 in the body; the layout renders the H1, author and dates. See [the full publishing guide](INSIGHTS_PUBLISHING_GUIDE.md) for components, covers, sources and QA.
 
 ```yaml
 ---
@@ -14,13 +14,16 @@ draft: true
 publishedDate: '[Actual publication date: YYYY-MM-DD]'
 # updatedDate: '[Only when significantly revised]'
 author:
-  name: '[Verified person]'
+  name: '[Confirmed person or ElevateX brand]'
+  type: Organization # Use Person only for a confirmed individual author.
   # url: 'https://[real author profile]'
-category: '[Editorial category]'
+category: Web Development # Or AI Automation, AI Chatbots, Digital Strategy.
 tags: []
 featured: false
 relatedServices: [web-development]
 sources: []
+# quickAnswer: '[Direct answer in 2–4 sentences]'
+# takeaways: ['One useful point']
 # featuredImage:
 #   src: /images/approved-image.avif
 #   alt: '[Useful description]'
@@ -29,7 +32,7 @@ sources: []
 ---
 ```
 
-Answer the headline question immediately, then add useful first-party detail and relevant sources. Sources are rendered in the article and should support the actual claim. Each image requires real dimensions and appropriate alternative text. Future responsive image components should use AVIF/WebP sources; the foundation does not generate imaginary image variants.
+Answer the headline question immediately, then add useful first-party detail and relevant sources. Sources render in the article and should support the actual claim. Each configured cover/social image must exist locally and have real dimensions and appropriate alternative text. Existing AVIF/WebP variants are discovered by the shared helper; it does not generate assets. The collection drives the homepage, listing, article routes, related content and RSS. Drafts and future publication dates stay excluded through one shared gate; preview builds remain noindex.
 
 ## Case study model
 
@@ -40,6 +43,16 @@ Create `src/content/case-studies/approved-slug.md` only after confirming publica
 The case-study layout renders structured context, constraints, role, strategy, solution, timeline, technologies, before/after, results and media. Markdown adds original narrative; avoid duplicating those automatic sections. Internal links to services/insights are added when their actual routes exist; do not link to planned but unpublished pages.
 
 ## Publication review
+
+### Portfolio previews
+
+Use `entryType: showcase` in the existing case-studies collection for a verified project preview. Required metadata: title, description, industry, publishedDate, relatedServices and a `showcase` block containing projectType (`concept`, `demo`, `client`, `internal`), category, liveUrl, order, verifiedDate, verification and image (src, alt, width, height). Set featured and draft explicitly. Add a typed `projectStudy` block when a cinematic study is authorized; see the dedicated guide rather than copying an old page component.
+
+Preview images use the same 4:3 capture ratio, with local 480, 800 and 1200 px AVIF/WebP variants. Point image.src at the `-1200.webp` fallback. The featured-work helper validates all variants and service associations at build time; malformed or missing previews fail the build. It selects up to three published featured entries, sorted by showcase.order. It excludes drafts and future publication dates.
+
+Showcase entries retain their inspected live-project links. A separately published `projectStudy` adds its real study route, Work link, next-project eligibility and sitemap URL; a missing, draft or future-dated study adds none. Full evidence-backed case studies default to `entryType: case-study` and keep all existing evidence requirements; add an optional showcase block to feature one on the homepage with a link to its real detail page. Project classification needs owner confirmation. Public demo ratings/testimonials are not evidence of ElevateX results.
+
+### Checklist
 
 1. Verify claims, identities, permissions, source material and dates.
 2. Verify related links and media dimensions; avoid unapproved location assertions.

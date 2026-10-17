@@ -1,0 +1,40 @@
+---
+import type { featuredSystem } from '../../data/featured-system';
+interface Props {
+  order: typeof featuredSystem.order;
+}
+const { order } = Astro.props;
+---
+
+<div class="order-output" role="group" aria-labelledby="order-draft-title">
+  <p class="handoff__zone-label">
+    <span>02</span> / Structured output
+  </p>
+  <div class="order-draft" data-order-draft>
+    <div class="order-draft__heading">
+      <h3 id="order-draft-title">Order draft</h3>
+      <span>Illustrative</span>
+    </div>
+    <p class="order-draft__label">Items</p>
+    <ol class="order-draft__items" aria-label="Illustrative order items">
+      {order.items.map((item) => (
+        <li data-order-row>
+          <span class="order-draft__quantity">
+            <span class="sr-only">Quantity </span>
+            {String(item.quantity).padStart(2, '0')}{' '}
+            <span aria-hidden="true">×</span>
+          </span>
+          <span>{item.name}</span>
+        </li>
+      ))}
+    </ol>
+    <dl class="order-draft__status" data-order-status>
+      <dt>Status</dt>
+      <dd>
+        <span aria-hidden="true"></span>
+        {order.status}
+      </dd>
+    </dl>
+    <p class="order-draft__note">For restaurant review before accepting.</p>
+  </div>
+</div>

@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AboutHero from '../components/about/AboutHero.astro';
+import AboutHeading from '../components/about/AboutHeading.astro';
+import AboutPhilosophy from '../components/about/AboutPhilosophy.astro';
+import AboutFounder from '../components/about/AboutFounder.astro';
+import AboutApproach from '../components/about/AboutApproach.astro';
+import ProjectPreview from '../components/work/ProjectPreview.astro';
+import ServiceActions from '../components/services/ServiceActions.astro';
+import {
+  aboutMetadata,
+  aboutStory,
+  aboutPrinciples,
+  aboutCapabilities,
+  aboutProjectIds,
+} from '../data/about';
+import { publishedWork } from '../utils/content';
+import {
+  organizationSchema,
+  websiteSchema,
+  aboutPageSchema,
+  founderPersonSchema,
+  breadcrumbSchema,
+} from '../utils/structured-data';
+import '../styles/about.css';
+const work = await publishedWork();
+const projects = aboutProjectIds.map((id) => {
+  const project = work.find((item) => item.id === id);
+  if (!project) throw new Error(`About project ${id} is not published.`);
+  return project;
+});
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: aboutMetadata.path },
+];
+---
+
+<BaseLayout
+  {...aboutMetadata}
+  image={aboutMetadata.image}
+  indexable={true}
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    aboutPageSchema(aboutMetadata),
+    founderPersonSchema(),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </Fragment>
+  <div class="about-page" data-about-page>
+    <AboutHero />
+    <section
+      class="about-story about-section container"
+      id="our-story"
+      aria-labelledby="story-title"
+      data-about-story
+    >
+      <AboutHeading
+        id="story-title"
+        eyebrow="The story / 01"
+        lines={['More than a service.', 'A particular way of building.']}
+        intro="ElevateX is a founder-led digital studio built around a straightforward idea: good digital work should combine visual quality, clear purpose and practical functionality."
+      />
+      <div class="about-story__body">
+        {aboutStory.map((text) => (
+          <p data-about-row>{text}</p>
+        ))}
+      </div>
+      <p class="about-story__closing" data-about-row>
+        <span data-about-story-rule aria-hidden="true"></span>Thoughtful by
+        design. <span>Useful in practice.</span>
+      </p>
+    </section>
+    <AboutPhilosophy />
+    <AboutFounder />
+    <AboutApproach />
+    <section
+      class="about-principles about-section"
+      id="our-principles"
+      aria-labelledby="principles-title"
+    >
+      <div class="container">
+        <AboutHeading
+          id="principles-title"
+          eyebrow="Our principles / 05"
+          lines={['The standards', 'behind the work.']}
+        />
+        <ol class="about-principles__rows">
+          {aboutPrinciples.map((principle, index) => (
+            <li data-about-row>
+              <span class="about-number" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <h3>{principle.title}</h3>
+              <p>{principle.text}</p>
+              <span class="about-principles__marker" aria-hidden="true">
+                ＋
+              </span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+    <section
+      class="about-capabilities about-section container"
+      id="capabilities"
+      aria-labelledby="capabilities-title"
+    >
+      <AboutHeading
+        id="capabilities-title"
+        eyebrow="Our capabilities / 06"
+        lines={['Thoughtful digital work.', 'Built for real needs.']}
+        intro="From digital experiences to intelligent business workflows, ElevateX focuses on four core capabilities."
+      />
+      <ol class="about-capabilities__rows">
+        {aboutCapabilities.map((service, index) => (
+          <li data-about-row>
+            <a href={`/services/${service.slug}/`}>
+              <span class="about-number" aria-hidden="true">
+                0{index + 1}
+              </span>
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+              <span class="about-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+    <section
+      class="about-work about-section"
+      id="about-work"
+      aria-labelledby="work-title"
+    >
+      <div class="container">
+        <AboutHeading
+          id="work-title"
+          eyebrow="A look at the work / 07"
+          lines={['The thinking becomes real', 'in the finished work.']}
+          intro="Explore selected website concepts to see how different visual directions, industries and requirements shape the result."
+        />
+      </div>
+      <div class="container about-work__projects">
+        {projects.map((project, index) => (
+          <article class="about-project" data-about-project>
+            <a
+              class="about-project__link"
+              href={project.caseStudyHref ?? project.href}
+            >
+              <div class="about-project__image" data-about-image>
+                <ProjectPreview
+                  project={project}
+                  sizes="(max-width: 767px) 90vw, 60vw"
+                />
+              </div>
+              <div class="about-project__copy">
+                <p class="about-eyebrow">
+                  0{index + 1} / {project.typeLabel}
+                </p>
+                <h3 id={`about-project-${index}`}>{project.title}</h3>
+                <p>{project.description}</p>
+                <span class="about-project__action">
+                  Explore the Project{' '}
+                  <span class="about-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </span>
+              </div>
+            </a>
+            <p class="about-project__caption">
+              Actual website capture / {project.typeLabel}
+            </p>
+          </article>
+        ))}
+      </div>
+      <div class="container about-work__action">
+        <a class="about-text-link" href="/work/">
+          Explore All Work <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+    <section
+      class="about-cta about-section container"
+      id="about-cta"
+      aria-labelledby="cta-title"
+    >
+      <AboutHeading
+        id="cta-title"
+        eyebrow="Ready to build something?"
+        lines={['Have an idea worth building?', 'Let’s make it real.']}
+        intro="Whether you’re planning a new website, exploring AI automation or improving an existing digital experience, tell us what you’re working on."
+      />
+      <div data-about-row>
+        <ServiceActions
+          primaryLabel="Start a Project"
+          primaryHref="/contact/"
+          secondaryLabel="Explore Our Services"
+          secondaryHref="#capabilities"
+          source="about-final"
+        />
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+<script>
+  import { initializeAbout } from '../scripts/animations/about';
+  initializeAbout();
+</script>

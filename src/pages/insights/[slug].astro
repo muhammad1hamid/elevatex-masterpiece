@@ -1,0 +1,291 @@
+---
+import { render } from 'astro:content';
+import type { InferGetStaticPropsType } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import EditorialImage from '../../components/insights/EditorialImage.astro';
+import EditorialHeading from '../../components/insights/EditorialHeading.astro';
+import EditorialPreview from '../../components/insights/EditorialPreview.astro';
+import ServiceActions from '../../components/services/ServiceActions.astro';
+import ArticleMarkdownTable from '../../components/insights/ArticleMarkdownTable.astro';
+import {
+  insightArticles,
+  relatedInsights,
+  formatInsightDate,
+} from '../../lib/insights/articles';
+import { services } from '../../data/site';
+import { publishedProjectStudies } from '../../utils/content';
+import {
+  articleSchema,
+  breadcrumbSchema,
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+} from '../../utils/structured-data';
+import '../../styles/insights.css';
+import '../../styles/insight-article.css';
+export async function getStaticPaths() {
+  return (await insightArticles()).map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((heading) => heading.depth === 2);
+const related = relatedInsights(entry, await insightArticles());
+const primaryService = services.find(
+  (service) => service.slug === entry.data.relatedServices[0],
+);
+const projects = (await publishedProjectStudies()).filter((project) =>
+  entry.data.relatedProjects.includes(
+    project.id as
+      'qadeer-jewellers' | 'infinity-salon' | 'apex-detailing-studio',
+  ),
+);
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Insights', path: '/insights/' },
+  { name: entry.data.title, path: entry.href },
+];
+---
+
+<BaseLayout
+  title={entry.data.seoTitle ?? entry.data.title}
+  description={entry.data.seoDescription ?? entry.data.description}
+  path={entry.href}
+  indexable={true}
+  type="article"
+  image={entry.data.socialImage ?? entry.image}
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    webPageSchema({
+      title: entry.data.title,
+      description: entry.data.description,
+      path: entry.href,
+    }),
+    breadcrumbSchema(breadcrumbs),
+    articleSchema({
+      title: entry.data.title,
+      description: entry.data.description,
+      path: entry.href,
+      author: entry.data.author,
+      publishedDate: entry.data.publishedDate,
+      updatedDate: entry.data.updatedDate,
+      image: entry.image?.src,
+    }),
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta
+      property="article:published_time"
+      content={entry.data.publishedDate.toISOString()}
+    />
+    {entry.data.updatedDate && (
+      <meta
+        property="article:modified_time"
+        content={entry.data.updatedDate.toISOString()}
+      />
+    )}
+    <meta property="article:author" content={entry.data.author.name} />
+    <meta property="article:section" content={entry.data.category} />
+  </Fragment>
+  <div class="insight-page journal-page" data-journal-page data-insight-page>
+    <div
+      class="insight-progress"
+      aria-hidden="true"
+      hidden
+      data-reading-progress
+    >
+      <span></span>
+    </div>
+    <div class="insight-breadcrumbs container">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+    <article>
+      <header class="insight-hero container">
+        <p class="journal-eyebrow" data-journal-hero-item>
+          {entry.data.category}
+        </p>
+        <h1 data-journal-hero-item>{entry.data.title}</h1>
+        <p class="journal-lead" data-journal-hero-item>
+          {entry.data.description}
+        </p>
+        <div class="insight-meta" data-journal-hero-item>
+          <span>
+            By{' '}
+            {entry.data.author.url ? (
+              <a href={entry.data.author.url} rel="author">
+                {entry.data.author.name}
+              </a>
+            ) : (
+              entry.data.author.name
+            )}
+          </span>
+          <span aria-hidden="true">/</span>
+          <time datetime={entry.data.publishedDate.toISOString()}>
+            {formatInsightDate(entry.data.publishedDate)}
+          </time>
+          <span aria-hidden="true">/</span>
+          <span>{entry.reading.minutes} min read</span>
+          {entry.data.updatedDate && (
+            <span class="insight-meta__updated">
+              Updated{' '}
+              <time datetime={entry.data.updatedDate.toISOString()}>
+                {formatInsightDate(entry.data.updatedDate)}
+              </time>
+            </span>
+          )}
+        </div>
+      </header>
+      {entry.image && (
+        <figure class="insight-cover container" data-journal-cover>
+          <div>
+            <EditorialImage article={entry} priority={true} />
+          </div>
+          {entry.data.coverCaption && (
+            <figcaption>{entry.data.coverCaption}</figcaption>
+          )}
+        </figure>
+      )}
+      <div
+        class:list={[
+          'insight-reading container',
+          toc.length >= 5 && 'insight-reading--with-toc',
+        ]}
+      >
+        {toc.length >= 5 && (
+          <aside class="insight-toc" aria-label="Article contents">
+            <details open>
+              <summary>
+                On this page <span aria-hidden="true">↙</span>
+              </summary>
+              <nav aria-label="Table of contents">
+                <ol>
+                  {toc.map((heading) => (
+                    <li>
+                      <a href={`#${heading.slug}`}>{heading.text}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </details>
+          </aside>
+        )}
+        <div class="insight-body" data-reading-region>
+          {entry.data.quickAnswer && (
+            <section class="insight-answer" aria-label="The short answer">
+              <p class="journal-eyebrow">The short answer</p>
+              <p>{entry.data.quickAnswer}</p>
+            </section>
+          )}
+          {entry.data.takeaways.length > 0 && (
+            <section
+              class="insight-takeaways"
+              aria-labelledby="takeaways-title"
+            >
+              <h2 id="takeaways-title">What you’ll take away</h2>
+              <ul>
+                {entry.data.takeaways.map((takeaway) => (
+                  <li>{takeaway}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+          <div class="insight-prose">
+            <Content components={{ table: ArticleMarkdownTable }} />
+          </div>
+          {entry.data.sources.length > 0 && (
+            <section class="insight-sources" aria-labelledby="sources-heading">
+              <p class="journal-eyebrow">Read the source</p>
+              <h2 id="sources-heading">Sources & references</h2>
+              <ol>
+                {entry.data.sources.map((source) => (
+                  <li>
+                    <a href={source.url}>
+                      {source.title}
+                      <span aria-hidden="true"> ↗</span>
+                    </a>
+                    {source.publisher && (
+                      <span class="insight-sources__publisher">
+                        {source.publisher}
+                      </span>
+                    )}
+                    {source.context && <p>{source.context}</p>}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+          {projects.length > 0 && (
+            <aside
+              class="insight-projects"
+              aria-label="Related project studies"
+            >
+              <p class="journal-eyebrow">See the thinking in context</p>
+              {projects.map((project) => (
+                <a
+                  href={`/work/${project.data.projectStudy!.slug ?? project.id}/`}
+                >
+                  {project.data.title} <span>Concept project study ↗</span>
+                </a>
+              ))}
+            </aside>
+          )}
+        </div>
+      </div>
+    </article>
+    {related.length > 0 && (
+      <section
+        class="insight-related journal-section container"
+        aria-labelledby="related-title"
+      >
+        <EditorialHeading
+          id="related-title"
+          eyebrow="Keep exploring"
+          first="Follow the thread."
+          second="There’s more to consider."
+        />
+        <div class="journal-latest__grid">
+          {related.map((article) => (
+            <EditorialPreview article={article} />
+          ))}
+        </div>
+      </section>
+    )}
+    {primaryService && (
+      <section
+        class="insight-service-cta journal-section container"
+        aria-labelledby="article-cta-title"
+      >
+        <EditorialHeading
+          id="article-cta-title"
+          eyebrow="From reading to doing"
+          first="Put the idea"
+          second="to work."
+          intro={`Explore how our ${primaryService.name.toLowerCase()} service could fit what you’re planning.`}
+        />
+        <ServiceActions
+          primaryLabel={`Explore ${primaryService.name}`}
+          primaryHref={`/services/${primaryService.slug}/`}
+          secondaryLabel="Discuss Your Project"
+          secondaryHref={`/contact/?service=${primaryService.slug}`}
+          source="insights-article"
+        />
+      </section>
+    )}
+  </div>
+</BaseLayout>
+<script>
+  import { initializeJournal } from '../../scripts/insights';
+  initializeJournal();
+</script>

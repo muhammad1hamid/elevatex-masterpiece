@@ -1,0 +1,32 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  lines: readonly string[];
+  intro?: string;
+}
+const { id, eyebrow, lines, intro } = Astro.props;
+---
+
+<header class="about-heading" data-about-heading>
+  <p class="about-eyebrow" data-about-copy>
+    {eyebrow}
+  </p>
+  <h2 id={id}>
+    {lines.map((line, index) => (
+      <span class="about-mask">
+        <span
+          data-about-line
+          class:list={{ 'about-accent': index === lines.length - 1 }}
+        >
+          {line}
+        </span>
+      </span>
+    ))}
+  </h2>
+  {intro && (
+    <p class="about-lead" data-about-copy>
+      {intro}
+    </p>
+  )}
+</header>

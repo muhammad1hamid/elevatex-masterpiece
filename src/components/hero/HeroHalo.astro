@@ -1,5 +1,35 @@
 <div class="hero__halo-position">
   <div class="hero__halo" data-hero-halo>
+    <div class="hero__halo-aura">
+      <svg
+        class="hero__halo-art"
+        viewBox="0 0 720 300"
+        fill="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <defs>
+          <filter
+            id="halo-aura-diffusion"
+            x="-20%"
+            y="-30%"
+            width="140%"
+            height="170%"
+          >
+            <feGaussianBlur stdDeviation="9" />
+          </filter>
+        </defs>
+        <path
+          d="M16 282 A344 260 0 0 1 704 282"
+          stroke="#efbb79"
+          stroke-width="22"
+          opacity=".85"
+          filter="url(#halo-aura-diffusion)"
+          pathLength="1"
+          data-arc-path
+        />
+      </svg>
+    </div>
     <svg
       class="hero__halo-art"
       viewBox="0 0 720 300"

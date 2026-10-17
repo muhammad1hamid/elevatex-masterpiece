@@ -1,0 +1,103 @@
+---
+import { contactLinkForService } from '../../utils/contact-link';
+interface Props {
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondary?: boolean;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  source?: string | undefined;
+}
+const {
+  primaryLabel = 'Start a Website Project',
+  primaryHref = '/contact/',
+  secondary = true,
+  secondaryLabel = 'View Our Work',
+  secondaryHref = '/work/',
+  source,
+} = Astro.props;
+---
+
+<div class="service-actions">
+  <a
+    class="service-actions__primary"
+    href={contactLinkForService(Astro.url.pathname, primaryHref)}
+    data-cta-source={source}
+  >
+    {primaryLabel}
+    <span aria-hidden="true">→</span>
+  </a>
+  {secondary && (
+    <a
+      class="service-actions__secondary"
+      href={secondaryHref}
+      data-cta-source={source}
+    >
+      {secondaryLabel}
+      <span aria-hidden="true">→</span>
+    </a>
+  )}
+</div>
+<style>
+  .service-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+  .service-actions a {
+    display: inline-flex;
+    min-height: var(--action-height-large);
+    min-width: 44px;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition:
+      background-color var(--duration-normal) var(--ease-standard),
+      border-color var(--duration-normal) var(--ease-standard);
+  }
+  .service-actions__primary {
+    background: var(--color-gold-soft);
+    border: 1px solid var(--color-gold-soft);
+    color: #151411;
+  }
+  .service-actions__secondary {
+    border: 1px solid var(--border-accent);
+    color: var(--color-text);
+  }
+  .service-actions span {
+    flex-shrink: 0;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .service-actions__primary:hover {
+      background: #f2e4ca;
+    }
+    .service-actions__secondary:hover {
+      border-color: var(--color-gold);
+      background: var(--color-surface);
+    }
+  }
+  @media (max-width: 479px) {
+    .service-actions {
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .service-actions a {
+      padding-inline: min(1.5rem, 6vw);
+      gap: min(1.5rem, 6vw);
+    }
+  }
+  @media (forced-colors: active) {
+    .service-actions a {
+      border-color: LinkText;
+    }
+  }
+</style>

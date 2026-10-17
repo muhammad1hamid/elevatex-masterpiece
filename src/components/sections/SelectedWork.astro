@@ -1,0 +1,37 @@
+---
+import ProjectShowcase from './ProjectShowcase.astro';
+import type { FeaturedProject } from '../../utils/content';
+interface Props {
+  projects: FeaturedProject[];
+}
+const { projects } = Astro.props;
+const allConcepts = projects.every(
+  (project) => project.projectType === 'concept',
+);
+---
+
+<div class="selected-work" id="selected-work">
+  <header class="selected-work__intro" data-proof-reveal>
+    <p class="selected-work__label">
+      Selected work{' '}
+      <span aria-hidden="true">
+        / 01—{String(projects.length).padStart(2, '0')}
+      </span>
+    </p>
+    <p class="selected-work__note">
+      {allConcepts
+        ? 'Concept projects. Real interfaces to explore.'
+        : 'Websites and digital experiences to explore.'}
+    </p>
+  </header>
+  <div class="selected-work__projects">
+    {projects.map((project, index) => (
+      <ProjectShowcase project={project} index={index} />
+    ))}
+  </div>
+  <div class="selected-work__footer" data-proof-reveal>
+    <a class="selected-work__cta" href="/work/">
+      Explore Selected Work <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</div>

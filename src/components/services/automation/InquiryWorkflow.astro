@@ -1,0 +1,89 @@
+---
+import AutomationIntro from './AutomationIntro.astro';
+import { inquirySteps } from '../../../data/services/ai-automation';
+---
+
+<section
+  class="automation-section automation-workflow"
+  id="automation-workflow"
+  aria-labelledby="automation-workflow-heading"
+  data-automation-workflow
+>
+  <div class="container">
+    <AutomationIntro
+      id="automation-workflow-heading"
+      eyebrow="From trigger to outcome / 05"
+      heading="See what happens between request and result."
+      lead="A good automation is a controlled sequence of inputs, decisions, actions, validations, and fallbacks. Explore a new customer inquiry, one step at a time."
+    />
+    <fieldset class="inquiry-system">
+      <legend>Select a step in the example workflow.</legend>
+      <div class="inquiry-system__meta">
+        <span>New customer inquiry</span>
+        <span>Illustrative sequence · No live actions</span>
+      </div>
+      <ol class="inquiry-system__steps">
+        {inquirySteps.map((step, index) => (
+          <li
+            class="inquiry-step"
+            data-inquiry-step
+            style={`--step-index:${index}`}
+          >
+            <input
+              class="inquiry-step__radio"
+              type="radio"
+              name="inquiry-step"
+              id={`inquiry-${step.id}`}
+              value={step.id}
+              aria-describedby={`inquiry-${step.id}-description`}
+              checked={index === 0}
+            />
+            <h3>
+              <label for={`inquiry-${step.id}`}>
+                <span class="inquiry-step__number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{step.title}</span>
+                <span class="inquiry-step__marker" aria-hidden="true" />
+              </label>
+            </h3>
+            <p id={`inquiry-${step.id}-description`}>{step.description}</p>
+            <span class="automation-tag">{step.kind}</span>
+            <div
+              class="inquiry-step__mobile-detail"
+              data-inquiry-mobile-detail={step.id}
+            >
+              <span class="automation-tag">{step.key}</span>
+              <p>{step.value}</p>
+              <p>
+                <strong>The boundary.</strong> {step.boundary}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="inquiry-system__details">
+        {inquirySteps.map((step, index) => (
+          <div class="inquiry-detail" data-inquiry-detail={step.id}>
+            <div class="inquiry-detail__index" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+              <span>/ 08</span>
+            </div>
+            <div>
+              <p class="automation-tag">{step.key}</p>
+              <p class="inquiry-detail__value">{step.value}</p>
+            </div>
+            <div class="inquiry-detail__boundary">
+              <span class="automation-tag">The boundary</span>
+              <p>{step.boundary}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </fieldset>
+    <p class="automation-footnote">
+      This example illustrates the logic. The actual sequence, permissions, and
+      approval points are defined around your workflow.
+    </p>
+  </div>
+</section>

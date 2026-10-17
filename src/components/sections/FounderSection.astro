@@ -1,0 +1,82 @@
+---
+import { founder } from '../../data/founder';
+import '../../styles/founder-section.css';
+---
+
+<section
+  class="founder"
+  id="founder"
+  aria-labelledby="founder-heading"
+  data-founder
+>
+  <div class="container founder__container">
+    <div class="founder__grid">
+      <header class="founder__intro" data-founder-reveal>
+        <p class="founder__eyebrow">
+          Behind ElevateX <span>/ 07</span>
+        </p>
+        <h2 id="founder-heading">
+          <span>{founder.heading[0]}</span> <span>{founder.heading[1]}</span>
+        </h2>
+        <p class="founder__lead">{founder.introduction}</p>
+      </header>
+
+      <figure class="founder__portrait" data-founder-reveal>
+        <picture>
+          <source
+            type="image/avif"
+            srcset={founder.image.sources.avif
+              .map(({ path, width }) => `${path} ${width}w`)
+              .join(', ')}
+            sizes="(max-width: 1023px) min(100vw - 2.5rem, 38rem), (max-width: 1439px) 43vw, 38rem"
+          />
+          <img
+            src="/images/founder/hamid-founder-840.webp"
+            srcset={founder.image.sources.webp
+              .map(({ path, width }) => `${path} ${width}w`)
+              .join(', ')}
+            sizes="(max-width: 1023px) min(100vw - 2.5rem, 38rem), (max-width: 1439px) 43vw, 38rem"
+            width={founder.image.width}
+            height={founder.image.height}
+            alt={founder.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </figure>
+
+      <div class="founder__details" data-founder-reveal>
+        <div class="founder__identity">
+          <h3>{founder.name}</h3>
+          <p>{founder.role}</p>
+        </div>
+        <p class="founder__statement">{founder.statement}</p>
+        <ul class="founder__capabilities" aria-label="ElevateX capabilities">
+          {founder.capabilities.map((capability) => (
+            <li>{capability}</li>
+          ))}
+        </ul>
+        <nav class="founder__actions" aria-label="Explore ElevateX">
+          <a class="founder__action founder__action--primary" href="/work/">
+            View Our Work <span aria-hidden="true">→</span>
+          </a>
+          <a
+            class="founder__action founder__action--secondary"
+            href="/contact/"
+          >
+            Let’s Talk <span aria-hidden="true">→</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initSectionReveal } from '../../scripts/animations/section-reveal';
+
+  initSectionReveal('[data-founder]', '[data-founder-reveal]', {
+    distance: 12,
+    duration: 820,
+  });
+</script>

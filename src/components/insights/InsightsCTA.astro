@@ -1,0 +1,24 @@
+---
+import ServiceActions from '../services/ServiceActions.astro';
+import EditorialHeading from './EditorialHeading.astro';
+---
+
+<section
+  class="journal-cta journal-section container"
+  aria-labelledby="journal-cta-title"
+>
+  <EditorialHeading
+    id="journal-cta-title"
+    eyebrow="Have something in mind?"
+    first="Read something useful?"
+    second="Let’s build something meaningful."
+    intro="If an idea connects with a challenge in your business, tell us what you’re working on and let’s explore the next step."
+  />
+  <ServiceActions
+    primaryLabel="Start a Project"
+    primaryHref="/contact/"
+    secondaryLabel="Explore Our Work"
+    secondaryHref="/work/"
+    source="insights-final"
+  />
+</section>

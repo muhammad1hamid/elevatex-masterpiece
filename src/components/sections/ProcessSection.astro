@@ -1,0 +1,58 @@
+---
+import ProcessChapter from '../process/ProcessChapter.astro';
+import ProcessThread from '../process/ProcessThread.astro';
+import ProcessVisual from '../process/ProcessVisual.astro';
+import { processSteps } from '../../data/processSteps';
+import '../../styles/process-section.css';
+---
+
+<section
+  class="process"
+  id="process"
+  aria-labelledby="process-heading"
+  data-process
+>
+  <div class="container process__container">
+    <header class="process__intro">
+      <p class="process__eyebrow" data-process-reveal>
+        How we work <span>/ 06</span>
+      </p>
+      <h2 id="process-heading" data-process-reveal>
+        <span>From an idea.</span> <span>To something real.</span>
+      </h2>
+      <p class="process__lead" data-process-reveal>
+        Five deliberate stages. From understanding your goals to designing,
+        developing, and launching digital solutions built around your business.
+      </p>
+    </header>
+    <div class="process__body">
+      <ProcessVisual />
+      <div class="process__journey" data-process-journey>
+        <ProcessThread />
+        <ol class="process__chapters" aria-label="ElevateX project process">
+          {processSteps.map((step) => (
+            <ProcessChapter step={step} />
+          ))}
+        </ol>
+      </div>
+    </div>
+    <p class="process__scope">
+      Our typical approach. The scope and stages are adapted to each project.
+    </p>
+    <div class="process__cta">
+      <p>Have something in mind?</p>
+      <a href="/contact/">
+        Let’s Build It <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+<script>
+  import { initSectionReveal } from '../../scripts/animations/section-reveal';
+  import { initializeProcess } from '../../scripts/animations/process-scroll';
+  initSectionReveal('[data-process]', '[data-process-reveal]', {
+    distance: 16,
+    duration: 700,
+  });
+  initializeProcess();
+</script>

@@ -1,0 +1,244 @@
+---
+import type { ServiceFAQItem } from '../../data/services/types';
+import { contactLinkForService } from '../../utils/contact-link';
+interface Props {
+  items: readonly ServiceFAQItem[];
+  id: string;
+  name: string;
+  eyebrow: string;
+  heading: string;
+  lead: string;
+  ctaLabel?: string;
+  centered?: boolean;
+}
+const {
+  items,
+  id,
+  name,
+  eyebrow,
+  heading,
+  lead,
+  ctaLabel = 'Start a Website Project',
+  centered = false,
+} = Astro.props;
+---
+
+<section
+  class:list={['service-faq', { 'service-faq--centered': centered }]}
+  id={id}
+  aria-labelledby={`${id}-heading`}
+>
+  <div class="container service-faq__layout">
+    <header>
+      <p class="service-faq__eyebrow">{eyebrow}</p>
+      <h2 id={`${id}-heading`}>{heading}</h2>
+      <p class="service-faq__lead">{lead}</p>
+      <a
+        class="service-faq__contact"
+        href={contactLinkForService(Astro.url.pathname)}
+      >
+        {ctaLabel}
+        <span aria-hidden="true">→</span>
+      </a>
+    </header>
+    <ol class="service-faq__list">
+      {items.map((item, index) => (
+        <li>
+          <details name={name} open={index === 0} id={item.id}>
+            <summary>
+              <span class="service-faq__number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span>{item.question}</span>
+              <span class="service-faq__indicator" aria-hidden="true"></span>
+            </summary>
+            <div class="service-faq__answer">
+              <p>{item.answer}</p>
+              {index === items.length - 1 && (
+                <a href={contactLinkForService(Astro.url.pathname)}>
+                  {ctaLabel}
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </div>
+          </details>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+<style>
+  .service-faq {
+    padding-block: var(--section-md);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .service-faq__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(2rem, 6vw, 6rem);
+  }
+  .service-faq header {
+    min-width: 0;
+  }
+  .service-faq__eyebrow {
+    font-size: var(--eyebrow-size);
+    letter-spacing: var(--eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--color-gold-soft);
+    margin-bottom: 1.5rem;
+  }
+  .service-faq h2 {
+    max-width: 15ch;
+  }
+  .service-faq__lead {
+    margin-block: 1.5rem;
+    color: var(--color-muted);
+  }
+  .service-faq__contact,
+  .service-faq__answer a {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-gold-soft);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-accent);
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+  }
+  .service-faq__list {
+    min-width: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .service-faq--centered .service-faq__layout {
+    display: block;
+  }
+  .service-faq--centered header {
+    text-align: center;
+    margin: 0 auto 3rem;
+  }
+  .service-faq--centered .service-faq__eyebrow {
+    max-width: none;
+  }
+  .service-faq--centered h2 {
+    max-width: 25ch;
+    margin-inline: auto;
+  }
+  .service-faq--centered .service-faq__lead {
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+  .service-faq--centered .service-faq__list {
+    max-width: 60rem;
+    margin-inline: auto;
+  }
+  .service-faq li + li {
+    margin-top: 0.625rem;
+  }
+  .service-faq details {
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-frame);
+    background: #101110;
+  }
+  .service-faq details[open] {
+    border-color: var(--border-accent);
+  }
+  .service-faq summary {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr) 2.25rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    min-height: 4.25rem;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 1.0625rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+  .service-faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .service-faq__number {
+    color: var(--color-gold-soft);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+  }
+  .service-faq__indicator {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--border-accent);
+    border-radius: 50%;
+  }
+  .service-faq__indicator::before,
+  .service-faq__indicator::after {
+    position: absolute;
+    content: '';
+    background: var(--color-gold-soft);
+    width: 0.75rem;
+    height: 1px;
+    left: calc(50% - 0.375rem);
+    top: 50%;
+  }
+  .service-faq__indicator::after {
+    transform: rotate(90deg);
+  }
+  details[open] .service-faq__indicator {
+    background: var(--color-gold-soft);
+  }
+  details[open] .service-faq__indicator::before {
+    background: #171716;
+  }
+  details[open] .service-faq__indicator::after {
+    display: none;
+  }
+  .service-faq__answer {
+    margin: 0 1.25rem 1.25rem 3.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    overflow-wrap: anywhere;
+  }
+  .service-faq__answer a {
+    margin-top: 1rem;
+  }
+  @media (max-width: 1023px) {
+    .service-faq__layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .service-faq h2 {
+      max-width: 22ch;
+    }
+  }
+  @media (max-width: 479px) {
+    .service-faq {
+      padding-block: var(--section-mobile);
+    }
+    .service-faq summary {
+      grid-template-columns: 1rem minmax(0, 1fr) 2rem;
+      gap: 0.625rem;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+    .service-faq__answer {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+  @media (forced-colors: active) {
+    .service-faq details,
+    .service-faq__indicator {
+      border-color: ButtonText;
+    }
+    .service-faq__indicator::before,
+    .service-faq__indicator::after {
+      background: ButtonText;
+    }
+  }
+</style>

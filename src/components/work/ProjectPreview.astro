@@ -1,0 +1,39 @@
+---
+import type { FeaturedProject } from '../../utils/content';
+interface Props {
+  project: FeaturedProject;
+  sizes?: string;
+  eager?: boolean;
+  decorative?: boolean;
+}
+const {
+  project,
+  sizes = '(max-width: 767px) 90vw, 65vw',
+  eager = false,
+  decorative = false,
+} = Astro.props;
+---
+
+<div class="work-browser" data-media-provenance="verifiedScreenshot">
+  <div class="work-browser__bar" aria-hidden="true">
+    <i></i>
+    <i></i>
+    <i></i>
+    <span>{new URL(project.liveUrl).hostname}</span>
+    <b>↗</b>
+  </div>
+  <picture>
+    <source type="image/avif" srcset={project.avifSrcSet} sizes={sizes} />
+    <img
+      src={project.image.src}
+      srcset={project.webpSrcSet}
+      sizes={sizes}
+      alt={decorative ? '' : project.image.alt}
+      width={project.image.width}
+      height={project.image.height}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={eager ? 'high' : 'auto'}
+    />
+  </picture>
+</div>

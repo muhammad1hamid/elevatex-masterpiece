@@ -1,0 +1,109 @@
+---
+import { featuredWork } from '../../utils/content';
+import { webProjectStories } from '../../data/services/web-development';
+import ServiceActions from './ServiceActions.astro';
+const projects = (await featuredWork()).filter(
+  (project) =>
+    project.serviceNames.includes('Web Development') &&
+    webProjectStories[project.id],
+);
+const sizes =
+  '(min-width: 1440px) 720px, (min-width: 1024px) 52vw, calc(100vw - 2.5rem)';
+---
+
+<section
+  class="web-work web-service__section"
+  id="web-work"
+  aria-labelledby="web-work-heading"
+>
+  <div class="container">
+    <header class="web-service__section-intro web-work__intro" data-web-reveal>
+      <div>
+        <p class="web-service__eyebrow">Selected website work / 05</p>
+        <h2 id="web-work-heading">
+          A closer look <br />
+          at the <em>craft.</em>
+        </h2>
+      </div>
+      <p>
+        Three concept websites. Different businesses, visual directions, and
+        visitor journeys. Explore the interfaces and the choices behind them.
+      </p>
+    </header>
+    <div class="web-work__projects">
+      {projects.map((project, index) => {
+        const story = webProjectStories[project.id]!;
+        return (
+          <article
+            class:list={[
+              'web-work__project',
+              index === 1 && 'web-work__project--reverse',
+            ]}
+            data-web-reveal
+          >
+            <figure class="web-work__figure">
+              <div class="web-work__chrome" aria-hidden="true">
+                <span>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </span>
+                <span>{project.category}</span>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+              </div>
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset={project.avifSrcSet}
+                  sizes={sizes}
+                />
+                <img
+                  src={project.image.src}
+                  srcset={project.webpSrcSet}
+                  sizes={sizes}
+                  width={project.image.width}
+                  height={project.image.height}
+                  alt={`${project.title} website concept homepage in a desktop browser.`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+              <figcaption>
+                {project.title} / {project.typeLabel}
+              </figcaption>
+            </figure>
+            <div class="web-work__story">
+              <p class="web-service__eyebrow">
+                {project.typeLabel} <span aria-hidden="true">·</span>{' '}
+                {project.industry}
+              </p>
+              <h3>{project.title}</h3>
+              <p class="web-work__brief">{story.brief}</p>
+              <dl>
+                <div>
+                  <dt>Design direction</dt>
+                  <dd>{story.direction}</dd>
+                </div>
+                <div>
+                  <dt>Interface includes</dt>
+                  <dd>{story.implementation}</dd>
+                </div>
+              </dl>
+              <a class="web-service__text-link" href={project.href}>
+                Explore {project.title} concept{' '}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <div class="web-work__close">
+      <p>
+        Have a different kind of website in mind? <br />
+        We start with what your business needs.
+      </p>
+      <ServiceActions source="webdev_view_work" />
+    </div>
+  </div>
+</section>

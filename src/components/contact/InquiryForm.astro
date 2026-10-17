@@ -1,0 +1,203 @@
+---
+import {
+  inquiryServices,
+  inquiryBudgets,
+  inquiryTimelines,
+} from '../../data/contact';
+---
+
+<!-- No submit control: this explicitly labeled frontend preview cannot send inquiries. -->
+<form
+  class="inquiry-form"
+  id="inquiry-form"
+  method="post"
+  action="/contact/"
+  aria-labelledby="inquiry-title"
+  aria-describedby="inquiry-availability"
+  data-inquiry-form
+  data-inquiry-state="idle"
+>
+  <div class="inquiry-form__topline">
+    <p>Your project, in a few words.</p>
+    <span>01 / The details</span>
+  </div>
+  <p class="inquiry-form__availability" id="inquiry-availability">
+    <span aria-hidden="true"></span> Inquiry preview — sending is not available
+    yet.
+  </p>
+  <p class="inquiry-form__required">
+    Fields marked * are required. Everything else is optional.
+  </p>
+  <div class="inquiry-form__grid">
+    <div class="inquiry-field" data-contact-field>
+      <label for="inquiry-name">
+        Your Name <span aria-hidden="true">*</span>
+      </label>
+      <input
+        id="inquiry-name"
+        name="name"
+        type="text"
+        autocomplete="name"
+        placeholder="Your full name"
+        required
+        minlength="2"
+        maxlength="100"
+        aria-describedby="inquiry-name-error"
+      />
+      <p class="inquiry-field__error" id="inquiry-name-error"></p>
+    </div>
+    <div class="inquiry-field" data-contact-field>
+      <label for="inquiry-email">
+        Email Address <span aria-hidden="true">*</span>
+      </label>
+      <input
+        id="inquiry-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="you@company.com"
+        required
+        maxlength="254"
+        spellcheck="false"
+        aria-describedby="inquiry-email-error"
+      />
+      <p class="inquiry-field__error" id="inquiry-email-error"></p>
+    </div>
+    <div class="inquiry-field" data-contact-field>
+      <label for="inquiry-service">
+        What Can We Help With? <span aria-hidden="true">*</span>
+      </label>
+      <select
+        id="inquiry-service"
+        name="service"
+        required
+        aria-describedby="inquiry-service-error"
+      >
+        <option value="" selected disabled>
+          Select a service
+        </option>
+        {inquiryServices.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+      <p class="inquiry-field__error" id="inquiry-service-error"></p>
+    </div>
+    <div class="inquiry-field" data-contact-field>
+      <label for="inquiry-budget">
+        Approximate Budget <span class="inquiry-field__optional">Optional</span>
+      </label>
+      <select
+        id="inquiry-budget"
+        name="budget"
+        aria-describedby="inquiry-budget-error"
+      >
+        <option value="" selected>
+          Your preference
+        </option>
+        {inquiryBudgets.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+      <p class="inquiry-field__error" id="inquiry-budget-error"></p>
+    </div>
+    <div class="inquiry-field" data-contact-field>
+      <label for="inquiry-phone">
+        WhatsApp / Phone <span class="inquiry-field__optional">Optional</span>
+      </label>
+      <input
+        id="inquiry-phone"
+        name="phone"
+        type="tel"
+        autocomplete="tel"
+        placeholder="Your number, with country code"
+        maxlength="40"
+        aria-describedby="inquiry-phone-error"
+      />
+      <p class="inquiry-field__error" id="inquiry-phone-error"></p>
+    </div>
+    <div class="inquiry-field" data-contact-field>
+      <label for="inquiry-timeline">
+        Preferred Timeline <span class="inquiry-field__optional">Optional</span>
+      </label>
+      <select
+        id="inquiry-timeline"
+        name="timeline"
+        aria-describedby="inquiry-timeline-error"
+      >
+        <option value="" selected>
+          When are you thinking?
+        </option>
+        {inquiryTimelines.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+      <p class="inquiry-field__error" id="inquiry-timeline-error"></p>
+    </div>
+    <div class="inquiry-field inquiry-field--wide" data-contact-field>
+      <label for="inquiry-website">
+        Existing Website <span class="inquiry-field__optional">Optional</span>
+      </label>
+      <input
+        id="inquiry-website"
+        name="website"
+        type="url"
+        autocomplete="url"
+        placeholder="https://yourwebsite.com"
+        maxlength="2048"
+        spellcheck="false"
+        aria-describedby="inquiry-website-error"
+      />
+      <p class="inquiry-field__error" id="inquiry-website-error"></p>
+    </div>
+    <div class="inquiry-field inquiry-field--wide" data-contact-field>
+      <label for="inquiry-description">
+        Tell Us About Your Project <span aria-hidden="true">*</span>
+      </label>
+      <textarea
+        id="inquiry-description"
+        name="description"
+        rows="5"
+        required
+        minlength="10"
+        maxlength="4000"
+        placeholder="What would you like to build or improve? Share your goals, ideas or any important features you have in mind."
+        aria-describedby="inquiry-description-hint inquiry-description-error"
+      ></textarea>
+      <div class="inquiry-field__helper">
+        <span id="inquiry-description-hint">
+          An idea is enough. No formal brief needed.
+        </span>
+        <span data-inquiry-count aria-hidden="true">
+          0 / 4,000
+        </span>
+      </div>
+      <p class="inquiry-field__error" id="inquiry-description-error"></p>
+    </div>
+  </div>
+  <div class="inquiry-form__bottom" data-contact-form-action>
+    <button
+      class="inquiry-form__review"
+      type="button"
+      data-inquiry-review
+      disabled
+    >
+      Review Project Inquiry <span aria-hidden="true">→</span>
+    </button>
+    <p class="inquiry-form__privacy">
+      Review only. Your details are not sent or saved by this page.
+    </p>
+    <noscript>
+      <p class="inquiry-form__noscript">
+        JavaScript enables the local details review. Inquiry sending is not
+        available yet.
+      </p>
+    </noscript>
+    <p
+      class="inquiry-form__status"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      data-inquiry-status
+    ></p>
+  </div>
+</form>

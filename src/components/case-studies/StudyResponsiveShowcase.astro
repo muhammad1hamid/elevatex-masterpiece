@@ -1,0 +1,60 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import StudyHeading from './StudyHeading.astro';
+import StudyMedia from './StudyMedia.astro';
+import StudyViewer from './StudyViewer.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'responsive-showcase'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix,
+  layered = s.variant === 'layered-devices';
+---
+
+<section
+  id={s.id}
+  class:list={[
+    `${p}-section`,
+    { container: layered, [`${p}-responsive`]: !layered },
+  ]}
+  aria-labelledby={s.heading.id}
+>
+  <StudyHeading section={s} prefix={p} contained={!layered} />
+  <div
+    class={layered ? `${p}-responsive__stage` : `${p}-wide ${p}-devices`}
+    data-study-motion={s.motion ?? 'device-reveal'}
+  >
+    {s.devices.map((device) =>
+      layered ? (
+        <StudyMedia
+          context={context}
+          image={device.image}
+          class={`${p}-responsive__${device.role}`}
+        />
+      ) : (
+        <div class={`${p}-device ${p}-device--${device.role}`}>
+          <p class={`${p}-kicker`}>{device.label}</p>
+          <StudyMedia context={context} image={device.image} />
+        </div>
+      ),
+    )}
+  </div>
+  <div class:list={[`${p}-responsive__notes`, { container: !layered }]}>
+    {s.notes.map((note) => (
+      <div>
+        <h3>{note.title}</h3>
+        <p>{note.text}</p>
+      </div>
+    ))}
+  </div>
+  {s.viewer && (
+    <StudyViewer
+      context={context}
+      viewer={s.viewer}
+      kind="menu-detail"
+      contained={!layered}
+    />
+  )}
+</section>

@@ -1,0 +1,49 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import StudyHeading from './StudyHeading.astro';
+import StudyMedia from './StudyMedia.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'final-showcase'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix,
+  full = s.variant === 'full-bleed';
+---
+
+<section
+  id={s.id}
+  class={full ? `${p}-finished` : `container ${p}-section`}
+  aria-labelledby={s.heading.id}
+>
+  <div class:list={{ container: full }}>
+    <StudyHeading section={s} prefix={p} />
+    <StudyMedia
+      context={context}
+      image={s.image}
+      class={!full ? `${p}-services-preview` : undefined}
+      motion={s.motion}
+    />
+    <div class={full ? `${p}-actions` : `${p}-finished__actions`}>
+      <a
+        class={`${p}-button${!full ? ` ${p}-button--quiet` : ''}`}
+        href={context.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {s.buttonLabel} <span aria-hidden="true">↗</span>
+        <span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    </div>
+    <p class={`${p}-related`}>
+      {s.related.map((segment) =>
+        segment.type === 'text' ? (
+          segment.text
+        ) : (
+          <a href={segment.href}>{segment.label}</a>
+        ),
+      )}
+    </p>
+  </div>
+</section>

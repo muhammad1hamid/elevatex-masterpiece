@@ -1,0 +1,87 @@
+---
+import { founder } from '../../data/founder';
+import AboutHeading from './AboutHeading.astro';
+import ServiceActions from '../services/ServiceActions.astro';
+const sizes = '(max-width: 767px) 90vw, (max-width: 1023px) 70vw, 42vw';
+---
+
+<section
+  class="about-founder about-section container"
+  id="founder"
+  aria-labelledby="founder-title"
+>
+  <div class="about-founder__composition" data-about-scene="founder">
+    <figure class="about-founder__portrait">
+      <div class="about-art__window" data-about-image>
+        <picture>
+          <source
+            type="image/avif"
+            srcset={founder.image.sources.avif
+              .map(({ path, width }) => `${path} ${width}w`)
+              .join(', ')}
+            sizes={sizes}
+          />
+          <img
+            src="/images/founder/hamid-founder-840.webp"
+            srcset={founder.image.sources.webp
+              .map(({ path, width }) => `${path} ${width}w`)
+              .join(', ')}
+            sizes={sizes}
+            width={founder.image.width}
+            height={founder.image.height}
+            alt={founder.image.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <span
+          class="about-art__light"
+          data-about-light
+          aria-hidden="true"
+        ></span>
+      </div>
+      <figcaption>Hamid / Founder, ElevateX</figcaption>
+    </figure>
+    <div class="about-founder__bio">
+      <AboutHeading
+        id="founder-title"
+        eyebrow="Behind ElevateX / 03"
+        lines={['The person', 'behind the direction.']}
+      />
+      <p class="about-eyebrow" data-about-founder-copy>
+        Founder-led. Hands-on.
+      </p>
+      <h3 data-about-founder-copy>
+        {founder.name}
+        <span>{founder.role}</span>
+      </h3>
+      <p class="about-founder__introduction" data-about-founder-copy>
+        I’m Hamid, the founder of ElevateX. I work across websites, automation
+        and chatbot experiences, with a focus on making technology useful,
+        thoughtful and well executed.
+      </p>
+      <p data-about-founder-copy>
+        The starting point is always the same: understand what the business
+        needs, bring care to the design and make the experience work in
+        practice.
+      </p>
+      <div class="about-founder__note" data-about-founder-copy>
+        <span aria-hidden="true"></span>
+        <p>
+          Good thinking.
+          <br />
+          <strong>Careful execution.</strong>
+        </p>
+      </div>
+      <div data-about-founder-copy>
+        <ServiceActions
+          primaryLabel="Explore Our Work"
+          primaryHref="/work/"
+          secondaryLabel="Start a Conversation"
+          secondaryHref="/contact/"
+          source="about-founder"
+        />
+      </div>
+    </div>
+  </div>
+</section>

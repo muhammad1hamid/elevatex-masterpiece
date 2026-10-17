@@ -1,0 +1,52 @@
+---
+import type { InsightArticle } from '../../lib/insights/articles';
+interface Props {
+  article: InsightArticle;
+  priority?: boolean;
+  sizes?: string;
+  mobile?: boolean;
+}
+const {
+  article,
+  priority = false,
+  sizes = '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1439px) 90vw, 1280px',
+  mobile = true,
+} = Astro.props;
+const image = article.image;
+---
+
+{image && (
+  <picture>
+    {mobile && 'mobileAvifSrcSet' in image && image.mobileAvifSrcSet && (
+      <source
+        media="(max-width: 767px)"
+        type="image/avif"
+        srcset={image.mobileAvifSrcSet}
+        sizes={sizes}
+      />
+    )}
+    {mobile && 'mobileWebpSrcSet' in image && image.mobileWebpSrcSet && (
+      <source
+        media="(max-width: 767px)"
+        type="image/webp"
+        srcset={image.mobileWebpSrcSet}
+        sizes={sizes}
+      />
+    )}
+    {'avifSrcSet' in image && image.avifSrcSet && (
+      <source type="image/avif" srcset={image.avifSrcSet} sizes={sizes} />
+    )}
+    {'webpSrcSet' in image && image.webpSrcSet && (
+      <source type="image/webp" srcset={image.webpSrcSet} sizes={sizes} />
+    )}
+    <img
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : undefined}
+      decoding="async"
+    />
+  </picture>
+)}

@@ -1,0 +1,125 @@
+---
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import ServiceActions from './ServiceActions.astro';
+import { webDevelopment } from '../../data/services/web-development';
+---
+
+<section
+  class="web-hero"
+  id="web-hero"
+  aria-labelledby="web-development-heading"
+>
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { name: 'Home', path: '/' },
+        { name: 'Web Development', path: webDevelopment.path },
+      ]}
+    />
+    <div class="web-hero__composition">
+      <div class="web-hero__copy">
+        <p class="web-service__eyebrow">Web Development</p>
+        <h1 id="web-development-heading">
+          Websites built to look exceptional.{' '}
+          <span>
+            And work <em>even better.</em>
+          </span>
+        </h1>
+        <p class="web-hero__lead">{webDevelopment.supporting}</p>
+        <ServiceActions source="webdev_hero_start_project" />
+      </div>
+      <div class="web-browser-art" aria-hidden="true">
+        <div class="web-browser-art__guide">
+          <span>Interface / responsive system</span>
+          <span>01</span>
+        </div>
+        <div class="web-browser-art__desktop">
+          <div class="web-browser-art__chrome">
+            <span class="web-browser-art__dots">
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+            <span>Website composition</span>
+            <span>↗</span>
+          </div>
+          <div class="web-browser-art__navigation">
+            <span>ElevateX</span>
+            <span>Overview &nbsp; Work &nbsp; Contact</span>
+          </div>
+          <div class="web-browser-art__canvas">
+            <div class="web-browser-art__words">
+              <small>A considered presence</small>
+              <p>
+                A clear story.
+                <br />A better experience.
+              </p>
+              <span class="web-browser-art__button">
+                Explore the work &nbsp; →
+              </span>
+            </div>
+            <svg
+              class="web-browser-art__architecture"
+              viewBox="0 0 270 330"
+              fill="none"
+            >
+              <path
+                d="M35 98 189 31 232 85 76 151Z"
+                fill="#393935"
+                stroke="#a6a39b"
+              />
+              <path
+                d="m76 151 156-66v154L76 305Z"
+                fill="#1a1b19"
+                stroke="#656257"
+              />
+              <path
+                d="m35 98 41 53v154l-41-53Z"
+                fill="#252622"
+                stroke="#656257"
+              />
+              <path
+                d="m126 130 1 130m32-144 1 130m32-144 1 130"
+                stroke="#504638"
+              />
+              <path d="m232 85-1 154" stroke="#e8d7b3" />
+              <path
+                d="m11 319 242-103M4 270 257 161"
+                stroke="#524e43"
+                stroke-opacity=".5"
+              />
+            </svg>
+          </div>
+          <div class="web-browser-art__tiles">
+            <span>
+              <i></i>Clear structure
+            </span>
+            <span>
+              <i></i>Considered detail
+            </span>
+            <span>
+              <i></i>Room to evolve
+            </span>
+          </div>
+        </div>
+        <div class="web-browser-art__mobile">
+          <div class="web-browser-art__notch"></div>
+          <span class="web-browser-art__mobile-brand">
+            ElevateX <i></i>
+          </span>
+          <small>A considered presence</small>
+          <p>
+            A clear story.
+            <br />A better experience.
+          </p>
+          <div class="web-browser-art__mobile-image"></div>
+          <span class="web-browser-art__mobile-action">Explore &nbsp; →</span>
+        </div>
+        <div class="web-browser-art__caption">
+          <span>One visual language.</span>
+          <span>Every screen.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

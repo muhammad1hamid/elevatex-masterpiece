@@ -1,4 +1,5 @@
 import { site } from '../data/site';
+import { founder } from '../data/founder';
 import { canonicalUrl } from './seo';
 
 export type JsonLd = Record<string, unknown>;
@@ -17,6 +18,12 @@ export function organizationSchema(): JsonLd {
     name: site.name,
     url: `${site.origin}/`,
     description: site.description,
+    founder: {
+      '@type': 'Person',
+      '@id': `${site.origin}/#hamid`,
+      name: founder.name,
+      jobTitle: 'Founder',
+    },
   };
 }
 
@@ -36,7 +43,7 @@ export function webPageSchema(input: {
   title: string;
   description: string;
   path: string;
-  type?: 'WebPage' | 'AboutPage' | 'ContactPage';
+  type?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage';
 }): JsonLd {
   const url = canonicalUrl(input.path);
   return {
@@ -64,6 +71,94 @@ export function breadcrumbSchema(items: Breadcrumb[]): JsonLd {
   };
 }
 
+/** The About page describes the same verified organization and founder IDs. */
+export function aboutPageSchema(input: {
+  title: string;
+  description: string;
+  path: string;
+}): JsonLd {
+  return {
+    ...webPageSchema({ ...input, type: 'AboutPage' }),
+    about: { '@id': organizationId },
+    mainEntity: { '@id': organizationId },
+  };
+}
+
+export function founderPersonSchema(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': `${site.origin}/#hamid`,
+    name: founder.name,
+    jobTitle: 'Founder',
+    url: `${canonicalUrl('/about/')}#founder`,
+    image: new URL('/images/founder/hamid-founder-840.webp', site.origin).href,
+    worksFor: { '@id': organizationId },
+  };
+}
+
+export function contactPageSchema(input: {
+  title: string;
+  description: string;
+  path: string;
+}): JsonLd {
+  return {
+    ...webPageSchema({ ...input, type: 'ContactPage' }),
+    about: { '@id': organizationId },
+    mainEntity: { '@id': organizationId },
+  };
+}
+
+export function projectListSchema(
+  projects: { title: string; liveUrl: string; typeLabel: string }[],
+): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${canonicalUrl('/work/')}#projects`,
+    name: 'ElevateX website concepts',
+    numberOfItems: projects.length,
+    itemListElement: projects.map((project, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: `${project.title} — ${project.typeLabel}`,
+      url: project.liveUrl,
+    })),
+  };
+}
+
+/** Describes the editorial project study, without asserting retail products or results. */
+export function projectStudySchema(input: {
+  title: string;
+  description: string;
+  path: string;
+  publishedDate: Date;
+  updatedDate?: Date | undefined;
+  liveUrl: string;
+  projectName: string;
+  projectType?: 'concept' | 'demo' | 'client' | 'internal';
+}): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': `${canonicalUrl(input.path)}#study`,
+    name: input.title,
+    description: input.description,
+    url: canonicalUrl(input.path),
+    datePublished: input.publishedDate.toISOString(),
+    ...(input.updatedDate
+      ? { dateModified: input.updatedDate.toISOString() }
+      : {}),
+    genre: `Website ${input.projectType ?? 'concept'} project study`,
+    creator: { '@id': organizationId },
+    about: {
+      '@type': 'WebSite',
+      name: `${input.projectName} website ${input.projectType ?? 'concept'}`,
+      url: input.liveUrl,
+    },
+  };
+}
+
 export function serviceSchema(input: {
   name: string;
   description: string;
@@ -85,12 +180,19 @@ export function articleSchema(input: {
   path: string;
   publishedDate: Date;
   updatedDate?: Date | undefined;
-  author: { name: string; url?: string | undefined };
+  author: {
+    name: string;
+    url?: string | undefined;
+    type?: 'Person' | 'Organization' | undefined;
+  };
   image?: string | undefined;
 }): JsonLd {
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    '@id': `${canonicalUrl(input.path)}#article`,
+    url: canonicalUrl(input.path),
+    inLanguage: site.language,
     headline: input.title,
     description: input.description,
     mainEntityOfPage: canonicalUrl(input.path),
@@ -99,7 +201,11 @@ export function articleSchema(input: {
       ? { dateModified: input.updatedDate.toISOString() }
       : {}),
     author: {
-      '@type': 'Person',
+      '@type': input.author.type ?? 'Person',
+      ...(input.author.type === 'Organization' &&
+      input.author.name === site.name
+        ? { '@id': organizationId }
+        : {}),
       name: input.author.name,
       ...(input.author.url ? { url: input.author.url } : {}),
     },

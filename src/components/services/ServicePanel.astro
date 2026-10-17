@@ -1,0 +1,44 @@
+---
+import type { ServicePanelContent } from '../../data/services';
+import WebDevelopmentVisual from './WebDevelopmentVisual.astro';
+import AutomationVisual from './AutomationVisual.astro';
+import ChatbotVisual from './ChatbotVisual.astro';
+import LandingPageVisual from './LandingPageVisual.astro';
+
+interface Props {
+  service: ServicePanelContent;
+}
+const { service } = Astro.props;
+const visuals = {
+  website: WebDevelopmentVisual,
+  workflow: AutomationVisual,
+  conversation: ChatbotVisual,
+  landing: LandingPageVisual,
+};
+const Visual = visuals[service.visualType];
+---
+
+<article
+  class={`service-panel service-panel--${service.visualType}`}
+  aria-labelledby={`${service.slug}-heading`}
+  data-service-reveal
+>
+  <div class="service-panel__surface">
+    <header>
+      <p class="service-panel__eyebrow">
+        <span>{service.number}</span> / {service.eyebrow}
+      </p>
+      <h3 id={`${service.slug}-heading`}>{service.title}</h3>
+      <p class="service-panel__description">{service.description}</p>
+    </header>
+    <div
+      class={`service-visual service-visual--${service.visualType}`}
+      aria-hidden="true"
+    >
+      <Visual />
+    </div>
+    <a class="service-panel__link" href={service.href}>
+      {service.ctaLabel} <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

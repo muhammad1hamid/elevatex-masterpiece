@@ -1,0 +1,23 @@
+---
+interface Props {
+  message: string;
+}
+const { message } = Astro.props;
+---
+
+<div class="message-input" aria-labelledby="message-input-title" role="group">
+  <p class="handoff__zone-label">
+    <span>01</span> / Incoming message
+  </p>
+  <h3 id="message-input-title">Customer request</h3>
+  <blockquote class="message-input__transcript" data-incoming-message>
+    <p>
+      <span aria-hidden="true">“</span>
+      {message}
+      <span aria-hidden="true">”</span>
+    </p>
+  </blockquote>
+  <p class="message-input__note">
+    Natural language. A request to make sense of.
+  </p>
+</div>

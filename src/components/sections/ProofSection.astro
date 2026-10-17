@@ -1,0 +1,35 @@
+---
+import ProofMetrics from './ProofMetrics.astro';
+import SelectedWork from './SelectedWork.astro';
+import { featuredWork } from '../../utils/content';
+import '../../styles/proof.css';
+
+const projects = await featuredWork();
+---
+
+<section class="proof" id="proof" aria-labelledby="proof-heading" data-proof>
+  <div class="container proof__inner">
+    <header class="proof__intro">
+      <p class="proof__eyebrow" data-proof-reveal>
+        Proof, not promises
+      </p>
+      <h2 id="proof-heading" data-proof-reveal>
+        <span>Built for real businesses.</span>{' '}
+        <span>
+          Designed to <em>perform.</em>
+        </span>
+      </h2>
+      <p class="proof__lead" data-proof-reveal>
+        From high-converting websites to AI-powered customer systems, ElevateX
+        builds digital experiences designed around real business needs.
+      </p>
+    </header>
+    <ProofMetrics />
+    {projects.length > 0 && <SelectedWork projects={projects} />}
+  </div>
+</section>
+
+<script>
+  import { initProofReveal } from '../../scripts/animations/proof-reveal';
+  initProofReveal();
+</script>

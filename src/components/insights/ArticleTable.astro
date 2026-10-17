@@ -1,0 +1,121 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'Comparison table, scroll horizontally if needed' } =
+  Astro.props;
+---
+
+<div class="article-table">
+  <p class="article-table__hint">
+    On smaller screens, scroll across to compare.
+  </p>
+  <div
+    class="article-table__scroll"
+    role="region"
+    aria-label={title}
+    tabindex="0"
+  >
+    <slot />
+  </div>
+</div>
+
+<style>
+  .article-table {
+    min-width: 0;
+    max-width: 100%;
+    margin: 2.5rem 0;
+  }
+
+  .article-table__hint {
+    margin: 0 0 0.75rem;
+    color: var(--color-muted);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  .article-table__scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    border-block: 1px solid var(--hero-border);
+    scrollbar-color: var(--hero-champagne) var(--color-surface);
+    scrollbar-width: thin;
+  }
+
+  .article-table__scroll:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 5px;
+  }
+
+  .article-table__scroll :global(table) {
+    width: 100%;
+    min-width: 38.75rem;
+    margin: 0;
+    border: 0;
+    border-collapse: collapse;
+    color: var(--color-text);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    text-align: start;
+  }
+
+  .article-table__scroll :global(caption) {
+    padding: 1rem 1.125rem;
+    color: var(--hero-champagne-soft);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    text-align: start;
+  }
+
+  .article-table__scroll :global(th),
+  .article-table__scroll :global(td) {
+    padding: 1.125rem;
+    border: 0;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: top;
+    overflow-wrap: break-word;
+  }
+
+  .article-table__scroll :global(thead th) {
+    background: rgb(216 183 139 / 5%);
+    color: var(--hero-champagne-soft);
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  .article-table__scroll :global(tbody th) {
+    width: 26%;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .article-table__scroll :global(tbody td) {
+    color: var(--color-muted);
+  }
+
+  .article-table__scroll :global(tbody tr:last-child th),
+  .article-table__scroll :global(tbody tr:last-child td) {
+    border-bottom: 0;
+  }
+
+  .article-table__scroll :global(a) {
+    color: var(--hero-champagne-soft);
+    text-underline-offset: 0.2em;
+  }
+
+  .article-table__scroll :global(a:focus-visible) {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+  }
+
+  @media (forced-colors: active) {
+    .article-table__scroll,
+    .article-table__scroll :global(th),
+    .article-table__scroll :global(td) {
+      border-color: CanvasText;
+    }
+  }
+</style>

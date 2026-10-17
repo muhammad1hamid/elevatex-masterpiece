@@ -1,0 +1,414 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import ServiceActions from '../../components/services/ServiceActions.astro';
+import ProjectPreview from '../../components/work/ProjectPreview.astro';
+import Atmosphere from '../../components/work/Atmosphere.astro';
+import { publishedWork } from '../../utils/content';
+import { workMetadata, workCapabilities } from '../../data/work';
+import { staticPages } from '../../data/site';
+import {
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+  breadcrumbSchema,
+  projectListSchema,
+} from '../../utils/structured-data';
+import '../../styles/work.css';
+const projects = await publishedWork();
+const featured = projects.filter((p) => p.portfolio?.featured);
+const salon = projects.find((p) => p.id === 'infinity-salon')!;
+const industries = [...new Set(projects.map((p) => p.industry))];
+const projectList = projectListSchema(projects);
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Work', path: '/work/' },
+];
+---
+
+<BaseLayout
+  {...workMetadata}
+  indexable={staticPages.find((p) => p.path === '/work/')?.indexable ?? false}
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    {
+      ...webPageSchema({ ...workMetadata, type: 'CollectionPage' }),
+      mainEntity: { '@id': projectList['@id'] },
+    },
+    breadcrumbSchema(breadcrumbs),
+    projectList,
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </Fragment>
+  <article class="work-page">
+    <section class="work-hero" id="work-hero" aria-labelledby="work-title">
+      <div class="container work-hero__copy">
+        <Breadcrumbs items={breadcrumbs} />
+        <p class="work-kicker">
+          Selected work <span>/ ElevateX</span>
+        </p>
+        <h1 id="work-title">
+          Work that speaks
+          <br />
+          <span>for itself.</span>
+        </h1>
+        <p class="work-lead">
+          A selection of websites and digital experiences — created with
+          attention to design, usability, and the purpose behind each build.
+        </p>
+        <ServiceActions
+          primaryLabel="Explore Projects ↓"
+          primaryHref="#featured-work"
+          secondaryLabel="Start a Project"
+          secondaryHref="/contact/"
+          source="work-hero"
+        />
+      </div>
+      <div class="work-showroom">
+        <div class="work-showroom__arc" aria-hidden="true"></div>
+        <Atmosphere name="hero" />
+        <div class="work-showroom__previews">
+          {featured.slice(0, 3).map((project, index) => (
+            <div
+              class:list={[
+                'work-showroom__preview',
+                { 'work-showroom__preview--primary': index === 0 },
+              ]}
+            >
+              <ProjectPreview
+                project={project}
+                sizes="(max-width: 767px) 90vw, 36vw"
+                eager={index === 0}
+                decorative
+              />
+              <p>
+                {project.title}
+                <span>Website concept</span>
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p class="work-caption">
+        Real website previews. Independently explored concepts.
+      </p>
+    </section>
+
+    <section
+      id="featured-work"
+      class="work-featured"
+      aria-labelledby="featured-title"
+    >
+      <header class="container work-intro">
+        <p class="work-kicker">Featured projects / 01</p>
+        <h2 id="featured-title">
+          Different industries.
+          <br />
+          <span>Distinct digital experiences.</span>
+        </h2>
+        <p>
+          Each project starts with a different business, audience, and
+          objective. The approach changes with the work — from visual direction
+          and structure to the final experience.
+        </p>
+        <p class="work-note">
+          These are website concepts, presented to demonstrate design and
+          implementation. Demo content, ratings and testimonials are not
+          verified client results.
+        </p>
+      </header>
+      {featured.map((project, index) => (
+        <article
+          id={`feature-${project.id}`}
+          class:list={[
+            'work-feature',
+            `work-feature--${project.portfolio!.layout}`,
+          ]}
+          aria-labelledby={`title-${project.id}`}
+        >
+          <div class="container work-feature__layout">
+            <div class="work-feature__visual">
+              <Atmosphere name={project.portfolio!.layout!} />
+              <ProjectPreview
+                project={project}
+                sizes="(max-width: 767px) 90vw, (max-width: 1023px) 85vw, 65vw"
+              />
+            </div>
+            <div class="work-feature__copy">
+              <p class="work-kicker">
+                {String(index + 1).padStart(2, '0')} / {project.industry}
+              </p>
+              <span class="work-type">{project.typeLabel}</span>
+              <h3 id={`title-${project.id}`}>{project.title}</h3>
+              <p class="work-feature__focus">{project.portfolio!.focus}</p>
+              <p>{project.description}</p>
+              <ul class="work-details">
+                {project.portfolio!.details.map((detail) => (
+                  <li>{detail}</li>
+                ))}
+              </ul>
+              <p class="work-service">{project.serviceNames.join(' · ')}</p>
+              <a
+                class="work-link"
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Live Project <span aria-hidden="true">↗</span>
+                <span class="sr-only">
+                  {' '}
+                  — {project.title} (opens in a new tab)
+                </span>
+              </a>
+              {project.caseStudyHref && (
+                <a
+                  class="work-link work-case-link"
+                  href={project.caseStudyHref}
+                >
+                  View Case Study <span aria-hidden="true">→</span>
+                  <span class="sr-only"> — {project.title}</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="work-interlude" aria-labelledby="interlude-title">
+      <Atmosphere name="gallery" />
+      <div class="container">
+        <p class="work-kicker">The thinking carries through.</p>
+        <h2 id="interlude-title">
+          Designed with intent.
+          <br />
+          <span>Built with purpose.</span>
+        </h2>
+        <p>Different expressions. The same attention to detail.</p>
+      </div>
+    </section>
+
+    <section
+      id="project-explorer"
+      class="container work-explorer"
+      aria-labelledby="explorer-title"
+    >
+      <header class="work-intro">
+        <p class="work-kicker">Explore the work / 02</p>
+        <h2 id="explorer-title">
+          Find the kind of work
+          <br />
+          <span>you want to see.</span>
+        </h2>
+        <p>
+          Browse the collection by industry, then open a live concept to explore
+          the experience for yourself.
+        </p>
+      </header>
+      <div
+        class="work-filters"
+        role="group"
+        aria-label="Filter projects by industry"
+        hidden
+      >
+        {['All projects', ...industries].map((industry, i) => (
+          <button
+            type="button"
+            data-work-filter={i === 0 ? 'all' : industry}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+            aria-controls="work-results"
+          >
+            {industry}
+          </button>
+        ))}
+      </div>
+      <p class="work-count" role="status" aria-live="polite" aria-atomic="true">
+        {projects.length} website concepts
+      </p>
+      <div class="work-grid" id="work-results">
+        {projects.map((project, index) => (
+          <article class="work-tile" data-industry={project.industry}>
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Explore ${project.title} concept (opens in a new tab)`}
+            >
+              <ProjectPreview
+                project={project}
+                sizes="(max-width: 767px) 90vw, 48vw"
+                decorative
+              />
+            </a>
+            <div class="work-tile__meta">
+              <p class="work-kicker">
+                {String(index + 1).padStart(2, '0')} / {project.industry}
+              </p>
+              <span class="work-type">{project.typeLabel}</span>
+            </div>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <p class="work-service">{project.serviceNames.join(' · ')}</p>
+            <a
+              class="work-link"
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Live Project <span aria-hidden="true">↗</span>
+              <span class="sr-only">
+                {' '}
+                — {project.title} (opens in a new tab)
+              </span>
+            </a>
+            {project.caseStudyHref && (
+              <a class="work-link work-case-link" href={project.caseStudyHref}>
+                View Case Study <span aria-hidden="true">→</span>
+                <span class="sr-only"> — {project.title}</span>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section
+      id="behind-the-work"
+      class="work-behind"
+      aria-labelledby="behind-title"
+    >
+      <div class="container">
+        <header class="work-intro">
+          <p class="work-kicker">Behind the work / 03</p>
+          <h2 id="behind-title">
+            More than
+            <br />
+            <span>a finished screen.</span>
+          </h2>
+          <p>
+            A website takes shape through its structure, visual decisions and
+            behavior across screen sizes. Here is the same Infinity Salon
+            concept at desktop and mobile widths.
+          </p>
+        </header>
+        <div class="work-behind__composition">
+          <div class="work-behind__desktop">
+            <ProjectPreview project={salon} />
+            <p class="work-caption">Desktop / real website capture</p>
+          </div>
+          <figure class="work-phone">
+            <picture>
+              <source
+                type="image/avif"
+                srcset="/images/work/infinity-salon-mobile.avif"
+              />
+              <img
+                src={salon.portfolio!.mobileImage!.src}
+                alt={salon.portfolio!.mobileImage!.alt}
+                width="390"
+                height="844"
+                loading="lazy"
+                decoding="async"
+                data-media-provenance="verifiedScreenshot"
+              />
+            </picture>
+            <figcaption>Mobile / 390 × 844</figcaption>
+          </figure>
+        </div>
+        <div class="work-observations">
+          <div>
+            <span>01 / Structure</span>
+            <h3>Find the next step.</h3>
+            <p>
+              Treatments, studio imagery and appointment links give visitors a
+              clear route through the salon concept.
+            </p>
+          </div>
+          <div>
+            <span>02 / Visual direction</span>
+            <h3>Let the imagery lead.</h3>
+            <p>
+              Warm photography and restrained typography create a consistent
+              mood from the opening view onward.
+            </p>
+          </div>
+          <div>
+            <span>03 / Responsive detail</span>
+            <h3>Recompose for the screen.</h3>
+            <p>
+              The mobile capture shows a compact menu, a stacked headline and
+              full-width appointment actions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="work-capabilities"
+      class="container work-capabilities"
+      aria-labelledby="capabilities-title"
+    >
+      <header class="work-intro">
+        <p class="work-kicker">What we build / 04</p>
+        <h2 id="capabilities-title">
+          Different needs.
+          <br />
+          <span>Thoughtful solutions.</span>
+        </h2>
+        <p>
+          The collection above focuses on websites. Explore the wider
+          capabilities available for your next project.
+        </p>
+      </header>
+      <div>
+        {workCapabilities.map((service, index) => (
+          <a class="work-capability" href={`/services/${service.slug}/`}>
+            <span class="work-kicker">0{index + 1}</span>
+            <h3>{service.name}</h3>
+            <p>{service.description}</p>
+            <span class="work-capability__arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section
+      id="work-cta"
+      class="container work-cta"
+      aria-labelledby="cta-title"
+    >
+      <p class="work-kicker">Have something in mind?</p>
+      <h2 id="cta-title">
+        Your project
+        <br />
+        <span>could be next.</span>
+      </h2>
+      <p>
+        Whether you're starting with an idea or improving something that already
+        exists, tell us what you're working on and let's explore the right next
+        step.
+      </p>
+      <ServiceActions
+        primaryLabel="Start a Project"
+        secondaryLabel="Explore Our Services"
+        secondaryHref="/#services"
+        source="work-final"
+      />
+    </section>
+  </article>
+</BaseLayout>
+<script>
+  import '../../scripts/work';
+</script>

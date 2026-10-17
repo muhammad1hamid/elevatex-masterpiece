@@ -1,0 +1,229 @@
+.why-elevatex {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: var(--section-sm) var(--section-md);
+  background:
+    radial-gradient(
+      ellipse 42% 32% at 50% 12%,
+      rgb(201 202 203 / 2%),
+      transparent
+    ),
+    linear-gradient(
+      var(--color-bg),
+      var(--hero-bg-soft) 16%,
+      var(--hero-bg-soft) 88%,
+      var(--color-bg)
+    );
+}
+.why-elevatex__architecture {
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+  top: 0;
+  width: min(100%, 75rem);
+  height: auto;
+  margin-inline: auto;
+  color: var(--color-silver);
+  opacity: 0.045;
+  mask-image:
+    linear-gradient(transparent, black 20%, black 70%, transparent),
+    radial-gradient(ellipse 68% 78% at 50% 24%, black 28%, transparent 88%);
+  mask-composite: intersect;
+  pointer-events: none;
+}
+.why-elevatex__intro {
+  max-width: 59rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.why-elevatex__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4375rem 0.8125rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-text);
+  color: var(--hero-bg-soft);
+  font-size: var(--eyebrow-pill-size);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+.why-elevatex__heading {
+  margin-top: 1.375rem;
+  font-family: var(--font-heading);
+  font-size: clamp(2.3rem, 4.2vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--color-text);
+}
+.why-elevatex__heading > span {
+  display: block;
+}
+.why-elevatex__heading > span + span {
+  color: var(--hero-text);
+}
+.why-elevatex__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 0.875rem;
+  max-width: 77.5rem;
+  margin: clamp(3rem, 4.4vw, 4rem) auto 0;
+}
+.why-elevatex__card {
+  min-width: 0;
+}
+.why-elevatex__card-surface {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: 15.25rem;
+  padding: 1.75rem;
+  border: 1px solid var(--border-quiet);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--hero-bg-soft) 94%, var(--color-surface));
+  text-align: center;
+}
+.why-elevatex__card-surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgb(216 183 139 / 5%),
+    transparent 75%
+  );
+  opacity: 0;
+  pointer-events: none;
+}
+.why-elevatex__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid color-mix(in srgb, var(--color-silver) 30%, transparent);
+  border-radius: 0.875rem;
+  color: var(--color-silver);
+  background: color-mix(in srgb, var(--color-surface) 80%, var(--hero-bg-soft));
+  box-shadow:
+    inset 0 1px rgb(243 240 233 / 6%),
+    0 0 1rem rgb(201 202 203 / 3%);
+}
+.why-elevatex__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.why-elevatex__card-title {
+  position: relative;
+  margin-top: 1.375rem;
+  font-size: clamp(1.15rem, 1.5vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+.why-elevatex__card-description {
+  position: relative;
+  max-width: 20rem;
+  margin-top: 0.625rem;
+  color: var(--color-muted);
+  font-size: 0.90625rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .why-elevatex__card-surface {
+    transition:
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 300ms ease;
+  }
+  .why-elevatex__card-surface::before {
+    transition: opacity 300ms ease;
+  }
+  .why-elevatex__icon {
+    transition:
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 300ms ease,
+      color 300ms ease;
+  }
+  .why-elevatex__card:hover .why-elevatex__card-surface {
+    transform: translateY(-3px);
+    border-color: var(--hero-border);
+  }
+  .why-elevatex__card:hover .why-elevatex__card-surface::before {
+    opacity: 1;
+  }
+  .why-elevatex__card:hover .why-elevatex__icon {
+    transform: translateY(-1px);
+    border-color: var(--hero-border-strong);
+    color: var(--hero-champagne-soft);
+  }
+}
+@media (max-width: 1199px) {
+  .why-elevatex__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 56rem;
+  }
+}
+@media (max-width: 767px) {
+  .why-elevatex__grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+    max-width: 30rem;
+    gap: 0.75rem;
+  }
+  .why-elevatex__heading {
+    font-size: clamp(1.625rem, 7.8vw, 2.3rem);
+    letter-spacing: -0.035em;
+  }
+  .why-elevatex__card-surface {
+    min-height: 13rem;
+    padding: 1.5rem;
+  }
+  .why-elevatex__icon {
+    width: 2.875rem;
+    height: 2.875rem;
+  }
+  .why-elevatex__card-title {
+    margin-top: 1.125rem;
+    font-size: 1.1875rem;
+  }
+}
+@media (max-width: 639px) {
+  .why-elevatex {
+    padding-block: 3.5rem 4rem;
+  }
+  .why-elevatex__architecture {
+    display: none;
+  }
+  .why-elevatex__heading {
+    margin-top: 1.25rem;
+  }
+  .why-elevatex__grid {
+    margin-top: 2.5rem;
+  }
+}
+@media (forced-colors: active) {
+  .why-elevatex__architecture {
+    display: none;
+  }
+  .why-elevatex__eyebrow {
+    border: 1px solid CanvasText;
+  }
+  .why-elevatex__card-surface,
+  .why-elevatex__icon {
+    border-color: CanvasText;
+  }
+}

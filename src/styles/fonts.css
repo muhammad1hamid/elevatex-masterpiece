@@ -1,9 +1,17 @@
 @font-face {
-  font-family: 'Bodoni Moda';
+  font-family: 'Outfit';
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400 600;
   font-display: swap;
-  src: url('/fonts/bodoni-moda-latin-opsz-normal.woff2') format('woff2');
+  src: url('/fonts/outfit-latin-wght-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Outfit Fallback';
+  src: local('Arial');
+  size-adjust: 100%;
+  ascent-override: 100%;
+  descent-override: 26%;
+  line-gap-override: 0%;
 }
 @font-face {
   font-family: 'Bodoni Moda';

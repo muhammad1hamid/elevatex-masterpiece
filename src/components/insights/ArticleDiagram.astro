@@ -1,0 +1,476 @@
+---
+interface Props {
+  variant: 'conversion' | 'automation' | 'support';
+}
+
+const { variant } = Astro.props;
+
+const descriptions = {
+  conversion: {
+    title: 'From first impression to a useful next step',
+    caption:
+      'Illustrative visitor journey. A clear path helps explain a decision; it does not predict conversion results.',
+  },
+  automation: {
+    title: 'One inquiry, with clear control points',
+    caption:
+      'Illustrative workflow, not a live ElevateX integration. Validation and human review come before consequential actions.',
+  },
+  support: {
+    title: 'Match the conversation to the right response',
+    caption:
+      'Illustrative routing workflow. The right boundary depends on the business, the information available and the risk of a wrong answer.',
+  },
+} as const;
+
+const { title, caption } = descriptions[variant];
+
+const conversionSteps = [
+  { title: 'Visitor goal', detail: 'What is this person trying to do?' },
+  { title: 'Clear proposition', detail: 'Explain the offer and who it helps.' },
+  {
+    title: 'Relevant evidence',
+    detail: 'Show work, details and honest limits.',
+  },
+  { title: 'Specific next step', detail: 'Name the action and what follows.' },
+];
+
+const automationSteps = [
+  { title: 'Inquiry received', detail: 'A customer submits a request.' },
+  {
+    title: 'Collect the required data',
+    detail: 'Keep the fields needed for this task.',
+  },
+  {
+    title: 'Interpret with AI',
+    detail: 'Suggest a category or extract relevant details.',
+  },
+  {
+    title: 'Validate against rules',
+    detail: 'Check required fields, permissions and allowed actions.',
+  },
+  {
+    title: 'Update the CRM or connected system',
+    detail: 'Use an approved API action after checks pass.',
+  },
+];
+
+const supportRoutes = [
+  {
+    condition: 'Routine and supported',
+    example: 'A documented question with an approved answer.',
+    destination: 'Chatbot response',
+    detail: 'Use the available source and stay within scope.',
+  },
+  {
+    condition: 'Complex or sensitive',
+    example: 'A complaint, exception or decision that needs judgment.',
+    destination: 'Human support',
+    detail: 'Pass along the message and useful context.',
+  },
+  {
+    condition: 'Unclear or unsupported',
+    example: 'Missing information or no reliable answer.',
+    destination: 'Clarify or hand off',
+    detail: 'Ask a focused question or offer a human route.',
+  },
+];
+---
+
+<figure
+  data-article-diagram
+  class:list={['article-diagram', `article-diagram--${variant}`]}
+  aria-label={title}
+>
+  <div class="article-diagram__header">
+    <p class="article-diagram__eyebrow">Illustrative workflow</p>
+    <p class="article-diagram__title">{title}</p>
+  </div>
+
+  {variant === 'conversion' && (
+    <>
+      <ol class="article-diagram__journey" role="list">
+        {conversionSteps.map((step, index) => (
+          <li>
+            <span class="article-diagram__index" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <strong>{step.title}</strong>
+              <p>{step.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <div class="article-diagram__comparison">
+        <div>
+          <span class="article-diagram__small-label">Vague action</span>
+          <p class="article-diagram__sample article-diagram__sample--muted">
+            Learn more
+          </p>
+        </div>
+        <span class="article-diagram__comparison-arrow" aria-hidden="true">
+          →
+        </span>
+        <div>
+          <span class="article-diagram__small-label">Specific action</span>
+          <p class="article-diagram__sample">
+            Request a website review <span aria-hidden="true">↗</span>
+          </p>
+        </div>
+      </div>
+      <p class="article-diagram__note">
+        Conceptual wording example. The action must match what the page actually
+        offers.
+      </p>
+    </>
+  )}
+
+  {variant === 'automation' && (
+    <>
+      <ol
+        class="article-diagram__journey article-diagram__journey--automation"
+        role="list"
+      >
+        {automationSteps.map((step, index) => (
+          <li class:list={{ 'article-diagram__validation': index === 3 }}>
+            <span class="article-diagram__index" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div class="article-diagram__step-copy">
+              <strong>{step.title}</strong>
+              <p>{step.detail}</p>
+              {index === 3 && (
+                <div class="article-diagram__review">
+                  <span class="article-diagram__small-label">
+                    Review branch
+                  </span>
+                  <strong>Human review when needed</strong>
+                  <p>
+                    Route unclear, failed or consequential cases to a person.
+                    Continue only after a suitable decision.
+                  </p>
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="article-diagram__note">
+        The AI suggestion is an input to the workflow. It is not permission to
+        take every action.
+      </p>
+    </>
+  )}
+
+  {variant === 'support' && (
+    <>
+      <div class="article-diagram__incoming">
+        <span class="article-diagram__small-label">Starting point</span>
+        <strong>Customer message</strong>
+        <p>Identify the request and the limits of the available information.</p>
+      </div>
+      <ul class="article-diagram__routes" role="list">
+        {supportRoutes.map((route) => (
+          <li>
+            <div class="article-diagram__condition">
+              <strong>{route.condition}</strong>
+              <p>{route.example}</p>
+            </div>
+            <span class="article-diagram__route-arrow" aria-hidden="true">
+              →
+            </span>
+            <div class="article-diagram__destination">
+              <strong>{route.destination}</strong>
+              <p>{route.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="article-diagram__note">
+        Keep a clear human route available when the conversation reaches a
+        boundary.
+      </p>
+    </>
+  )}
+
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+  .article-diagram {
+    --diagram-line: rgb(216 183 139 / 28%);
+    min-width: 0;
+    max-width: 100%;
+    margin: clamp(2.5rem, 5vw, 3.75rem) 0;
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    border-block: 1px solid var(--hero-border);
+    background: linear-gradient(145deg, rgb(216 183 139 / 5%), transparent 65%);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    text-align: start;
+    overflow-wrap: anywhere;
+  }
+
+  .article-diagram__header {
+    margin-bottom: 2rem;
+  }
+
+  .article-diagram__eyebrow,
+  .article-diagram__small-label {
+    display: block;
+    margin: 0;
+    color: var(--hero-champagne);
+    font-family: var(--font-heading);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.13em;
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+
+  .article-diagram__title {
+    max-width: 30rem;
+    margin: 0.625rem 0 0;
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .article-diagram strong {
+    display: block;
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .article-diagram p:not(.article-diagram__eyebrow, .article-diagram__title) {
+    margin: 0.375rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .article-diagram__journey {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .article-diagram__journey > li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding: 0 0 1.75rem;
+    list-style: none;
+  }
+
+  .article-diagram__journey > li:last-child {
+    padding-bottom: 0;
+  }
+
+  .article-diagram__journey > li:not(:last-child)::before {
+    position: absolute;
+    top: 2.125rem;
+    bottom: 0.25rem;
+    left: 0.9375rem;
+    width: 1px;
+    background: var(--diagram-line);
+    content: '';
+  }
+
+  .article-diagram__index {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid var(--diagram-line);
+    border-radius: 50%;
+    color: var(--hero-champagne);
+    font-size: 0.6875rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .article-diagram__comparison {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1.2fr);
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--diagram-line);
+  }
+
+  .article-diagram p.article-diagram__sample {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.625rem;
+    color: var(--hero-champagne-soft);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .article-diagram p.article-diagram__sample--muted {
+    color: var(--color-muted);
+  }
+
+  .article-diagram__comparison-arrow,
+  .article-diagram__route-arrow {
+    color: var(--hero-champagne);
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .article-diagram__review {
+    position: relative;
+    max-width: 25rem;
+    margin-top: 1rem;
+    padding: 0.875rem 0 0.875rem 1rem;
+    border-inline-start: 1px solid var(--hero-champagne);
+  }
+
+  .article-diagram__review strong {
+    margin-top: 0.375rem;
+    color: var(--hero-champagne-soft);
+  }
+
+  .article-diagram__incoming {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--diagram-line);
+  }
+
+  .article-diagram__incoming strong {
+    margin-top: 0.5rem;
+    font-size: 1.25rem;
+  }
+
+  .article-diagram__routes {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .article-diagram__routes > li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1.5rem minmax(0, 1fr);
+    align-items: start;
+    gap: 1rem;
+    margin: 0;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    list-style: none;
+  }
+
+  .article-diagram__route-arrow {
+    padding-top: 0.2rem;
+    text-align: center;
+  }
+
+  .article-diagram__destination strong {
+    color: var(--hero-champagne-soft);
+  }
+
+  .article-diagram p.article-diagram__note {
+    margin-top: 1.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .article-diagram figcaption {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--color-muted);
+    font-size: 0.75rem;
+    line-height: 1.7;
+  }
+
+  @media (min-width: 48rem) {
+    .article-diagram--conversion .article-diagram__journey {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .article-diagram--conversion .article-diagram__journey > li {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0;
+    }
+
+    .article-diagram--conversion
+      .article-diagram__journey
+      > li:not(:last-child)::before {
+      top: 1rem;
+      right: -1.25rem;
+      bottom: auto;
+      left: 2.5rem;
+      width: auto;
+      height: 1px;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .article-diagram__header {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-diagram__journey > li {
+      gap: 0.75rem;
+    }
+
+    .article-diagram__comparison {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .article-diagram__comparison-arrow {
+      width: 1.25rem;
+      transform: rotate(90deg);
+    }
+
+    .article-diagram__routes > li {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.75rem;
+    }
+
+    .article-diagram__route-arrow {
+      width: 1.25rem;
+      padding: 0;
+      transform: rotate(90deg);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .article-diagram,
+    .article-diagram__comparison,
+    .article-diagram__index,
+    .article-diagram__review,
+    .article-diagram__incoming,
+    .article-diagram__routes > li,
+    .article-diagram figcaption {
+      border-color: CanvasText;
+    }
+
+    .article-diagram {
+      background: Canvas;
+    }
+
+    .article-diagram__journey > li:not(:last-child)::before {
+      background: CanvasText;
+    }
+  }
+</style>

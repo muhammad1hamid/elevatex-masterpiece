@@ -1,0 +1,53 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { MediaPlacement } from '../../lib/case-study/schema';
+import StudyMedia from './StudyMedia.astro';
+interface Props {
+  context: StudyContext;
+  viewer: {
+    image: MediaPlacement;
+    summary: string;
+    instructions?: string | undefined;
+    regionLabel?: string | undefined;
+  };
+  kind: 'fullpage' | 'menu-detail' | 'gallery-detail';
+  contained?: boolean;
+}
+const { context, viewer, kind, contained = false } = Astro.props,
+  p = context.prefix;
+---
+
+<details class:list={[`${p}-${kind}`, { container: contained }]}>
+  <summary>
+    {viewer.summary} <span aria-hidden="true">+</span>
+  </summary>
+  {viewer.instructions && (
+    <p
+      class:list={{ [`${p}-small`]: p !== 'campaign' }}
+      id={
+        kind === 'fullpage' && p !== 'campaign'
+          ? 'fullpage-instructions'
+          : undefined
+      }
+    >
+      {viewer.instructions}
+    </p>
+  )}
+  {kind === 'fullpage' ? (
+    <div
+      class={`${p}-fullpage__viewport`}
+      tabindex="0"
+      role="region"
+      aria-label={viewer.regionLabel ?? 'Complete website capture'}
+      aria-describedby={
+        p !== 'campaign' && viewer.instructions
+          ? 'fullpage-instructions'
+          : undefined
+      }
+    >
+      <StudyMedia context={context} image={viewer.image} />
+    </div>
+  ) : (
+    <StudyMedia context={context} image={viewer.image} />
+  )}
+</details>

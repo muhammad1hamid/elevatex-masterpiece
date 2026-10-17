@@ -1,0 +1,76 @@
+---
+import { heroMotion } from '../../data/hero-motion';
+---
+
+<script
+  is:inline
+  define:vars={{
+    sessionKey: heroMotion.sessionKey,
+    bootTimeout: heroMotion.bootTimeout,
+    staticQuery: heroMotion.staticQuery,
+  }}
+>
+  // Only an eligible, working JS visit covers the page before its first paint.
+  // The inline timer also recovers if every module download subsequently fails.
+  (() => {
+    const html = document.documentElement;
+    const listeners = new AbortController();
+    let timer;
+    const reveal = () => {
+      clearTimeout(timer);
+      listeners.abort();
+      delete html.dataset.heroBoot;
+      document.querySelector('[data-hero-intro]')?.setAttribute('hidden', '');
+    };
+    try {
+      if (
+        matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        matchMedia(staticQuery).matches ||
+        document.hidden ||
+        location.hash ||
+        scrollY > 0 ||
+        sessionStorage.getItem(sessionKey) === 'true'
+      )
+        return;
+      sessionStorage.setItem(sessionKey, 'false');
+      html.dataset.heroBoot = 'pending';
+      timer = setTimeout(() => {
+        html.dataset.heroInterrupted = 'true';
+        reveal();
+      }, bootTimeout);
+      window.addEventListener(
+        'elevatex:intro-finished',
+        () => {
+          clearTimeout(timer);
+          reveal();
+        },
+        { once: true, signal: listeners.signal },
+      );
+      // Input always bypasses the cover, including when module loading has failed.
+      const interrupt = (event) => {
+        if (event.type === 'keydown' && !['Tab', 'Escape'].includes(event.key))
+          return;
+        if (event.type === 'scroll' && scrollY === 0) return;
+        if (!html.dataset.heroBoot) return;
+        html.dataset.heroInterrupted = 'true';
+        reveal();
+      };
+      document.addEventListener('keydown', interrupt, {
+        signal: listeners.signal,
+      });
+      document.addEventListener('pointerdown', interrupt, {
+        signal: listeners.signal,
+      });
+      document.addEventListener('wheel', interrupt, {
+        passive: true,
+        signal: listeners.signal,
+      });
+      window.addEventListener('scroll', interrupt, {
+        passive: true,
+        signal: listeners.signal,
+      });
+    } catch {
+      reveal();
+    }
+  })();
+</script>

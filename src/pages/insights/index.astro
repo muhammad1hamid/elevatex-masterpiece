@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EditorialHeading from '../../components/insights/EditorialHeading.astro';
+import EditorialPreview from '../../components/insights/EditorialPreview.astro';
+import InsightsCTA from '../../components/insights/InsightsCTA.astro';
+import { insightArticles } from '../../lib/insights/articles';
+import { insightTopics } from '../../data/insight-topics';
+import { services } from '../../data/site';
+import {
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+  breadcrumbSchema,
+} from '../../utils/structured-data';
+import { canonicalUrl } from '../../utils/seo';
+import '../../styles/insights.css';
+const articles = await insightArticles();
+const featured = articles[0];
+const latest = articles.slice(1);
+const topics = insightTopics.filter((topic) =>
+  articles.some((article) => article.data.category === topic),
+);
+const title = 'Insights on Web Design, AI & Digital Strategy';
+const description =
+  'Explore practical ElevateX insights on web development, AI automation, chatbots, digital strategy, and building better business experiences.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/insights/"
+  indexable={articles.length > 0}
+  image={featured?.data.socialImage ?? featured?.image}
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    webPageSchema({
+      title,
+      description,
+      path: '/insights/',
+      type: 'CollectionPage',
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Insights', path: '/insights/' },
+    ]),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      '@id': `${canonicalUrl('/insights/')}#articles`,
+      numberOfItems: articles.length,
+      itemListElement: articles.map((article, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: article.data.title,
+        url: canonicalUrl(article.href),
+      })),
+    },
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="ElevateX Insights"
+      href="/insights/rss.xml"
+    />
+  </Fragment>
+  <div class="journal-page" data-journal-page>
+    <section class="journal-hero container" aria-labelledby="journal-title">
+      <div
+        class="journal-hero__light"
+        aria-hidden="true"
+        data-journal-light
+      ></div>
+      <p class="journal-eyebrow" data-journal-hero-item>
+        ElevateX Journal
+      </p>
+      <h1 id="journal-title">
+        <span class="journal-mask">
+          <span data-journal-hero-item>Ideas worth</span>
+        </span>{' '}
+        <span class="journal-mask">
+          <span class="journal-accent" data-journal-hero-item>
+            building on.
+          </span>
+        </span>
+      </h1>
+      <p class="journal-lead" data-journal-hero-item>
+        Practical thinking on websites, AI automation, digital systems, and the
+        decisions that shape better business experiences.
+      </p>
+      <p class="journal-hero__topics" data-journal-hero-item>
+        Design <span>·</span> Development <span>·</span> AI <span>·</span>{' '}
+        Strategy
+      </p>
+      <a
+        class="journal-explore"
+        href="#featured-insight"
+        data-journal-hero-item
+      >
+        Explore Insights <span aria-hidden="true">↓</span>
+      </a>
+      <p class="journal-hero__issue">
+        Notes on making technology useful <span aria-hidden="true">/</span>{' '}
+        {String(articles.length).padStart(2, '0')} reads
+      </p>
+    </section>
+    {articles.length > 0 ? (
+      <>
+        <section
+          class="journal-topics container"
+          aria-labelledby="topics-title"
+        >
+          <p class="journal-eyebrow">Explore by topic</p>
+          <h2 id="topics-title">Find the ideas that matter to you.</h2>
+          <div
+            class="journal-filters"
+            role="group"
+            aria-label="Filter insights by topic"
+            data-journal-filters
+            hidden
+          >
+            {['All Insights', ...topics].map((topic, index) => (
+              <button
+                type="button"
+                data-journal-filter={index === 0 ? 'all' : topic}
+                aria-pressed={index === 0}
+                aria-controls="journal-stories"
+              >
+                {topic}
+                <span>
+                  {index === 0
+                    ? articles.length
+                    : articles.filter(
+                        (article) => article.data.category === topic,
+                      ).length}
+                </span>
+              </button>
+            ))}
+          </div>
+          <p
+            class="journal-filter-count"
+            data-journal-count
+            role="status"
+            aria-live="polite"
+          >
+            {articles.length} articles to explore.
+          </p>
+        </section>
+        <div id="journal-stories">
+          {featured && (
+            <section
+              class="journal-featured journal-section container"
+              id="featured-insight"
+              tabindex="-1"
+              aria-labelledby="featured-title"
+              data-journal-group
+            >
+              <EditorialHeading
+                id="featured-title"
+                eyebrow="Featured perspective / 01"
+                first="A closer look"
+                second="at what matters."
+              />
+              <EditorialPreview article={featured} featured={true} />
+            </section>
+          )}
+          {latest.length > 0 && (
+            <section
+              class="journal-latest journal-section container"
+              aria-labelledby="latest-title"
+              data-journal-group
+            >
+              <EditorialHeading
+                id="latest-title"
+                eyebrow="Latest insights / 02"
+                first="Fresh perspectives."
+                second="Practical ideas."
+                intro="Explore ideas and explanations that help connect digital decisions with real business needs."
+              />
+              <div class="journal-latest__grid">
+                {latest.map((article) => (
+                  <EditorialPreview article={article} />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      </>
+    ) : (
+      <p class="journal-empty container">
+        The next insights are being prepared. Published articles will appear
+        here.
+      </p>
+    )}
+    <section
+      class="journal-perspective journal-section container"
+      aria-labelledby="perspective-title"
+    >
+      <EditorialHeading
+        id="perspective-title"
+        eyebrow="From ElevateX / 03"
+        first="Technology is useful"
+        second="when it solves something real."
+        intro="Our perspective starts with understanding the problem, then choosing the design, tools, and systems that make the most sense for it."
+      />
+      <p class="journal-perspective__signature">A perspective from ElevateX</p>
+    </section>
+    <section
+      class="journal-services journal-section container"
+      aria-labelledby="journal-services-title"
+    >
+      <EditorialHeading
+        id="journal-services-title"
+        eyebrow="From thinking to building / 04"
+        first="Ideas are useful."
+        second="Execution makes them real."
+        intro="Explore how ElevateX applies design, development, and intelligent workflows to business problems."
+      />
+      <ol>
+        {services.map((service, index) => (
+          <li>
+            <a href={`/services/${service.slug}/`}>
+              <span class="journal-services__number">0{index + 1}</span>
+              <span>{service.name}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+    <InsightsCTA />
+  </div>
+</BaseLayout>
+<script>
+  import { initializeJournal } from '../../scripts/insights';
+  initializeJournal();
+</script>

@@ -1,0 +1,99 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { MediaPlacement, StudyMotion } from '../../lib/case-study/schema';
+interface Props {
+  context: StudyContext;
+  image: MediaPlacement;
+  class?: string | undefined;
+  eager?: boolean;
+  motion?: StudyMotion | undefined;
+}
+const { context, image, class: className, eager = false, motion } = Astro.props;
+const media = context.study.media[image.media];
+if (!media) throw new Error(`Missing media ${image.media}`);
+if (image.browser && media.category !== 'AUTHENTIC_SCREENSHOT')
+  throw new Error('Browser frames require authentic screenshots.');
+const set = (
+  item: { base: string; widths: readonly number[] },
+  format: string,
+) =>
+  item.widths
+    .map((width) => `${item.base}-${width}.${format} ${width}w`)
+    .join(', ');
+const provenance =
+  media.category === 'AUTHENTIC_SCREENSHOT'
+    ? 'verifiedScreenshot'
+    : media.category === 'ILLUSTRATIVE_EDITORIAL_ART'
+      ? 'editorialArtwork'
+      : media.category;
+const aspect = {
+  wide: '16 / 9',
+  square: '1',
+  portrait: '4 / 5',
+  native: `${media.width}/${media.height}`,
+}[media.aspectRatio];
+const sizes = image.sizes ?? '(max-width: 767px) 90vw, 85vw';
+---
+
+<figure
+  class:list={[
+    'case-media',
+    className,
+    { 'case-media--art-directed': Boolean(media.mobile) },
+  ]}
+  data-media-provenance={provenance}
+  data-media-category={media.category}
+  data-media-position={media.position}
+  data-study-motion={motion}
+  style={`--media-aspect:${aspect};--media-fit:${media.fit};--media-focal:${media.focalPoint.x}% ${media.focalPoint.y}%;${media.mobile ? `--mobile-aspect:${media.mobile.width}/${media.mobile.height};` : ''}`}
+>
+  <div class:list={{ 'case-frame': image.browser }}>
+    {image.browser && (
+      <div class="case-frame__bar" aria-hidden="true">
+        <i></i>
+        <i></i>
+        <i></i>
+        <span>{context.browserLabel}</span>
+        <b>↗</b>
+      </div>
+    )}
+    <picture>
+      {media.mobile && (
+        <>
+          <source
+            media="(max-width: 767px)"
+            type="image/avif"
+            srcset={set(media.mobile, 'avif')}
+            sizes="100vw"
+            width={media.mobile.width}
+            height={media.mobile.height}
+          />
+          <source
+            media="(max-width: 767px)"
+            type="image/webp"
+            srcset={set(media.mobile, 'webp')}
+            sizes="100vw"
+            width={media.mobile.width}
+            height={media.mobile.height}
+          />
+        </>
+      )}
+      <source type="image/avif" srcset={set(media, 'avif')} sizes={sizes} />
+      <img
+        src={`${media.base}-${media.widths.at(-1)}.webp`}
+        srcset={set(media, 'webp')}
+        sizes={sizes}
+        width={media.width}
+        height={media.height}
+        alt={media.alt}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        fetchpriority={eager ? 'high' : 'auto'}
+        style={`object-position:var(--media-focal);${media.aspectRatio !== 'native' ? 'object-fit:var(--media-fit);' : ''}`}
+      />
+    </picture>
+  </div>
+  {image.showCaption && (
+    <figcaption>{image.caption ?? media.caption}</figcaption>
+  )}
+</figure>

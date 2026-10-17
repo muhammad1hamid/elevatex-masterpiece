@@ -1,0 +1,176 @@
+[
+  {
+    "name": "hero",
+    "provenance": "editorialArtwork",
+    "original": "source-assets/work/hero-reference.png",
+    "crop": {
+      "left": 0,
+      "top": 907,
+      "width": 1491,
+      "height": 148
+    },
+    "outputs": [
+      {
+        "file": "public/images/work/atmosphere/hero-640.avif",
+        "width": 640,
+        "height": 64,
+        "bytes": 2319
+      },
+      {
+        "file": "public/images/work/atmosphere/hero-640.webp",
+        "width": 640,
+        "height": 64,
+        "bytes": 3636
+      },
+      {
+        "file": "public/images/work/atmosphere/hero-1280.avif",
+        "width": 1280,
+        "height": 127,
+        "bytes": 5122
+      },
+      {
+        "file": "public/images/work/atmosphere/hero-1280.webp",
+        "width": 1280,
+        "height": 127,
+        "bytes": 7948
+      }
+    ]
+  },
+  {
+    "name": "gallery",
+    "provenance": "editorialArtwork",
+    "original": "source-assets/work/gallery-reference.png",
+    "crop": {
+      "left": 0,
+      "top": 907,
+      "width": 1491,
+      "height": 148
+    },
+    "outputs": [
+      {
+        "file": "public/images/work/atmosphere/gallery-640.avif",
+        "width": 640,
+        "height": 64,
+        "bytes": 3224
+      },
+      {
+        "file": "public/images/work/atmosphere/gallery-640.webp",
+        "width": 640,
+        "height": 64,
+        "bytes": 5762
+      },
+      {
+        "file": "public/images/work/atmosphere/gallery-1280.avif",
+        "width": 1280,
+        "height": 127,
+        "bytes": 6972
+      },
+      {
+        "file": "public/images/work/atmosphere/gallery-1280.webp",
+        "width": 1280,
+        "height": 127,
+        "bytes": 12308
+      }
+    ]
+  },
+  {
+    "name": "jewellery",
+    "provenance": "editorialArtwork",
+    "original": "source-assets/work/jewellery-reference.png",
+    "crop": {
+      "left": 0,
+      "top": 0,
+      "width": 134,
+      "height": 1055
+    },
+    "outputs": [
+      {
+        "file": "public/images/work/atmosphere/jewellery-160.avif",
+        "width": 160,
+        "height": 1260,
+        "bytes": 7602
+      },
+      {
+        "file": "public/images/work/atmosphere/jewellery-160.webp",
+        "width": 160,
+        "height": 1260,
+        "bytes": 11232
+      }
+    ]
+  },
+  {
+    "name": "beauty",
+    "provenance": "editorialArtwork",
+    "original": "source-assets/work/beauty-reference.png",
+    "crop": {
+      "left": 0,
+      "top": 0,
+      "width": 134,
+      "height": 1055
+    },
+    "outputs": [
+      {
+        "file": "public/images/work/atmosphere/beauty-160.avif",
+        "width": 160,
+        "height": 1260,
+        "bytes": 10338
+      },
+      {
+        "file": "public/images/work/atmosphere/beauty-160.webp",
+        "width": 160,
+        "height": 1260,
+        "bytes": 15044
+      }
+    ]
+  },
+  {
+    "name": "automotive",
+    "provenance": "editorialArtwork",
+    "original": "source-assets/work/automotive-reference.png",
+    "crop": {
+      "left": 0,
+      "top": 0,
+      "width": 134,
+      "height": 1055
+    },
+    "outputs": [
+      {
+        "file": "public/images/work/atmosphere/automotive-160.avif",
+        "width": 160,
+        "height": 1260,
+        "bytes": 8563
+      },
+      {
+        "file": "public/images/work/atmosphere/automotive-160.webp",
+        "width": 160,
+        "height": 1260,
+        "bytes": 12446
+      }
+    ]
+  },
+  {
+    "name": "events",
+    "provenance": "editorialArtwork",
+    "original": "source-assets/work/events-reference.png",
+    "crop": {
+      "left": 0,
+      "top": 0,
+      "width": 134,
+      "height": 1055
+    },
+    "outputs": [
+      {
+        "file": "public/images/work/atmosphere/events-160.avif",
+        "width": 160,
+        "height": 1260,
+        "bytes": 6562
+      },
+      {
+        "file": "public/images/work/atmosphere/events-160.webp",
+        "width": 160,
+        "height": 1260,
+        "bytes": 8678
+      }
+    ]
+  }
+]

@@ -5,25 +5,48 @@ body {
 }
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
   font-weight: 400;
+  font-synthesis: none;
   line-height: 1.1;
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 h1 {
   font-size: var(--text-h1);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.035em;
   max-width: 20ch;
 }
 h2 {
   font-size: var(--text-h2);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.035em;
 }
 h3 {
   font-size: 1.5rem;
 }
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+h4 {
+  font-size: 1.25rem;
+}
+h5 {
+  font-size: 1.125rem;
+}
+h6 {
+  font-size: 1rem;
+}
 h1 em {
-  font-family: var(--font-display);
+  font-family: var(--font-accent);
   color: var(--color-gold-soft);
   font-weight: 400;
 }

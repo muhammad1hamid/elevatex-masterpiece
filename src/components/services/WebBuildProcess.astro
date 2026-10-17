@@ -1,0 +1,310 @@
+---
+import '../../styles/web-build-process.css';
+
+const stages = [
+  {
+    id: 'understand',
+    number: '01',
+    title: 'Understand',
+    description:
+      'Understand your business, audience, website goals, required functionality, and existing constraints.',
+  },
+  {
+    id: 'structure',
+    number: '02',
+    title: 'Structure',
+    description:
+      'Plan the pages, navigation, content priorities, and journeys that guide visitors toward the next step.',
+  },
+  {
+    id: 'design',
+    number: '03',
+    title: 'Design',
+    description:
+      'Shape the visual system, page layouts, responsive behavior, and interactions around that structure.',
+  },
+  {
+    id: 'build',
+    number: '04',
+    title: 'Build',
+    description:
+      'Develop the website with an appropriate stack, semantic HTML, and careful attention to performance.',
+  },
+  {
+    id: 'launch',
+    number: '05',
+    title: 'Test & Launch',
+    description:
+      'Check devices and key journeys, address issues, deploy, and complete the agreed handoff or launch support.',
+  },
+];
+---
+
+<section
+  class="web-build-process"
+  id="web-build-process"
+  aria-labelledby="web-build-process-heading"
+>
+  <div class="container web-build-process__container">
+    <header class="web-build-process__intro">
+      <p class="web-build-process__eyebrow">The website build process</p>
+      <h2 id="web-build-process-heading">
+        From a clear brief to a considered launch.
+      </h2>
+      <p class="web-build-process__lead">
+        Each stage gives the next one a stronger foundation. We agree the scope,
+        decisions, and deliverables around your website’s needs.
+      </p>
+    </header>
+
+    <fieldset class="web-build-process__selector">
+      <legend class="web-build-process__guide">
+        Select a stage to explore the build.
+      </legend>
+
+      <ol class="web-build-process__stages">
+        {stages.map((stage, index) => (
+          <li class="web-build-process__stage" data-stage={stage.id}>
+            <input
+              class="web-build-process__control"
+              type="radio"
+              name="web-build-stage"
+              id={`web-build-${stage.id}`}
+              value={stage.id}
+              aria-describedby={`web-build-${stage.id}-description`}
+              checked={index === 0}
+            />
+            <h3>
+              <label
+                class="web-build-process__label"
+                for={`web-build-${stage.id}`}
+              >
+                <span class="web-build-process__number">{stage.number}</span>
+                <span>{stage.title}</span>
+                <span class="web-build-process__indicator" aria-hidden="true" />
+              </label>
+            </h3>
+            <p id={`web-build-${stage.id}-description`}>{stage.description}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div class="web-build-process__visual" aria-hidden="true">
+        <div class="web-build-process__visual-meta">
+          <span>Website workspace</span>
+          <span>Illustrative build view</span>
+        </div>
+        <div class="web-build-process__browser">
+          <div class="web-build-process__chrome">
+            <span class="web-build-process__browser-dots">
+              <i />
+              <i />
+              <i />
+            </span>
+            <span>From brief to browser</span>
+            <span class="web-build-process__chrome-mark">EX</span>
+          </div>
+
+          <div class="web-build-process__scene web-build-process__scene--understand">
+            <div class="web-build-process__brief-intro">
+              <span class="web-build-process__view-label">
+                01 / Website brief
+              </span>
+              <span class="web-build-process__view-title">
+                One website.
+                <br />A clear purpose.
+              </span>
+              <span class="web-build-process__brief-rule" />
+              <span class="web-build-process__view-copy">
+                Start with the people, the purpose, and the practical
+                requirements.
+              </span>
+            </div>
+            <dl class="web-build-process__brief-notes">
+              <div>
+                <dt>Audience</dt>
+                <dd>Who is the website for?</dd>
+              </div>
+              <div>
+                <dt>Goal</dt>
+                <dd>What should a visitor do next?</dd>
+              </div>
+              <div>
+                <dt>Content</dt>
+                <dd>What do they need to understand?</dd>
+              </div>
+              <div>
+                <dt>Requirements</dt>
+                <dd>What must the website support?</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="web-build-process__scene web-build-process__scene--structure">
+            <span class="web-build-process__view-label">
+              02 / Page architecture
+            </span>
+            <div class="web-build-process__sitemap">
+              <div class="web-build-process__map-home">
+                <span>Home</span>
+                <i />
+                <i />
+              </div>
+              <div class="web-build-process__map-pages">
+                {['Services', 'Work', 'About', 'Contact'].map((page) => (
+                  <div class="web-build-process__map-page">
+                    <span>{page}</span>
+                    <i />
+                    <i />
+                    <i />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="web-build-process__visitor-path">
+              <span>Understand the offer</span>
+              <b>→</b>
+              <span>Explore the evidence</span>
+              <b>→</b>
+              <span>Start a conversation</span>
+            </div>
+          </div>
+
+          <div class="web-build-process__scene web-build-process__scene--design">
+            <span class="web-build-process__view-label">
+              03 / Visual system & responsive layouts
+            </span>
+            <div class="web-build-process__design-page">
+              <div class="web-build-process__mock-nav">
+                <span>YOUR BRAND</span>
+                <span>Work &nbsp; About &nbsp; Contact</span>
+              </div>
+              <div class="web-build-process__design-hero">
+                <div>
+                  <span class="web-build-process__design-eyebrow">
+                    A considered first impression
+                  </span>
+                  <span class="web-build-process__design-title">
+                    Clear ideas.
+                    <br />
+                    Considered design.
+                  </span>
+                  <span class="web-build-process__mock-copy" />
+                  <span class="web-build-process__mock-copy web-build-process__mock-copy--short" />
+                  <span class="web-build-process__mock-action">
+                    Start a project <b>↗</b>
+                  </span>
+                </div>
+                <div class="web-build-process__design-composition">
+                  <span>01</span>
+                  <i />
+                  <i />
+                  <i />
+                </div>
+              </div>
+              <div class="web-build-process__design-system">
+                <span>Type / Space / Colour / Interaction</span>
+                <div>
+                  <i />
+                  <i />
+                  <i />
+                  <i />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="web-build-process__scene web-build-process__scene--build">
+            <span class="web-build-process__view-label">
+              04 / Semantic structure meets the browser
+            </span>
+            <div class="web-build-process__implementation">
+              <div class="web-build-process__code">
+                <span class="web-build-process__code-file">website.astro</span>
+                <pre><code><span>&lt;main&gt;</span>
+  &lt;section&gt;
+    <span>&lt;h1&gt;</span>A clear offer<span>&lt;/h1&gt;</span>
+    &lt;p&gt;A useful explanation.&lt;/p&gt;
+    <span>&lt;a href="/contact/"&gt;</span>
+      Start a conversation
+    <span>&lt;/a&gt;</span>
+  &lt;/section&gt;
+<span>&lt;/main&gt;</span></code></pre>
+              </div>
+              <div class="web-build-process__live-preview">
+                <span class="web-build-process__preview-label">
+                  Browser preview
+                </span>
+                <span class="web-build-process__preview-brand">
+                  YOUR BRAND <i />
+                </span>
+                <span class="web-build-process__preview-title">
+                  A clear offer.
+                </span>
+                <span class="web-build-process__mock-copy" />
+                <span class="web-build-process__mock-copy web-build-process__mock-copy--short" />
+                <span class="web-build-process__mock-action">
+                  Start a conversation <b>↗</b>
+                </span>
+                <div class="web-build-process__preview-section">
+                  <i />
+                  <span />
+                  <span />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="web-build-process__scene web-build-process__scene--launch">
+            <span class="web-build-process__view-label">
+              05 / Responsive review & launch preparation
+            </span>
+            <div class="web-build-process__devices">
+              <div class="web-build-process__device web-build-process__device--desktop">
+                <div />
+                <span />
+                <span />
+                <i />
+                <p />
+              </div>
+              <div class="web-build-process__device web-build-process__device--tablet">
+                <div />
+                <span />
+                <span />
+                <i />
+                <p />
+              </div>
+              <div class="web-build-process__device web-build-process__device--phone">
+                <div />
+                <span />
+                <span />
+                <i />
+                <p />
+              </div>
+            </div>
+            <div class="web-build-process__review-items">
+              {[
+                'Device layouts',
+                'Keyboard journeys',
+                'Performance checks',
+                'Launch handoff',
+              ].map((item) => (
+                <span>
+                  <i>✓</i>
+                  {item}
+                </span>
+              ))}
+            </div>
+            <span class="web-build-process__review-note">
+              Example launch review.
+            </span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <p class="web-build-process__scope">
+      A typical sequence. Project complexity, content readiness, and
+      integrations shape the final plan.
+    </p>
+  </div>
+</section>

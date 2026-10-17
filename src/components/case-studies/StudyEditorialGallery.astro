@@ -1,0 +1,54 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import StudyHeading from './StudyHeading.astro';
+import StudyMedia from './StudyMedia.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'editorial-gallery'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix;
+---
+
+<section
+  id={s.id}
+  class={`container ${p}-section`}
+  aria-labelledby={s.heading.id}
+>
+  <StudyHeading section={s} prefix={p} />
+  <div
+    class={`${p}-gallery`}
+    data-gallery-variant={s.variant}
+    data-study-motion={s.motion ?? 'gallery-reveal'}
+  >
+    {s.variant === 'portrait-mosaic' ? (
+      <>
+        <StudyMedia
+          context={context}
+          image={s.images[0]!}
+          class={`${p}-gallery__lead`}
+        />
+        <div class={`${p}-gallery__side`}>
+          {s.images.slice(1).map((image) => (
+            <StudyMedia context={context} image={image} />
+          ))}
+        </div>
+      </>
+    ) : (
+      s.images.map((image, index) => (
+        <StudyMedia
+          context={context}
+          image={image}
+          class={
+            s.variant === 'asymmetric-editorial'
+              ? `${p}-gallery__${['wide', 'large', 'small'][index] ?? 'small'}`
+              : index === s.images.length - 1
+                ? `${p}-gallery__closing`
+                : undefined
+          }
+        />
+      ))
+    )}
+  </div>
+</section>

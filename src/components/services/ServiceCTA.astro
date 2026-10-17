@@ -1,0 +1,87 @@
+---
+import ServiceActions from './ServiceActions.astro';
+interface Props {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  emphasis: string;
+  supporting: string;
+  source?: string;
+  primaryLabel?: string;
+  secondaryLabel?: string;
+}
+const {
+  id,
+  eyebrow,
+  heading,
+  emphasis,
+  supporting,
+  source,
+  primaryLabel = 'Start a Website Project',
+  secondaryLabel = 'View Our Work',
+} = Astro.props;
+---
+
+<section class="service-cta" id={id} aria-labelledby={`${id}-heading`}>
+  <div class="container">
+    <p class="service-cta__eyebrow">{eyebrow}</p>
+    <h2 id={`${id}-heading`}>
+      {heading} <span>{emphasis}</span>
+    </h2>
+    <p class="service-cta__lead">{supporting}</p>
+    <div class="service-cta__actions">
+      <ServiceActions
+        source={source}
+        primaryLabel={primaryLabel}
+        secondaryLabel={secondaryLabel}
+      />
+    </div>
+  </div>
+</section>
+<style>
+  .service-cta {
+    position: relative;
+    padding-block: var(--section-lg);
+    border-top: 1px solid var(--border-subtle);
+    background: radial-gradient(
+      ellipse at 50% 100%,
+      rgb(214 190 140 / 5%),
+      transparent 65%
+    );
+    text-align: center;
+  }
+  .service-cta__eyebrow {
+    margin-inline: auto;
+    font-size: var(--eyebrow-size);
+    letter-spacing: var(--eyebrow-tracking);
+    color: var(--color-gold-soft);
+    text-transform: uppercase;
+  }
+  .service-cta h2 {
+    margin: 1.5rem auto 0;
+    max-width: 24ch;
+    font-size: clamp(2rem, 1.4rem + 3vw, 4.5rem);
+  }
+  .service-cta h2 span {
+    display: block;
+    color: var(--color-gold-soft);
+    margin-top: 0.2em;
+  }
+  .service-cta__lead {
+    max-width: 48ch;
+    margin: 1.75rem auto 2.5rem;
+    color: var(--color-muted);
+  }
+  .service-cta__actions {
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 479px) {
+    .service-cta {
+      padding-block: var(--section-mobile);
+    }
+    .service-cta__actions {
+      display: block;
+    }
+  }
+</style>

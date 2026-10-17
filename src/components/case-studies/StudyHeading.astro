@@ -1,0 +1,22 @@
+---
+import type { StudySection } from '../../lib/case-study/schema';
+interface Props {
+  section: Extract<StudySection, { heading: unknown }>;
+  prefix: string;
+  contained?: boolean;
+}
+const { section, prefix, contained = false } = Astro.props;
+---
+
+<header class:list={[`${prefix}-intro`, { container: contained }]}>
+  <p class={`${prefix}-kicker`}>{section.eyebrow}</p>
+  <h2 id={section.heading.id}>
+    {section.heading.lines.map((line, index) => (
+      <>
+        {index > 0 && <br />}
+        {index === 0 ? line : <span>{line}</span>}
+      </>
+    ))}
+  </h2>
+  <p>{section.intro}</p>
+</header>

@@ -1,0 +1,100 @@
+---
+import InsightCard from '../insights/InsightCard.astro';
+import { insightArticles } from '../../lib/insights/articles';
+import '../../styles/insights-section.css';
+
+const publishedEntries = await insightArticles();
+const publishedCards = publishedEntries.flatMap((entry) => {
+  const image = entry.image;
+  if (!image) return [];
+  return [
+    {
+      id: entry.id,
+      title: entry.data.title,
+      category: entry.data.category,
+      description: entry.data.description,
+      featured: entry.data.featured,
+      status: 'published' as const,
+      href: entry.href,
+      publishedDate: entry.data.publishedDate,
+      readingMinutes: entry.reading.minutes,
+      image,
+    },
+  ];
+});
+const selectedPublished = [
+  ...publishedCards.filter((entry) => entry.featured),
+  ...publishedCards.filter((entry) => !entry.featured),
+].slice(0, 3);
+const cards = selectedPublished;
+const featuredCard =
+  selectedPublished.find((card) => card.featured) ?? selectedPublished[0];
+const supportingCards = cards.filter((card) => card !== featuredCard);
+---
+
+<section
+  class="insights-section"
+  id="insights"
+  aria-labelledby="insights-heading"
+  data-insights
+>
+  <div class="container insights-section__container">
+    <header class="insights-section__header">
+      <div class="insights-section__title-group" data-insights-reveal>
+        <p class="insights-section__eyebrow">
+          Insights <span>/ 08</span>
+        </p>
+        <h2 id="insights-heading">
+          Ideas worth <em>building on.</em>
+        </h2>
+      </div>
+      <p class="insights-section__lead" data-insights-reveal>
+        Practical thinking on websites, AI automation, digital systems, and how
+        businesses can use technology more effectively.
+      </p>
+      <a
+        class="insights-section__all insights-section__all--desktop"
+        href="/insights/"
+      >
+        View All Insights <span aria-hidden="true">→</span>
+      </a>
+    </header>
+
+    {featuredCard ? (
+      <div class="insights-section__grid">
+        <div class="insights-section__featured" data-insights-reveal>
+          <InsightCard insight={featuredCard} featured={true} />
+        </div>
+        {supportingCards.length > 0 && (
+          <div class="insights-section__supporting">
+            {supportingCards.map((insight) => (
+              <div data-insights-reveal>
+                <InsightCard insight={insight} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ) : (
+      <p class="insights-section__empty">
+        New insights are being prepared. Published articles will appear here.
+      </p>
+    )}
+
+    <a
+      class="insights-section__all insights-section__all--mobile"
+      href="/insights/"
+    >
+      View All Insights <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<script>
+  import { initSectionReveal } from '../../scripts/animations/section-reveal';
+
+  initSectionReveal('[data-insights]', '[data-insights-reveal]', {
+    distance: 14,
+    duration: 760,
+  });
+</script>

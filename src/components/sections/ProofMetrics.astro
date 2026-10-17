@@ -1,0 +1,17 @@
+---
+// Numerical business claims remain unpublished until evidence is supplied.
+const proof = [
+  { title: 'Real interfaces', detail: 'Design you can explore' },
+  { title: 'Live demos', detail: 'Open to inspect' },
+  { title: 'Web · AI', detail: 'Automation & chatbots' },
+];
+---
+
+<dl class="proof__metrics" aria-label="Work and capabilities">
+  {proof.map(({ title, detail }) => (
+    <div class="proof__metric" data-proof-reveal>
+      <dt>{title}</dt>
+      <dd>{detail}</dd>
+    </div>
+  ))}
+</dl>

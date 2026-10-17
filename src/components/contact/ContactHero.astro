@@ -1,0 +1,47 @@
+---
+import ServiceActions from '../services/ServiceActions.astro';
+---
+
+<section
+  class="contact-hero container"
+  aria-labelledby="contact-title"
+  data-contact-hero
+>
+  <div class="contact-hero__light" data-contact-light aria-hidden="true"></div>
+  <div class="contact-hero__guides" aria-hidden="true">
+    <i></i>
+    <i></i>
+  </div>
+  <div class="contact-hero__copy">
+    <p class="contact-eyebrow" data-contact-hero-eyebrow>
+      Let’s talk
+    </p>
+    <h1 id="contact-title">
+      <span class="contact-mask">
+        <span data-contact-hero-line>Great ideas start</span>
+      </span>
+      <span class="contact-mask">
+        <span data-contact-hero-line>
+          with{' '}
+          <span class="contact-accent contact-hero__emphasis">
+            a conversation.<i data-contact-shine aria-hidden="true"></i>
+          </span>
+        </span>
+      </span>
+    </h1>
+    <p class="contact-lead" data-contact-hero-copy>
+      Tell us what you’re building, improving or exploring. Whether it’s a
+      website, AI automation or a smarter digital experience, we’d love to
+      understand what you have in mind.
+    </p>
+    <div class="contact-hero__action" data-contact-hero-action>
+      <ServiceActions
+        primaryLabel="Tell Us About Your Project"
+        primaryHref="#project-inquiry"
+        secondary={false}
+        source="contact-hero"
+      />
+    </div>
+    <p class="contact-hero__note">A clear idea is a good place to start.</p>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+---
+import DifferenceCard from '../why-elevatex/DifferenceCard.astro';
+import { differentiators } from '../../data/differentiators';
+import '../../styles/why-elevatex.css';
+---
+
+<section
+  class="why-elevatex"
+  id="why-elevatex"
+  aria-labelledby="why-elevatex-heading"
+  data-why-elevatex
+>
+  <svg
+    class="why-elevatex__architecture"
+    viewBox="0 0 1280 500"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {Array.from({ length: 10 }, (_, index) => (
+      <g>
+        <rect
+          x={index * 128 + 5}
+          y="-170"
+          width="118"
+          height="390"
+          rx="59"
+          fill="currentColor"
+        />
+        <rect
+          x={index * 128 + 5}
+          y="230"
+          width="118"
+          height="390"
+          rx="59"
+          fill="currentColor"
+        />
+        <path
+          d={`M${index * 128 + 64} 0v500`}
+          stroke="var(--hero-bg-soft)"
+          stroke-width="8"
+        />
+      </g>
+    ))}
+  </svg>
+  <div class="container why-elevatex__container">
+    <header class="why-elevatex__intro">
+      <p class="why-elevatex__eyebrow" data-why-intro-reveal>
+        Why Choose ElevateX
+      </p>
+      <h2
+        id="why-elevatex-heading"
+        class="why-elevatex__heading"
+        data-why-intro-reveal
+      >
+        <span>More than a deliverable.</span>{' '}
+        <span>A smarter way to build.</span>
+      </h2>
+    </header>
+    <div class="why-elevatex__grid">
+      {differentiators.map((difference) => (
+        <DifferenceCard difference={difference} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initSectionReveal } from '../../scripts/animations/section-reveal';
+  initSectionReveal('[data-why-elevatex]', '[data-why-intro-reveal]', {
+    distance: 14,
+    duration: 700,
+  });
+  initSectionReveal('[data-why-elevatex]', '[data-difference-reveal]', {
+    distance: 14,
+    duration: 650,
+  });
+</script>

@@ -1,0 +1,30 @@
+.case-study {
+  --study-accent: var(--color-gold-soft);
+}
+.case-study[data-study-theme='jewellery'] {
+  --study-accent: #e8d7b3;
+}
+.case-study[data-study-theme='beauty'] {
+  --study-accent: #e8d7b3;
+}
+.case-study[data-study-theme='automotive'] {
+  --study-accent: var(--color-silver);
+}
+.case-study[data-study-theme='neutral'] {
+  --study-accent: var(--color-silver);
+}
+.case-media figcaption {
+  padding-inline: 1.25rem;
+}
+.case-study [data-hero-motion='none'] * {
+  animation: none !important;
+}
+.case-study .case-media[data-media-position='left'] {
+  margin-inline-end: auto;
+}
+.case-study .case-media[data-media-position='right'] {
+  margin-inline-start: auto;
+}
+.case-study .case-media[data-media-position='center'] {
+  margin-inline: auto;
+}

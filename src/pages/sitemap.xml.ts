@@ -1,6 +1,10 @@
 import type { APIRoute } from 'astro';
 import { staticPages } from '../data/site';
-import { publishedInsights, publishedCaseStudies } from '../utils/content';
+import {
+  publishedInsights,
+  publishedCaseStudies,
+  publishedProjectStudies,
+} from '../utils/content';
 import { contentPath } from '../utils/publication';
 import { canIndex, canonicalUrl, escapeXml } from '../utils/seo';
 
@@ -9,7 +13,9 @@ export const GET: APIRoute = async () => {
   if (canIndex(true)) {
     for (const page of staticPages)
       if (page.indexable) entries.push({ path: page.path });
-    for (const entry of await publishedInsights())
+    const insights = await publishedInsights();
+    if (insights.length > 0) entries.push({ path: '/insights/' });
+    for (const entry of insights)
       entries.push({
         path: contentPath('insights', entry.id),
         modified: entry.data.updatedDate ?? entry.data.publishedDate,
@@ -18,6 +24,16 @@ export const GET: APIRoute = async () => {
       entries.push({
         path: contentPath('caseStudies', entry.id),
         modified: entry.data.updatedDate ?? entry.data.publishedDate,
+      });
+    for (const entry of await publishedProjectStudies())
+      entries.push({
+        path: contentPath(
+          'caseStudies',
+          entry.data.projectStudy!.slug ?? entry.id,
+        ),
+        modified:
+          entry.data.projectStudy!.updatedDate ??
+          entry.data.projectStudy!.publishedDate,
       });
   }
   const xml =

@@ -1,0 +1,32 @@
+---
+interface Props {
+  name: 'hero' | 'gallery' | 'jewellery' | 'beauty' | 'automotive' | 'events';
+}
+const { name } = Astro.props;
+const wide = name === 'hero' || name === 'gallery';
+const base = `/images/work/atmosphere/${name}`;
+---
+
+<picture
+  class:list={['work-atmosphere', { 'work-atmosphere--floor': wide }]}
+  aria-hidden="true"
+  data-media-provenance="editorialArtwork"
+>
+  <source
+    type="image/avif"
+    srcset={
+      wide
+        ? `${base}-640.avif 640w, ${base}-1280.avif 1280w`
+        : `${base}-160.avif`
+    }
+    sizes={wide ? '100vw' : '160px'}
+  />
+  <img
+    src={`${base}-${wide ? '1280' : '160'}.webp`}
+    alt=""
+    width={wide ? 1280 : 160}
+    height={wide ? 127 : 1260}
+    loading="lazy"
+    decoding="async"
+  />
+</picture>

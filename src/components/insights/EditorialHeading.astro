@@ -1,0 +1,19 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  first: string;
+  second?: string;
+  intro?: string;
+}
+const { id, eyebrow, first, second, intro } = Astro.props;
+---
+
+<header class="journal-heading" data-journal-heading>
+  <p class="journal-eyebrow">{eyebrow}</p>
+  <h2 id={id}>
+    <span>{first}</span>{' '}
+    {second && <span class="journal-accent">{second}</span>}
+  </h2>
+  {intro && <p class="journal-lead">{intro}</p>}
+</header>

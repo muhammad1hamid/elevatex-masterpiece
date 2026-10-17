@@ -1,0 +1,77 @@
+---
+import { conversation } from '../../../data/services/ai-chatbots';
+---
+
+<fieldset class="conversation" data-conversation>
+  <legend>Explore the example conversation</legend>
+  <div class="conversation__bar">
+    <span>Website project inquiry</span>
+    <span>Illustrative conversation · No live chat</span>
+  </div>
+  <div class="conversation__controls">
+    {conversation.map((step, i) => (
+      <div>
+        <input
+          type="radio"
+          class="conversation__radio"
+          name="conversation-stage"
+          id={`conversation-stage-${i}`}
+          value={i}
+          checked={i === 3}
+        />
+        <label for={`conversation-stage-${i}`}>
+          <span>0{i + 1}</span>
+          {step.label}
+        </label>
+      </div>
+    ))}
+  </div>
+  <div class="conversation__body">
+    <ol class="conversation__transcript">
+      {conversation.map((step, i) => (
+        <li
+          class:list={[
+            'chat-message',
+            { 'chat-message--customer': i % 2 === 0 },
+          ]}
+          data-conversation-message={i}
+        >
+          <p class="chat-label">{step.role}</p>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+    <aside
+      class="conversation__context"
+      aria-label="Understanding this example"
+    >
+      <p class="chat-label">What the conversation tells us</p>
+      {conversation.map((step, i) => (
+        <div class="conversation__state" data-conversation-state={i}>
+          <h3>{step.label}</h3>
+          <dl>
+            {[
+              ['Intent', step.intent],
+              ['Business type', step.business],
+              ['Key requirement', step.requirement],
+              ['Important details', step.details],
+            ].map(([key, value]) => (
+              <div>
+                <dt>{key}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div class="conversation__next">
+            <p class="chat-label">Recommended next step</p>
+            <p>{step.next}</p>
+          </div>
+        </div>
+      ))}
+    </aside>
+  </div>
+  <p class="chat-note">
+    An illustrative sequence. No message is sent, lead stored, or appointment
+    booked here.
+  </p>
+</fieldset>

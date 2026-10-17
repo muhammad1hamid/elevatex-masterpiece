@@ -3,6 +3,8 @@ import Seo, { type Props as SeoProps } from '../components/seo/Seo.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 import SkipLink from '../components/ui/SkipLink.astro';
+import HeroBoot from '../components/hero/HeroBoot.astro';
+import HeroIntro from '../components/hero/HeroIntro.astro';
 import { site } from '../data/site';
 import '../styles/global.css';
 type Props = SeoProps & { hero?: boolean };
@@ -16,10 +18,19 @@ const { hero = false, ...seoProps } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0c0c0b" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="preload"
+      href="/fonts/outfit-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <Seo {...seoProps} />
     <slot name="head" />
+    {hero && <HeroBoot />}
   </head>
-  <body>
+  <body id="page-top">
+    {hero && <HeroIntro />}
     <SkipLink />
     <Header overlay={hero} />
     <main id="main-content" tabindex="-1">

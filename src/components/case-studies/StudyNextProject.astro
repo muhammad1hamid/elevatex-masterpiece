@@ -1,0 +1,70 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'related-project'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix,
+  next = context.next,
+  framed = s.variant === 'framed-preview';
+---
+
+<section id={s.id} class={`container ${p}-next`} aria-labelledby="next-title">
+  <div class={framed ? `${p}-next__copy` : undefined}>
+    <p class={`${p}-kicker`}>{s.eyebrow}</p>
+    <h2 id="next-title">{next?.title ?? 'Explore more work'}</h2>
+    <p>
+      {(
+        s.descriptionLines ?? [
+          next?.description ?? 'More website concepts from ElevateX.',
+        ]
+      ).map((line, index) => (
+        <>
+          {index > 0 && <br />}
+          {line}
+        </>
+      ))}
+    </p>
+    {next && <span class={`${p}-classification`}>{next.typeLabel}</span>}
+    <a class={`${p}-link`} href={context.nextHref}>
+      {s.linkLabel} <span aria-hidden="true">→</span>
+    </a>
+  </div>
+  {next && (
+    <a
+      href={context.nextHref}
+      class={framed ? `${p}-next__preview` : `${p}-next__image`}
+      aria-label={`Explore the ${next.title} concept in Selected Work`}
+    >
+      <div class:list={{ 'case-frame': framed }}>
+        <picture>
+          <source
+            type="image/avif"
+            srcset={next.avifSrcSet}
+            sizes={
+              framed
+                ? '(max-width: 767px) 90vw, 56vw'
+                : '(max-width: 767px) 90vw, 54vw'
+            }
+          />
+          <img
+            src={next.image.src}
+            srcset={next.webpSrcSet}
+            sizes={
+              framed
+                ? '(max-width: 767px) 90vw, 56vw'
+                : '(max-width: 767px) 90vw, 54vw'
+            }
+            alt={next.image.alt}
+            width={next.image.width}
+            height={next.image.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+    </a>
+  )}
+</section>

@@ -1,0 +1,108 @@
+---
+import type { InsightPreview } from '../../data/insight-previews';
+
+interface InsightCardItem extends InsightPreview {
+  status: 'planned' | 'published';
+  href?: string;
+  publishedDate?: Date;
+  readingMinutes?: number;
+}
+
+interface Props {
+  insight: InsightCardItem;
+  featured?: boolean;
+}
+
+const { insight, featured = false } = Astro.props;
+const { image } = insight;
+const desktopSizes = featured
+  ? '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1279px) 58vw, 760px'
+  : '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) 44vw, 480px';
+const mobileSizes = featured
+  ? '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) calc(100vw - 5rem), 58vw'
+  : '(max-width: 767px) calc(100vw - 2.5rem), 44vw';
+---
+
+<article
+  class:list={[
+    'insight-card',
+    featured && 'insight-card--featured',
+    insight.status === 'planned' && 'insight-card--planned',
+  ]}
+>
+  <div class="insight-card__media">
+    <picture>
+      {image.mobileAvifSrcSet && (
+        <source
+          media="(max-width: 63.99rem)"
+          type="image/avif"
+          srcset={image.mobileAvifSrcSet}
+          sizes={mobileSizes}
+        />
+      )}
+      {image.mobileWebpSrcSet && (
+        <source
+          media="(max-width: 63.99rem)"
+          type="image/webp"
+          srcset={image.mobileWebpSrcSet}
+          sizes={mobileSizes}
+        />
+      )}
+      {image.avifSrcSet && (
+        <source
+          type="image/avif"
+          srcset={image.avifSrcSet}
+          sizes={desktopSizes}
+        />
+      )}
+      {image.webpSrcSet && (
+        <source
+          type="image/webp"
+          srcset={image.webpSrcSet}
+          sizes={desktopSizes}
+        />
+      )}
+      <img
+        src={image.src}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+    {featured && <span class="insight-card__feature-mark">Featured</span>}
+  </div>
+
+  <div class="insight-card__content">
+    <p class="insight-card__category">{insight.category}</p>
+    <h3 class="insight-card__title">
+      {insight.href ? (
+        <a href={insight.href}>{insight.title}</a>
+      ) : (
+        insight.title
+      )}
+    </h3>
+    <p class="insight-card__summary">{insight.description}</p>
+    <div class="insight-card__meta">
+      {insight.publishedDate ? (
+        <time datetime={insight.publishedDate.toISOString()}>
+          {insight.publishedDate.toLocaleDateString('en', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            timeZone: 'UTC',
+          })}
+        </time>
+      ) : (
+        <span class="insight-card__status">Article in development</span>
+      )}
+      {insight.readingMinutes && <span>{insight.readingMinutes} min read</span>}
+      {insight.href && (
+        <a class="insight-card__link" href={insight.href}>
+          Read Insight <span aria-hidden="true">→</span>
+        </a>
+      )}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,117 @@
+---
+import Breadcrumbs from '../../ui/Breadcrumbs.astro';
+import ServiceActions from '../ServiceActions.astro';
+import { aiAutomation } from '../../../data/services/ai-automation';
+const nodes = [
+  {
+    label: 'Customer request',
+    type: 'Input',
+    symbol: '↳',
+    detail: 'A new inquiry arrives',
+  },
+  {
+    label: 'Interpret intent',
+    type: 'AI assistance',
+    symbol: '✳',
+    detail: 'Structure the information',
+  },
+  {
+    label: 'Select a rule',
+    type: 'Decision',
+    symbol: '◇',
+    detail: 'Check the next step',
+  },
+  {
+    label: 'Prepare action',
+    type: 'Workflow',
+    symbol: '→',
+    detail: 'Draft, route, or update',
+  },
+  {
+    label: 'Validate outcome',
+    type: 'Confirmation',
+    symbol: '✓',
+    detail: 'Confirm the system state',
+  },
+];
+---
+
+<section
+  class="automation-hero"
+  id="automation-hero"
+  aria-labelledby="automation-heading"
+>
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { name: 'Home', path: '/' },
+        { name: 'AI Automation', path: aiAutomation.path },
+      ]}
+    />
+    <div class="automation-hero__copy">
+      <p class="automation-eyebrow">AI Automation</p>
+      <h1 id="automation-heading">
+        Turn repetitive work{' '}
+        <span>
+          into systems that run <em>smarter.</em>
+        </span>
+      </h1>
+      <p class="automation-lead">{aiAutomation.supporting}</p>
+      <div class="automation-actions">
+        <ServiceActions
+          primaryLabel="Discuss an Automation"
+          secondaryLabel="See How It Works"
+          secondaryHref="#automation-workflow"
+          source="ai_automation_hero_cta"
+        />
+      </div>
+    </div>
+    <figure class="automation-signal" data-automation-signal>
+      <div class="automation-signal__meta">
+        <span>From a request to a considered next step</span>
+        <span>Illustrative workflow / 01</span>
+      </div>
+      <div class="automation-signal__route">
+        <svg
+          class="automation-signal__pulse"
+          viewBox="0 0 1000 4"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 2H1000"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-dasharray="14 1000"
+          />
+        </svg>
+        <ol class="automation-signal__nodes">
+          {nodes.map((node, index) => (
+            <li style={`--node-index:${index}`}>
+              <span class="automation-signal__symbol" aria-hidden="true">
+                {node.symbol}
+              </span>
+              <span class="automation-tag">{node.type}</span>
+              <strong>{node.label}</strong>
+              <span class="automation-signal__detail">{node.detail}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="automation-signal__review">
+        <span class="automation-signal__review-icon" aria-hidden="true">
+          ◎
+        </span>
+        <div>
+          <strong>Human review, when it matters.</strong>
+          <p>Pause sensitive or unclear actions before continuing.</p>
+        </div>
+        <span class="automation-tag">Approval gate</span>
+      </div>
+      <figcaption>
+        Clear inputs. Defined decisions. An accountable next step.
+      </figcaption>
+    </figure>
+  </div>
+</section>

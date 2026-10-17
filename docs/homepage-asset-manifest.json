@@ -1,0 +1,125 @@
+{
+  "process": [
+    {
+      "source": "process-discover.webp",
+      "outputs": [
+        {
+          "filename": "process-discover-620.avif",
+          "width": 620,
+          "height": 620,
+          "bytes": 21778
+        },
+        {
+          "filename": "process-discover-620.webp",
+          "width": 620,
+          "height": 620,
+          "bytes": 28568
+        },
+        {
+          "filename": "process-discover-1240.avif",
+          "width": 1240,
+          "height": 1240,
+          "bytes": 55668
+        }
+      ]
+    },
+    {
+      "source": "process-strategize.webp",
+      "outputs": [
+        {
+          "filename": "process-strategize-620.avif",
+          "width": 620,
+          "height": 620,
+          "bytes": 10281
+        },
+        {
+          "filename": "process-strategize-620.webp",
+          "width": 620,
+          "height": 620,
+          "bytes": 13830
+        },
+        {
+          "filename": "process-strategize-1240.avif",
+          "width": 1240,
+          "height": 1240,
+          "bytes": 25504
+        }
+      ]
+    },
+    {
+      "source": "process-design.webp",
+      "outputs": [
+        {
+          "filename": "process-design-620.avif",
+          "width": 620,
+          "height": 620,
+          "bytes": 18246
+        },
+        {
+          "filename": "process-design-620.webp",
+          "width": 620,
+          "height": 620,
+          "bytes": 25164
+        },
+        {
+          "filename": "process-design-1240.avif",
+          "width": 1240,
+          "height": 1240,
+          "bytes": 46541
+        }
+      ]
+    },
+    {
+      "source": "process-develop.webp",
+      "outputs": [
+        {
+          "filename": "process-develop-620.avif",
+          "width": 620,
+          "height": 620,
+          "bytes": 20579
+        },
+        {
+          "filename": "process-develop-620.webp",
+          "width": 620,
+          "height": 620,
+          "bytes": 28850
+        },
+        {
+          "filename": "process-develop-1240.avif",
+          "width": 1240,
+          "height": 1240,
+          "bytes": 51626
+        }
+      ]
+    },
+    {
+      "source": "process-launch.webp",
+      "outputs": [
+        {
+          "filename": "process-launch-620.avif",
+          "width": 620,
+          "height": 413,
+          "bytes": 24672
+        },
+        {
+          "filename": "process-launch-620.webp",
+          "width": 620,
+          "height": 413,
+          "bytes": 35884
+        },
+        {
+          "filename": "process-launch-1200.avif",
+          "width": 1200,
+          "height": 800,
+          "bytes": 69517
+        }
+      ]
+    }
+  ],
+  "smoke": {
+    "filename": "smoke-medium.webp",
+    "width": 576,
+    "height": 163,
+    "bytes": 29336
+  }
+}

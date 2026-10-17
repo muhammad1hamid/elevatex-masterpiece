@@ -1,0 +1,36 @@
+---
+import ContactHeading from './ContactHeading.astro';
+import { contactSteps } from '../../data/contact';
+---
+
+<section
+  class="contact-next contact-section container"
+  aria-labelledby="next-title"
+>
+  <ContactHeading
+    id="next-title"
+    eyebrow="What happens next / 02"
+    first="Simple from"
+    second="the first conversation."
+    intro="Every project starts with understanding what you need. Here’s how we approach that first conversation."
+  />
+  <div class="contact-steps" data-contact-steps>
+    <span
+      class="contact-steps__line"
+      data-contact-process-line
+      aria-hidden="true"
+    ></span>
+    <ol>
+      {contactSteps.map((step, index) => (
+        <li data-contact-step>
+          <span class="contact-steps__number" aria-hidden="true">
+            0{index + 1}
+            <i></i>
+          </span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

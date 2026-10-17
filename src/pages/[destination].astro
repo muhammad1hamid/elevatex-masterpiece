@@ -1,5 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import '../styles/fonts.css';
 
 // Preview handoffs only. Production routes require approved page content.
 export const getStaticPaths = (() => {
@@ -7,21 +8,6 @@ export const getStaticPaths = (() => {
 
   return [
     { destination: 'services', target: '/#services', external: false },
-    {
-      destination: 'work',
-      target: 'https://www.elevatexlab.com/#work',
-      external: true,
-    },
-    {
-      destination: 'about',
-      target: 'https://www.elevatexlab.com/#home',
-      external: true,
-    },
-    {
-      destination: 'contact',
-      target: 'https://www.elevatexlab.com/#contact',
-      external: true,
-    },
   ].map(({ destination, ...props }) => ({
     params: { destination },
     props,
@@ -77,8 +63,10 @@ const label = external
   }
 
   h1 {
+    font-family: 'Outfit', Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.035em;
     font-size: 1.75rem;
-    font-weight: 500;
   }
 
   a {

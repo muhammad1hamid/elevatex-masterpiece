@@ -13,6 +13,7 @@ The laptop, pedestal, and smoke are independent transparent images. An independe
 | `hero-pedestal-800`  | 800 × 120      |     20,155 |     37,874 |
 | `hero-pedestal-1600` | 1600 × 241     |     58,536 |    120,348 |
 | `smoke-small.webp`   | 384 × 109      |          — |     15,832 |
+| `smoke-medium.webp`  | 576 × 163      |          — |     29,336 |
 | `smoke.webp`         | 768 × 217      |          — |     47,330 |
 | `hero-floor-800`     | 800 × 155      |     10,467 |     16,830 |
 | `hero-floor-1600`    | 1600 × 309     |     34,397 |     55,562 |
@@ -20,6 +21,11 @@ The laptop, pedestal, and smoke are independent transparent images. An independe
 All runtime images are under `public/images/hero/`. The largest laptop, pedestal, floor and one smoke file total **172,219 bytes (168.2 KiB)** with AVIF, or **297,330 bytes (290.4 KiB)** with WebP. The smallest responsive selection totals **61,415 bytes (60.0 KiB)** with AVIF, or **101,472 bytes (99.1 KiB)** with WebP. Reusing the smoke image in multiple layers downloads the same URL once through the browser cache. The floor alone is 33.6/54.3 KiB desktop and 10.2/16.4 KiB mobile (AVIF/WebP).
 
 These are encoded-file totals, not complete page weight, LCP measurements, or production performance claims. A browser with a high device pixel ratio can select the larger responsive candidate.
+
+The 2026-10-11 homepage polish adds the 576px smoke candidate to close the
+384px-to-768px gap. This preserves the approved source crop and transparency,
+while avoiding the 47,330-byte file when the 29,336-byte candidate provides enough
+pixels. `scripts/optimize-homepage-assets.mjs` reproduces this extra candidate.
 
 ## Placement
 

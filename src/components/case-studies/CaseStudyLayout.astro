@@ -1,0 +1,113 @@
+---
+import type { StudyProject, StudyContext } from '../../lib/case-study/context';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StudyHero from './StudyHero.astro';
+import StudySectionRenderer from './StudySectionRenderer.astro';
+import { publishedWork } from '../../utils/content';
+import {
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+  breadcrumbSchema,
+  projectStudySchema,
+} from '../../utils/structured-data';
+import { validateStudyAssets } from '../../lib/case-study/media';
+import campaignCSS from '../../styles/case-study-campaign.css?inline';
+import editorialCSS from '../../styles/case-study-editorial.css?inline';
+import precisionCSS from '../../styles/case-study-precision.css?inline';
+import '../../styles/case-study-themes.css';
+interface Props {
+  project: StudyProject;
+  id: string;
+  indexable?: boolean;
+}
+const { project, id, indexable = true } = Astro.props,
+  study = project.projectStudy;
+if (!study) throw new Error('A cinematic study requires published content.');
+validateStudyAssets(study);
+const name = study.displayName ?? project.title,
+  path = `/work/${study.slug ?? id}/`;
+const page = { title: study.pageTitle, description: study.description, path };
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Work', path: '/work/' },
+  { name, path },
+];
+const creativeWork = projectStudySchema({
+  ...page,
+  publishedDate: study.publishedDate,
+  updatedDate: study.updatedDate,
+  liveUrl: project.showcase.liveUrl,
+  projectName: project.title,
+  projectType: project.showcase.projectType,
+});
+const work = (await publishedWork()).filter((item) => item.caseStudyHref);
+const current = work.findIndex((item) => item.id === id);
+const next =
+  (study.nextProjectSlug
+    ? work.find(
+        (item) =>
+          item.caseStudyHref === `/work/${study.nextProjectSlug}/` &&
+          item.id !== id,
+      )
+    : undefined) ??
+  (work.length > 1 ? work[(current + 1) % work.length] : undefined);
+const context: StudyContext = {
+  project,
+  study,
+  name,
+  prefix: study.presentation,
+  liveUrl: project.showcase.liveUrl,
+  browserLabel: new URL(project.showcase.liveUrl).hostname,
+  classification: {
+    concept: 'Concept project',
+    demo: 'Demo project',
+    client: 'Client project',
+    internal: 'Internal build',
+  }[project.showcase.projectType],
+  next,
+  nextHref: next?.caseStudyHref ?? '/work/',
+};
+const stylesheet = {
+  campaign: campaignCSS,
+  editorial: editorialCSS,
+  precision: precisionCSS,
+}[study.presentation];
+---
+
+<BaseLayout
+  {...page}
+  indexable={indexable}
+  image={study.socialImage}
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    { ...webPageSchema(page), mainEntity: { '@id': creativeWork['@id'] } },
+    breadcrumbSchema(breadcrumbs),
+    creativeWork,
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <style is:inline set:html={stylesheet}></style>
+  </Fragment>
+  <article
+    class={`${study.presentation}-study case-study`}
+    data-case-study
+    data-study-theme={study.theme}
+  >
+    <StudyHero context={context} breadcrumbs={breadcrumbs} />
+    {study.sections.map((section) => (
+      <StudySectionRenderer context={context} section={section} />
+    ))}
+  </article>
+</BaseLayout>
+<script>
+  import '../../scripts/animations/case-study';
+</script>

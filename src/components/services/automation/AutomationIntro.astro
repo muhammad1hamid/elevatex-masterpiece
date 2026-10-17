@@ -1,0 +1,15 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  lead?: string;
+}
+const { id, eyebrow, heading, lead } = Astro.props;
+---
+
+<header class="automation-intro">
+  <p class="automation-eyebrow">{eyebrow}</p>
+  <h2 id={id}>{heading}</h2>
+  {lead && <p class="automation-lead">{lead}</p>}
+</header>

@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readFile } from 'node:fs/promises';
-import { site } from '../src/data/site';
+import { homepageMetadata, site } from '../src/data/site';
 
 test('primary content and metadata are delivered in static HTML', async ({
   request,
@@ -33,15 +33,46 @@ test('preview crawling and hosting headers remain non-indexable', async ({
   );
 });
 
-test('metadata, JSON-LD and heading hierarchy are valid', async ({ page }) => {
+test('metadata, JSON-LD and heading hierarchy are valid', async ({
+  page,
+  request,
+}) => {
   await page.goto('/');
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('title')).toHaveCount(1);
   await expect(page.locator('meta[name="description"]')).toHaveCount(1);
+  await expect(page).toHaveTitle(homepageMetadata.title);
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    'content',
+    homepageMetadata.description,
+  );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
     `${site.origin}/`,
   );
+  for (const property of ['og:title', 'twitter:title']) {
+    await expect(
+      page.locator(`meta[property="${property}"], meta[name="${property}"]`),
+    ).toHaveAttribute('content', homepageMetadata.title);
+  }
+  for (const property of ['og:image', 'twitter:image']) {
+    await expect(
+      page.locator(`meta[property="${property}"], meta[name="${property}"]`),
+    ).toHaveAttribute(
+      'content',
+      new URL(homepageMetadata.image.src, site.origin).href,
+    );
+  }
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    'content',
+    'summary_large_image',
+  );
+  const socialImage = await request.get(homepageMetadata.image.src);
+  expect(socialImage.status()).toBe(200);
+  expect(socialImage.headers()['content-type']).toContain('image/png');
+  const imageBytes = await socialImage.body();
+  expect(imageBytes.readUInt32BE(16)).toBe(homepageMetadata.image.width);
+  expect(imageBytes.readUInt32BE(20)).toBe(homepageMetadata.image.height);
   const schema = JSON.parse(
     (await page.locator('script[type="application/ld+json"]').textContent()) ??
       'null',
@@ -51,6 +82,11 @@ test('metadata, JSON-LD and heading hierarchy are valid', async ({ page }) => {
     'WebSite',
     'WebPage',
   ]);
+  expect(schema.find((item) => item['@type'] === 'WebPage')).toMatchObject({
+    name: homepageMetadata.title,
+    description: homepageMetadata.description,
+    url: `${site.origin}/`,
+  });
 });
 
 test('keyboard skip link moves focus to content', async ({ page }) => {

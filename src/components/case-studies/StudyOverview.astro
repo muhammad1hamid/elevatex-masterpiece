@@ -1,0 +1,97 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import StudyHeading from './StudyHeading.astro';
+import StudyMedia from './StudyMedia.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'overview'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix;
+const facts = s.facts.map((fact) => ({
+  ...fact,
+  value:
+    fact.source === 'project'
+      ? context.name
+      : fact.source === 'industry'
+        ? context.project.industry
+        : fact.source === 'classification'
+          ? context.classification
+          : (fact.text ?? ''),
+  target: fact.source === 'live' ? context.liveUrl : fact.href,
+}));
+const panorama = s.variant === 'panorama';
+---
+
+<section
+  id={s.id}
+  class:list={[
+    panorama ? `${p}-overview` : `container ${p}-section`,
+    { [`${p}-overview--studio`]: s.variant === 'wide-studio' },
+  ]}
+  aria-labelledby={s.heading.id}
+>
+  <div class:list={{ container: panorama }}>
+    <StudyHeading section={s} prefix={p} />
+    <dl class={`${p}-facts`}>
+      {facts.map((fact) => (
+        <div>
+          <dt>{fact.label}</dt>
+          <dd>
+            {fact.target ? (
+              <a
+                href={fact.target}
+                target={fact.source === 'live' ? '_blank' : undefined}
+                rel={fact.source === 'live' ? 'noopener noreferrer' : undefined}
+              >
+                {fact.value}
+              </a>
+            ) : (
+              fact.value
+            )}
+          </dd>
+        </div>
+      ))}
+    </dl>
+    {s.evidenceNote && <p class={`${p}-evidence-note`}>{s.evidenceNote}</p>}
+  </div>
+  {s.variant === 'interior-split' && s.atmosphere ? (
+    <div class={`${p}-interior`} data-study-motion={s.motion ?? 'soft-reveal'}>
+      <StudyMedia context={context} image={s.image} />
+      <div class={`${p}-interior__copy`}>
+        <span class={`${p}-rule`} aria-hidden="true"></span>
+        <p class={`${p}-kicker`}>{s.atmosphere.eyebrow}</p>
+        <h3>
+          {s.atmosphere.headingLines.map((line, index) => (
+            <>
+              {index > 0 && <br />}
+              {index === s.atmosphere!.headingLines.length - 1 ? (
+                <span>{line}</span>
+              ) : (
+                line
+              )}
+            </>
+          ))}
+        </h3>
+        <p>{s.atmosphere.text}</p>
+        <p class={`${p}-small`}>{s.atmosphere.disclaimer}</p>
+        <a
+          class={`${p}-link`}
+          href={context.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {s.atmosphere.linkLabel} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  ) : (
+    <StudyMedia
+      context={context}
+      image={s.image}
+      class={`${p}-overview__image`}
+      motion={s.motion}
+    />
+  )}
+</section>

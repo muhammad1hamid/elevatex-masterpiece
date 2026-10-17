@@ -40,7 +40,7 @@ test('hero copy and calls to action are semantic and exact', async ({
     await page
       .locator('h1')
       .evaluate((heading) => getComputedStyle(heading).fontFamily),
-  ).toContain('Bodoni Moda');
+  ).toContain('Outfit');
   expect(
     await page
       .locator('body')
@@ -61,7 +61,7 @@ test('scene layers are decorative and reserve image dimensions', async ({
         .evaluate((layer) => Boolean(layer.closest('[aria-hidden="true"]'))),
     ).toBe(true);
   }
-  await expect(page.locator('svg.hero__halo, .hero__halo svg')).toHaveCount(1);
+  await expect(page.locator('.hero__halo svg')).toHaveCount(2);
   const images = await page.locator('.hero img').evaluateAll((elements) =>
     elements.map((element) => {
       const image = element as HTMLImageElement;
@@ -145,6 +145,7 @@ test('failed JavaScript downloads retain useful content and a final scene', asyn
     else await route.continue();
   });
   await page.goto('/');
+  await expect(page.locator('.hero__intro')).toBeHidden({ timeout: 8000 });
   await expectFinalScene(page);
   await expect(page.locator('[data-hero-root]')).toHaveAttribute(
     'data-motion',
@@ -230,6 +231,7 @@ test('mobile menu supports keyboard activation and Escape', async ({
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
+  await page.keyboard.press('Tab');
   const toggle = page.locator('[data-menu-toggle]');
   await toggle.focus();
   await page.keyboard.press('Enter');
@@ -262,11 +264,11 @@ test('non-hero pages do not download the cinematic animation runtime', async ({
   await expect(page.locator('[data-hero-root]')).toHaveCount(0);
   const scriptSources = await Promise.all(downloadedScripts);
   expect(scriptSources.join('\n')).not.toMatch(
-    /elevatexIntroSeen|gsap|WebGLRenderer|__REACT_DEVTOOLS_GLOBAL_HOOK__/i,
+    /elevatexIntroSeen:v2|gsap|WebGLRenderer|__REACT_DEVTOOLS_GLOBAL_HOOK__/i,
   );
 });
 
-test('first session presents the platform before the laptop and does not replay on refresh', async ({
+test('first session presents the platform before the laptop and refresh uses a short entrance', async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -296,13 +298,13 @@ test('first session presents the platform before the laptop and does not replay 
   const hero = page.locator('[data-hero-root]');
   await expect(hero).toHaveAttribute('data-intro', 'first');
   await expect(hero).toHaveAttribute('data-motion', 'entering');
-  await page.clock.runFor(3000);
+  await page.clock.runFor(4500);
   await expect(hero).toHaveAttribute('data-motion', 'ambient', {
     timeout: 5000,
   });
   await expectFinalScene(page);
   expect(
-    await page.evaluate(() => sessionStorage.getItem('elevatexIntroSeen')),
+    await page.evaluate(() => sessionStorage.getItem('elevatexIntroSeen:v2')),
   ).toBe('true');
   const frames = await page.evaluate(
     () =>
@@ -326,64 +328,103 @@ test('first session presents the platform before the laptop and does not replay 
   expect(laptopReveal?.pedestalY).toBeLessThan(initialPedestalY * 0.35);
   await page.reload();
   await expect(hero).toHaveAttribute('data-intro', 'repeat');
+  await expect(hero).toHaveAttribute('data-motion', 'entering');
+  await expect(page.locator('.hero__intro')).toBeHidden();
+  await page.clock.runFor(1000);
   await expect(hero).toHaveAttribute('data-motion', 'ambient', {
     timeout: 3000,
   });
   await expectFinalScene(page);
 });
 
-test('ambient motion can pause and resume without resetting the smoke position', async ({
+test('a slow document response does not consume the animation loading budget', async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.route('**/', async (route) => {
+    if (route.request().isNavigationRequest())
+      await new Promise((resolve) => setTimeout(resolve, 2100));
+    await route.continue();
+  });
   await page.goto('/');
   await expect(page.locator('[data-hero-root]')).toHaveAttribute(
     'data-motion',
-    'ambient',
-    { timeout: 5000 },
+    'entering',
   );
-  const smokePosition = () =>
-    page
-      .locator('.hero__smoke')
-      .first()
-      .evaluate((smoke) => {
-        const matrix = new DOMMatrix(getComputedStyle(smoke).transform);
-        return { x: matrix.m41, y: matrix.m42 };
-      });
-  const before = await smokePosition();
-  await page.getByRole('button', { name: 'Pause motion', exact: true }).click();
-  await expect(
-    page.getByRole('button', { name: 'Resume motion', exact: true }),
-  ).toBeVisible();
-  const after = await smokePosition();
-  expect(Math.abs(before.x - after.x)).toBeLessThan(1);
-  expect(Math.abs(before.y - after.y)).toBeLessThan(1);
-  expect(
-    await page
-      .locator('[data-hero-root]')
-      .evaluate(
-        (hero) =>
-          hero
-            .getAnimations({ subtree: true })
-            .filter((animation) => animation.playState === 'running').length,
-      ),
-  ).toBe(0);
-  await page
-    .getByRole('button', { name: 'Resume motion', exact: true })
-    .click();
-  await expect(
-    page.getByRole('button', { name: 'Pause motion', exact: true }),
-  ).toBeVisible();
-  expect(
-    await page
-      .locator('[data-hero-root]')
-      .evaluate((hero) =>
-        hero
-          .getAnimations({ subtree: true })
-          .some((animation) => animation.playState === 'running'),
-      ),
-  ).toBe(true);
+  await expect(page.locator('[data-hero-root]')).toHaveAttribute(
+    'data-intro',
+    'first',
+  );
+  await expect(page.locator('[data-hero-root]')).toHaveAttribute(
+    'data-motion',
+    'ambient',
+  );
+  await expectFinalScene(page);
 });
+
+test('a background load preserves the first entrance until the page becomes visible', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.clock.install();
+  await page.clock.pauseAt(new Date());
+  await page.addInitScript(() =>
+    Object.defineProperty(document, 'hidden', {
+      configurable: true,
+      get: () => true,
+    }),
+  );
+  await page.goto('/');
+  expect(
+    await page.evaluate(() => sessionStorage.getItem('elevatexIntroSeen:v2')),
+  ).toBe('false');
+  await expect(page.locator('.hero__intro')).toBeHidden();
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'hidden', {
+      configurable: true,
+      get: () => false,
+    });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await expect(page.locator('[data-hero-root]')).toHaveAttribute(
+    'data-motion',
+    'entering',
+  );
+  await page.clock.runFor(4500);
+  await expectFinalScene(page);
+});
+
+for (const [width, height] of [
+  [320, 568],
+  [390, 844],
+  [768, 1024],
+  [1024, 768],
+  [1280, 720],
+  [1366, 600],
+  [1440, 900],
+  [1536, 864],
+  [1920, 1080],
+  [2560, 1440],
+]) {
+  test(`scene stays centered and laptop sits on the pedestal at ${width}x${height}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: width!, height: height! });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    const laptop = (await page.locator('.hero__laptop').boundingBox())!;
+    const pedestal = (await page.locator('.hero__pedestal').boundingBox())!;
+    const actions = (await page.locator('.hero__actions').boundingBox())!;
+    expect(Math.abs(laptop.x + laptop.width / 2 - width! / 2)).toBeLessThan(1);
+    const contact = (laptop.y + laptop.height - pedestal.y) / pedestal.height;
+    expect(contact).toBeGreaterThan(0.2);
+    expect(contact).toBeLessThan(0.32);
+    expect(laptop.y).toBeGreaterThan(actions.y + actions.height + 8);
+    expect(pedestal.x).toBeGreaterThanOrEqual(0);
+    expect(pedestal.x + pedestal.width).toBeLessThanOrEqual(width!);
+  });
+}
 
 test('denied session storage writes skip the intro across refreshes', async ({
   page,
@@ -408,7 +449,7 @@ test('denied session storage writes skip the intro across refreshes', async ({
   await expect(hero).toHaveAttribute('data-motion', 'ambient');
   await expectFinalScene(page);
   expect(
-    await page.evaluate(() => sessionStorage.getItem('elevatexIntroSeen')),
+    await page.evaluate(() => sessionStorage.getItem('elevatexIntroSeen:v2')),
   ).toBeNull();
   await page.reload();
   await expect(hero).toHaveAttribute('data-intro', 'skipped');
@@ -417,7 +458,7 @@ test('denied session storage writes skip the intro across refreshes', async ({
   expect(errors).toEqual([]);
 });
 
-test('failed GSAP download leaves the enhanced page in its final static state', async ({
+test('failed GSAP download reveals the page and preserves CSS ambience', async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -433,9 +474,9 @@ test('failed GSAP download leaves the enhanced page in its final static state', 
   await expect.poll(() => blockedDownloads).toBeGreaterThan(0);
   const hero = page.locator('[data-hero-root]');
   await expect(hero).toHaveAttribute('data-intro', 'first');
-  await expect(hero).toHaveAttribute('data-motion', 'static');
+  await expect(hero).toHaveAttribute('data-motion', 'ambient');
   await expect(page.locator('.hero__intro')).toBeHidden();
-  await expect(page.locator('[data-motion-toggle]')).toBeHidden();
+  await expect(page.locator('[data-motion-toggle]')).toHaveCount(0);
   await expectFinalScene(page);
   expect(errors).toEqual([]);
 });
@@ -445,7 +486,7 @@ test('changing reduced-motion preference stops and restores ambient motion', asy
 }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.addInitScript(() =>
-    sessionStorage.setItem('elevatexIntroSeen', 'true'),
+    sessionStorage.setItem('elevatexIntroSeen:v2', 'true'),
   );
   await page.goto('/');
   const hero = page.locator('[data-hero-root]');
@@ -459,14 +500,16 @@ test('changing reduced-motion preference stops and restores ambient motion', asy
   await expect.poll(hasRunningAnimation).toBe(true);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(hero).toHaveAttribute('data-motion', 'static');
-  await expect(page.locator('[data-motion-toggle]')).toBeHidden();
+  await expect(
+    page.getByRole('button', { name: 'Enable motion', exact: true }),
+  ).toHaveCount(0);
   await expect.poll(hasRunningAnimation).toBe(false);
   await expectFinalScene(page);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(hero).toHaveAttribute('data-motion', 'ambient');
   await expect(
     page.getByRole('button', { name: 'Pause motion', exact: true }),
-  ).toBeVisible();
+  ).toHaveCount(0);
   await expect.poll(hasRunningAnimation).toBe(true);
 });
 
@@ -476,7 +519,7 @@ test('ambient motion pauses when the hero leaves the viewport and resumes on ret
   await page.setViewportSize({ width: 1440, height: 500 });
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.addInitScript(() =>
-    sessionStorage.setItem('elevatexIntroSeen', 'true'),
+    sessionStorage.setItem('elevatexIntroSeen:v2', 'true'),
   );
   await page.goto('/');
   const hero = page.locator('[data-hero-root]');

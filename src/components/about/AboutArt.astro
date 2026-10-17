@@ -1,0 +1,65 @@
+---
+import { aboutMedia } from '../../data/about-media';
+interface Props {
+  name: keyof typeof aboutMedia;
+  class?: string;
+  priority?: boolean;
+}
+const { name, class: className, priority = false } = Astro.props;
+const media = aboutMedia[name];
+const mobile = 'mobile' in media ? media.mobile : undefined;
+const set = (
+  item: { base: string; widths: readonly number[] },
+  format: string,
+) =>
+  item.widths
+    .map((width) => `${item.base}-${width}.${format} ${width}w`)
+    .join(', ');
+---
+
+<figure
+  class:list={['about-art', className]}
+  data-media-category="ILLUSTRATIVE_EDITORIAL_ART"
+>
+  <div class="about-art__window" data-about-image>
+    <div class="about-art__depth" data-about-parallax>
+      <picture>
+        {mobile && (
+          <>
+            <source
+              media="(max-width: 767px)"
+              type="image/avif"
+              srcset={set(mobile, 'avif')}
+              sizes="100vw"
+              width={mobile.width}
+              height={mobile.height}
+            />
+            <source
+              media="(max-width: 767px)"
+              type="image/webp"
+              srcset={set(mobile, 'webp')}
+              sizes="100vw"
+              width={mobile.width}
+              height={mobile.height}
+            />
+          </>
+        )}
+        <source type="image/avif" srcset={set(media, 'avif')} sizes="100vw" />
+        <img
+          src={`${media.base}-${media.widths.at(-1)}.webp`}
+          srcset={set(media, 'webp')}
+          sizes="100vw"
+          width={media.width}
+          height={media.height}
+          alt={media.alt}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchpriority={priority ? 'high' : undefined}
+          decoding="async"
+        />
+      </picture>
+    </div>
+    <span class="about-art__light" data-about-light aria-hidden="true"></span>
+    <slot />
+  </div>
+  <figcaption>{media.caption}</figcaption>
+</figure>

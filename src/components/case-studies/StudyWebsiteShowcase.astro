@@ -1,0 +1,55 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import StudyHeading from './StudyHeading.astro';
+import StudyMedia from './StudyMedia.astro';
+import StudyViewer from './StudyViewer.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'website-showcase'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix,
+  contained = s.variant === 'contained-browser';
+---
+
+<section
+  id={s.id}
+  class:list={[
+    `${p}-section`,
+    { container: contained, [`${p}-website`]: !contained },
+  ]}
+  aria-labelledby={s.heading.id}
+>
+  <StudyHeading section={s} prefix={p} contained={!contained} />
+  {contained ? (
+    <StudyMedia context={context} image={s.image} motion={s.motion} />
+  ) : (
+    <div class={`${p}-wide`} data-study-motion={s.motion ?? 'browser-reveal'}>
+      <StudyMedia context={context} image={s.image} />
+    </div>
+  )}
+  {s.notes && (
+    <div class={`${p}-showcase__notes`}>
+      <p>{s.notes}</p>
+      <a
+        class={`${p}-link`}
+        href={context.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {s.liveLabel ?? 'Inspect the live concept'}{' '}
+        <span aria-hidden="true">↗</span>
+        <span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    </div>
+  )}
+  {s.viewer && (
+    <StudyViewer
+      context={context}
+      viewer={s.viewer}
+      kind="fullpage"
+      contained={!contained}
+    />
+  )}
+</section>

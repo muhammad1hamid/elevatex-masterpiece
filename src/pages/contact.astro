@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactHero from '../components/contact/ContactHero.astro';
+import ContactHeading from '../components/contact/ContactHeading.astro';
+import InquiryForm from '../components/contact/InquiryForm.astro';
+import ContactNextSteps from '../components/contact/ContactNextSteps.astro';
+import { contactMetadata, verifiedContactMethods } from '../data/contact';
+import {
+  organizationSchema,
+  websiteSchema,
+  contactPageSchema,
+  breadcrumbSchema,
+} from '../utils/structured-data';
+import '../styles/contact.css';
+---
+
+<BaseLayout
+  {...contactMetadata}
+  indexable={false}
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    contactPageSchema(contactMetadata),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Contact', path: '/contact/' },
+    ]),
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </Fragment>
+  <div class="contact-page" data-contact-page>
+    <ContactHero />
+    <section
+      class="contact-inquiry contact-section container"
+      id="project-inquiry"
+      aria-labelledby="inquiry-title"
+      tabindex="-1"
+    >
+      <ContactHeading
+        id="inquiry-title"
+        eyebrow="Start your project / 01"
+        first="Tell us what"
+        second="you’re building."
+        intro="A few details are enough to shape the conversation. Start with your idea, and add anything that helps explain what you need."
+      />
+      <InquiryForm />
+    </section>
+    <ContactNextSteps />
+    {verifiedContactMethods.length > 0 && (
+      <section
+        class="contact-alternatives contact-section container"
+        aria-labelledby="alternatives-title"
+      >
+        <ContactHeading
+          id="alternatives-title"
+          eyebrow="Prefer another way? / 03"
+          first="Let’s talk"
+          second="on WhatsApp."
+          intro="Have a project in mind? Start a conversation with us on WhatsApp."
+        />
+        <ul class="contact-methods">
+          {verifiedContactMethods.map((method) => (
+            <li data-contact-row>
+              <a
+                href={method.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${method.label} at ${method.detail} (opens in a new tab)`}
+              >
+                <span class="contact-eyebrow">{method.label}</span>
+                <span>{method.detail}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <section
+      class="contact-reassurance contact-section container"
+      aria-labelledby="reassurance-title"
+    >
+      <ContactHeading
+        id="reassurance-title"
+        eyebrow="No perfect brief required"
+        first="Start with the idea."
+        second="We’ll figure out the details."
+        intro="You don’t need to have every requirement finalized. A clear idea of what you’re trying to achieve is enough to begin the conversation."
+      />
+      <a class="contact-return" href="#project-inquiry">
+        Back to Project Form <span aria-hidden="true">↑</span>
+      </a>
+    </section>
+  </div>
+</BaseLayout>
+<script>
+  import { initializeContactMotion } from '../scripts/animations/contact';
+  import { initializeInquiryForm } from '../scripts/contact-form';
+  initializeContactMotion();
+  initializeInquiryForm();
+</script>

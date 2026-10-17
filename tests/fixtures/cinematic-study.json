@@ -1,0 +1,87 @@
+{
+  "entryType": "showcase",
+  "title": "QA Only Engine Fixture",
+  "description": "Unpublished test content for the shared case-study renderer.",
+  "industry": "QA fixture",
+  "publishedDate": "2020-01-01",
+  "draft": true,
+  "featured": false,
+  "relatedServices": ["web-development"],
+  "showcase": {
+    "projectType": "demo",
+    "category": "QA only",
+    "order": 99,
+    "verifiedDate": "2026-10-15",
+    "verification": "Test fixture, not a business or client project. Uses an existing real capture only to test rendering.",
+    "liveUrl": "https://apex-detailing-studio-phi.vercel.app/",
+    "image": {
+      "src": "/images/work/apex-detailing-1200.webp",
+      "alt": "Existing real automotive demo capture used for an unpublished test.",
+      "width": 1200,
+      "height": 900
+    }
+  },
+  "projectStudy": {
+    "version": 1,
+    "presentation": "campaign",
+    "theme": "neutral",
+    "draft": true,
+    "publishedDate": "2020-01-01",
+    "pageTitle": "QA Only Engine Fixture",
+    "description": "Unpublished test fixture with optional chapters and a minimal hero.",
+    "hero": {
+      "id": "fixture-hero",
+      "titleId": "fixture-title",
+      "variant": "minimal-typographic",
+      "motion": "none",
+      "eyebrow": "QA only / Unpublished",
+      "statement": ["Content drives this renderer."],
+      "description": "This synthetic test has no project-specific page component.",
+      "classificationSuffix": "QA only"
+    },
+    "media": {
+      "interface": {
+        "base": "/images/work/apex/desktop",
+        "widths": [640, 1000, 1440],
+        "width": 1440,
+        "height": 900,
+        "category": "AUTHENTIC_SCREENSHOT",
+        "alt": "Actual Classic Detailers demo homepage used in an unpublished renderer test.",
+        "caption": "Actual capture / QA use only.",
+        "credit": "Existing public demo capture.",
+        "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+        "capturedAt": "2026-10-15"
+      }
+    },
+    "sections": [
+      {
+        "type": "website-showcase",
+        "variant": "contained-browser",
+        "id": "fixture-website",
+        "eyebrow": "QA / Optional chapter sequence",
+        "heading": {
+          "id": "fixture-website-title",
+          "lines": ["A reordered story."]
+        },
+        "intro": "An overview chapter is deliberately absent in this test configuration.",
+        "image": { "media": "interface", "browser": true },
+        "motion": "none"
+      },
+      {
+        "type": "cta",
+        "variant": "quiet-centered",
+        "id": "fixture-cta",
+        "eyebrow": "QA only",
+        "heading": {
+          "id": "fixture-cta-title",
+          "lines": ["The same shared components."]
+        },
+        "intro": "This fixture must never be listed or indexed.",
+        "primaryLabel": "View Work",
+        "primaryHref": "/work/",
+        "secondaryLabel": "Contact",
+        "secondaryHref": "/contact/"
+      }
+    ]
+  }
+}

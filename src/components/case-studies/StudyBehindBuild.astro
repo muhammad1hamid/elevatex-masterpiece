@@ -1,0 +1,81 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import StudyHeading from './StudyHeading.astro';
+import StudyMedia from './StudyMedia.astro';
+import StudyViewer from './StudyViewer.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'technical-story'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix,
+  imageLeft = s.variant === 'interface-left';
+---
+
+<section
+  id={s.id}
+  class={imageLeft ? `${p}-build` : `container ${p}-section`}
+  aria-labelledby={s.heading.id}
+>
+  <div class:list={{ container: imageLeft }}>
+    <StudyHeading section={s} prefix={p} />
+    <ol
+      class={`${p}-journey`}
+      aria-label={!imageLeft ? 'Observed browsing journey' : undefined}
+    >
+      {s.journey.map((step, index) => (
+        <li>
+          <span aria-hidden={!imageLeft ? 'true' : undefined}>
+            0{index + 1}
+          </span>
+          {step}
+        </li>
+      ))}
+    </ol>
+    {imageLeft ? (
+      <div class={`${p}-build__composition`} data-study-motion={s.motion}>
+        <div>
+          <StudyMedia context={context} image={s.image} />
+          {s.notes.map((note) => (
+            <div class={`${p}-note`}>
+              <h3>{note.title}</h3>
+              <p>{note.text}</p>
+            </div>
+          ))}
+        </div>
+        {s.secondary && (
+          <StudyMedia
+            context={context}
+            image={s.secondary}
+            class={`${p}-build__menu`}
+          />
+        )}
+      </div>
+    ) : (
+      <div class={`${p}-build`} data-study-motion={s.motion}>
+        <div class={`${p}-build__notes`}>
+          {s.notes.map((note, index) => (
+            <div>
+              <span class={`${p}-kicker`} aria-hidden="true">
+                0{index + 1}
+              </span>
+              <h3>{note.title}</h3>
+              <p>{note.text}</p>
+            </div>
+          ))}
+        </div>
+        <div class={`${p}-build__evidence`}>
+          <StudyMedia context={context} image={s.image} />
+          {s.viewer && (
+            <StudyViewer
+              context={context}
+              viewer={s.viewer}
+              kind="gallery-detail"
+            />
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

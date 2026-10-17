@@ -1,0 +1,278 @@
+[
+  {
+    "name": "hero",
+    "referenceId": "glamorous_salon_vanity_portrait.png",
+    "original": "source-assets/infinity/glamorous_salon_vanity_portrait.png",
+    "width": 1122,
+    "height": 1402,
+    "provenance": "editorialArtwork",
+    "outputs": [
+      {
+        "file": "public/images/work/infinity/art/hero-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 22010
+      },
+      {
+        "file": "public/images/work/infinity/art/hero-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 39260
+      },
+      {
+        "file": "public/images/work/infinity/art/hero-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 47721
+      },
+      {
+        "file": "public/images/work/infinity/art/hero-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 81668
+      },
+      {
+        "file": "public/images/work/infinity/art/hero-1122.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 79201
+      },
+      {
+        "file": "public/images/work/infinity/art/hero-1122.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 132452
+      }
+    ]
+  },
+  {
+    "name": "interior",
+    "referenceId": "luxury_golden_salon_interior.png",
+    "original": "source-assets/infinity/luxury_golden_salon_interior.png",
+    "width": 1122,
+    "height": 1402,
+    "provenance": "editorialArtwork",
+    "outputs": [
+      {
+        "file": "public/images/work/infinity/art/interior-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 33376
+      },
+      {
+        "file": "public/images/work/infinity/art/interior-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 61034
+      },
+      {
+        "file": "public/images/work/infinity/art/interior-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 65601
+      },
+      {
+        "file": "public/images/work/infinity/art/interior-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 123236
+      },
+      {
+        "file": "public/images/work/infinity/art/interior-1122.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 101220
+      },
+      {
+        "file": "public/images/work/infinity/art/interior-1122.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 182574
+      }
+    ]
+  },
+  {
+    "name": "detail",
+    "referenceId": "golden_glow_glamour_portrait.png",
+    "original": "source-assets/infinity/golden_glow_glamour_portrait.png",
+    "width": 1122,
+    "height": 1402,
+    "provenance": "editorialArtwork",
+    "outputs": [
+      {
+        "file": "public/images/work/infinity/art/detail-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 27794
+      },
+      {
+        "file": "public/images/work/infinity/art/detail-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 50686
+      },
+      {
+        "file": "public/images/work/infinity/art/detail-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 65505
+      },
+      {
+        "file": "public/images/work/infinity/art/detail-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 118646
+      },
+      {
+        "file": "public/images/work/infinity/art/detail-1122.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 109038
+      },
+      {
+        "file": "public/images/work/infinity/art/detail-1122.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 189078
+      }
+    ]
+  },
+  {
+    "name": "hair",
+    "referenceId": "glamorous_golden_hour_salon_portrait.png",
+    "original": "source-assets/infinity/glamorous_golden_hour_salon_portrait.png",
+    "width": 1122,
+    "height": 1402,
+    "provenance": "editorialArtwork",
+    "outputs": [
+      {
+        "file": "public/images/work/infinity/art/hair-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 24690
+      },
+      {
+        "file": "public/images/work/infinity/art/hair-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 44932
+      },
+      {
+        "file": "public/images/work/infinity/art/hair-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 51939
+      },
+      {
+        "file": "public/images/work/infinity/art/hair-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 93024
+      },
+      {
+        "file": "public/images/work/infinity/art/hair-1122.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 82665
+      },
+      {
+        "file": "public/images/work/infinity/art/hair-1122.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 144208
+      }
+    ]
+  },
+  {
+    "name": "tools",
+    "referenceId": "luxury_salon_vanity_still_life.png",
+    "original": "source-assets/infinity/luxury_salon_vanity_still_life.png",
+    "width": 1122,
+    "height": 1402,
+    "provenance": "editorialArtwork",
+    "outputs": [
+      {
+        "file": "public/images/work/infinity/art/tools-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 38014
+      },
+      {
+        "file": "public/images/work/infinity/art/tools-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 68866
+      },
+      {
+        "file": "public/images/work/infinity/art/tools-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 76185
+      },
+      {
+        "file": "public/images/work/infinity/art/tools-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 142020
+      },
+      {
+        "file": "public/images/work/infinity/art/tools-1122.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 116930
+      },
+      {
+        "file": "public/images/work/infinity/art/tools-1122.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 220450
+      }
+    ]
+  },
+  {
+    "name": "editorial",
+    "referenceId": "glamorous_salon_editorial_portrait.png",
+    "original": "source-assets/infinity/glamorous_salon_editorial_portrait.png",
+    "width": 1122,
+    "height": 1402,
+    "provenance": "editorialArtwork",
+    "outputs": [
+      {
+        "file": "public/images/work/infinity/art/editorial-480.avif",
+        "width": 480,
+        "height": 600,
+        "bytes": 28766
+      },
+      {
+        "file": "public/images/work/infinity/art/editorial-480.webp",
+        "width": 480,
+        "height": 600,
+        "bytes": 51462
+      },
+      {
+        "file": "public/images/work/infinity/art/editorial-800.avif",
+        "width": 800,
+        "height": 1000,
+        "bytes": 57319
+      },
+      {
+        "file": "public/images/work/infinity/art/editorial-800.webp",
+        "width": 800,
+        "height": 1000,
+        "bytes": 100120
+      },
+      {
+        "file": "public/images/work/infinity/art/editorial-1122.avif",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 88353
+      },
+      {
+        "file": "public/images/work/infinity/art/editorial-1122.webp",
+        "width": 1122,
+        "height": 1402,
+        "bytes": 150682
+      }
+    ]
+  }
+]

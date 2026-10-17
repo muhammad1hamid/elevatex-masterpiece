@@ -1,0 +1,31 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import ServiceActions from '../services/ServiceActions.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'cta'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix;
+---
+
+<section id={s.id} class={`container ${p}-cta`} aria-labelledby={s.heading.id}>
+  <p class={`${p}-kicker`}>{s.eyebrow}</p>
+  <h2 id={s.heading.id}>
+    {s.heading.lines.map((line, index) => (
+      <>
+        {index > 0 && <br />}
+        {index === 0 ? line : <span>{line}</span>}
+      </>
+    ))}
+  </h2>
+  <p>{s.intro}</p>
+  <ServiceActions
+    primaryLabel={s.primaryLabel}
+    primaryHref={s.primaryHref}
+    secondaryLabel={s.secondaryLabel}
+    secondaryHref={s.secondaryHref}
+    source="case-study-final"
+  />
+</section>

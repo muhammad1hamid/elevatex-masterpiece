@@ -1,0 +1,49 @@
+---
+import '../../styles/final-cta.css';
+---
+
+<section
+  class="final-cta"
+  id="start-a-project"
+  aria-labelledby="final-cta-heading"
+  data-final-cta
+>
+  <div class="final-cta__inner">
+    <p class="final-cta__eyebrow" data-final-cta-reveal>
+      Ready when you are <span>/ 10</span>
+    </p>
+    <h2 id="final-cta-heading">
+      <span class="final-cta__line">
+        <span data-final-cta-reveal>Have an idea worth building?</span>
+      </span>{' '}
+      <span class="final-cta__line">
+        <span data-final-cta-reveal>
+          Let’s turn it into{' '}
+          <span class="final-cta__emphasis">something real.</span>
+        </span>
+      </span>
+    </h2>
+    <p class="final-cta__description" data-final-cta-reveal>
+      Whether you need a premium website, AI automation, or a smarter customer
+      experience, tell us what you’re working on and we’ll help you figure out
+      the right next step.
+    </p>
+    <div class="final-cta__actions" data-final-cta-reveal>
+      <a class="final-cta__primary" href="/contact/">
+        Start a Project <span aria-hidden="true">→</span>
+      </a>
+      <a class="final-cta__secondary" href="/work/">
+        View Our Work <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initSectionReveal } from '../../scripts/animations/section-reveal';
+
+  initSectionReveal('[data-final-cta]', '[data-final-cta-reveal]', {
+    distance: 18,
+    duration: 780,
+  });
+</script>

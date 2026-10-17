@@ -1,0 +1,57 @@
+---
+import ServicePanel from '../services/ServicePanel.astro';
+import { serviceOverview } from '../../data/services';
+import '../../styles/services.css';
+---
+
+<section
+  class="expertise"
+  id="services"
+  aria-labelledby="services-heading"
+  data-services
+>
+  <div class="container">
+    <header class="expertise__intro">
+      <p class="expertise__eyebrow" data-service-reveal>
+        Our expertise <span>/ 03</span>
+      </p>
+      <h2 id="services-heading" data-service-reveal>
+        <span>Digital experiences.</span>{' '}
+        <span>
+          <em>Intelligent systems.</em>
+        </span>{' '}
+        <span>Real possibilities.</span>
+      </h2>
+      <p class="expertise__lead" data-service-reveal>
+        We design high-performing websites and build intelligent automation
+        systems that help businesses attract customers, simplify operations, and
+        grow.
+      </p>
+    </header>
+    <div class="expertise__grid">
+      {serviceOverview.map((service) => (
+        <ServicePanel service={service} />
+      ))}
+    </div>
+    <div class="expertise__footer" data-service-reveal>
+      <div>
+        <p class="expertise__question">Not sure where to start?</p>
+        <p>
+          Tell us what you're building, and we'll help you explore the right
+          approach.
+        </p>
+      </div>
+      <a href="/contact/">
+        Let's Talk <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initSectionReveal } from '../../scripts/animations/section-reveal';
+  initSectionReveal('[data-services]', '[data-service-reveal]', {
+    distance: 16,
+    duration: 700,
+  });
+</script>

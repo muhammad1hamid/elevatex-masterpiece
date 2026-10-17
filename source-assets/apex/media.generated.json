@@ -1,0 +1,1152 @@
+{
+  "media": {
+    "hero": {
+      "base": "/images/work/apex/hero",
+      "widths": [480, 800, 1448],
+      "width": 1448,
+      "height": 1086,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Supplied automotive study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    "studio": {
+      "base": "/images/work/apex/studio",
+      "widths": [480, 800, 1448],
+      "width": 1448,
+      "height": 1086,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Imagined detailing studio.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    "macro": {
+      "base": "/images/work/apex/macro",
+      "widths": [480, 800, 1448],
+      "width": 1448,
+      "height": 1086,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Surface, water and reflection study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    "cockpit": {
+      "base": "/images/work/apex/cockpit",
+      "widths": [480, 800, 1448],
+      "width": 1448,
+      "height": 1086,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Interior materials study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    "polishing": {
+      "base": "/images/work/apex/polishing",
+      "widths": [480, 800, 1448],
+      "width": 1448,
+      "height": 1086,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Polishing study; the depicted person is not identified as studio staff.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    "closing": {
+      "base": "/images/work/apex/closing",
+      "widths": [480, 800, 1448],
+      "width": 1448,
+      "height": 1086,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART",
+      "alt": "",
+      "caption": "Illustrative Art Direction / Closing rear-angle study.",
+      "credit": "Supplied generated editorial artwork; no studio, vehicle manufacturer or employee affiliation is implied."
+    },
+    "desktop": {
+      "base": "/images/work/apex/desktop",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 900,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers concept homepage, with Protect Your Investment, Restore The Shine and Drive With Confidence headings and quote and transformation actions.",
+      "caption": "Actual website capture / desktop · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "full-page": {
+      "base": "/images/work/apex/full-page",
+      "widths": [800],
+      "width": 800,
+      "height": 7224,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Complete Classic Detailers concept homepage with service, process, gallery and quote sections. Demo business claims are unverified.",
+      "caption": "Actual website capture / full page · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "services": {
+      "base": "/images/work/apex/services",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 1695,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers service section presenting ceramic coating, paint protection film, paint correction and interior services.",
+      "caption": "Actual website capture / services · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "contact": {
+      "base": "/images/work/apex/contact",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 1043,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers demo contact interface; business information shown has not been independently verified.",
+      "caption": "Actual website capture / contact · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "quote": {
+      "base": "/images/work/apex/quote",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 954,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers quote interface at the vehicle selection step.",
+      "caption": "Actual website capture / quote · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "large-desktop": {
+      "base": "/images/work/apex/large-desktop",
+      "widths": [640, 1000, 1920],
+      "width": 1920,
+      "height": 1080,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers concept homepage at 1920 by 1080 pixels.",
+      "caption": "Actual website capture / large desktop · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "tablet": {
+      "base": "/images/work/apex/tablet",
+      "widths": [768],
+      "width": 768,
+      "height": 1024,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers tablet homepage at 768 pixels.",
+      "caption": "Actual website capture / tablet · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "mobile": {
+      "base": "/images/work/apex/mobile",
+      "widths": [390],
+      "width": 390,
+      "height": 844,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers mobile homepage at 390 pixels, with compact navigation and stacked quote and transformation actions.",
+      "caption": "Actual website capture / mobile · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "mobile-menu": {
+      "base": "/images/work/apex/mobile-menu",
+      "widths": [390],
+      "width": 390,
+      "height": 844,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers open mobile menu with services, transformations, process, showroom, quote and contact destinations.",
+      "caption": "Actual website capture / mobile menu · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "quote-service": {
+      "base": "/images/work/apex/quote-service",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 1202,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers quote interface after selecting Sedan, showing service choices.",
+      "caption": "Actual website capture / quote service · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "quote-summary": {
+      "base": "/images/work/apex/quote-summary",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 1166,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers quote interface at its final step; no contact information was sent.",
+      "caption": "Actual website capture / quote summary · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "process-grid": {
+      "base": "/images/work/apex/process-grid",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 1499,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers six-stage process after selecting the grid layout.",
+      "caption": "Actual website capture / process grid · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "showroom-filter": {
+      "base": "/images/work/apex/showroom-filter",
+      "widths": [640, 1000, 1440],
+      "width": 1440,
+      "height": 1153,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Actual Classic Detailers showroom after selecting the PPF filter.",
+      "caption": "Actual website capture / showroom filter · 15 October 2026.",
+      "credit": "Public Classic Detailers demo captured in Chrome.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    },
+    "interface-detail": {
+      "base": "/images/work/apex/interface-detail",
+      "widths": [640, 1080],
+      "width": 1080,
+      "height": 475,
+      "category": "AUTHENTIC_SCREENSHOT",
+      "alt": "Unmodified crop of the real Classic Detailers hero showing its Cinzel serif headline, supporting copy and quote actions.",
+      "caption": "Actual website capture / Unmodified hero typography and action crop.",
+      "credit": "Crop from the retained 1440 by 900 browser capture.",
+      "sourceUrl": "https://apex-detailing-studio-phi.vercel.app/",
+      "capturedAt": "2026-10-15T09:18:16.213Z"
+    }
+  },
+  "outputs": [
+    {
+      "key": "hero",
+      "source": "source-assets/apex/midnight_911_in_a_luxury_studio.png",
+      "file": "public/images/work/apex/hero-480.avif",
+      "width": 480,
+      "height": 360,
+      "bytes": 20320,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "hero",
+      "source": "source-assets/apex/midnight_911_in_a_luxury_studio.png",
+      "file": "public/images/work/apex/hero-480.webp",
+      "width": 480,
+      "height": 360,
+      "bytes": 36724,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "hero",
+      "source": "source-assets/apex/midnight_911_in_a_luxury_studio.png",
+      "file": "public/images/work/apex/hero-800.avif",
+      "width": 800,
+      "height": 600,
+      "bytes": 44429,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "hero",
+      "source": "source-assets/apex/midnight_911_in_a_luxury_studio.png",
+      "file": "public/images/work/apex/hero-800.webp",
+      "width": 800,
+      "height": 600,
+      "bytes": 81016,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "hero",
+      "source": "source-assets/apex/midnight_911_in_a_luxury_studio.png",
+      "file": "public/images/work/apex/hero-1448.avif",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 99435,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "hero",
+      "source": "source-assets/apex/midnight_911_in_a_luxury_studio.png",
+      "file": "public/images/work/apex/hero-1448.webp",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 182572,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "studio",
+      "source": "source-assets/apex/luxury_black_car_detailing_studio.png",
+      "file": "public/images/work/apex/studio-480.avif",
+      "width": 480,
+      "height": 360,
+      "bytes": 23553,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "studio",
+      "source": "source-assets/apex/luxury_black_car_detailing_studio.png",
+      "file": "public/images/work/apex/studio-480.webp",
+      "width": 480,
+      "height": 360,
+      "bytes": 44782,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "studio",
+      "source": "source-assets/apex/luxury_black_car_detailing_studio.png",
+      "file": "public/images/work/apex/studio-800.avif",
+      "width": 800,
+      "height": 600,
+      "bytes": 52196,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "studio",
+      "source": "source-assets/apex/luxury_black_car_detailing_studio.png",
+      "file": "public/images/work/apex/studio-800.webp",
+      "width": 800,
+      "height": 600,
+      "bytes": 98456,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "studio",
+      "source": "source-assets/apex/luxury_black_car_detailing_studio.png",
+      "file": "public/images/work/apex/studio-1448.avif",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 117868,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "studio",
+      "source": "source-assets/apex/luxury_black_car_detailing_studio.png",
+      "file": "public/images/work/apex/studio-1448.webp",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 226540,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "macro",
+      "source": "source-assets/apex/glossy_black_coupe_in_led_studio.png",
+      "file": "public/images/work/apex/macro-480.avif",
+      "width": 480,
+      "height": 360,
+      "bytes": 30901,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "macro",
+      "source": "source-assets/apex/glossy_black_coupe_in_led_studio.png",
+      "file": "public/images/work/apex/macro-480.webp",
+      "width": 480,
+      "height": 360,
+      "bytes": 56140,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "macro",
+      "source": "source-assets/apex/glossy_black_coupe_in_led_studio.png",
+      "file": "public/images/work/apex/macro-800.avif",
+      "width": 800,
+      "height": 600,
+      "bytes": 66056,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "macro",
+      "source": "source-assets/apex/glossy_black_coupe_in_led_studio.png",
+      "file": "public/images/work/apex/macro-800.webp",
+      "width": 800,
+      "height": 600,
+      "bytes": 123970,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "macro",
+      "source": "source-assets/apex/glossy_black_coupe_in_led_studio.png",
+      "file": "public/images/work/apex/macro-1448.avif",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 144977,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "macro",
+      "source": "source-assets/apex/glossy_black_coupe_in_led_studio.png",
+      "file": "public/images/work/apex/macro-1448.webp",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 276942,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "cockpit",
+      "source": "source-assets/apex/luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "file": "public/images/work/apex/cockpit-480.avif",
+      "width": 480,
+      "height": 360,
+      "bytes": 17805,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "cockpit",
+      "source": "source-assets/apex/luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "file": "public/images/work/apex/cockpit-480.webp",
+      "width": 480,
+      "height": 360,
+      "bytes": 33052,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "cockpit",
+      "source": "source-assets/apex/luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "file": "public/images/work/apex/cockpit-800.avif",
+      "width": 800,
+      "height": 600,
+      "bytes": 37072,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "cockpit",
+      "source": "source-assets/apex/luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "file": "public/images/work/apex/cockpit-800.webp",
+      "width": 800,
+      "height": 600,
+      "bytes": 70702,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "cockpit",
+      "source": "source-assets/apex/luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "file": "public/images/work/apex/cockpit-1448.avif",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 82692,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "cockpit",
+      "source": "source-assets/apex/luxury_sports_car_cockpit_in_warm_studio_light.png",
+      "file": "public/images/work/apex/cockpit-1448.webp",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 155090,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "polishing",
+      "source": "source-assets/apex/polishing_a_glossy_black_sports_car.png",
+      "file": "public/images/work/apex/polishing-480.avif",
+      "width": 480,
+      "height": 360,
+      "bytes": 22456,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "polishing",
+      "source": "source-assets/apex/polishing_a_glossy_black_sports_car.png",
+      "file": "public/images/work/apex/polishing-480.webp",
+      "width": 480,
+      "height": 360,
+      "bytes": 41308,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "polishing",
+      "source": "source-assets/apex/polishing_a_glossy_black_sports_car.png",
+      "file": "public/images/work/apex/polishing-800.avif",
+      "width": 800,
+      "height": 600,
+      "bytes": 43659,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "polishing",
+      "source": "source-assets/apex/polishing_a_glossy_black_sports_car.png",
+      "file": "public/images/work/apex/polishing-800.webp",
+      "width": 800,
+      "height": 600,
+      "bytes": 83904,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "polishing",
+      "source": "source-assets/apex/polishing_a_glossy_black_sports_car.png",
+      "file": "public/images/work/apex/polishing-1448.avif",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 90930,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "polishing",
+      "source": "source-assets/apex/polishing_a_glossy_black_sports_car.png",
+      "file": "public/images/work/apex/polishing-1448.webp",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 172558,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "closing",
+      "source": "source-assets/apex/glossy_black_sports_car_in_a_luxury_garage.png",
+      "file": "public/images/work/apex/closing-480.avif",
+      "width": 480,
+      "height": 360,
+      "bytes": 21266,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "closing",
+      "source": "source-assets/apex/glossy_black_sports_car_in_a_luxury_garage.png",
+      "file": "public/images/work/apex/closing-480.webp",
+      "width": 480,
+      "height": 360,
+      "bytes": 37392,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "closing",
+      "source": "source-assets/apex/glossy_black_sports_car_in_a_luxury_garage.png",
+      "file": "public/images/work/apex/closing-800.avif",
+      "width": 800,
+      "height": 600,
+      "bytes": 46045,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "closing",
+      "source": "source-assets/apex/glossy_black_sports_car_in_a_luxury_garage.png",
+      "file": "public/images/work/apex/closing-800.webp",
+      "width": 800,
+      "height": 600,
+      "bytes": 82818,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "closing",
+      "source": "source-assets/apex/glossy_black_sports_car_in_a_luxury_garage.png",
+      "file": "public/images/work/apex/closing-1448.avif",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 99609,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "closing",
+      "source": "source-assets/apex/glossy_black_sports_car_in_a_luxury_garage.png",
+      "file": "public/images/work/apex/closing-1448.webp",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 179698,
+      "category": "ILLUSTRATIVE_EDITORIAL_ART"
+    },
+    {
+      "key": "desktop",
+      "source": "artifacts/apex/source/desktop.png",
+      "file": "public/images/work/apex/desktop-640.avif",
+      "width": 640,
+      "height": 400,
+      "bytes": 15528,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "desktop",
+      "source": "artifacts/apex/source/desktop.png",
+      "file": "public/images/work/apex/desktop-640.webp",
+      "width": 640,
+      "height": 400,
+      "bytes": 25088,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "desktop",
+      "source": "artifacts/apex/source/desktop.png",
+      "file": "public/images/work/apex/desktop-1000.avif",
+      "width": 1000,
+      "height": 625,
+      "bytes": 29224,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "desktop",
+      "source": "artifacts/apex/source/desktop.png",
+      "file": "public/images/work/apex/desktop-1000.webp",
+      "width": 1000,
+      "height": 625,
+      "bytes": 46450,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "desktop",
+      "source": "artifacts/apex/source/desktop.png",
+      "file": "public/images/work/apex/desktop-1440.avif",
+      "width": 1440,
+      "height": 900,
+      "bytes": 44405,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "desktop",
+      "source": "artifacts/apex/source/desktop.png",
+      "file": "public/images/work/apex/desktop-1440.webp",
+      "width": 1440,
+      "height": 900,
+      "bytes": 71724,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "full-page",
+      "source": "artifacts/apex/source/full-page.png",
+      "file": "public/images/work/apex/full-page-800.avif",
+      "width": 800,
+      "height": 7224,
+      "bytes": 148663,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "full-page",
+      "source": "artifacts/apex/source/full-page.png",
+      "file": "public/images/work/apex/full-page-800.webp",
+      "width": 800,
+      "height": 7224,
+      "bytes": 223982,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "services",
+      "source": "artifacts/apex/source/services.png",
+      "file": "public/images/work/apex/services-640.avif",
+      "width": 640,
+      "height": 753,
+      "bytes": 21870,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "services",
+      "source": "artifacts/apex/source/services.png",
+      "file": "public/images/work/apex/services-640.webp",
+      "width": 640,
+      "height": 753,
+      "bytes": 30618,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "services",
+      "source": "artifacts/apex/source/services.png",
+      "file": "public/images/work/apex/services-1000.avif",
+      "width": 1000,
+      "height": 1177,
+      "bytes": 41296,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "services",
+      "source": "artifacts/apex/source/services.png",
+      "file": "public/images/work/apex/services-1000.webp",
+      "width": 1000,
+      "height": 1177,
+      "bytes": 57238,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "services",
+      "source": "artifacts/apex/source/services.png",
+      "file": "public/images/work/apex/services-1440.avif",
+      "width": 1440,
+      "height": 1695,
+      "bytes": 60410,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "services",
+      "source": "artifacts/apex/source/services.png",
+      "file": "public/images/work/apex/services-1440.webp",
+      "width": 1440,
+      "height": 1695,
+      "bytes": 93582,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "contact",
+      "source": "artifacts/apex/source/contact.png",
+      "file": "public/images/work/apex/contact-640.avif",
+      "width": 640,
+      "height": 464,
+      "bytes": 14306,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "contact",
+      "source": "artifacts/apex/source/contact.png",
+      "file": "public/images/work/apex/contact-640.webp",
+      "width": 640,
+      "height": 464,
+      "bytes": 20758,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "contact",
+      "source": "artifacts/apex/source/contact.png",
+      "file": "public/images/work/apex/contact-1000.avif",
+      "width": 1000,
+      "height": 724,
+      "bytes": 27930,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "contact",
+      "source": "artifacts/apex/source/contact.png",
+      "file": "public/images/work/apex/contact-1000.webp",
+      "width": 1000,
+      "height": 724,
+      "bytes": 41282,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "contact",
+      "source": "artifacts/apex/source/contact.png",
+      "file": "public/images/work/apex/contact-1440.avif",
+      "width": 1440,
+      "height": 1043,
+      "bytes": 43971,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "contact",
+      "source": "artifacts/apex/source/contact.png",
+      "file": "public/images/work/apex/contact-1440.webp",
+      "width": 1440,
+      "height": 1043,
+      "bytes": 72160,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote",
+      "source": "artifacts/apex/source/quote.png",
+      "file": "public/images/work/apex/quote-640.avif",
+      "width": 640,
+      "height": 424,
+      "bytes": 5849,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote",
+      "source": "artifacts/apex/source/quote.png",
+      "file": "public/images/work/apex/quote-640.webp",
+      "width": 640,
+      "height": 424,
+      "bytes": 8236,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote",
+      "source": "artifacts/apex/source/quote.png",
+      "file": "public/images/work/apex/quote-1000.avif",
+      "width": 1000,
+      "height": 663,
+      "bytes": 10649,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote",
+      "source": "artifacts/apex/source/quote.png",
+      "file": "public/images/work/apex/quote-1000.webp",
+      "width": 1000,
+      "height": 663,
+      "bytes": 15144,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote",
+      "source": "artifacts/apex/source/quote.png",
+      "file": "public/images/work/apex/quote-1440.avif",
+      "width": 1440,
+      "height": 954,
+      "bytes": 13841,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote",
+      "source": "artifacts/apex/source/quote.png",
+      "file": "public/images/work/apex/quote-1440.webp",
+      "width": 1440,
+      "height": 954,
+      "bytes": 23950,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "large-desktop",
+      "source": "artifacts/apex/source/large-desktop.png",
+      "file": "public/images/work/apex/large-desktop-640.avif",
+      "width": 640,
+      "height": 360,
+      "bytes": 12991,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "large-desktop",
+      "source": "artifacts/apex/source/large-desktop.png",
+      "file": "public/images/work/apex/large-desktop-640.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 20054,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "large-desktop",
+      "source": "artifacts/apex/source/large-desktop.png",
+      "file": "public/images/work/apex/large-desktop-1000.avif",
+      "width": 1000,
+      "height": 563,
+      "bytes": 24061,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "large-desktop",
+      "source": "artifacts/apex/source/large-desktop.png",
+      "file": "public/images/work/apex/large-desktop-1000.webp",
+      "width": 1000,
+      "height": 563,
+      "bytes": 39110,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "large-desktop",
+      "source": "artifacts/apex/source/large-desktop.png",
+      "file": "public/images/work/apex/large-desktop-1920.avif",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 54745,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "large-desktop",
+      "source": "artifacts/apex/source/large-desktop.png",
+      "file": "public/images/work/apex/large-desktop-1920.webp",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 90112,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "tablet",
+      "source": "artifacts/apex/source/tablet.png",
+      "file": "public/images/work/apex/tablet-768.avif",
+      "width": 768,
+      "height": 1024,
+      "bytes": 33264,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "tablet",
+      "source": "artifacts/apex/source/tablet.png",
+      "file": "public/images/work/apex/tablet-768.webp",
+      "width": 768,
+      "height": 1024,
+      "bytes": 52334,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "mobile",
+      "source": "artifacts/apex/source/mobile.png",
+      "file": "public/images/work/apex/mobile-390.avif",
+      "width": 390,
+      "height": 844,
+      "bytes": 25138,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "mobile",
+      "source": "artifacts/apex/source/mobile.png",
+      "file": "public/images/work/apex/mobile-390.webp",
+      "width": 390,
+      "height": 844,
+      "bytes": 37886,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "mobile-menu",
+      "source": "artifacts/apex/source/mobile-menu.png",
+      "file": "public/images/work/apex/mobile-menu-390.avif",
+      "width": 390,
+      "height": 844,
+      "bytes": 16925,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "mobile-menu",
+      "source": "artifacts/apex/source/mobile-menu.png",
+      "file": "public/images/work/apex/mobile-menu-390.webp",
+      "width": 390,
+      "height": 844,
+      "bytes": 23412,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-service",
+      "source": "artifacts/apex/source/quote-service.png",
+      "file": "public/images/work/apex/quote-service-640.avif",
+      "width": 640,
+      "height": 534,
+      "bytes": 9364,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-service",
+      "source": "artifacts/apex/source/quote-service.png",
+      "file": "public/images/work/apex/quote-service-640.webp",
+      "width": 640,
+      "height": 534,
+      "bytes": 12706,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-service",
+      "source": "artifacts/apex/source/quote-service.png",
+      "file": "public/images/work/apex/quote-service-1000.avif",
+      "width": 1000,
+      "height": 835,
+      "bytes": 16067,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-service",
+      "source": "artifacts/apex/source/quote-service.png",
+      "file": "public/images/work/apex/quote-service-1000.webp",
+      "width": 1000,
+      "height": 835,
+      "bytes": 22942,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-service",
+      "source": "artifacts/apex/source/quote-service.png",
+      "file": "public/images/work/apex/quote-service-1440.avif",
+      "width": 1440,
+      "height": 1202,
+      "bytes": 21734,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-service",
+      "source": "artifacts/apex/source/quote-service.png",
+      "file": "public/images/work/apex/quote-service-1440.webp",
+      "width": 1440,
+      "height": 1202,
+      "bytes": 36382,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-summary",
+      "source": "artifacts/apex/source/quote-summary.png",
+      "file": "public/images/work/apex/quote-summary-640.avif",
+      "width": 640,
+      "height": 518,
+      "bytes": 9189,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-summary",
+      "source": "artifacts/apex/source/quote-summary.png",
+      "file": "public/images/work/apex/quote-summary-640.webp",
+      "width": 640,
+      "height": 518,
+      "bytes": 13000,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-summary",
+      "source": "artifacts/apex/source/quote-summary.png",
+      "file": "public/images/work/apex/quote-summary-1000.avif",
+      "width": 1000,
+      "height": 810,
+      "bytes": 16257,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-summary",
+      "source": "artifacts/apex/source/quote-summary.png",
+      "file": "public/images/work/apex/quote-summary-1000.webp",
+      "width": 1000,
+      "height": 810,
+      "bytes": 24018,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-summary",
+      "source": "artifacts/apex/source/quote-summary.png",
+      "file": "public/images/work/apex/quote-summary-1440.avif",
+      "width": 1440,
+      "height": 1166,
+      "bytes": 21256,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "quote-summary",
+      "source": "artifacts/apex/source/quote-summary.png",
+      "file": "public/images/work/apex/quote-summary-1440.webp",
+      "width": 1440,
+      "height": 1166,
+      "bytes": 37156,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "process-grid",
+      "source": "artifacts/apex/source/process-grid.png",
+      "file": "public/images/work/apex/process-grid-640.avif",
+      "width": 640,
+      "height": 666,
+      "bytes": 11890,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "process-grid",
+      "source": "artifacts/apex/source/process-grid.png",
+      "file": "public/images/work/apex/process-grid-640.webp",
+      "width": 640,
+      "height": 666,
+      "bytes": 15772,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "process-grid",
+      "source": "artifacts/apex/source/process-grid.png",
+      "file": "public/images/work/apex/process-grid-1000.avif",
+      "width": 1000,
+      "height": 1041,
+      "bytes": 20664,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "process-grid",
+      "source": "artifacts/apex/source/process-grid.png",
+      "file": "public/images/work/apex/process-grid-1000.webp",
+      "width": 1000,
+      "height": 1041,
+      "bytes": 30442,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "process-grid",
+      "source": "artifacts/apex/source/process-grid.png",
+      "file": "public/images/work/apex/process-grid-1440.avif",
+      "width": 1440,
+      "height": 1499,
+      "bytes": 31977,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "process-grid",
+      "source": "artifacts/apex/source/process-grid.png",
+      "file": "public/images/work/apex/process-grid-1440.webp",
+      "width": 1440,
+      "height": 1499,
+      "bytes": 47272,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "showroom-filter",
+      "source": "artifacts/apex/source/showroom-filter.png",
+      "file": "public/images/work/apex/showroom-filter-640.avif",
+      "width": 640,
+      "height": 512,
+      "bytes": 11477,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "showroom-filter",
+      "source": "artifacts/apex/source/showroom-filter.png",
+      "file": "public/images/work/apex/showroom-filter-640.webp",
+      "width": 640,
+      "height": 512,
+      "bytes": 16522,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "showroom-filter",
+      "source": "artifacts/apex/source/showroom-filter.png",
+      "file": "public/images/work/apex/showroom-filter-1000.avif",
+      "width": 1000,
+      "height": 801,
+      "bytes": 19836,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "showroom-filter",
+      "source": "artifacts/apex/source/showroom-filter.png",
+      "file": "public/images/work/apex/showroom-filter-1000.webp",
+      "width": 1000,
+      "height": 801,
+      "bytes": 30016,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "showroom-filter",
+      "source": "artifacts/apex/source/showroom-filter.png",
+      "file": "public/images/work/apex/showroom-filter-1440.avif",
+      "width": 1440,
+      "height": 1153,
+      "bytes": 28806,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "showroom-filter",
+      "source": "artifacts/apex/source/showroom-filter.png",
+      "file": "public/images/work/apex/showroom-filter-1440.webp",
+      "width": 1440,
+      "height": 1153,
+      "bytes": 48046,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "interface-detail",
+      "source": "artifacts/apex/source/interface-detail.png",
+      "file": "public/images/work/apex/interface-detail-640.avif",
+      "width": 640,
+      "height": 281,
+      "bytes": 17530,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "interface-detail",
+      "source": "artifacts/apex/source/interface-detail.png",
+      "file": "public/images/work/apex/interface-detail-640.webp",
+      "width": 640,
+      "height": 281,
+      "bytes": 28260,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "interface-detail",
+      "source": "artifacts/apex/source/interface-detail.png",
+      "file": "public/images/work/apex/interface-detail-1080.avif",
+      "width": 1080,
+      "height": 475,
+      "bytes": 34447,
+      "category": "AUTHENTIC_SCREENSHOT"
+    },
+    {
+      "key": "interface-detail",
+      "source": "artifacts/apex/source/interface-detail.png",
+      "file": "public/images/work/apex/interface-detail-1080.webp",
+      "width": 1080,
+      "height": 475,
+      "bytes": 54022,
+      "category": "AUTHENTIC_SCREENSHOT"
+    }
+  ]
+}

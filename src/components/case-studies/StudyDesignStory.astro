@@ -1,0 +1,57 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { SectionOf } from '../../lib/case-study/schema';
+import StudyHeading from './StudyHeading.astro';
+import StudyMedia from './StudyMedia.astro';
+interface Props {
+  context: StudyContext;
+  section: SectionOf<'design-story'>;
+}
+const { context, section: s } = Astro.props,
+  p = context.prefix,
+  campaign = s.variant === 'image-left';
+---
+
+<section
+  id={s.id}
+  class={campaign ? `${p}-design` : `container ${p}-section`}
+  aria-labelledby={s.heading.id}
+>
+  <div class:list={{ container: campaign }}>
+    <StudyHeading section={s} prefix={p} />
+    <div class={campaign ? `${p}-design__composition` : `${p}-design`}>
+      <StudyMedia
+        context={context}
+        image={s.image}
+        class={!campaign ? `${p}-design__portrait` : undefined}
+      />
+      <div
+        class={campaign ? `${p}-design__notes` : `${p}-design__interface`}
+        data-study-motion={s.motion ?? 'detail-reveal'}
+      >
+        {s.detailEyebrow && <p class={`${p}-kicker`}>{s.detailEyebrow}</p>}
+        <StudyMedia context={context} image={s.detail} />
+        {campaign ? (
+          s.notes.map((note, index) => (
+            <div class={`${p}-note`}>
+              <span class={`${p}-kicker`}>
+                0{index + 1} / {s.noteKicker}
+              </span>
+              <h3>{note.title}</h3>
+              <p>{note.text}</p>
+            </div>
+          ))
+        ) : (
+          <div class={`${p}-design__notes`}>
+            {s.notes.map((note) => (
+              <div>
+                <h3>{note.title}</h3>
+                <p>{note.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

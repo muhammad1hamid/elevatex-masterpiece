@@ -1,0 +1,44 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import type { StudySection } from '../../lib/case-study/schema';
+import StudyOverview from './StudyOverview.astro';
+import StudyWebsiteShowcase from './StudyWebsiteShowcase.astro';
+import StudyDesignStory from './StudyDesignStory.astro';
+import StudyResponsiveShowcase from './StudyResponsiveShowcase.astro';
+import StudyBehindBuild from './StudyBehindBuild.astro';
+import StudyEditorialGallery from './StudyEditorialGallery.astro';
+import StudyFinalShowcase from './StudyFinalShowcase.astro';
+import StudyNextProject from './StudyNextProject.astro';
+import StudyCTA from './StudyCTA.astro';
+interface Props {
+  context: StudyContext;
+  section: StudySection;
+}
+const { context, section } = Astro.props;
+---
+
+{section.type === 'overview' && (
+  <StudyOverview context={context} section={section} />
+)}
+{section.type === 'website-showcase' && (
+  <StudyWebsiteShowcase context={context} section={section} />
+)}
+{section.type === 'design-story' && (
+  <StudyDesignStory context={context} section={section} />
+)}
+{section.type === 'responsive-showcase' && (
+  <StudyResponsiveShowcase context={context} section={section} />
+)}
+{section.type === 'technical-story' && (
+  <StudyBehindBuild context={context} section={section} />
+)}
+{section.type === 'editorial-gallery' && (
+  <StudyEditorialGallery context={context} section={section} />
+)}
+{section.type === 'final-showcase' && (
+  <StudyFinalShowcase context={context} section={section} />
+)}
+{section.type === 'related-project' && (
+  <StudyNextProject context={context} section={section} />
+)}
+{section.type === 'cta' && <StudyCTA context={context} section={section} />}

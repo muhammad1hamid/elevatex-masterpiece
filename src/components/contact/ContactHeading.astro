@@ -1,0 +1,25 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  first: string;
+  second: string;
+  intro?: string;
+}
+const { id, eyebrow, first, second, intro } = Astro.props;
+---
+
+<header class="contact-heading" data-contact-heading>
+  <p class="contact-eyebrow">{eyebrow}</p>
+  <h2 id={id}>
+    <span class="contact-mask">
+      <span data-contact-line>{first}</span>
+    </span>
+    <span class="contact-mask">
+      <span class="contact-accent" data-contact-line>
+        {second}
+      </span>
+    </span>
+  </h2>
+  {intro && <p class="contact-lead">{intro}</p>}
+</header>

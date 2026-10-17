@@ -1,10 +1,190 @@
 ---
 import { site } from '../../data/site';
+import {
+  footerGroups,
+  footerStatement,
+  footerContactMethods,
+} from '../../data/footer';
+import '../../styles/footer.css';
+const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer container">
-  <a class="wordmark" href="/" aria-label="ElevateX home">
-    Elevate<span>X</span>
-  </a>
-  <p>{site.headline}</p>
+<footer class="site-footer" id="footer" data-footer data-footer-motion="static">
+  <div class="container site-footer__inner">
+    <section
+      class="site-footer__cta"
+      aria-labelledby="footer-cta-heading"
+      data-footer-cta
+    >
+      <div
+        class="site-footer__cta-light"
+        aria-hidden="true"
+        data-footer-cta-light
+      ></div>
+      <p class="site-footer__eyebrow" data-footer-eyebrow>
+        Have something in mind?
+      </p>
+      <h2 id="footer-cta-heading">
+        <span class="site-footer__mask">
+          <span data-footer-heading-line>Let’s build something</span>
+        </span>{' '}
+        <span class="site-footer__mask">
+          <span class="site-footer__accent" data-footer-heading-line>
+            worth remembering.
+          </span>
+        </span>
+      </h2>
+      <p class="site-footer__lead" data-footer-copy>
+        From websites to intelligent digital systems, tell us what you’re
+        working on and let’s explore what’s possible.
+      </p>
+      <div data-footer-action>
+        <a class="site-footer__project" href="/contact/">
+          Start a Project <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+    <div class="site-footer__main" data-footer-main>
+      <div class="site-footer__brand" data-footer-brand>
+        <a class="site-footer__logo" href="/" aria-label={`${site.name} home`}>
+          Elevate<span>X</span>
+        </a>
+        <p class="site-footer__statement">{footerStatement}</p>
+      </div>
+      <nav class="site-footer__navigation" aria-label="Footer navigation">
+        {footerGroups.map((group) => (
+          <div class="site-footer__group" data-footer-nav-group>
+            <p
+              class="site-footer__label"
+              id={`footer-${group.label.toLowerCase()}`}
+            >
+              {group.label}
+            </p>
+            <ul aria-labelledby={`footer-${group.label.toLowerCase()}`}>
+              {group.links.map(({ label, href }) => (
+                <li>
+                  <a href={href}>{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+      <div class="site-footer__connect" data-footer-nav-group>
+        <p class="site-footer__label">Start a conversation</p>
+        <p class="site-footer__conversation">
+          Have a new project or an idea worth exploring?
+        </p>
+        <a class="site-footer__text-link" href="/contact/">
+          Get in Touch <span aria-hidden="true">↗</span>
+        </a>
+        {footerContactMethods.map((method) => (
+          <a
+            class="site-footer__contact"
+            href={method.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${method.label} at ${method.detail} (opens in a new tab)`}
+          >
+            <span>
+              {method.label} <span aria-hidden="true">↗</span>
+            </span>
+            <span class="site-footer__number">{method.detail}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="site-footer__scene" aria-hidden="true" data-footer-scene>
+      <div class="site-footer__ambient"></div>
+      <svg
+        class="site-footer__arc"
+        viewBox="0 0 1440 420"
+        preserveAspectRatio="none"
+        focusable="false"
+        aria-hidden="true"
+        data-footer-arc
+      >
+        <defs>
+          <linearGradient id="footer-arc-light" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#d8b78b" stop-opacity="0" />
+            <stop offset=".3" stop-color="#d8b78b" stop-opacity=".28" />
+            <stop offset=".5" stop-color="#f1d8b1" stop-opacity=".72" />
+            <stop offset=".7" stop-color="#d8b78b" stop-opacity=".28" />
+            <stop offset="1" stop-color="#d8b78b" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="footer-arc-glint">
+            <stop stop-color="#fff0d7" stop-opacity="0" />
+            <stop offset=".5" stop-color="#fff0d7" stop-opacity=".65" />
+            <stop offset="1" stop-color="#fff0d7" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M -60 360 C 210 -80 1230 -80 1500 360"
+          fill="none"
+          stroke="url(#footer-arc-light)"
+          stroke-width="1"
+          vector-effect="non-scaling-stroke"
+          pathLength="1"
+          stroke-dasharray="1"
+          stroke-dashoffset="0"
+          data-footer-arc-path
+        />
+        <path
+          d="M -60 360 C 210 -80 1230 -80 1500 360"
+          fill="none"
+          stroke="url(#footer-arc-glint)"
+          stroke-width="1.5"
+          vector-effect="non-scaling-stroke"
+          pathLength="1"
+          opacity="0"
+          stroke-dasharray=".12 .88"
+          data-footer-arc-highlight
+        />
+      </svg>
+      <span class="site-footer__wordmark" data-footer-wordmark>
+        ELEVATEX
+        <span
+          class="site-footer__sweep"
+          data-footer-sweep
+          data-wordmark="ELEVATEX"
+        ></span>
+      </span>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        © {year} {site.name}. All rights reserved.
+      </p>
+      <a class="site-footer__top" href="#page-top">
+        Back to Top <span aria-hidden="true">↑</span>
+      </a>
+    </div>
+  </div>
 </footer>
+<script>
+  const footer = document.querySelector<HTMLElement>('[data-footer]');
+  if (
+    footer &&
+    !matchMedia('(prefers-reduced-motion: reduce)').matches &&
+    'IntersectionObserver' in window
+  ) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        void import('../../scripts/animations/footer')
+          .then(({ initializeFooterMotion }) => initializeFooterMotion())
+          .catch(() => {});
+      },
+      { rootMargin: '320px 0px' },
+    );
+    observer.observe(footer);
+    document.addEventListener(
+      'astro:before-swap',
+      () => observer.disconnect(),
+      { once: true },
+    );
+    window.addEventListener('pagehide', () => observer.disconnect(), {
+      once: true,
+    });
+  }
+</script>

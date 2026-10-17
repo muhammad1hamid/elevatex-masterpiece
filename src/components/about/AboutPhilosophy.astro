@@ -1,0 +1,66 @@
+---
+import AboutHeading from './AboutHeading.astro';
+import AboutArt from './AboutArt.astro';
+import { aboutThinking } from '../../data/about';
+---
+
+<section
+  class="about-philosophy about-scene about-section"
+  id="our-thinking"
+  aria-labelledby="thinking-title"
+>
+  <div
+    class="about-philosophy__stage about-scene__backdrop"
+    data-about-scene="philosophy"
+  >
+    <AboutArt name="philosophy">
+      <svg
+        class="about-philosophy__drawing"
+        viewBox="0 0 1280 720"
+        preserveAspectRatio="none"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          data-about-draw
+          pathLength="1"
+          d="M110 570V168H387M470 100H714V540M822 168H1170V570M110 606H1170"
+        />
+        <path
+          data-about-draw
+          pathLength="1"
+          d="M110 168l15-15M387 168h32M714 100l15-15M1170 570l15 15"
+        />
+      </svg>
+    </AboutArt>
+  </div>
+  <div class="container about-scene__content">
+    <AboutHeading
+      id="thinking-title"
+      eyebrow="The way we think / 02"
+      lines={['Good work starts', 'with the right thinking.']}
+      intro="Before design or development begins, the questions are about purpose, audience, structure and what the finished experience needs to achieve."
+    />
+    <ol class="about-philosophy__labels" aria-label="From thinking to making">
+      {['Understand', 'Structure', 'Design', 'Build'].map((label, index) => (
+        <li data-about-label>
+          <span aria-hidden="true">0{index + 1}</span>
+          {label}
+        </li>
+      ))}
+    </ol>
+    <ol class="about-thinking" aria-label="A considered approach">
+      {aboutThinking.map((item, index) => (
+        <li data-about-row>
+          <span class="about-number" aria-hidden="true">
+            0{index + 1}
+          </span>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

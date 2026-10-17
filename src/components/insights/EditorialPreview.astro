@@ -1,0 +1,61 @@
+---
+import type { InsightArticle } from '../../lib/insights/articles';
+import { formatInsightDate } from '../../lib/insights/articles';
+import EditorialImage from './EditorialImage.astro';
+interface Props {
+  article: InsightArticle;
+  featured?: boolean;
+  priority?: boolean;
+}
+const { article, featured = false, priority = false } = Astro.props;
+---
+
+<article
+  class:list={['editorial-preview', featured && 'editorial-preview--featured']}
+  data-journal-story
+  data-category={article.data.category}
+>
+  <a
+    class="editorial-preview__image"
+    href={article.href}
+    tabindex="-1"
+    aria-hidden="true"
+    data-journal-image
+  >
+    <EditorialImage
+      article={article}
+      priority={priority}
+      sizes={
+        featured
+          ? '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) 90vw, 780px'
+          : '(max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) 80vw, 620px'
+      }
+    />
+    {featured && (
+      <span class="editorial-preview__badge">The featured read</span>
+    )}
+  </a>
+  <div class="editorial-preview__copy">
+    <p class="journal-eyebrow">{article.data.category}</p>
+    <h3>
+      <a href={article.href}>{article.data.title}</a>
+    </h3>
+    <p class="editorial-preview__description">{article.data.description}</p>
+    <p class="editorial-preview__meta">
+      <span>{article.data.author.name}</span>
+      <span aria-hidden="true">·</span>
+      <time datetime={article.data.publishedDate.toISOString()}>
+        {formatInsightDate(article.data.publishedDate)}
+      </time>
+      <span aria-hidden="true">·</span>
+      <span>{article.reading.minutes} min read</span>
+    </p>
+    <a
+      class="journal-text-link"
+      href={article.href}
+      aria-label={`Read article: ${article.data.title}`}
+    >
+      Read Article <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

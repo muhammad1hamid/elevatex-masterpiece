@@ -1,0 +1,89 @@
+---
+interface Props {
+  title: string;
+  tone?: 'note' | 'takeaway';
+}
+
+const { title, tone = 'note' } = Astro.props;
+---
+
+<aside
+  class:list={['article-callout', `article-callout--${tone}`]}
+  aria-label={title}
+>
+  <p class="article-callout__title">{title}</p>
+  <div class="article-callout__body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .article-callout {
+    margin: 2.5rem 0;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    border-block: 1px solid var(--border-subtle);
+    border-inline-start: 2px solid var(--hero-champagne);
+  }
+
+  .article-callout--takeaway {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border: 1px solid var(--hero-border);
+    background: linear-gradient(120deg, rgb(216 183 139 / 7%), transparent 75%);
+  }
+
+  .article-callout__title {
+    margin: 0 0 0.875rem;
+    color: var(--hero-champagne-soft);
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .article-callout__body {
+    color: var(--color-text);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+
+  .article-callout__body :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .article-callout__body :global(:last-child) {
+    margin-bottom: 0;
+  }
+
+  .article-callout__body :global(a) {
+    color: var(--hero-champagne-soft);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  .article-callout__body :global(a:focus-visible) {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 30rem) {
+    .article-callout {
+      margin-block: 2rem;
+      padding-inline-start: 1rem;
+    }
+
+    .article-callout--takeaway {
+      padding: 1.25rem;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .article-callout {
+      border-color: CanvasText;
+      background: Canvas;
+    }
+  }
+</style>

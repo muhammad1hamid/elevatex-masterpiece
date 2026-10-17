@@ -1,0 +1,62 @@
+---
+import { processSteps } from '../../data/processSteps';
+---
+
+<div class="process-visual" aria-hidden="true">
+  <div class="process-visual__sticky">
+    <div class="process-visual__meta">
+      <span>The golden thread</span>
+      <span>Process / 05 stages</span>
+    </div>
+    <div class="process-visual__numbers">
+      {processSteps.map((step, i) => (
+        <span
+          class:list={['process-visual__number', { 'is-current': i === 0 }]}
+          data-process-number={step.id}
+        >
+          {step.number}
+        </span>
+      ))}
+      <span class="process-visual__total">/ 05</span>
+    </div>
+    <div class="process-visual__drawing">
+      {processSteps.map((step, i) => {
+        const base = step.visual.replace(/\.webp$/, '');
+        const sizes = '(min-width: 1440px) 525px, 38vw';
+        return (
+          <picture>
+            <source
+              type="image/avif"
+              srcset={`${base}-620.avif 620w, ${base}-${step.visualWidth}.avif ${step.visualWidth}w`}
+              sizes={sizes}
+            />
+            <img
+              class:list={['process-visual__image', { 'is-current': i === 0 }]}
+              src={step.visual}
+              srcset={`${base}-620.webp 620w, ${step.visual} ${step.visualWidth}w`}
+              sizes={sizes}
+              alt=""
+              width={step.visualWidth}
+              height={step.visualHeight}
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              data-process-visual={step.id}
+            />
+          </picture>
+        );
+      })}
+    </div>
+    <div class="process-visual__caption">
+      {processSteps.map((step, i) => (
+        <span
+          class:list={[{ 'is-current': i === 0 }]}
+          data-process-caption={step.id}
+        >
+          {step.eyebrow}
+        </span>
+      ))}
+    </div>
+    <p class="process-visual__footnote">One idea. A considered progression.</p>
+  </div>
+</div>

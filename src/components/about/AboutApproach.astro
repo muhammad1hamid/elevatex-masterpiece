@@ -1,0 +1,50 @@
+---
+import AboutHeading from './AboutHeading.astro';
+import AboutArt from './AboutArt.astro';
+import { aboutWorkflow } from '../../data/about';
+---
+
+<section
+  class="about-approach about-scene about-section"
+  id="our-approach"
+  aria-labelledby="approach-title"
+>
+  <div
+    class="about-approach__stage about-scene__backdrop"
+    data-about-scene="workspace"
+  >
+    <AboutArt name="workspace" />
+  </div>
+  <div class="container about-scene__content">
+    <AboutHeading
+      id="approach-title"
+      eyebrow="Behind the build / 04"
+      lines={['From first thought', 'to finished experience.']}
+      intro="Good digital work is shaped by the decisions behind it — from structure and visual direction to development, testing and the details that hold everything together."
+    />
+    <div class="about-workflow" data-about-workflow>
+      <p class="about-workflow__intro">
+        A way of approaching the work.<span>Adapted to the project.</span>
+      </p>
+      <div class="about-workflow__sequence">
+        <span
+          class="about-workflow__light"
+          data-about-workflow-line
+          aria-hidden="true"
+        ></span>
+        <ol>
+          {aboutWorkflow.map((step, index) => (
+            <li data-about-step>
+              <span class="about-workflow__number" aria-hidden="true">
+                0{index + 1}
+                <i></i>
+              </span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

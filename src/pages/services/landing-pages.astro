@@ -1,0 +1,755 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import ServiceActions from '../../components/services/ServiceActions.astro';
+import ServiceFAQ from '../../components/services/ServiceFAQ.astro';
+import ServiceCTA from '../../components/services/ServiceCTA.astro';
+import Intro from '../../components/services/landing/LandingIntro.astro';
+import {
+  landingPages,
+  anatomy,
+  journey,
+  useCases,
+  landingProcess,
+  landingDeliverables,
+  landingFAQs,
+} from '../../data/services/landing-pages';
+import { staticPages } from '../../data/site';
+import { featuredWork } from '../../utils/content';
+import { webProjectStories } from '../../data/services/web-development';
+import {
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+  serviceSchema,
+  breadcrumbSchema,
+} from '../../utils/structured-data';
+import '../../styles/landing-pages.css';
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Landing Pages', path: landingPages.path },
+];
+const projects = (await featuredWork())
+  .filter((p) => ['apex-detailing', 'infinity-salon'].includes(p.id))
+  .reverse();
+---
+
+<BaseLayout
+  title={landingPages.title}
+  description={landingPages.description}
+  path={landingPages.path}
+  image={landingPages.image}
+  indexable={
+    staticPages.find((p) => p.path === landingPages.path)?.indexable ?? false
+  }
+  schema={[
+    organizationSchema(),
+    websiteSchema(),
+    webPageSchema(landingPages),
+    serviceSchema({
+      name: 'Landing Page Design & Development',
+      description: landingPages.description,
+      path: landingPages.path,
+    }),
+    breadcrumbSchema(breadcrumbs),
+  ]}
+>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      href="/fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+  </Fragment>
+  <article class="landing-page" data-landing-page>
+    <section
+      class="lp-hero"
+      id="landing-hero"
+      aria-labelledby="landing-heading"
+    >
+      <div class="container">
+        <Breadcrumbs items={breadcrumbs} />
+        <header class="lp-hero__copy">
+          <p class="lp-eyebrow">Landing Pages</p>
+          <h1 id="landing-heading">
+            One page. One clear goal. <span>Built around action.</span>
+          </h1>
+          <p class="lp-lead">{landingPages.supporting}</p>
+          <div class="lp-actions">
+            <ServiceActions
+              primaryLabel="Start a Landing Page"
+              secondaryLabel="See How We Structure It"
+              secondaryHref="#landing-anatomy"
+              source="landing_hero_start"
+            />
+          </div>
+        </header>
+        <figure class="lp-canvas" data-landing-hero>
+          <div class="lp-canvas__bar">
+            <span>ElevateX / Page architecture</span>
+            <span>One deliberate journey</span>
+          </div>
+          <div class="lp-canvas__composition">
+            <div class="lp-canvas__note">
+              <span class="lp-eyebrow">The starting point</span>
+              <p>
+                An offer worth
+                <br />
+                paying attention to.
+              </p>
+              <span class="lp-canvas__fine">Clarity sets the direction.</span>
+            </div>
+            <div class="lp-canvas__page" aria-hidden="true">
+              <div class="lp-canvas__wordmark">
+                Your offer <span>01 / 05</span>
+              </div>
+              <div class="lp-canvas__zone" style="--beat:0">
+                <small>Attention</small>
+                <strong>
+                  Make the next
+                  <br />
+                  step obvious.
+                </strong>
+                <i></i>
+                <i class="short"></i>
+              </div>
+              <div class="lp-canvas__zone lp-canvas__message" style="--beat:1">
+                <small>Message</small>
+                <span>
+                  A clear promise.
+                  <br />
+                  For the right audience.
+                </span>
+              </div>
+              <div class="lp-canvas__zone lp-canvas__value" style="--beat:2">
+                <small>Value</small>
+                <div>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+              </div>
+              <div class="lp-canvas__zone lp-canvas__proof" style="--beat:3">
+                <small>Proof</small>
+                <span>Evidence belongs here.</span>
+              </div>
+              <div class="lp-canvas__zone lp-canvas__action" style="--beat:4">
+                <small>Action</small>
+                <span>
+                  One clear next step <b>→</b>
+                </span>
+              </div>
+            </div>
+            <div class="lp-canvas__note lp-canvas__note--end">
+              <span class="lp-eyebrow">The destination</span>
+              <p>
+                A decision made
+                <br />
+                with confidence.
+              </p>
+              <span class="lp-canvas__fine">Every section has a purpose.</span>
+            </div>
+          </div>
+          <figcaption>
+            Attention <span>→</span> Clarity <span>→</span> Persuasion{' '}
+            <span>→</span> Trust <span>→</span> Action
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section
+      class="lp-principles"
+      id="landing-principles"
+      aria-labelledby="landing-principles-heading"
+    >
+      <div class="container">
+        <h2 id="landing-principles-heading" class="sr-only">
+          Four landing page principles
+        </h2>
+        <ul>
+          {[
+            'One clear offer',
+            'One clear audience',
+            'One clear journey',
+            'One clear action',
+          ].map((text, i) => (
+            <li>
+              <span>0{i + 1}</span>
+              {text}
+            </li>
+          ))}
+        </ul>
+        <p>
+          A landing page is a focused digital experience built around one
+          audience, one offer, and one clear next action.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="lp-section"
+      id="landing-problems"
+      aria-labelledby="landing-problems-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-problems-heading"
+          eyebrow="Where conversion breaks"
+          heading="Traffic can reach the page and still go nowhere."
+          lead="An unclear offer, competing actions, or a difficult mobile experience can leave interested visitors unsure what to do next."
+        />
+        <ol class="lp-leaks">
+          {[
+            ['Traffic', 'The campaign promises one thing.'],
+            ['First impression', 'The first screen explains another.'],
+            ['Message', 'The offer stays vague.'],
+            ['Value', 'The benefit is hard to find.'],
+            ['Trust', 'Important questions go unanswered.'],
+            ['CTA', 'Too many actions compete.'],
+          ].map(([title, text], i) => (
+            <li>
+              <span class="lp-index">0{i + 1}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="lp-note">
+          Slow media, crowded mobile layouts, and long forms can add friction at
+          any stage. This is a conceptual journey, not campaign performance
+          data.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="lp-section lp-section--tonal"
+      id="landing-anatomy"
+      aria-labelledby="landing-anatomy-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-anatomy-heading"
+          eyebrow="Anatomy of a landing page"
+          heading="Every section should earn the next scroll."
+          lead="A deliberate sequence helps visitors understand the offer, see why it matters, resolve uncertainty, and know exactly what to do next."
+        />
+        <div class="lp-anatomy" data-anatomy>
+          <div class="lp-anatomy__top" aria-hidden="true">
+            <span>Offer / structure</span>
+            <span>07 purposeful sections</span>
+          </div>
+          {anatomy.map(([name, title, text], i) => (
+            <div class="lp-anatomy__row" data-anatomy-row>
+              <div class="lp-anatomy__annotation">
+                <span class="lp-index">
+                  0{i + 1} / {name}
+                </span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+              <div
+                class:list={['lp-anatomy__region', `lp-anatomy__region--${i}`]}
+                aria-hidden="true"
+              >
+                <span>{name}</span>
+                {i === 0 ? (
+                  <strong>
+                    Your offer,
+                    <br />
+                    clearly expressed.
+                  </strong>
+                ) : i === 6 ? (
+                  <b>Take the next step →</b>
+                ) : (
+                  <div class="lp-wire">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        <p class="lp-note">
+          A flexible framework. The sequence and length follow the offer,
+          audience, and evidence available.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="lp-section"
+      id="landing-types"
+      aria-labelledby="landing-types-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-types-heading"
+          eyebrow="Built around the goal"
+          heading="Different offers need different landing experiences."
+          lead="Start with the decision you want to support. Then shape the page around the people making it."
+        />
+        <div class="lp-types">
+          {useCases.map(([name, goal, visitor, action, emphasis], i) => (
+            <article>
+              <div>
+                <span class="lp-index">0{i + 1}</span>
+                <h3>{name}</h3>
+                <p>{emphasis}</p>
+              </div>
+              <dl>
+                <div>
+                  <dt>Goal</dt>
+                  <dd>{goal}</dd>
+                </div>
+                <div>
+                  <dt>Visitor</dt>
+                  <dd>{visitor}</dd>
+                </div>
+                <div>
+                  <dt>Primary action</dt>
+                  <dd>{action}</dd>
+                </div>
+              </dl>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="lp-section lp-section--tonal"
+      id="landing-message"
+      aria-labelledby="landing-message-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-message-heading"
+          eyebrow="Message first"
+          heading="If the message is unclear, better visuals will not save the page."
+          lead="Visual design supports persuasion. The visitor still needs to understand what is offered, who it is for, why it matters, and what to do."
+        />
+        <ol class="lp-message-hierarchy">
+          {[
+            ['Headline', 'What is the core promise?'],
+            ['Supporting copy', 'What needs explaining next?'],
+            ['Proof', 'Why should they believe it?'],
+            ['CTA', 'What should they do?'],
+          ].map(([label, text]) => (
+            <li>
+              <span>{label}</span>
+              <p>{text}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="lp-message-example">
+          <p class="lp-eyebrow">A conceptual copy refinement</p>
+          <div>
+            <span class="lp-label">Vague</span>
+            <p>“Transform your business with innovative digital solutions.”</p>
+          </div>
+          <div>
+            <span class="lp-label">Focused</span>
+            <p>
+              “Get a focused landing page built around your campaign and one
+              clear conversion goal.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="lp-section"
+      id="landing-journey"
+      aria-labelledby="landing-journey-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-journey-heading"
+          eyebrow="The conversion path"
+          heading="Attention is only the start. The journey matters next."
+          lead="Guide the visitor from first impression to meaningful action. Each step should make the next decision easier to understand."
+        />
+        <fieldset class="lp-journey" data-journey>
+          <legend>Select a stage to explore the journey</legend>
+          <div class="lp-journey__bar" aria-hidden="true">
+            <span>The visitor’s perspective</span>
+            <span>Arrival → Action</span>
+          </div>
+          {journey.map(([label, title, text, signal], i) => (
+            <div class="lp-journey__slice" data-journey-row>
+              <input
+                type="radio"
+                name="landing-journey"
+                id={`landing-stage-${i}`}
+                value={i}
+                checked={i === 0}
+                aria-describedby={`landing-stage-description-${i}`}
+              />
+              <label for={`landing-stage-${i}`}>
+                <span class="lp-index">0{i + 1}</span>
+                <span>{label}</span>
+                <span class="lp-journey__dot" aria-hidden="true"></span>
+              </label>
+              <div
+                class="lp-journey__detail"
+                id={`landing-stage-description-${i}`}
+              >
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <span class="lp-journey__signal">{signal}</span>
+              </div>
+            </div>
+          ))}
+        </fieldset>
+        <p class="lp-note">
+          Explore by scrolling, selecting a stage, or using the arrow keys. This
+          is an illustrative path, not a prediction of visitor behavior.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="lp-section lp-section--tonal"
+      id="landing-work"
+      aria-labelledby="landing-work-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-work-heading"
+          eyebrow="Selected work / Concept studies"
+          heading="A focused first impression. A considered next step."
+          lead="Two concept website landing experiences, with different offers and inquiry paths. These illustrate design choices; they are not paid-campaign case studies or measured conversion results."
+        />
+        <div class="lp-projects">
+          {projects.map((project) => {
+            const story = webProjectStories[project.id]!;
+            return (
+              <article class="lp-project">
+                <figure>
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcset={project.avifSrcSet}
+                      sizes="(min-width: 1280px) 730px, (min-width: 1024px) 55vw, calc(100vw - 2.5rem)"
+                    />
+                    <img
+                      src={project.image.src}
+                      srcset={project.webpSrcSet}
+                      sizes="(min-width: 1280px) 730px, (min-width: 1024px) 55vw, calc(100vw - 2.5rem)"
+                      width={project.image.width}
+                      height={project.image.height}
+                      loading="lazy"
+                      decoding="async"
+                      alt={`${project.title} concept landing screen showing the offer and inquiry action.`}
+                    />
+                  </picture>
+                  <figcaption>
+                    Demo / Concept — screenshot content is illustrative,
+                    including any claims or contact details.
+                  </figcaption>
+                </figure>
+                <div>
+                  <p class="lp-eyebrow">
+                    {project.typeLabel} / {project.industry}
+                  </p>
+                  <h3>{project.title}</h3>
+                  <p>{story.brief}</p>
+                  <dl>
+                    <div>
+                      <dt>What was built</dt>
+                      <dd>{story.implementation}</dd>
+                    </div>
+                    <div>
+                      <dt>Design direction</dt>
+                      <dd>{story.direction}</dd>
+                    </div>
+                    <div>
+                      <dt>Primary action / conversion logic</dt>
+                      <dd>
+                        {project.id === 'apex-detailing'
+                          ? 'Request a quote. Service detail supports the inquiry before the visitor shares their requirements.'
+                          : 'Request an appointment. Treatment information and studio imagery provide context for the booking inquiry.'}
+                      </dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="lp-text-link"
+                    href={project.href}
+                    data-landing-project
+                  >
+                    Explore {project.title} concept{' '}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="lp-section"
+      id="landing-mobile"
+      aria-labelledby="landing-mobile-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-mobile-heading"
+          eyebrow="Mobile matters"
+          heading="The page has to persuade on a much smaller screen too."
+          lead="Mobile visitors see less at once. Content hierarchy, reading order, and touch targets need their own composition."
+        />
+        <div class="lp-responsive">
+          <div class="lp-responsive__wide">
+            <p class="lp-label">Desktop / room to explore</p>
+            <div class="lp-responsive__desktop">
+              <strong>
+                A clear offer.
+                <br />
+                Space for context.
+              </strong>
+              <div class="lp-responsive__art" aria-hidden="true"></div>
+              <span class="lp-example-action">Primary action →</span>
+              <p>Supporting evidence and useful details.</p>
+            </div>
+          </div>
+          <span class="lp-responsive__arrow" aria-hidden="true">
+            →
+          </span>
+          <div class="lp-responsive__narrow">
+            <p class="lp-label">Mobile / priorities first</p>
+            <div class="lp-responsive__phone">
+              <strong>
+                The offer.
+                <br />
+                The next step.
+              </strong>
+              <span class="lp-example-action">Primary action →</span>
+              <p>Relevant proof</p>
+              <p>Essential questions</p>
+              <p>Compact inquiry</p>
+            </div>
+          </div>
+        </div>
+        <ul class="lp-inline-list">
+          <li>Readable type</li>
+          <li>Prioritized content</li>
+          <li>Comfortable touch targets</li>
+          <li>Optimized media</li>
+          <li>Short, purposeful forms</li>
+        </ul>
+      </div>
+    </section>
+
+    <section
+      class="lp-section lp-section--tonal"
+      id="landing-technical"
+      aria-labelledby="landing-technical-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-technical-heading"
+          eyebrow="Built to perform"
+          heading="A landing page should not lose attention while loading."
+          lead="Responsive rendering, optimized assets, accessible interaction, and semantic structure give the page a reliable technical foundation."
+        />
+        <ol class="lp-technical">
+          {[
+            [
+              'Page',
+              'Responsive',
+              'Layouts and reading order adapted across relevant screen sizes.',
+            ],
+            [
+              'HTML',
+              'Semantic',
+              'Real headings, useful metadata, canonical URLs, and crawlable content.',
+            ],
+            [
+              'Assets',
+              'Optimized',
+              'Responsive images, reserved dimensions, and purposeful font loading.',
+            ],
+            [
+              'Interactions',
+              'Accessible',
+              'Keyboard access, visible focus, native controls, and reduced motion.',
+            ],
+            [
+              'Form',
+              'Considered',
+              'Concise fields, accessible validation, secure delivery, and abuse controls when included.',
+            ],
+            [
+              'Delivery',
+              'Measured',
+              'Cross-browser QA and Core Web Vitals checks before an agreed launch.',
+            ],
+          ].map(([name, label, text]) => (
+            <li>
+              <span class="lp-label">{label}</span>
+              <h3>{name}</h3>
+              <p>{text}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="lp-note">
+          Performance is measured against the actual page and environment.
+          Scores and search rankings are not guaranteed.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="lp-section"
+      id="landing-measurement"
+      aria-labelledby="landing-measurement-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-measurement-heading"
+          eyebrow="Ready to measure"
+          heading="A landing page should make important actions measurable."
+          lead="Where required, the page can be prepared to track agreed actions such as CTA clicks, form submissions, and campaign sources."
+        />
+        <ol class="lp-event-flow">
+          {[
+            'Campaign',
+            'Landing page',
+            'CTA',
+            'Form / action',
+            'Measurement',
+          ].map((label) => (
+            <li>{label}</li>
+          ))}
+        </ol>
+        <div class="lp-measurement-copy">
+          <div>
+            <h3>Measure the decisions that matter.</h3>
+            <p>
+              Useful events may include form starts, successful submissions,
+              WhatsApp links, or booking clicks. Select them around the campaign
+              goal and agreed privacy choices.
+            </p>
+          </div>
+          <div>
+            <h3>Keep attribution purposeful.</h3>
+            <p>
+              UTM source, medium, and campaign can provide context when needed.
+              Measurement supports future decisions; tracking alone does not
+              improve conversion. A/B testing requires a separate plan.
+            </p>
+          </div>
+        </div>
+        <p class="lp-related">
+          Need to route inquiries after submission?{' '}
+          <a href="/services/ai-automation/">
+            Explore AI Automation <span aria-hidden="true">→</span>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="lp-section lp-section--tonal"
+      id="landing-process"
+      aria-labelledby="landing-process-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-process-heading"
+          eyebrow="How we build"
+          heading="From a clear brief to a purposeful page."
+          lead="The offer and the audience shape the message. The message shapes the experience."
+        />
+        <p class="lp-process-backbone">
+          Brief <span>→</span> Message <span>→</span> Page <span>→</span> Action
+        </p>
+        <ol class="lp-process">
+          {landingProcess.map(([name, text], i) => (
+            <li>
+              <span class="lp-index">0{i + 1}</span>
+              <h3>{name}</h3>
+              <p>{text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section
+      class="lp-section"
+      id="landing-deliverables"
+      aria-labelledby="landing-deliverables-heading"
+    >
+      <div class="container">
+        <Intro
+          id="landing-deliverables-heading"
+          eyebrow="What a project can include"
+          heading="Strategy, design, development — working toward one clear objective."
+        />
+        <ol class="lp-deliverables">
+          {landingDeliverables.map(([name, text], i) => (
+            <li>
+              <span class="lp-index">0{i + 1}</span>
+              <h3>{name}</h3>
+              <p>{text}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="lp-note">
+          The exact scope depends on the campaign, content, integrations, and
+          level of strategy required. Deliverables are agreed before the project
+          begins.
+        </p>
+        <div class="lp-related-services">
+          <p>
+            Need a larger website with multiple visitor journeys?{' '}
+            <a href="/services/web-development/">
+              Explore Web Development <span aria-hidden="true">→</span>
+            </a>
+          </p>
+          <p>
+            Considering optional conversational lead capture?{' '}
+            <a href="/services/ai-chatbots/">
+              Explore AI Chatbots <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <ServiceFAQ
+      id="landing-faq"
+      name="landing-faq"
+      eyebrow="Common questions"
+      heading="What to know before building a landing page."
+      lead="Practical answers about content, scope, integrations, and what comes next."
+      items={landingFAQs}
+      centered
+      ctaLabel="Start a Landing Page"
+    />
+    <ServiceCTA
+      id="landing-cta"
+      eyebrow="Ready to turn the offer into a page?"
+      heading="You already have the offer."
+      emphasis="Now give it a page built around action."
+      supporting="Tell us what you are promoting, who the page is for, and what you want visitors to do next. We’ll help turn that into a focused landing experience."
+      source="landing_final_cta"
+      primaryLabel="Start a Landing Page"
+      secondaryLabel="Explore Our Work"
+    />
+  </article>
+</BaseLayout>
+<script>
+  import { initializeLandingPages } from '../../scripts/animations/landing-pages';
+  initializeLandingPages();
+</script>

@@ -1,0 +1,103 @@
+---
+import MessageInput from '../featured-system/MessageInput.astro';
+import OrderDraft from '../featured-system/OrderDraft.astro';
+import SystemConnection from '../featured-system/SystemConnection.astro';
+import { featuredSystem } from '../../data/featured-system';
+import '../../styles/featured-system.css';
+---
+
+<section
+  class="featured-system"
+  id="featured-system"
+  aria-labelledby="featured-system-heading"
+  data-featured-system
+>
+  <div class="container featured-system__container">
+    <header class="featured-system__intro">
+      <p class="featured-system__eyebrow" data-system-reveal>
+        Inside the build <span>/ 04</span>
+      </p>
+      <h2 id="featured-system-heading" data-system-reveal>
+        <span>From message.</span> <span>To meaningful action.</span>
+      </h2>
+      <p class="featured-system__lead" data-system-reveal>
+        {featuredSystem.description}
+      </p>
+    </header>
+
+    <figure
+      class="handoff"
+      data-system-preview
+      data-workflow-state="complete"
+      aria-labelledby="handoff-project"
+      data-system-reveal
+    >
+      <figcaption class="handoff__header">
+        <span class="handoff__project-name" id="handoff-project">
+          {featuredSystem.title}
+        </span>
+        <span class="handoff__classification">{featuredSystem.type}</span>
+      </figcaption>
+      <div class="handoff__zones" id="restaurant-workflow-preview">
+        <MessageInput message={featuredSystem.message} />
+        <SystemConnection />
+        <OrderDraft order={featuredSystem.order} />
+      </div>
+      <ol
+        class="handoff__process"
+        aria-label="Illustrative message-to-order process"
+      >
+        {featuredSystem.process.map((step, index) => (
+          <li data-workflow-step={step.id}>
+            <span class="handoff__process-dot" aria-hidden="true"></span>
+            <span>{step.label}</span>
+            {index < featuredSystem.process.length - 1 && (
+              <span class="handoff__process-arrow" aria-hidden="true">
+                →
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
+      <div class="handoff__controls">
+        <p id="system-demo-note">
+          Fictional sample data. No order is submitted.
+        </p>
+        <button
+          class="handoff__play"
+          type="button"
+          data-workflow-play
+          aria-controls="restaurant-workflow-preview"
+          aria-describedby="system-demo-note"
+          hidden
+        >
+          <span data-workflow-label>See the Flow</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </figure>
+
+    <div class="featured-system__footer" data-system-reveal>
+      <p>{featuredSystem.summary}</p>
+      <a
+        class="featured-system__service-link"
+        href={featuredSystem.projectUrl ?? '/#ai-automation-heading'}
+      >
+        {featuredSystem.projectUrl
+          ? 'Explore the Full Build'
+          : 'Explore AI Automation'}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initSectionReveal } from '../../scripts/animations/section-reveal';
+  import { initializeFeaturedWorkflow } from '../../scripts/animations/featured-system';
+  initSectionReveal('[data-featured-system]', '[data-system-reveal]', {
+    distance: 14,
+    duration: 700,
+  });
+  initializeFeaturedWorkflow();
+</script>

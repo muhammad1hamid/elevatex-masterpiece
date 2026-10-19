@@ -34,6 +34,43 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
             getComputedStyle(element.parentElement).overflowX,
         })),
     }));
+    if (layout.width > width) {
+      const isolation = await page.evaluate(() => {
+        const probes = [
+          '.global-header', '.hero', '.hero__rim', '.hero__stage',
+          '.hero__smoke-position', '.site-footer', '.site-footer__arc',
+          '.global-header__mobile-navigation', 'svg',
+        ];
+        const measured = probes.map((selector) => {
+          const elements = [...document.querySelectorAll<HTMLElement>(selector)];
+          const saved = elements.map((element) => element.getAttribute('style'));
+          elements.forEach((element) => element.style.setProperty('display', 'none', 'important'));
+          const documentWidth = document.documentElement.scrollWidth;
+          elements.forEach((element, index) => {
+            const original = saved[index];
+            if (original === null || original === undefined) element.removeAttribute('style');
+            else element.setAttribute('style', original);
+          });
+          return { selector, documentWidth };
+        });
+        const css = [
+          '.hero { overflow: hidden !important }',
+          '.hero { contain: paint !important }',
+          '.hero__stage { overflow: hidden !important }',
+          '.site-footer { overflow: hidden !important }',
+          '.global-header__mobile:not([open]) > nav { display: none !important }',
+        ].map((rule) => {
+          const style = document.createElement('style');
+          style.textContent = rule;
+          document.head.append(style);
+          const documentWidth = document.documentElement.scrollWidth;
+          style.remove();
+          return { rule, documentWidth };
+        });
+        return { measured, css };
+      });
+      console.log('LAYOUT_ISOLATION', JSON.stringify(isolation));
+    }
     expect(layout.width, JSON.stringify(layout)).toBeLessThanOrEqual(width);
     await expect(page.locator('main > section')).toHaveCount(10);
     await page.locator('#faq').scrollIntoViewIfNeeded();

@@ -606,7 +606,7 @@
 }
 .landing-visual__page {
   display: grid;
-  grid-template-columns: 1fr 0.9fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
   align-items: center;
   gap: 1.25rem;
   padding: 1.375rem;
@@ -641,6 +641,8 @@
   background: var(--hero-champagne);
 }
 .landing-visual__form {
+  min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -665,6 +667,7 @@
 }
 .landing-visual__button {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.25rem;
@@ -852,7 +855,7 @@
   .landing-visual__page {
     padding: 0.75rem;
     gap: 0.625rem;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .landing-visual__form {
     padding: 0.5rem;

@@ -8,11 +8,11 @@ Official origin: **https://elevatexlab.org**. This setup does not deploy the sit
 
 | Provider          | Owner-supplied public identifier   | Current state                                         |
 | ----------------- | ---------------------------------- | ----------------------------------------------------- |
-| GA4               | `G-D9PL0YNQ33`                     | Prepared; collection off by default                   |
-| Microsoft Clarity | `yzqephj94p`                       | Prepared; collection off by default                   |
+| GA4               | `G-D9PL0YNQ33`                     | Consent-controlled; production approved               |
+| Microsoft Clarity | `yzqephj94p`                       | Consent-controlled; production approved               |
 | Bing              | `92656A7713620AB21B7AE30FA4E79FBC` | Static shared head tag; external verification pending |
 
-IDs match the owner's screenshots and Master Prompt 31. They are public identifiers, not API credentials. There is no GTM installation or duplicate vendor loader. Google Search Console ownership is unverified; a GA4 property does not establish it.
+IDs follow the latest owner screenshots and copied snippet; the earlier Clarity q/e transposition has been corrected. They are public identifiers, not API credentials. There is no GTM installation or duplicate vendor loader. Google Search Console ownership is unverified; a GA4 property does not establish it.
 
 ## Activation gates
 
@@ -94,13 +94,13 @@ The existing GitHub quality workflow runs on push/PR and performs builds, types,
 
 Before activation, approve the legal/business identity, privacy-request contact, applicable markets, provider retention/sharing/access, storage durations, session recording disclosure, consent withdrawal description and any international data handling. The approved WhatsApp route is retained, but it is not silently designated a privacy-request channel. This is an implementation checklist, not published legal terms.
 
-## Validation boundaries
+## Historical #31 validation boundaries (superseded by the legal release record)
 
 Tests intercept vendor URLs with local command-recording stubs. Production-shaped builds are isolated, and no test events/recordings are sent to the supplied properties. They check default/preview blocking, static Bing placement, identifiers, grants/denials/withdrawal, duplicate prevention, views, safe events, storage failures and masking attributes. They do not prove GA/Clarity dashboard receipt, legal compliance, provider SDK internals or physical-device performance.
 
 Repository integration changes are prepared independently from the existing uncommitted local design/motion work. That work is not silently included in the feature-branch commit. The .org origin and required domain-aware expectations accompany the integration branch; no production merge is authorized.
 
-## Local validation record / 19 October 2026
+## Historical #31 local validation record / 19 October 2026
 
 The exact isolated feature branch passed **32 installed-Chrome checks**: 14 integration tests and 18 existing foundation checks, with zero retries. These include 320–2560px foundation layouts, keyboard/no-JS fallbacks, metadata, preview headers, links, static Bing output, consent grants/denials/withdrawal, GPC, blocked storage/providers, sensitive URL/referrer blocking and allowed events. The first foundation attempt had one failure because its no-JS helper hardcoded another local server port; the helper now uses the configured base URL, with the original assertions retained. An earlier integration attempt selected the listing link rather than a case-study link; the test now targets the actual study link.
 

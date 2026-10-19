@@ -1,6 +1,6 @@
 # ElevateX Lab — legal and analytics release
 
-**Record date:** 19 October 2026. **Current stage:** approved legal pages are public; corrected analytics activation has passed real-provider probes and is being published at the owner's explicit request. The historical protective hold below remains part of the audit trail. This is not a claim of full production, legal-compliance or accessibility certification.
+**Record date:** 19 October 2026. **Verdict:** approved legal pages and consent-controlled GA4/Clarity are live. Corrected activation commit 6dec9edcc62a8cd2ced8fd90179ec27e475e60f6 was observed on the public production manifest and verified with real-provider requests. The historical protective hold below remains part of the audit trail. This is not a claim of full production, legal-compliance or accessibility certification.
 
 ## Published scope and approval
 
@@ -101,8 +101,27 @@ The owner explicitly requested activation and immediate push after confirming GA
 
 ## Remaining verification
 
-1. Observe the actual activation commit on the public release manifest and repeat live consent/request checks.
+1. Completed: activation commit observed on the public manifest and live consent/request checks passed at 04:08 UTC.
 2. Check GA4 Realtime and Clarity recordings in the owner dashboards; network delivery is not proof of dashboard display or a complete masking certification.
 3. Check final GitHub CI and Cloudflare dashboard logs. Bing/GSC ownership, www redirect and broader indexing decisions remain external or separately approved work.
 
-**Current implementation:** legal publication and .org routing are pushed; corrected optional analytics are approved for activation only after visitor consent. The earlier hold and its published commits are retained above, not hidden.
+**Current implementation:** legal publication, .org routing and corrected consent-controlled analytics are pushed and publicly verified. The earlier hold and its published commits are retained above, not hidden.
+
+## Final public activation check — 19 October 2026, 04:08 UTC
+
+- Main activation commit: **6dec9edcc62a8cd2ced8fd90179ec27e475e60f6**. Git push confirmed. Public release manifest reports this SHA in production; homepage HTML contains enabled=true, corrected Clarity ID yzqephj94p and whole-body masking.
+- On the real domain, a fresh visit and Reject produced **zero optional-provider requests and zero analytics cookies**.
+- After explicit Accept, each owned tag was injected once; corrected Clarity tag and SDK returned HTTP 200. GA4 page_view and Clarity collection returned HTTP 204. There was one page_view and no unexpected automatic scroll event.
+- Consented first-party cookies observed: _ga, _ga_D9PL0YNQ33, _clck and _clsk. Microsoft third-party cookies were also observed after permission; cookie controls are not misrepresented as proof of anonymity or universal provider-side deletion. The Cookie Policy already links Microsoft's current inventory.
+- Consent expiry measured just under **180 days**. Withdrawal saved denied, removed both injected tags and all tested known first-party analytics cookies. The next document loaded no provider.
+- Whole-body data-clarity-mask=true was present. No page errors or console errors were observed.
+- The earlier synthetic-field test decoded four Clarity requests and found none of the synthetic name/email/description sentinels. This is a specific observed check, not complete masking certification or a review of dashboard recordings.
+- Provider Realtime/recording dashboards, Bing Verify, GSC ownership and Cloudflare dashboard logs remain externally unverified. Public source/HTTP and actual network delivery are verified independently.
+
+## Final responsive follow-up
+
+The activation CI run completed **552/553 checks successfully**; its remaining failure was the earlier Linux-only 321px document width at a 320px viewport with 200% text. Explicit geometry identified the landing-page illustration's intrinsic grid/form widths and the footer CTA exceeding its available content width. The illustration now permits zero-minimum grid tracks and content wrapping; the CTA wraps within its container. The strict 320px assertion is retained. No approved hero composition or motion timeline was changed.
+
+Fresh responsive follow-up: **29/29 Chrome checks passed**, including 200% text, footer/navigation targets and service layouts from 320px through desktop/ultrawide. Final Linux CI for this follow-up remains pending; the report does not label all CI or all browser engines as passing. Native-animation timing polling removed the earlier flaky fake-clock assertion without changing production animation code.
+
+Public no-JavaScript checks confirmed all three policies at HTTP 200 with one H1, readable content and the no-JS analytics notice. Live mobile keyboard navigation opened/closed correctly, returned focus and produced no provider request before permission.

@@ -8,6 +8,10 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     env:
       DEPLOYMENT_ENV: preview
     steps:
@@ -17,14 +21,16 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium firefox webkit
-      - run: npm run qa
-      - run: npm run test:all-browsers -- --project=firefox --project=webkit
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - if: matrix.browser == 'chromium'
+        run: npm run qa
+      - if: matrix.browser != 'chromium'
+        run: npm run build && npm run test:all-browsers -- --project=${{ matrix.browser }}
       - name: Upload failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: browser-report
+          name: browser-report-${{ matrix.browser }}
           path: |
             playwright-report/
             test-results/

@@ -35,6 +35,26 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
         })),
     }));
     expect(layout.width, JSON.stringify(layout)).toBeLessThanOrEqual(width);
+    const questionLines = await page
+      .locator('.faq-item__question')
+      .evaluateAll((questions) =>
+        questions.map((question) => {
+          const range = document.createRange();
+          range.selectNodeContents(question);
+          return {
+            question: question.textContent,
+            edge: question.getBoundingClientRect().right,
+            lines: [...range.getClientRects()].map((line) => line.right),
+          };
+        }),
+      );
+    for (const question of questionLines) {
+      for (const right of question.lines) {
+        expect(right, question.question ?? '').toBeLessThanOrEqual(
+          question.edge + 0.5,
+        );
+      }
+    }
     await expect(page.locator('main > section')).toHaveCount(10);
     await page.locator('#faq').scrollIntoViewIfNeeded();
     const question = page.locator('.faq-item summary').last();

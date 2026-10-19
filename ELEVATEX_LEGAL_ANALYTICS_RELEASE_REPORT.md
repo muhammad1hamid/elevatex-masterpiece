@@ -122,6 +122,14 @@ The owner explicitly requested activation and immediate push after confirming GA
 
 The activation CI run completed **552/553 checks successfully**; its remaining failure was the earlier Linux-only 321px document width at a 320px viewport with 200% text. Explicit geometry identified the landing-page illustration's intrinsic grid/form widths and the footer CTA exceeding its available content width. The illustration now permits zero-minimum grid tracks and content wrapping; the CTA wraps within its container. The strict 320px assertion is retained. No approved hero composition or motion timeline was changed.
 
-Fresh responsive follow-up: **29/29 Chrome checks passed**, including 200% text, footer/navigation targets and service layouts from 320px through desktop/ultrawide. Final Linux CI for this follow-up remains pending; the report does not label all CI or all browser engines as passing. Native-animation timing polling removed the earlier flaky fake-clock assertion without changing production animation code.
+Fresh responsive follow-up: **29/29 Chrome checks passed**, including 200% text, footer/navigation targets and service layouts from 320px through desktop/ultrawide. The first follow-up Linux CI retained one FAQ overflow failure; the precise correction and subsequent results are recorded below. Native-animation timing polling removed the earlier flaky fake-clock assertion without changing production animation code.
 
 Public no-JavaScript checks confirmed all three policies at HTTP 200 with one H1, readable content and the no-JS analytics notice. Live mobile keyboard navigation opened/closed correctly, returned focus and produced no provider request before permission.
+
+## Exact FAQ overflow correction and footer confirmation
+
+The 6b9813b main workflow completed 552/553 checks; its remaining 320px/200%-text failure was isolated on a separate diagnostic branch. Removing FAQ item 05 eliminated the overflow: the long word in its question exceeded a narrow grid track on Linux. The question now has min-width:0 and overflow-wrap:anywhere. No whole-page clipping or weakened viewport assertion was introduced. A regression checks each question text line stays within its column.
+
+The corrected enlarged-text/navigation checks passed in Linux Chromium, Firefox and WebKit (diagnostic run 39201541570, all three jobs successful). Fresh local checks: 48/48 legal/consent plus 2/2 enlarged-text/navigation passed. Full-suite CI is split into parallel browser jobs so each engine runs independently within the workflow timeout. The final full-suite results remain pending until observed.
+
+The live shared footer was independently confirmed to contain /privacy/, /terms/, /cookies/ and Cookie Preferences. The original root workspace retains its unrelated local changes. All tracking activation and live network evidence above remains applicable; this follow-up changes FAQ wrapping, its test and CI scheduling only.

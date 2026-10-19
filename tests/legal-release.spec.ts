@@ -124,7 +124,7 @@ test('approval gate rejects drafts, missing facts and mismatched revisions', () 
     expect(isLegalApproved(record)).toBe(false);
 });
 
-test('approved production publishes policies while provider hold prevents activation', async () => {
+test('approved production requires visitor consent and never inlines provider tags', async () => {
   test.setTimeout(120_000);
   const output = 'test-results/legal-release-gate';
   execFileSync(
@@ -146,14 +146,14 @@ test('approved production publishes policies while provider hold prevents activa
     const html = await readFile(`${output}/${slug}/index.html`, 'utf8');
     expect(html).toContain('Last updated:');
     expect(html).toContain('2026-10-19');
-    expect(html).toContain('"enabled":false');
+    expect(html).toContain('"enabled":true');
     expect(html).not.toContain('unapproved policy draft');
     await expect(
       access(`${output}/review/legal/${slug}/index.html`),
     ).rejects.toThrow();
   }
   const html = await readFile(`${output}/index.html`, 'utf8');
-  expect(html).toContain('"enabled":false');
+  expect(html).toContain('"enabled":true');
   expect(html).toContain('href="/privacy/"');
   expect(html).not.toContain('src="https://www.googletagmanager.com/');
   expect(html).not.toContain('src="https://www.clarity.ms/');
@@ -206,7 +206,7 @@ test('Workers main activation, preview override and explicit shutdown are determ
   expect(shutdown.PUBLIC_TRACKING_ENABLED).toBe('false');
 });
 
-test('operational hold lets an earlier visitor withdraw their saved grant', async ({
+test('disabled preview lets an earlier visitor withdraw their saved grant', async ({
   page,
   context,
 }) => {

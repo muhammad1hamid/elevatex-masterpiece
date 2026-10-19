@@ -85,7 +85,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         title: 'Optional Microsoft Clarity',
         paragraphs: [
           'After an analytics grant, Microsoft Clarity can help us understand clicks, scrolling and website interactions using heatmaps and session recordings. These recordings are reconstructed interaction data, rather than a video of your device camera.',
-          'The integration marks the inquiry form and editable fields for masking and does not send custom identity information. Masking is a protection, not a guarantee that every possible sensitive detail is removed. We do not deliberately unmask inquiry details. Our loader also skips collection on query-string URLs, unknown fragments and sensitive referrers.',
+          'The integration marks the entire page, including the inquiry form and editable fields, for masking and does not send custom identity information. Masking is a protection, not a guarantee that every possible sensitive detail is removed. We do not deliberately unmask inquiry details. Our loader also skips collection on query-string URLs, unknown fragments and sensitive referrers.',
           'We do not load Clarity before an analytics grant. Denying cookies alone is not equivalent to stopping all provider transmission, which is why the script itself is blocked until permission is given.',
         ],
         links: [

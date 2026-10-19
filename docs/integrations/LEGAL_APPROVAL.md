@@ -19,3 +19,13 @@ The current form remains a browser-only inquiry review; no delivery backend, dat
 ## Later live verification supersedes the initial provider attestation
 
 An approved live test observed a GA4 `scroll` event outside the authored event set and an empty HTTP 204 Clarity tag response. The later owner screenshot confirms Enhanced Measurement is **on**, despite the earlier confirmation. Tracking was immediately held in source and pushed to main. The public site then reported `enabled:false` at commit `3e579190b5b8fe6e06b5617a6e8b4fc811bb1548`. Legal publication remains approved. Provider activation requires corrected settings and fresh verification; an HTTP 204 does not prove a particular Clarity failure cause. The new Clarity installation screenshot is being compared with the supplied identifier; exact copied snippet and privacy settings were requested rather than guessing an ID correction.
+
+## Reactivation authorization and verification
+
+The owner subsequently confirmed Enhanced Measurement is off, pasted the exact Clarity snippet with project ID **yzqephj94p**, and explicitly requested immediate activation, push and verification. The earlier configuration **yzeqphj94p** transposed q/e; the screenshot and copied snippet agree on the correction. Its public tag returns JavaScript HTTP 200 rather than the old empty 204.
+
+An isolated real-provider probe on 19 October 2026 verified no requests before consent or after Reject, exactly one GA4 page_view after Accept, successful Clarity SDK and collection responses, no automatic scroll/form events, and successful withdrawal. A synthetic contact-field check found none of the test sentinels in four decoded Clarity request payloads; only the expected contact_form_start event was sent to GA4, never a lead. No inquiry was submitted.
+
+The shared body now has explicit data-clarity-mask=true before scripts, covering all descendants, in addition to form/input masks. Microsoft documents that this explicit markup overrides website masking settings. This enforces full-page content masking in code; no unmask rules are introduced. The documented consentv2 analytics grant/ad denial remains in place. Provider dashboard global settings, dashboard receipt and actual recording review are not claimed as inspected. The source activation hold may be removed for this verified configuration while all visitor/origin/environment gates remain.
+
+References: [masking markup](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-masking), [ConsentV2](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-consent-api-v2), [cookie inventory](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-cookies).

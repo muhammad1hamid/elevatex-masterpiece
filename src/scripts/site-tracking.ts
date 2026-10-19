@@ -211,13 +211,13 @@ export function initializeSiteTracking(): void {
     stopped = true;
     configureAnalytics(undefined);
     globals[disableKey] = true;
-    safeCall(() => window.clarity?.('stop'));
     safeCall(() =>
       window.clarity?.('consentv2', {
         ad_Storage: 'denied',
         analytics_Storage: 'denied',
       }),
     );
+    safeCall(() => window.clarity?.('stop'));
     safeCall(() => window.gtag?.('consent', 'update', denied));
     for (const id of ['elevatex-ga4', 'elevatex-clarity'])
       document.getElementById(id)?.remove();

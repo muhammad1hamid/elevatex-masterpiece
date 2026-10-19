@@ -1,6 +1,6 @@
 # ElevateX Lab — legal and analytics release
 
-**Record date:** 19 October 2026. **Verdict:** approved legal pages are public; optional analytics are held off pending correction/verification of provider settings. This is not a claim of full production, legal-compliance or accessibility certification.
+**Record date:** 19 October 2026. **Current stage:** approved legal pages are public; corrected analytics activation has passed real-provider probes and is being published at the owner's explicit request. The historical protective hold below remains part of the audit trail. This is not a claim of full production, legal-compliance or accessibility certification.
 
 ## Published scope and approval
 
@@ -17,7 +17,7 @@
 
 See `docs/integrations/LEGAL_APPROVAL.md`. The inquiry form remains a browser-only review with no delivery backend, email or database. WhatsApp is the available conversation channel. No fake lead was sent.
 
-## Live verification and protective hold
+## Initial live verification and protective hold (history)
 
 The initial approved release was tested on the real domain using a clean, isolated browser and an explicit non-sensitive test grant:
 
@@ -29,7 +29,7 @@ The initial approved release was tested on the real domain using a clean, isolat
 - Withdrawal persisted denial, removed both injected tags and known first-party analytics cookies in the live test; no browser page errors were observed.
 - Both optional providers were immediately disabled through `providerActivationVerified=false`, independent of environment flags. The public site subsequently returned `enabled:false` at the protective-hold commit.
 
-**Current activation is blocked.** Confirm GA4 Enhanced Measurement/automatic event detection is off for the actual stream, verify the exact Clarity project identifier/domain and strict masking/consent settings, then rerun actual-provider checks before removing the source hold. Do not paste a second raw tag beside the shared consent controller. Google documents automatic scroll/outbound/form collection in [Enhanced measurement](https://support.google.com/analytics/answer/9216061?hl=en) and [Google tag automatic detection](https://support.google.com/analytics/answer/12131703?hl=en).
+**The earlier activation block has been cleared for the corrected configuration.** The owner confirmed GA4 Enhanced Measurement off and supplied Clarity ID `yzqephj94p`. A fresh isolated real-provider probe observed one page_view, no automatic scroll/form event, valid Clarity SDK and successful collection. Whole-body masking is enforced in markup. Dashboard receipt remains a separate external check.
 
 ## Consent and privacy controls
 
@@ -37,7 +37,7 @@ The existing typed event boundary is reused. Accept/Reject have equal controls; 
 
 When operationally approved, GA4 receives analytics-only consent; advertising storage, ad user data, personalization and Google signals remain denied. Full-document navigation uses one explicit pageview; no ClientRouter or duplicate tag manager was added. Sensitive query URLs, unknown/malformed fragments and sensitive referrers block loading. Custom events exclude form values, free text, names, email, phone and destination URLs. `generate_lead` remains blocked without a delivery backend.
 
-Clarity forms/inputs/editable regions are statically or immediately marked for masking before startup. No identify/unmask API is introduced. Owner-confirmed strict masking is not independently verified by a real recorded session. Actual dashboard masking, retention/account access and permitted session receipt remain external checks. The policy distinguishes provider technical processing from anonymous data and does not promise universal compliance.
+The entire body and forms/inputs/editable regions are statically or immediately marked for masking before startup. No identify/unmask API is introduced. Owner-confirmed strict masking is not independently verified by a real recorded session. Actual dashboard masking, retention/account access and permitted session receipt remain external checks. The policy distinguishes provider technical processing from anonymous data and does not promise universal compliance.
 
 ## Domain, routing and search
 
@@ -89,15 +89,20 @@ Shared legal data/content/layout/styles/routes were added. Existing Footer, SEO 
 
 Local evidence lives in the ignored `artifacts/legal-release-branch/artifacts/release-32/` directory: legal captures, live HTTP/consent observations, production candidate and dry-run output. Only public provider IDs/statuses and sanitized test observations are recorded; no credentials or inquiry contents are committed.
 
-## Remaining actions
+## Corrected activation verification
 
-1. Owner: GA4 Enhanced Measurement/automatic detection OFF; provide the saved setting or confirmation for an actual-provider recheck.
-2. Owner: paste Microsoft Clarity's exact installation snippet and provide strict masking/consent settings. The Google snippet already supplied matches GA4 and should not be added a second time.
-3. Verify valid Clarity SDK delivery and permitted masked recording/GA4 receipt in their dashboards. Only then review removing the source hold.
-4. Check final GitHub CI and Cloudflare dashboard deployment identity/logs. Bing/GSC ownership, www redirect and any broader indexing decisions remain external or separately approved work.
+The owner explicitly requested activation and immediate push after confirming GA4 off and supplying the exact corrected Clarity snippet. Official Microsoft cookie, ConsentV2 and masking documentation was checked. The shared body carries data-clarity-mask=true before scripts; Microsoft documents that this masks descendants and overrides dashboard masking rules. No unmask or identity API is used.
 
-**Final state:** legal publication and .org routing are implemented and pushed; optional analytics are deliberately disabled pending the provider corrections above.
+- Probe at 03:56 UTC: unknown/rejected consent produced zero provider requests. Accept produced exactly one page_view, valid Clarity tag/SDK HTTP 200 and collection HTTP 204. No automatic scroll event followed the deliberate bottom-of-page scroll.
+- Synthetic-field probe at 04:01 UTC: four decoded Clarity request payloads contained none of the synthetic name/email/description sentinels. GA4 received only page_view and the authored contact_form_start; no automatic form event, form submission or fake lead occurred. Withdrawal left zero injected tags, a saved denial and no known first-party analytics cookies.
+- Final focused activation checks: **51 passed**, no retries. Strict check: 252 files, no errors/warnings/hints; lint passed.
+- Native animation timing was diagnosed independently: mocked timers do not advance native document animations. The test now polls their actual completion; production motion code is unchanged.
+- Linux CI's pre-existing 320px/200%-text 321px measurement is still being diagnosed with explicit element geometry, retaining the original strict bound. Follow-up CI status is not claimed as passing.
 
-### Latest public hold check
+## Remaining verification
 
-At **2026-10-19 03:41 UTC**, `release.json` identified `18571f36381c7dd609f61748f94e6279f538c7a3` in production. On the actual `/privacy/` page an isolated earlier-grant visitor had `enabled:false`, disabled Accept, zero optional-provider requests, a saved denial after Reject, no remaining known first-party analytics cookies, and no page errors. The hold is publicly verified; account configuration and a subsequent activation remain pending.
+1. Observe the actual activation commit on the public release manifest and repeat live consent/request checks.
+2. Check GA4 Realtime and Clarity recordings in the owner dashboards; network delivery is not proof of dashboard display or a complete masking certification.
+3. Check final GitHub CI and Cloudflare dashboard logs. Bing/GSC ownership, www redirect and broader indexing decisions remain external or separately approved work.
+
+**Current implementation:** legal publication and .org routing are pushed; corrected optional analytics are approved for activation only after visitor consent. The earlier hold and its published commits are retained above, not hidden.

@@ -1,6 +1,6 @@
 # Search verification and optional analytics
 
-**Current state:** optional providers are held off by `providerActivationVerified=false` after live verification. The owner's latest GA4 screenshot shows Enhanced Measurement on; the Clarity tag returned an empty 204 and its copied identifier/privacy settings need review. Environment flags alone cannot remove this source hold. See the legal release report and approval record before any reactivation.
+**Current state:** the corrected Clarity ID is `yzqephj94p`, confirmed by the owner screenshot and copied snippet. The owner confirmed GA4 Enhanced Measurement off; actual-provider probes verified the intended event set and consent behavior. `providerActivationVerified=true` permits production activation through the remaining legal/environment/origin/visitor gates. Explicit whole-body masking applies before SDK loading. See the legal approval record and release report for the earlier hold and current verification limits.
 
 ## Current implementation
 
@@ -9,7 +9,7 @@ Official origin: **https://elevatexlab.org**. This setup does not deploy the sit
 | Provider          | Owner-supplied public identifier   | Current state                                         |
 | ----------------- | ---------------------------------- | ----------------------------------------------------- |
 | GA4               | `G-D9PL0YNQ33`                     | Prepared; collection off by default                   |
-| Microsoft Clarity | `yzeqphj94p`                       | Prepared; collection off by default                   |
+| Microsoft Clarity | `yzqephj94p`                       | Prepared; collection off by default                   |
 | Bing              | `92656A7713620AB21B7AE30FA4E79FBC` | Static shared head tag; external verification pending |
 
 IDs match the owner's screenshots and Master Prompt 31. They are public identifiers, not API credentials. There is no GTM installation or duplicate vendor loader. Google Search Console ownership is unverified; a GA4 property does not establish it.

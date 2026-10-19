@@ -32,7 +32,7 @@ const { hero = false, ...seoProps } = Astro.props;
     <slot name="head" />
     {hero && <HeroBoot />}
   </head>
-  <body id="page-top">
+  <body id="page-top" data-clarity-mask="true">
     {hero && <HeroIntro />}
     <SkipLink />
     <Header overlay={hero} />

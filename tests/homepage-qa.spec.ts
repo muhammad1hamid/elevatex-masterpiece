@@ -12,9 +12,29 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
     });
     // Check the enlarged layout after font swaps have settled on every platform.
     await page.evaluate(() => document.fonts.ready);
-    expect(
-      await page.evaluate(() => document.documentElement.scrollWidth),
-    ).toBeLessThanOrEqual(width);
+    const layout = await page.evaluate(() => ({
+      width: document.documentElement.scrollWidth,
+      outside: [...document.querySelectorAll('body *')]
+        .filter((element) => {
+          const box = element.getBoundingClientRect();
+          return (
+            box.width > 0 && (box.right > innerWidth + 0.1 || box.left < -0.1)
+          );
+        })
+        .slice(0, 35)
+        .map((element) => ({
+          tag: element.tagName,
+          class: element.getAttribute('class'),
+          right: element.getBoundingClientRect().right,
+          left: element.getBoundingClientRect().left,
+          position: getComputedStyle(element).position,
+          parent: element.parentElement?.className,
+          parentOverflow:
+            element.parentElement &&
+            getComputedStyle(element.parentElement).overflowX,
+        })),
+    }));
+    expect(layout.width, JSON.stringify(layout)).toBeLessThanOrEqual(width);
     await expect(page.locator('main > section')).toHaveCount(10);
     await page.locator('#faq').scrollIntoViewIfNeeded();
     const question = page.locator('.faq-item summary').last();

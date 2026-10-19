@@ -87,20 +87,7 @@ async function fixture(
     );
     if (!file.startsWith(candidate + path.sep)) return route.abort();
     try {
-      let body = await readFile(file);
-      // Isolated provider-harness override only: every request is intercepted above.
-      // The shipped production gate stays false until real settings are verified.
-      if (file.endsWith('.html'))
-        body = Buffer.from(
-          body
-            .toString('utf8')
-            .replace('"enabled":false', '"enabled":true')
-            .replace(
-              /(<button[^>]*data-analytics-accept[^>]*) disabled(?:="")?/g,
-              '$1',
-            ),
-        );
-
+      const body = await readFile(file);
       const contentType = file.endsWith('.html')
         ? 'text/html'
         : file.endsWith('.js')
@@ -167,7 +154,7 @@ test('normal preview has one static Bing tag, org metadata and no optional provi
   );
   expect(config.enabled).toBe(false);
   expect(config.ga4).toBe('G-D9PL0YNQ33');
-  expect(config.clarity).toBe('yzeqphj94p');
+  expect(config.clarity).toBe('yzqephj94p');
   for (const route of [
     '/',
     '/services/web-development/',
@@ -190,6 +177,11 @@ test('unknown and rejected consent send nothing; explicit grant loads each exact
 }) => {
   const vendors = await fixture(context);
   await page.goto(origin + '/contact/');
+  await expect(page.locator('body')).toHaveAttribute(
+    'data-clarity-mask',
+    'true',
+  );
+  await expect(page.locator('[data-clarity-unmask]')).toHaveCount(0);
   await expect(page.locator('#analytics-choice')).toBeVisible();
   expect(vendors).toEqual([]);
   await page.locator('[data-analytics-reject]').click();
@@ -200,7 +192,7 @@ test('unknown and rejected consent send nothing; explicit grant loads each exact
   expect(vendors).toContain(
     'https://www.googletagmanager.com/gtag/js?id=G-D9PL0YNQ33',
   );
-  expect(vendors).toContain('https://www.clarity.ms/tag/yzeqphj94p');
+  expect(vendors).toContain('https://www.clarity.ms/tag/yzqephj94p');
   await page.locator('[data-analytics-manage]').click();
   await page.locator('[data-analytics-accept]').click();
   expect(vendors.length).toBe(2);

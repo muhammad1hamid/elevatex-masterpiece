@@ -8,7 +8,7 @@ Required decisions: recipient/inbox or storage destination, booking destination,
 
 ## Measurement — approved, consent required
 
-**Current provider hold:** real consent testing found an unexpected automatic GA4 scroll event; the later owner screenshot shows Enhanced Measurement on. Clarity's supplied tag returned an empty HTTP 204. `providerActivationVerified=false` now blocks both providers independently of build flags. Legal pages and preferences stay available. Exact copied Clarity ID/settings and corrected GA4 automatic measurement need verification before reactivation.
+**Current activation:** the owner confirmed GA4 automatic measurement off and pasted the corrected Clarity ID `yzqephj94p`. Real-provider probes passed: no pre-consent requests; one GA4 pageview; successful Clarity SDK/collection; no automatic scroll/form events; withdrawal stops further document collection. The source activation gate is approved. Whole-body `data-clarity-mask` markup enforces content masking independently of the dashboard. Production still requires visitor consent, the canonical origin and all environment/legal gates. Default/branch previews remain off; provider dashboard receipt is unverified.
 
 The owner supplied GA4, Clarity and Bing identifiers. The shared integration uses `src/scripts/analytics.ts` and a consent-aware provider loader; optional collection remains disabled by default and on previews. The static Bing tag is installed independently of consent. See [setup and owner checklist](integrations/SEO_ANALYTICS_SETUP.md) for exact IDs, environment gates, allowed events, masking, provider dashboard settings and external verification limits. No backend exists, and `generate_lead` is blocked.
 

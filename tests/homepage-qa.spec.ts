@@ -37,6 +37,8 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
     if (layout.width > width) {
       const isolation = await page.evaluate(() => {
         const probes = [
+          'body', 'body > :not(main)', 'main',
+          ...[...document.querySelectorAll('main > *')].map((element) => element.id ? `#${element.id}` : `main > .${[...element.classList].join('.')}`),
           '.global-header', '.hero', '.hero__rim', '.hero__stage',
           '.hero__smoke-position', '.site-footer', '.site-footer__arc',
           '.global-header__mobile-navigation', 'svg',
@@ -54,6 +56,12 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
           return { selector, documentWidth };
         });
         const css = [
+          '*::before, *::after { content: none !important }',
+          'body > :not(main) { display: none !important }',
+          'main > * { display: none !important }',
+          'html { min-width: 0 !important; width: 100% !important }',
+          '.skip-link { display: none !important }',
+          '.sr-only { display: none !important }',
           '.hero { overflow: hidden !important }',
           '.hero { contain: paint !important }',
           '.hero__stage { overflow: hidden !important }',
@@ -67,7 +75,7 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
           style.remove();
           return { rule, documentWidth };
         });
-        return { measured, css };
+        return { measured, css, viewport: {innerWidth, outerWidth, dpr: devicePixelRatio, client: document.documentElement.clientWidth, body: document.body.getBoundingClientRect().toJSON()} };
       });
       console.log('LAYOUT_ISOLATION', JSON.stringify(isolation));
     }

@@ -7,8 +7,13 @@ export const integrations = {
   consentVersion: 'analytics-v1',
 } as const;
 
+// Live verification found unexpected automatic GA4 events and an empty Clarity tag.
+// Keep optional providers off until the actual stream/project settings are verified.
+export const providerActivationVerified = false;
+
 /** All three gates require explicit operational approval; preview is always off. */
 export const trackingReady =
+  providerActivationVerified &&
   legalPublished &&
   import.meta.env.DEPLOYMENT_ENV === 'production' &&
   import.meta.env.PUBLIC_TRACKING_ENABLED === 'true' &&

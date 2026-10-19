@@ -1,9 +1,14 @@
 ---
 import { integrations, trackingReady } from '../../data/integrations';
 import { site } from '../../data/site';
+import { legalPublished } from '../../data/legal';
 const configuration = JSON.stringify({
   ...integrations,
   enabled: trackingReady,
+  preferencesAvailable:
+    legalPublished ||
+    (import.meta.env.LEGAL_REVIEW === 'true' &&
+      import.meta.env.DEPLOYMENT_ENV !== 'production'),
   origin: site.origin,
   path: Astro.url.pathname,
 }).replace(/</g, '\\u003c');

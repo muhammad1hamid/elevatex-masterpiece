@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { legalApproval, legalLinks, privacyContact } from '../../data/legal';
+import type { LegalPolicy } from '../../lib/legal/policies';
+import { webPageSchema, breadcrumbSchema } from '../../utils/structured-data';
+import '../../styles/legal.css';
+interface Props {
+  policy: LegalPolicy;
+  review?: boolean;
+}
+const { policy, review = false } = Astro.props;
+const hrefFor = (href: string) =>
+  review && /^\/(privacy|terms|cookies)\/$/.test(href)
+    ? `/review/legal${href}`
+    : href;
+const path = `/${policy.slug}/`;
+---
+
+<BaseLayout
+  title={`${policy.title} | ElevateX Lab`}
+  description={policy.description}
+  path={path}
+  indexable={false}
+  schema={[
+    webPageSchema({
+      title: policy.title,
+      description: policy.description,
+      path,
+    }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: policy.title, path },
+    ]),
+  ]}
+>
+  {review && (
+    <aside class="legal-review container" aria-labelledby="legal-review-title">
+      <p class="legal-eyebrow">
+        Private local draft / {legalApproval.revision}
+      </p>
+      <h2 id="legal-review-title">Review before publication.</h2>
+      <p>
+        This is an unapproved policy draft. It is absent from normal builds,
+        public footer links and sitemaps. Optional analytics remain off. No
+        effective policy date has been assigned.
+      </p>
+      <ul>
+        {policy.approvalNotes.map((note) => (
+          <li>{note}</li>
+        ))}
+      </ul>
+      <nav aria-label="Legal draft review">
+        {legalLinks.map((link) => (
+          <a href={hrefFor(link.href)}>{link.label}</a>
+        ))}
+      </nav>
+    </aside>
+  )}
+  <header class="legal-hero container">
+    <p class="legal-eyebrow">{policy.eyebrow}</p>
+    <h1>
+      {policy.heading[0]}
+      <br />
+      <span>{policy.heading[1]}</span>
+    </h1>
+    <p class="legal-intro">{policy.description}</p>
+    {review ? (
+      <p class="legal-date">
+        Draft prepared 19 October 2026 · awaiting approval
+      </p>
+    ) : (
+      <p class="legal-date">
+        Last updated:{' '}
+        <time datetime={legalApproval.approvedAt}>
+          {legalApproval.approvedAt}
+        </time>
+      </p>
+    )}
+  </header>
+  <div class="legal-layout container">
+    <nav class="legal-toc" aria-label={`${policy.title} contents`}>
+      <p class="legal-eyebrow">On this page</p>
+      <ol>
+        {policy.sections.map((section) => (
+          <li>
+            <a href={`#${section.id}`}>{section.title}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <article class="legal-content" aria-label={policy.title}>
+      {policy.sections.map((section, index) => (
+        <section id={section.id} aria-labelledby={`${section.id}-title`}>
+          <p class="legal-section-number" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </p>
+          <h2 id={`${section.id}-title`}>{section.title}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          {section.links && (
+            <ul class="legal-references">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={hrefFor(link.href)}
+                    {...(link.href.startsWith('https:')
+                      ? { rel: 'noopener noreferrer', target: '_blank' }
+                      : {})}
+                  >
+                    {link.label}
+                    {link.href.startsWith('https:') && (
+                      <span class="sr-only"> (opens in a new tab)</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))}
+    </article>
+  </div>
+  <section class="legal-close container" aria-labelledby="legal-contact-title">
+    <p class="legal-eyebrow">Questions and choices</p>
+    <h2 id="legal-contact-title">A clear way to get in touch.</h2>
+    <a
+      class="legal-contact"
+      href={privacyContact.href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Privacy questions on WhatsApp · {privacyContact.number}
+      <span class="sr-only"> (opens in a new tab)</span>
+    </a>
+    <nav aria-label="Related policies">
+      {legalLinks.map((link) => (
+        <a
+          href={hrefFor(link.href)}
+          aria-current={link.href === path ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <a href="#analytics-choice" data-cookie-preferences>
+      Cookie Preferences
+    </a>
+  </section>
+</BaseLayout>

@@ -1,4 +1,5 @@
 import { serviceOverview } from './services';
+import { legalPublished, legalLinks } from './legal';
 import { staticPages } from './site';
 import { verifiedContactMethods } from './contact';
 
@@ -47,8 +48,7 @@ export const pendingFooterRoutes = [
   ...serviceOverview
     .filter(({ plannedHref }) => !publishedServices.has(plannedHref))
     .map(({ plannedHref }) => plannedHref),
-  '/privacy/',
-  '/terms/',
+  ...(legalPublished ? [] : legalLinks.map(({ href }) => href)),
 ] as const;
 
-// No verified social profiles, email, location or legal pages are available.
+// No verified social profiles, email or office address are available.

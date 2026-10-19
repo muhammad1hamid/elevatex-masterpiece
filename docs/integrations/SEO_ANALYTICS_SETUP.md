@@ -25,13 +25,13 @@ PUBLIC_TRACKING_PROVIDER_REVIEWED=false
 
 Both optional providers require **all** of the following: an authorized production build, all three tracking flags true, the exact canonical runtime origin, a valid explicit visitor grant, and no browser DNT/GPC opt-out. Localhost, Pages previews, default builds and unresolved privacy approval do not load vendors. Search indexing remains controlled separately; enabling tracking never approves Home/Contact indexing.
 
-No Privacy Policy or approved processing/consent decision currently exists. Before activating, approve and publish `/privacy/`, the policy version and consent retention, then approve the provider settings below. The consent UI and privacy link are rendered only behind the operational gates, so no broken policy link is exposed by the normal preview. Do not switch flags merely to see data in the production properties.
+The owner approved the three policy drafts and material facts on 19 October 2026, including 180-day consent storage and GA4 14-month retention. Provider settings below were confirmed by the owner, not inspected in the accounts. The legal revision gate now permits publication. Approved Workers Builds on main default operational gates to true; other Workers branches force preview and tracking off. Ordinary local builds remain off. Explicit `PUBLIC_TRACKING_ENABLED=false` is the production shutdown switch. Preferences remain accessible through the published legal footer when collection is disabled.
 
 ## Consent and data flow
 
 The shared head contains one static Bing tag and a public JSON configuration. One small first-party module reuses the existing typed analytics boundary. It never loads vendor scripts before a grant: no advanced-consent/cookieless pings are intentionally enabled.
 
-The conditional charcoal consent panel offers equal Accept/Reject actions, a persistent preferences control, keyboard operation and an explicit description of session recording. It is a nonmodal disclosure. Its versioned grant/denial record expires after 180 days; this duration requires policy approval. Invalid/expired/blocked storage defaults off. A grant with unavailable storage applies only to the current page.
+The conditional charcoal consent panel offers equal Accept/Reject actions, a persistent preferences control, keyboard operation and an explicit description of session recording. It is a nonmodal disclosure. Its versioned grant/denial record expires after 180 days; this duration was owner-approved on 19 October 2026. Invalid/expired/blocked storage defaults off. A grant with unavailable storage applies only to the current page.
 
 GA4 receives default-denied consent followed by analytics-only consent. Advertising storage, ad user data, personalization and Google signals remain disabled. `send_page_view: false` disables the configuration pageview; the module sends one explicit view per full-document navigation. Normal full-page Astro navigation is in use; no ClientRouter is added. Hash changes do not send new views. BFCache restoration sends one new view. A future ClientRouter requires a separate lifecycle review.
 

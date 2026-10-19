@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths } from 'astro';
+import LegalLayout from '../components/legal/LegalLayout.astro';
+import { legalPublished } from '../data/legal';
+import { legalPolicies, type LegalPolicy } from '../lib/legal/policies';
+export const getStaticPaths = (() =>
+  legalPublished
+    ? legalPolicies.map((policy) => ({
+        params: { legal: policy.slug },
+        props: { policy },
+      }))
+    : []) satisfies GetStaticPaths;
+interface Props {
+  policy: LegalPolicy;
+}
+const { policy } = Astro.props;
+---
+
+<LegalLayout policy={policy} />

@@ -147,7 +147,8 @@ test('normal preview has one static Bing tag, org metadata and no optional provi
     'content',
     bing,
   );
-  await expect(page.locator('[data-analytics-preferences]')).toHaveCount(0);
+  await expect(page.locator('[data-analytics-preferences]')).toHaveCount(1);
+  await expect(page.locator('[data-analytics-preferences]')).toBeHidden();
   const config = JSON.parse(
     await page.locator('#site-tracking-config').innerText(),
   );

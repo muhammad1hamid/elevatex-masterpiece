@@ -9,6 +9,7 @@ interface Configuration {
   clarity: string;
   consentVersion: string;
   enabled: boolean;
+  preferencesAvailable?: boolean;
   origin: string;
   path: string;
 }
@@ -52,19 +53,6 @@ export function initializeSiteTracking(): void {
   } catch {
     return;
   }
-  if (
-    !config.enabled ||
-    location.origin !== config.origin ||
-    !/^G-[A-Z0-9]+$/.test(config.ga4) ||
-    !/^[a-z0-9]+$/.test(config.clarity) ||
-    !/^\/[a-z0-9/-]*$/.test(config.path)
-  )
-    return;
-  const privacySignal =
-    navigator.doNotTrack === '1' ||
-    (navigator as Navigator & { globalPrivacyControl?: boolean })
-      .globalPrivacyControl === true;
-  if (privacySignal) return;
   const ui = document.querySelector<HTMLElement>(
     '[data-analytics-preferences]',
   );
@@ -74,6 +62,62 @@ export function initializeSiteTracking(): void {
   );
   const status = ui?.querySelector<HTMLElement>('[data-analytics-status]');
   if (!ui || !panel || !manage || !status) return;
+  const privacySignal =
+    navigator.doNotTrack === '1' ||
+    (navigator as Navigator & { globalPrivacyControl?: boolean })
+      .globalPrivacyControl === true;
+  if (!config.enabled || privacySignal || location.origin !== config.origin) {
+    if (config.preferencesAvailable) {
+      let returnFocus: HTMLElement | undefined;
+      const open = (show: boolean) => {
+        ui.hidden = !show;
+        panel.hidden = !show;
+        manage.setAttribute('aria-expanded', String(show));
+        if (show) manage.focus();
+        else returnFocus?.focus();
+      };
+      const note = panel.querySelector<HTMLElement>(
+        '[data-analytics-disabled]',
+      );
+      if (note && privacySignal)
+        note.textContent =
+          'Your browser privacy preference keeps optional analytics off.';
+      if (privacySignal)
+        status.textContent =
+          'Your browser privacy preference keeps optional analytics off.';
+      ui.querySelector<HTMLButtonElement>(
+        '[data-analytics-accept]',
+      )?.setAttribute('disabled', '');
+      document
+        .querySelectorAll<HTMLAnchorElement>('[data-cookie-preferences]')
+        .forEach((link) =>
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            returnFocus = link;
+            open(true);
+          }),
+        );
+      manage.addEventListener('click', () => open(true));
+      ui.querySelector('[data-analytics-close]')?.addEventListener(
+        'click',
+        () => open(false),
+      );
+      ui.querySelector('[data-analytics-reject]')?.addEventListener(
+        'click',
+        () => open(false),
+      );
+      ui.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') open(false);
+      });
+    }
+    return;
+  }
+  if (
+    !/^G-[A-Z0-9]+$/.test(config.ga4) ||
+    !/^[a-z0-9]+$/.test(config.clarity) ||
+    !/^\/[a-z0-9/-]*$/.test(config.path)
+  )
+    return;
   const canonical = config.origin + config.path;
   const pageType =
     config.path === '/' ? 'home' : (config.path.split('/')[1] ?? 'other');
@@ -278,11 +322,26 @@ export function initializeSiteTracking(): void {
     },
     { signal },
   );
+  let returnFocus: HTMLElement | undefined;
+  document
+    .querySelectorAll<HTMLElement>('[data-cookie-preferences]')
+    .forEach((link) => {
+      link.addEventListener(
+        'click',
+        (event) => {
+          event.preventDefault();
+          returnFocus = link;
+          openPanel(true);
+          panel.querySelector<HTMLButtonElement>('button')?.focus();
+        },
+        { signal },
+      );
+    });
   ui.querySelector('[data-analytics-close]')?.addEventListener(
     'click',
     () => {
       openPanel(false);
-      manage.focus();
+      (returnFocus ?? manage).focus();
     },
     { signal },
   );
@@ -291,7 +350,7 @@ export function initializeSiteTracking(): void {
     (event) => {
       if (event.key === 'Escape') {
         openPanel(false);
-        manage.focus();
+        (returnFocus ?? manage).focus();
       }
     },
     { signal },

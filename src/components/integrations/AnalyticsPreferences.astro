@@ -1,8 +1,13 @@
 ---
 import { trackingReady } from '../../data/integrations';
+import { legalPublished } from '../../data/legal';
+const review =
+  !legalPublished &&
+  import.meta.env.LEGAL_REVIEW === 'true' &&
+  import.meta.env.DEPLOYMENT_ENV !== 'production';
 ---
 
-{trackingReady && (
+{(trackingReady || legalPublished || review) && (
   <aside class="analytics-preferences" data-analytics-preferences hidden>
     <button
       type="button"
@@ -17,18 +22,27 @@ import { trackingReady } from '../../data/integrations';
       hidden
     >
       <h2 id="analytics-choice-title">Your analytics choice.</h2>
+      {trackingReady ? (
+        <p>
+          With your permission, Google Analytics measures site use and Microsoft
+          Clarity records masked interactions to help improve the website.
+          Optional tracking stays off until you accept. Advertising storage and
+          personalization stay off.
+        </p>
+      ) : (
+        <p data-analytics-disabled>
+          Optional analytics are currently disabled. Google Analytics and
+          Microsoft Clarity do not load through this website integration.
+        </p>
+      )}
       <p>
-        With your permission, Google Analytics measures site use and Microsoft
-        Clarity records masked interactions to help improve the website.
-        Optional tracking stays off until you accept. Advertising storage and
-        personalization stay off.
-      </p>
-      <p>
-        <a href="/privacy/">Read our Privacy Policy</a>. You can change your
-        choice here later. Withdrawal reloads this page.
+        <a href={review ? '/review/legal/privacy/' : '/privacy/'}>
+          Read our Privacy Policy
+        </a>
+        . You can change your choice here later. Withdrawal reloads this page.
       </p>
       <div class="analytics-preferences__actions">
-        <button type="button" data-analytics-accept>
+        <button type="button" data-analytics-accept disabled={!trackingReady}>
           Accept analytics
         </button>
         <button type="button" data-analytics-reject>
@@ -41,6 +55,14 @@ import { trackingReady } from '../../data/integrations';
       <p role="status" data-analytics-status />
     </section>
   </aside>
+)}
+{(legalPublished || review) && (
+  <noscript>
+    <p class="container">
+      Optional Google Analytics and Microsoft Clarity do not load while
+      JavaScript is disabled.
+    </p>
+  </noscript>
 )}
 
 <style>

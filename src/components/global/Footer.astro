@@ -1,5 +1,6 @@
 ---
 import { site } from '../../data/site';
+import { legalLinks, legalPublished } from '../../data/legal';
 import {
   footerGroups,
   footerStatement,
@@ -84,7 +85,7 @@ const year = new Date().getFullYear();
             href={method.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${method.label} at ${method.detail} (opens in a new tab)`}
+            aria-label={`${method.label} ${method.detail} (opens in a new tab)`}
           >
             <span>
               {method.label} <span aria-hidden="true">↗</span>
@@ -151,6 +152,16 @@ const year = new Date().getFullYear();
       </span>
     </div>
     <div class="site-footer__bottom">
+      {legalPublished && (
+        <nav aria-label="Legal and privacy" class="site-footer__legal">
+          {legalLinks.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+          <a href="#analytics-choice" data-cookie-preferences>
+            Cookie Preferences
+          </a>
+        </nav>
+      )}
       <p class="site-footer__copyright">
         © {year} {site.name}. All rights reserved.
       </p>
@@ -160,6 +171,31 @@ const year = new Date().getFullYear();
     </div>
   </div>
 </footer>
+<style>
+  .site-footer__bottom {
+    flex-wrap: wrap;
+  }
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1.25rem;
+    flex-basis: 100%;
+  }
+  .site-footer__legal a {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  .site-footer__legal a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+</style>
 <script>
   const footer = document.querySelector<HTMLElement>('[data-footer]');
   if (

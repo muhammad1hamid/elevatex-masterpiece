@@ -212,7 +212,9 @@ for (const width of [320, 390, 768, 1024])
       await page.evaluate(() => document.documentElement.scrollWidth),
     ).toBeLessThanOrEqual(width);
     for (const element of await page
-      .locator('h1,h2,.campaign-actions a,.campaign-facts dd,.campaign-cta a')
+      .locator(
+        'h1:visible,h2:visible,.campaign-actions a,.campaign-facts dd,.campaign-cta a',
+      )
       .all()) {
       const bounds = await element.boundingBox();
       expect(bounds!.x).toBeGreaterThanOrEqual(0);

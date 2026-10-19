@@ -9,7 +9,8 @@ test('services are server-rendered in order with honest, working contact destina
   const html = await (await request.get('/')).text();
   for (const service of serviceOverview) {
     expect(html).toContain(service.description);
-    expect(html).not.toContain(`href="${service.plannedHref}"`);
+    // These service detail routes are published and linked by the shared footer.
+    expect((await request.get(service.plannedHref)).status()).toBe(200);
     expect((await request.get(service.href)).status()).toBe(200);
   }
   await page.emulateMedia({ reducedMotion: 'reduce' });

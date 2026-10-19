@@ -1,4 +1,8 @@
+> 19 October 2026: owner replaced the GA4 stream with `G-E1LMDQD9WE`. The owner explicitly requested Enhanced Measurement ON for the replacement. A real-provider probe received page_view and scroll after consent, with no requests before consent or after rejection. Consent and Clarity controls are unchanged.
+
 # Search verification and optional analytics
+
+**Current state:** the corrected Clarity ID is `yzqephj94p`, confirmed by the owner screenshot and copied snippet. The new GA4 stream uses owner-approved Enhanced Measurement ON. Automatic events are additional to the typed custom-event boundary; no automatic event is treated as a confirmed lead. Historical OFF observations below apply to the previous stream. `providerActivationVerified=true` permits production activation through the remaining legal/environment/origin/visitor gates. Explicit whole-body masking applies before SDK loading. See the legal approval record and release report for the earlier hold and current verification limits.
 
 ## Current implementation
 
@@ -6,11 +10,11 @@ Official origin: **https://elevatexlab.org**. This setup does not deploy the sit
 
 | Provider          | Owner-supplied public identifier   | Current state                                         |
 | ----------------- | ---------------------------------- | ----------------------------------------------------- |
-| GA4               | `G-D9PL0YNQ33`                     | Prepared; collection off by default                   |
-| Microsoft Clarity | `yzeqphj94p`                       | Prepared; collection off by default                   |
+| GA4               | `G-E1LMDQD9WE`                     | Consent-controlled; production approved               |
+| Microsoft Clarity | `yzqephj94p`                       | Consent-controlled; production approved               |
 | Bing              | `92656A7713620AB21B7AE30FA4E79FBC` | Static shared head tag; external verification pending |
 
-IDs match the owner's screenshots and Master Prompt 31. They are public identifiers, not API credentials. There is no GTM installation or duplicate vendor loader. Google Search Console ownership is unverified; a GA4 property does not establish it.
+IDs follow the latest owner screenshots and copied snippet; the earlier Clarity q/e transposition has been corrected. They are public identifiers, not API credentials. There is no GTM installation or duplicate vendor loader. Google Search Console ownership is unverified; a GA4 property does not establish it.
 
 ## Activation gates
 
@@ -25,13 +29,13 @@ PUBLIC_TRACKING_PROVIDER_REVIEWED=false
 
 Both optional providers require **all** of the following: an authorized production build, all three tracking flags true, the exact canonical runtime origin, a valid explicit visitor grant, and no browser DNT/GPC opt-out. Localhost, Pages previews, default builds and unresolved privacy approval do not load vendors. Search indexing remains controlled separately; enabling tracking never approves Home/Contact indexing.
 
-No Privacy Policy or approved processing/consent decision currently exists. Before activating, approve and publish `/privacy/`, the policy version and consent retention, then approve the provider settings below. The consent UI and privacy link are rendered only behind the operational gates, so no broken policy link is exposed by the normal preview. Do not switch flags merely to see data in the production properties.
+The owner approved the three policy drafts and material facts on 19 October 2026, including 180-day consent storage and GA4 14-month retention. Provider settings below were confirmed by the owner, not inspected in the accounts. The legal revision gate now permits publication. Approved Workers Builds on main default operational gates to true; other Workers branches force preview and tracking off. Ordinary local builds remain off. Explicit `PUBLIC_TRACKING_ENABLED=false` is the production shutdown switch. Preferences remain accessible through the published legal footer when collection is disabled.
 
 ## Consent and data flow
 
 The shared head contains one static Bing tag and a public JSON configuration. One small first-party module reuses the existing typed analytics boundary. It never loads vendor scripts before a grant: no advanced-consent/cookieless pings are intentionally enabled.
 
-The conditional charcoal consent panel offers equal Accept/Reject actions, a persistent preferences control, keyboard operation and an explicit description of session recording. It is a nonmodal disclosure. Its versioned grant/denial record expires after 180 days; this duration requires policy approval. Invalid/expired/blocked storage defaults off. A grant with unavailable storage applies only to the current page.
+The conditional charcoal consent panel offers equal Accept/Reject actions, a persistent preferences control, keyboard operation and an explicit description of session recording. It is a nonmodal disclosure. Its versioned grant/denial record expires after 180 days; this duration was owner-approved on 19 October 2026. Invalid/expired/blocked storage defaults off. A grant with unavailable storage applies only to the current page.
 
 GA4 receives default-denied consent followed by analytics-only consent. Advertising storage, ad user data, personalization and Google signals remain disabled. `send_page_view: false` disables the configuration pageview; the module sends one explicit view per full-document navigation. Normal full-page Astro navigation is in use; no ClientRouter is added. Hash changes do not send new views. BFCache restoration sends one new view. A future ClientRouter requires a separate lifecycle review.
 
@@ -44,7 +48,7 @@ Tracking is additionally skipped on URLs containing any query string or an unkno
 ### Google Analytics
 
 1. Confirm the web stream belongs to `https://elevatexlab.org` and uses the supplied measurement ID.
-2. In **Admin → Data streams → web stream → Enhanced measurement**, disable automatic measurement. In particular disable history/page changes, outbound clicks, form interactions and site-search collection. The code supplies the allowed views/events; automatic link/form collection could otherwise transmit unintended URLs or duplicate events.
+2. Keep **Admin → Data streams → web stream → Enhanced measurement ON**, as explicitly requested for G-E1LMDQD9WE. The real-provider check observed page_view, scroll and form_start alongside the authored contact_form_start. Automatic events can include public link URLs and form IDs; never insert user-entered data into URLs or DOM link labels. Automatic form_submit is not a confirmed lead. Site queries and sensitive referrers still block provider loading.
 3. Keep Google signals, Ads linking, advertising personalization and user-provided data collection off. Approve retention/data sharing and the privacy disclosure.
 4. After an approved deployment and visitor consent, inspect DebugView/Realtime using approved test traffic. A loader or queued command is not proof of receipt. Do not manufacture `generate_lead` events.
 
@@ -92,13 +96,13 @@ The existing GitHub quality workflow runs on push/PR and performs builds, types,
 
 Before activation, approve the legal/business identity, privacy-request contact, applicable markets, provider retention/sharing/access, storage durations, session recording disclosure, consent withdrawal description and any international data handling. The approved WhatsApp route is retained, but it is not silently designated a privacy-request channel. This is an implementation checklist, not published legal terms.
 
-## Validation boundaries
+## Historical #31 validation boundaries (superseded by the legal release record)
 
 Tests intercept vendor URLs with local command-recording stubs. Production-shaped builds are isolated, and no test events/recordings are sent to the supplied properties. They check default/preview blocking, static Bing placement, identifiers, grants/denials/withdrawal, duplicate prevention, views, safe events, storage failures and masking attributes. They do not prove GA/Clarity dashboard receipt, legal compliance, provider SDK internals or physical-device performance.
 
 Repository integration changes are prepared independently from the existing uncommitted local design/motion work. That work is not silently included in the feature-branch commit. The .org origin and required domain-aware expectations accompany the integration branch; no production merge is authorized.
 
-## Local validation record / 19 October 2026
+## Historical #31 local validation record / 19 October 2026
 
 The exact isolated feature branch passed **32 installed-Chrome checks**: 14 integration tests and 18 existing foundation checks, with zero retries. These include 320–2560px foundation layouts, keyboard/no-JS fallbacks, metadata, preview headers, links, static Bing output, consent grants/denials/withdrawal, GPC, blocked storage/providers, sensitive URL/referrer blocking and allowed events. The first foundation attempt had one failure because its no-JS helper hardcoded another local server port; the helper now uses the configured base URL, with the original assertions retained. An earlier integration attempt selected the listing link rather than a case-study link; the test now targets the actual study link.
 
@@ -114,3 +118,9 @@ No production deployment, DNS changes, provider-dashboard changes, real lead sub
 - [Clarity masking API](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-api)
 - [Cloudflare Pages Astro build](https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/)
 - [Cloudflare Git integration](https://developers.cloudflare.com/pages/configuration/git-integration/)
+
+## Replacement-stream consent renewal
+
+The replacement stream and owner-approved Enhanced Measurement use consent version analytics-v2. Older analytics-v1 grants are not reused: visitors receive the choice again before either provider loads. The replacement provider check observed one page_view, scroll and form_start; the custom contact_form_start remains separate. Request URLs and decoded Clarity payloads contained none of the synthetic name/email/description sentinels. This specific check does not certify all possible future content or dashboard reports.
+
+Primary event reference: [Google Enhanced Measurement](https://support.google.com/analytics/answer/9216061?hl=en).

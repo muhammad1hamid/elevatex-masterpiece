@@ -45,7 +45,7 @@ async function fixture(
           localStorage.setItem(
             key,
             JSON.stringify({
-              version: 'analytics-v1',
+              version: 'analytics-v2',
               choice: 'granted',
               expires: Date.now() + 60000,
             }),
@@ -153,7 +153,7 @@ test('normal preview has one static Bing tag, org metadata and no optional provi
     await page.locator('#site-tracking-config').innerText(),
   );
   expect(config.enabled).toBe(false);
-  expect(config.ga4).toBe('G-D9PL0YNQ33');
+  expect(config.ga4).toBe('G-E1LMDQD9WE');
   expect(config.clarity).toBe('yzqephj94p');
   for (const route of [
     '/',
@@ -169,6 +169,35 @@ test('normal preview has one static Bing tag, org metadata and no optional provi
     expect(html).toContain('noindex');
   }
   expect(providers).toEqual([]);
+});
+
+test('the replacement stream requires a fresh choice instead of reusing an older grant', async ({
+  page,
+  context,
+}) => {
+  await context.addInitScript(() =>
+    localStorage.setItem(
+      'elevatex.analytics-consent',
+      JSON.stringify({
+        version: 'analytics-v1',
+        choice: 'granted',
+        expires: Date.now() + 60000,
+      }),
+    ),
+  );
+  const vendors = await fixture(context);
+  await page.goto(origin + '/privacy/');
+  await expect(page.locator('#analytics-choice')).toBeVisible();
+  await expect(page.locator('#elevatex-ga4,#elevatex-clarity')).toHaveCount(0);
+  expect(vendors).toEqual([]);
+  await accept(page);
+  await expect.poll(() => vendors.length).toBe(2);
+  expect(
+    await page.evaluate(
+      () =>
+        JSON.parse(localStorage.getItem('elevatex.analytics-consent')!).version,
+    ),
+  ).toBe('analytics-v2');
 });
 
 test('unknown and rejected consent send nothing; explicit grant loads each exact provider once', async ({
@@ -190,7 +219,7 @@ test('unknown and rejected consent send nothing; explicit grant loads each exact
   await accept(page);
   await expect.poll(() => vendors.length).toBe(2);
   expect(vendors).toContain(
-    'https://www.googletagmanager.com/gtag/js?id=G-D9PL0YNQ33',
+    'https://www.googletagmanager.com/gtag/js?id=G-E1LMDQD9WE',
   );
   expect(vendors).toContain('https://www.clarity.ms/tag/yzqephj94p');
   await page.locator('[data-analytics-manage]').click();
@@ -425,7 +454,7 @@ test('sensitive referrers block collection and cached restoration rechecks withd
       localStorage.setItem(
         key,
         JSON.stringify({
-          version: 'analytics-v1',
+          version: 'analytics-v2',
           choice: 'denied',
           expires: Date.now() + 60000,
         }),

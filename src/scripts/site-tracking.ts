@@ -52,7 +52,7 @@ function clearAnalyticsCookies(): void {
       `; Domain=${location.hostname}`,
       `; Domain=.${location.hostname}`,
     ])
-      document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax; Secure${domain}`;
+      document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax${location.protocol === 'https:' ? '; Secure' : ''}${domain}`;
   }
 }
 

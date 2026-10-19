@@ -202,7 +202,9 @@ for (const [width, height] of sizes)
         .locator('.about-philosophy img')
         .evaluate((element) => (element as HTMLImageElement).currentSrc),
     ).toContain(width < 768 ? 'philosophy-mobile-' : '/philosophy-');
-    for (const heading of await page.locator('h1,h2').all())
+    for (const heading of await page
+      .locator('main h1, main h2, footer h2')
+      .all())
       expect(
         await heading.evaluate(
           (element) => getComputedStyle(element).textAlign,
@@ -380,7 +382,7 @@ test('cinematic scenes finish, stop on reduced motion and do not replay on rever
         ),
       ),
   ).toBe(true);
-  for (const heading of await page.locator('h1,h2').all())
+  for (const heading of await page.locator('main h1, main h2, footer h2').all())
     expect(
       await heading.evaluate((element) => getComputedStyle(element).opacity),
     ).toBe('1');

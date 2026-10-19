@@ -215,7 +215,7 @@ test('disabled preview lets an earlier visitor withdraw their saved grant', asyn
       'elevatex.analytics-consent',
       JSON.stringify({
         choice: 'granted',
-        version: 'analytics-v1',
+        version: 'analytics-v2',
         expires: Date.now() + 86400000,
       }),
     ),

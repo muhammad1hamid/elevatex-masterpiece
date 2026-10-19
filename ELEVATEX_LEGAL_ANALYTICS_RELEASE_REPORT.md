@@ -1,3 +1,5 @@
+> Latest owner update, 19 October 2026: replacement GA4 stream **G-E1LMDQD9WE**, with Enhanced Measurement **ON** at the owner's request. Earlier OFF/old-ID observations below remain historical. A fresh replacement-stream probe received page_view, scroll and form_start after consent; unknown/rejected traffic remained zero, synthetic field sentinels were absent and withdrawal left no owned tags/known first-party cookies. Full sync and publication status is recorded at the end.
+
 # ElevateX Lab — legal and analytics release
 
 **Record date:** 19 October 2026. **Verdict:** approved legal pages and consent-controlled GA4/Clarity are live. Corrected activation commit 6dec9edcc62a8cd2ced8fd90179ec27e475e60f6 was observed on the public production manifest and verified with real-provider requests. The historical protective hold below remains part of the audit trail. This is not a claim of full production, legal-compliance or accessibility certification.
@@ -133,3 +135,15 @@ The 6b9813b main workflow completed 552/553 checks; its remaining 320px/200%-tex
 The corrected enlarged-text/navigation checks passed in Linux Chromium, Firefox and WebKit (diagnostic run 39201541570, all three jobs successful). Fresh local checks: 48/48 legal/consent plus 2/2 enlarged-text/navigation passed. Full-suite CI is split into parallel browser jobs so each engine runs independently within the workflow timeout. The final full-suite results remain pending until observed.
 
 The live shared footer was independently confirmed to contain /privacy/, /terms/, /cookies/ and Cookie Preferences. The original root workspace retains its unrelated local changes. All tracking activation and live network evidence above remains applicable; this follow-up changes FAQ wrapping, its test and CI scheduling only.
+
+## Complete source synchronization and replacement GA4 stream
+
+The root workspace was preserved in commit e5b37d2 on codex/complete-site-sync, then merged with production main 070254e. This includes the previously local approved motion, Hamid contextual cursor, disclosure smoothing, documented build evidence and content updates. Legal/footer/provider safeguards from the published branch were retained. No backend, extra tracker, DNS change or duplicate Cloudflare project was added.
+
+The connected Cloudflare API confirmed the active zone/domain, correct GitHub repository, main production branch, auto_build_enabled=true, npm run build, npx wrangler deploy, root / and an all-path main trigger. The previous main push was a successful push_event build with its deployed version receiving 100% traffic. The final new push and matching public manifest are verified separately after publication.
+
+Replacement stream: G-E1LMDQD9WE. The owner explicitly requested Enhanced Measurement ON. Real-provider requests showed page_view, scroll and form_start plus authored contact_form_start, with HTTP 204 collection and the exact new tid. Fresh/Reject traffic was zero; withdrawal removed owned tags and known first-party cookies. Request URLs and four decoded Clarity payloads contained none of the synthetic field sentinels. This is a specific observation, not dashboard receipt certification. Consent version analytics-v2 requires a new visitor choice; legal revision v2 discloses the owner-requested automatic events.
+
+The merged source passed 620/620 local Chrome tests with no retries. Final focused consent/legal renewal: 49/49 passed with no retries, including rejection of the old analytics-v1 grant. Publication fixtures passed and were removed; the final default build contains 20 preview HTML pages. Final TypeScript, lint and formatting checks passed; TypeScript reported 271 files with zero errors/warnings/hints.
+
+Earlier 070254e CI: Chromium succeeded; Firefox had 17 failures and 13 flaky checks (many transient image decoding), WebKit had 7 failures (including screenshot size, native radio/scroll, image timing and HTTP-preview cookie cleanup). The HTTP cookie cleanup is corrected without weakening HTTPS Secure cookies. Those earlier cross-engine failures are not claimed resolved by local Chrome success; the final parallel browser CI remains independently visible. This synchronization does not assert universal browser/physical-device readiness.

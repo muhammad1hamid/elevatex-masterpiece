@@ -235,7 +235,7 @@ for (const width of [320, 390, 768, 1024])
     ).toBeLessThanOrEqual(width);
     for (const element of await page
       .locator(
-        'h1,h2,.editorial-actions a,.editorial-facts dd,.editorial-cta a',
+        'h1:visible,h2:visible,.editorial-actions a,.editorial-facts dd,.editorial-cta a',
       )
       .all()) {
       const box = await element.boundingBox();

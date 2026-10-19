@@ -70,6 +70,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         title: 'Optional Google Analytics',
         paragraphs: [
           'When you accept optional analytics, Google Analytics 4 helps us understand page use and service interest. The website sends page views and selected actions such as opening a case study, choosing a service contact link, starting the inquiry form or clicking WhatsApp.',
+          'Enhanced Measurement is enabled. Depending on the stream settings and available features, Google can also measure scrolling, outbound links, downloads, form interactions and supported media. These automatic events may include public destination URLs and form identifiers; a form interaction or submit event does not confirm that we received an inquiry.',
           'Our custom events do not include names, email addresses, phone numbers, free-text messages or project descriptions. This does not mean that analytics is anonymous or collects no personal information: providers process technical and pseudonymous identifiers under their own arrangements.',
           'Advertising storage, advertising personalization and Google signals are disabled in this integration. A WhatsApp click records interest only; it does not prove that a conversation or lead occurred. No confirmed-lead event is sent by the current form.',
         ],
@@ -259,6 +260,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         paragraphs: [
           'After valid analytics consent, Google Analytics may use cookies to distinguish browsers and understand page use. Google documents names such as _ga and _ga_<container-id>. Cookie expiry may depend on the property and tag configuration; it is different from retention of analytics reports.',
           'The website does not load Google Analytics before an analytics grant. Advertising storage and personalization remain denied. Our selected interaction events exclude form content and personal contact details.',
+          'After permission, Enhanced Measurement can also collect interaction events such as scrolls, outbound clicks, downloads and form interactions, depending on the stream settings. These events are usage measurements, not proof of a delivered inquiry or completed sale.',
         ],
         links: [
           {

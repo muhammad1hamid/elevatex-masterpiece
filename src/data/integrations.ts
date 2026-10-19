@@ -1,14 +1,14 @@
 import { legalPublished } from './legal';
 /** Public owner-supplied IDs. These are not credentials. */
 export const integrations = {
-  ga4: 'G-D9PL0YNQ33',
+  ga4: 'G-E1LMDQD9WE',
   clarity: 'yzqephj94p',
   bing: '92656A7713620AB21B7AE30FA4E79FBC',
-  consentVersion: 'analytics-v1',
+  consentVersion: 'analytics-v2',
 } as const;
 
-// Owner confirmed GA4 automatic measurement off and corrected Clarity ID.
-// Real-provider probe passed on 2026-10-19; explicit whole-body masking is enforced.
+// Owner supplied the replacement GA4 stream and explicitly requested Enhanced
+// Measurement on. Corrected Clarity ID and whole-body masking are retained.
 export const providerActivationVerified = true;
 
 /** All three gates require explicit operational approval; preview is always off. */

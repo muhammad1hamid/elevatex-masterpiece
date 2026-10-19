@@ -6,11 +6,15 @@ No recipient, booking URL or confirmed business email was supplied. Do not inven
 
 Required decisions: recipient/inbox or storage destination, booking destination, retention rules and privacy text. Never log raw form messages in analytics. Legal documents require real business/data-processing facts.
 
-## Measurement — configured, activation disabled
+## Measurement — approved, consent required
+
+**Current activation:** the owner confirmed GA4 automatic measurement off and pasted the corrected Clarity ID `yzqephj94p`. Real-provider probes passed: no pre-consent requests; one GA4 pageview; successful Clarity SDK/collection; no automatic scroll/form events; withdrawal stops further document collection. The source activation gate is approved. Whole-body `data-clarity-mask` markup enforces content masking independently of the dashboard. Production still requires visitor consent, the canonical origin and all environment/legal gates. Default/branch previews remain off; provider dashboard receipt is unverified.
 
 The owner supplied GA4, Clarity and Bing identifiers. The shared integration uses `src/scripts/analytics.ts` and a consent-aware provider loader; optional collection remains disabled by default and on previews. The static Bing tag is installed independently of consent. See [setup and owner checklist](integrations/SEO_ANALYTICS_SETUP.md) for exact IDs, environment gates, allowed events, masking, provider dashboard settings and external verification limits. No backend exists, and `generate_lead` is blocked.
 
-GSC ownership and provider dashboard receipt remain unverified. Do not install an additional GA/GTM/Clarity or Cloudflare analytics tracker over this setup. Archived live identifiers are historical; the owner's current supplied IDs are the integration source. Privacy policy, consent, retention and provider settings require approval before collection is activated.
+On 19 October 2026 the owner approved the policy drafts, operator Hamid trading as ElevateX Lab in Pakistan, WhatsApp privacy contact, inquiry-retention criteria and 180-day consent preference. The owner confirmed GA4 14-month retention, Enhanced Measurement off, and Clarity strict masking/consent settings. These are owner confirmations, not an independent dashboard inspection. Approved Cloudflare Workers Builds on `main` enable the consent interface; local/branch previews keep collection off. `PUBLIC_TRACKING_ENABLED=false` remains a build-time shutdown switch. `src/data/legal.ts` also requires a matching approved legal revision before activation.
+
+GSC ownership and provider dashboard receipt remain unverified. Do not install an additional GA/GTM/Clarity or Cloudflare analytics tracker over this setup. Archived live identifiers are historical; the owner's current supplied IDs are the integration source. See the current legal release report for publication and deployment evidence.
 
 ## Search and AI crawlers
 

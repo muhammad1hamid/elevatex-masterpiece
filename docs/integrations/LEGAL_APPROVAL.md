@@ -29,3 +29,7 @@ An isolated real-provider probe on 19 October 2026 verified no requests before c
 The shared body now has explicit data-clarity-mask=true before scripts, covering all descendants, in addition to form/input masks. Microsoft documents that this explicit markup overrides website masking settings. This enforces full-page content masking in code; no unmask rules are introduced. The documented consentv2 analytics grant/ad denial remains in place. Provider dashboard global settings, dashboard receipt and actual recording review are not claimed as inspected. The source activation hold may be removed for this verified configuration while all visitor/origin/environment gates remain.
 
 References: [masking markup](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-masking), [ConsentV2](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-consent-api-v2), [cookie inventory](https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-cookies).
+
+## Owner-directed GA4 replacement — 19 October 2026
+
+The owner supplied G-E1LMDQD9WE and explicitly requested Enhanced Measurement. Privacy/Cookie text now discloses automatic interaction events, public destination URLs/form identifiers and the distinction between form interaction and delivered inquiry. This replaces the earlier OFF requirement for the previous stream. Visitor consent, ad denial, Clarity masking and backend deferral remain in force.

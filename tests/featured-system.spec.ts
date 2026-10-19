@@ -269,11 +269,14 @@ test('workflow plays its four phases once in 1.75 seconds with no data requests 
   await expect(button).toBeFocused();
   await page.clock.runFor(10000);
   await expect(preview).toHaveAttribute('data-workflow-state', 'complete');
-  expect(
-    await preview.evaluate(
-      (element) => element.getAnimations({ subtree: true }).length,
-    ),
-  ).toBe(0);
+  // Native CSS transitions use the document timeline, independent of mocked timers.
+  await expect
+    .poll(() =>
+      preview.evaluate(
+        (element) => element.getAnimations({ subtree: true }).length,
+      ),
+    )
+    .toBe(0);
   expect(await page.locator('.handoff__zones').innerText()).toBe(originalText);
   expect(requests).toEqual([]);
   await button.click();

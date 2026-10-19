@@ -22,3 +22,9 @@ Only successful Resend acceptance returns success. Acceptance does not establish
 Local/branch preview forms cannot send. Production security cannot be verified with static Astro preview alone. Never introduce a live test bypass or substitute a Turnstile test key in production.
 
 References: [Turnstile verification](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/), [rate limits](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/), [Resend API](https://resend.com/docs/api-reference/emails/send-email).
+
+## Release observation
+
+Commit 561aa4939b2c25ed3a52715918e247e43248dac5 was pushed to main and the public release.json matched it in production. Workers Builds reported success. The public /api/contact readiness response was false. The owner screenshot locates both keys under **Builds**; the corresponding runtime secret list is empty. Runtime Variables and Secrets must be populated before the authorized test notification can be sent. No real email has been sent or claimed delivered.
+
+Local verification: 76 focused Chromium checks passed (backend controls, mocked provider failure/acceptance, masked analytics, Contact accessibility/responsive layouts and legal pages), TypeScript 278 files without diagnostics, build/lint/format and Worker dry-run passed. Production publication fixture was updated to assert the authorized live form plus absence of provider secrets/inbox from HTML; it passed. These checks do not establish real provider delivery.

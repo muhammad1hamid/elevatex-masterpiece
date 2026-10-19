@@ -560,7 +560,14 @@ try {
   assert.match(contactHtml, /noindex, follow/);
   assert.match(contactHtml, /"@type":"ContactPage"/);
   assert.match(contactHtml, /https:\/\/elevatexlab\.org\/contact\//);
-  assert.match(contactHtml, /Inquiry preview — sending is not available yet/);
+  assert.match(contactHtml, /Share your details securely/);
+  assert.match(contactHtml, /data-inquiry-enabled="true"/);
+  assert.match(contactHtml, /action="\/api\/contact"/);
+  assert.match(contactHtml, /data-inquiry-turnstile/);
+  assert.doesNotMatch(
+    contactHtml,
+    /RESEND_API_KEY|TURNSTILE_SECRET_KEY|muhammadhamid4386@gmail\.com/,
+  );
   assert.doesNotMatch(contactHtml, /http-equiv="refresh"|type="submit"/);
   assert.equal([...contactHtml.matchAll(/<h1\b/g)].length, 1);
   assert.ok(!sitemap.includes('<loc>https://elevatexlab.org/contact/</loc>'));

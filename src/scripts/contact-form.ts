@@ -4,16 +4,26 @@ import {
   inquiryTimelines,
 } from '../data/contact';
 import { serviceSlugs } from '../data/site';
+import { initializeInquiryDelivery } from './inquiry-delivery';
 
 type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 const instances = new WeakMap<HTMLFormElement, () => void>();
 
-/** Local review only: no fetch, storage, logging, analytics or delivery state. */
+/** Local previews keep review mode; the live site uses the verified backend. */
 export function initializeInquiryForm(): () => void {
   const form = document.querySelector<HTMLFormElement>('[data-inquiry-form]');
   if (!form) return () => {};
   const previous = instances.get(form);
   if (previous) return previous;
+  if (form.dataset['inquiryEnabled'] === 'true') {
+    const destroy = initializeInquiryDelivery(form);
+    const cleanup = () => {
+      destroy();
+      instances.delete(form);
+    };
+    instances.set(form, cleanup);
+    return cleanup;
+  }
   const controller = new AbortController(),
     { signal } = controller;
   const fields = [...form.querySelectorAll<Field>('input, select, textarea')];

@@ -33,3 +33,9 @@ References: [masking markup](https://learn.microsoft.com/en-us/clarity/setup-and
 ## Owner-directed GA4 replacement — 19 October 2026
 
 The owner supplied G-E1LMDQD9WE and explicitly requested Enhanced Measurement. Privacy/Cookie text now discloses automatic interaction events, public destination URLs/form identifiers and the distinction between form interaction and delivered inquiry. This replaces the earlier OFF requirement for the previous stream. Visitor consent, ad denial, Clarity masking and backend deferral remain in force.
+
+## Contact delivery approval — 19 October 2026
+
+The owner reviewed the updated local Privacy /privacy/#inquiries and Terms /terms/#projects wording and answered “Wording approve — publish kar do”. Current approved revision: `legal-2026-10-19-v3`. The necessary-security cookie disclosure includes Turnstile. The owner confirmed both runtime secrets are saved in Cloudflare and explicitly authorized one clearly labelled test inquiry notification.
+
+This supersedes the earlier backend deferral: production submissions pass server validation and Turnstile verification, then Resend sends a notification to the confirmed Gmail inbox. No website inquiry database is introduced. Provider acceptance is not proof of inbox delivery. Existing indexing decisions, optional analytics consent and content masking remain in force.

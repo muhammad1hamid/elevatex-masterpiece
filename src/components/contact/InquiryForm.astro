@@ -4,27 +4,33 @@ import {
   inquiryBudgets,
   inquiryTimelines,
 } from '../../data/contact';
+import { legalPublished } from '../../data/legal';
+const delivery =
+  import.meta.env.DEPLOYMENT_ENV === 'production' && legalPublished;
 ---
 
-<!-- No submit control: this explicitly labeled frontend preview cannot send inquiries. -->
+<!-- Sending activates only with JavaScript, backend readiness and Turnstile. -->
 <form
   class="inquiry-form"
   id="inquiry-form"
   method="post"
-  action="/contact/"
+  action={delivery ? '/api/contact' : '/contact/'}
   aria-labelledby="inquiry-title"
   aria-describedby="inquiry-availability"
   data-inquiry-form
   data-clarity-mask="true"
   data-inquiry-state="idle"
+  data-inquiry-enabled={String(delivery)}
 >
   <div class="inquiry-form__topline">
     <p>Your project, in a few words.</p>
     <span>01 / The details</span>
   </div>
   <p class="inquiry-form__availability" id="inquiry-availability">
-    <span aria-hidden="true"></span> Inquiry preview — sending is not available
-    yet.
+    <span aria-hidden="true"></span>
+    {delivery
+      ? 'Share your details securely. We’ll reply by email.'
+      : 'Inquiry preview — sending is not available yet.'}
   </p>
   <p class="inquiry-form__required">
     Fields marked * are required. Everything else is optional.
@@ -176,21 +182,49 @@ import {
     </div>
   </div>
   <div class="inquiry-form__bottom" data-contact-form-action>
+    {delivery && (
+      <>
+        <div class="inquiry-form__trap" aria-hidden="true">
+          <label for="inquiry-company">Leave this field empty</label>
+          <input
+            id="inquiry-company"
+            name="company"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+            maxlength="200"
+          />
+        </div>
+        <div class="inquiry-form__security">
+          <p>Complete the security check to enable sending.</p>
+          <div
+            data-inquiry-turnstile
+            data-sitekey="0x4AAAAAAFbZihINVc96nVYv"
+            data-clarity-mask="true"
+          ></div>
+        </div>
+      </>
+    )}
     <button
       class="inquiry-form__review"
       type="button"
       data-inquiry-review
       disabled
     >
-      Review Project Inquiry <span aria-hidden="true">→</span>
+      {delivery ? 'Send Project Inquiry' : 'Review Project Inquiry'}{' '}
+      <span aria-hidden="true">→</span>
     </button>
     <p class="inquiry-form__privacy">
-      Review only. Your details are not sent or saved by this page.
+      {delivery
+        ? 'Submitting shares your details with ElevateX Lab to respond to your inquiry.'
+        : 'Review only. Your details are not sent or saved by this page.'}
+      {delivery && <a href="/privacy/#inquiries">Privacy Policy</a>}
     </p>
     <noscript>
       <p class="inquiry-form__noscript">
-        JavaScript enables the local details review. Inquiry sending is not
-        available yet.
+        {delivery
+          ? 'JavaScript is required for the security check and sending. You can contact us using the WhatsApp button below.'
+          : 'JavaScript enables the local details review. Inquiry sending is not available yet.'}
       </p>
     </noscript>
     <p

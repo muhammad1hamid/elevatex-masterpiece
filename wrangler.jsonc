@@ -1,11 +1,31 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "elevatex-masterpiece",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-10-06",
   "workers_dev": true,
-  // Future approved custom domain: elevatexlab.org (apex). Bind only at cutover.
+  "keep_vars": true,
+  "vars": {
+    "CONTACT_ENABLED": "true",
+    "CONTACT_TO_EMAIL": "muhammadhamid4386@gmail.com",
+    "CONTACT_FROM_EMAIL": "ElevateX Lab <website@send.elevatexlab.org>",
+  },
+  "ratelimits": [
+    {
+      "name": "CONTACT_LIMITER",
+      "namespace_id": "202610191",
+      "simple": { "limit": 5, "period": 60 },
+    },
+    {
+      "name": "CONTACT_GLOBAL_LIMITER",
+      "namespace_id": "202610192",
+      "simple": { "limit": 40, "period": 60 },
+    },
+  ],
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
     "html_handling": "force-trailing-slash",
     "not_found_handling": "404-page",
   },

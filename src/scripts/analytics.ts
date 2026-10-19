@@ -42,6 +42,7 @@ export type TrackingEvent =
   | 'contact_form_start'
   | 'whatsapp_click'
   | 'article_cta_click'
+  | 'form_submit_success'
   | 'generate_lead';
 export type AnalyticsAdapter = (
   event: BusinessEvent,
@@ -53,7 +54,7 @@ export function configureAnalytics(next: AnalyticsAdapter | undefined): void {
 }
 export function trackEvent(event: BusinessEvent, context: EventContext): void {
   // Strip queries/fragments to avoid leaking identifiers from inbound links.
-  // No backend acceptance exists. A click or successful frontend review is not a lead.
+  // Generic lead events remain blocked. Backend acceptance emits form_submit_success.
   if (event === 'generate_lead') return;
   try {
     adapter?.(event, {

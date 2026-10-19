@@ -1,6 +1,6 @@
 import { services } from './site';
 
-/** Sending and backend work are explicitly deferred by the user. */
+/** Local previews retain review mode; production delivery uses the Cloudflare backend. */
 export const contactMetadata = {
   title: 'Contact — Start a Website or AI Project',
   description:

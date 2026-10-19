@@ -40,14 +40,24 @@ export const legalPolicies: readonly LegalPolicy[] = [
         id: 'inquiries',
         title: 'Project inquiries and conversations',
         paragraphs: [
-          'The current website form is a local review interface. It includes name, email, service, project description and optional phone, website, budget and timeline fields. Reviewing or validating those fields does not submit them to us, save them in a website database or email an inquiry. Values remain in the current browser page unless your browser independently retains them.',
+          'The live website form collects your name, email, selected service and project description, with optional phone, website, budget and timeline details. When you submit it, Cloudflare processes the request and Resend sends an inquiry notification to our Gmail inbox. We use those details to respond, understand your project and discuss the next steps. Local and branch previews do not send inquiries.',
+          'Cloudflare Turnstile checks submissions for automated abuse. This security service may process technical information such as network and browser information. Our server verifies its token, checks field sizes and permitted choices, and applies short-lived abuse limits. Security checks are required for sending; accepting optional analytics is not required.',
+          'We do not save inquiry contents in a website database or deliberately write them to application logs. Submitted details are processed by Cloudflare and Resend and retained in our email correspondence; those providers also apply their own operational, security and retention arrangements. A delivery acceptance message means the email service accepted the notification, not that inbox delivery or a client agreement is guaranteed.',
           'If you choose WhatsApp, you leave this website and communicate through that service. We receive the details you choose to send there and use them to understand your request, reply and discuss possible next steps. WhatsApp also processes information under its own terms and privacy policy. Avoid sending sensitive documents or unnecessary personal information in an initial inquiry.',
-          'There is no automated lead-acceptance backend on this website. An inquiry, reviewed form or WhatsApp click is not a completed service agreement.',
+          'An inquiry or WhatsApp click does not create a completed service agreement. If email delivery cannot be confirmed, the form keeps your details in the current page so you can retry or use WhatsApp.',
         ],
         links: [
           {
             label: 'WhatsApp privacy information',
             href: 'https://www.whatsapp.com/legal/privacy-policy',
+          },
+          {
+            label: 'Resend privacy policy',
+            href: 'https://resend.com/legal/privacy-policy',
+          },
+          {
+            label: 'Cloudflare privacy policy',
+            href: 'https://www.cloudflare.com/privacypolicy/',
           },
         ],
       },
@@ -72,7 +82,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
           'When you accept optional analytics, Google Analytics 4 helps us understand page use and service interest. The website sends page views and selected actions such as opening a case study, choosing a service contact link, starting the inquiry form or clicking WhatsApp.',
           'Enhanced Measurement is enabled. Depending on the stream settings and available features, Google can also measure scrolling, outbound links, downloads, form interactions and supported media. These automatic events may include public destination URLs and form identifiers; a form interaction or submit event does not confirm that we received an inquiry.',
           'Our custom events do not include names, email addresses, phone numbers, free-text messages or project descriptions. This does not mean that analytics is anonymous or collects no personal information: providers process technical and pseudonymous identifiers under their own arrangements.',
-          'Advertising storage, advertising personalization and Google signals are disabled in this integration. A WhatsApp click records interest only; it does not prove that a conversation or lead occurred. No confirmed-lead event is sent by the current form.',
+          'Advertising storage, advertising personalization and Google signals are disabled in this integration. A WhatsApp click records interest only; it does not prove that a conversation or lead occurred. With analytics permission, our custom form-success event is sent only after the backend confirms email-service acceptance and contains no inquiry values.',
         ],
         links: [
           {
@@ -192,7 +202,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         id: 'projects',
         title: 'Inquiries and separate agreements',
         paragraphs: [
-          'An inquiry does not itself create a paid service agreement or oblige either party to proceed. The current form only reviews information locally; it does not deliver an inquiry. WhatsApp is the available conversation channel.',
+          'An inquiry does not itself create a paid service agreement or oblige either party to proceed. The live form sends a notification through our email provider after validation and a security check. Provider acceptance is not a guarantee of inbox placement or a promise that a project will proceed. WhatsApp is also available for a conversation.',
           'Project scope, deliverables, fees, milestones, ownership arrangements and other commercial terms are agreed separately when applicable. These website terms do not introduce a refund, cancellation or payment policy for a future project.',
         ],
         links: [{ label: 'Project contact', href: '/contact/' }],
@@ -252,6 +262,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         paragraphs: [
           'The website uses a local-storage record named elevatex.analytics-consent to remember an analytics grant or denial, its policy version and expiry. The current implementation expires that record after 180 days. It does not contain inquiry details.',
           'If preference storage is blocked or cleared, a previous choice may be unavailable and optional analytics default off. Cloudflare delivers and protects the site; whether it sets a security cookie depends on the enabled hosting features. No account, shopping basket or payment session is implemented here.',
+          'The contact form uses Cloudflare Turnstile for a security check before sending. Its verification token is used for submission protection rather than optional analytics. These necessary security checks do not require accepting Google Analytics or Clarity.',
         ],
       },
       {

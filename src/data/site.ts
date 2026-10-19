@@ -45,6 +45,6 @@ export const staticPages = [
   { path: '/services/landing-pages/', indexable: true },
   { path: '/work/', indexable: true },
   { path: '/about/', indexable: true },
-  // Frontend preview only; enable indexing after inquiry delivery is ready.
+  // Contact indexing remains a separate owner decision from delivery activation.
   { path: '/contact/', indexable: false },
 ] as const;

@@ -32,6 +32,7 @@ const events = new Set<TrackingEvent>([
   'contact_form_start',
   'whatsapp_click',
   'article_cta_click',
+  'form_submit_success',
 ]);
 const services = new Set([
   'web-development',

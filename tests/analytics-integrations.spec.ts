@@ -55,6 +55,19 @@ async function fixture(
     );
   await context.route('**/*', async (route) => {
     const url = new URL(route.request().url());
+    if (url.origin === origin && url.pathname === '/api/contact')
+      return route.fulfill({ json: { ready: true } });
+    if (url.hostname === 'challenges.cloudflare.com')
+      return route.fulfill({
+        contentType: 'application/javascript',
+        body: `
+        window.turnstile = {
+          render: (_el, options) => { queueMicrotask(() => options.callback('local-inert-token')); return 'local'; },
+          reset: () => {}, remove: () => {}
+        };
+      `,
+      });
+
     if (
       url.hostname === 'www.googletagmanager.com' ||
       url.hostname === 'www.clarity.ms'
@@ -538,4 +551,56 @@ test('consent interface remains keyboard usable at 390px without axe AA violatio
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+});
+
+test('live form preserves failed inquiries and reports backend acceptance without personal analytics', async ({
+  page,
+  context,
+}) => {
+  await fixture(context);
+  let accepted = false;
+  await page.route('**/api/contact', async (route) => {
+    if (route.request().method() === 'GET')
+      return route.fulfill({ json: { ready: true } });
+    return route.fulfill({
+      status: accepted ? 200 : 503,
+      json: accepted
+        ? { ok: true }
+        : { ok: false, message: 'Delivery unavailable — try again.' },
+    });
+  });
+  await page.goto(origin + '/contact/');
+  await accept(page);
+  await page.locator('#inquiry-name').fill('Private Sentinel');
+  await page.locator('#inquiry-email').fill('sentinel@example.test');
+  await page.locator('#inquiry-service').selectOption('web-development');
+  await page
+    .locator('#inquiry-description')
+    .fill('Private sentinel inquiry for local verification.');
+  await page.locator('[data-inquiry-review]').click();
+  await expect(page.locator('[data-inquiry-status]')).toContainText(
+    'Delivery unavailable',
+  );
+  await expect(page.locator('#inquiry-email')).toHaveValue(
+    'sentinel@example.test',
+  );
+  expect(
+    (await commands(page)).some((c) => c[1] === 'form_submit_success'),
+  ).toBe(false);
+  accepted = true;
+  await page.reload();
+  await page.locator('#inquiry-name').fill('Private Sentinel');
+  await page.locator('#inquiry-email').fill('sentinel@example.test');
+  await page.locator('#inquiry-service').selectOption('web-development');
+  await page
+    .locator('#inquiry-description')
+    .fill('Private sentinel inquiry for local verification.');
+  await page.locator('[data-inquiry-review]').click();
+  await expect(page.locator('[data-inquiry-status]')).toContainText(
+    'accepted for email delivery',
+  );
+  await expect(page.locator('#inquiry-email')).toHaveValue('');
+  const calls = await commands(page);
+  expect(calls.filter((c) => c[1] === 'form_submit_success')).toHaveLength(1);
+  expect(JSON.stringify(calls)).not.toMatch(/sentinel|Private|example.test/);
 });

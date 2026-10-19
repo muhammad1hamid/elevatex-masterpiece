@@ -10,8 +10,8 @@ export const legalApproval: Readonly<{
 }> = {
   status: 'approved',
   approvedAt: '2026-10-19',
-  approvedRevision: 'legal-2026-10-19-v2',
-  revision: 'legal-2026-10-19-v2',
+  approvedRevision: 'legal-2026-10-19-v3',
+  revision: 'legal-2026-10-19-v3',
   operatorConfirmed: true,
   retentionConfirmed: true,
   providerSettingsOwnerConfirmed: true,

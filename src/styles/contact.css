@@ -300,6 +300,27 @@
   text-align: center;
   margin-top: 1.25rem;
 }
+.inquiry-form__trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.inquiry-form__security {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  min-height: 100px;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+.inquiry-form__security > div {
+  width: 100%;
+  max-width: 300px;
+}
 .inquiry-form__review {
   position: relative;
   display: inline-flex;

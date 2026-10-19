@@ -75,7 +75,26 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
           style.remove();
           return { rule, documentWidth };
         });
-        return { measured, css, viewport: {innerWidth, outerWidth, dpr: devicePixelRatio, client: document.documentElement.clientWidth, body: document.body.getBoundingClientRect().toJSON()} };
+        const target = document.querySelector<HTMLElement>('main > :nth-child(17)');
+        const sources: unknown[] = [];
+        const isolate = (parent: HTMLElement, depth: number) => {
+          if (depth > 8) return;
+          for (const child of parent.children) {
+            const element = child as HTMLElement;
+            if (!element.style) continue;
+            const saved = element.getAttribute('style');
+            element.style.setProperty('display', 'none', 'important');
+            const fits = document.documentElement.scrollWidth <= innerWidth;
+            if (saved === null) element.removeAttribute('style');
+            else element.setAttribute('style', saved);
+            if (fits) {
+              sources.push({tag: element.tagName, id: element.id, class: element.className, depth, text: element.textContent?.trim().slice(0,80), rect: element.getBoundingClientRect().toJSON()});
+              isolate(element, depth + 1);
+            }
+          }
+        };
+        if(target) isolate(target, 0);
+        return { measured, css, target: target?.outerHTML.slice(0,150), sources, viewport: {innerWidth, outerWidth, dpr: devicePixelRatio, client: document.documentElement.clientWidth, body: document.body.getBoundingClientRect().toJSON()} };
       });
       console.log('LAYOUT_ISOLATION', JSON.stringify(isolation));
     }

@@ -8,6 +8,8 @@ Required decisions: recipient/inbox or storage destination, booking destination,
 
 ## Measurement — approved, consent required
 
+**Current provider hold:** real consent testing found an unexpected automatic GA4 scroll event; the later owner screenshot shows Enhanced Measurement on. Clarity's supplied tag returned an empty HTTP 204. `providerActivationVerified=false` now blocks both providers independently of build flags. Legal pages and preferences stay available. Exact copied Clarity ID/settings and corrected GA4 automatic measurement need verification before reactivation.
+
 The owner supplied GA4, Clarity and Bing identifiers. The shared integration uses `src/scripts/analytics.ts` and a consent-aware provider loader; optional collection remains disabled by default and on previews. The static Bing tag is installed independently of consent. See [setup and owner checklist](integrations/SEO_ANALYTICS_SETUP.md) for exact IDs, environment gates, allowed events, masking, provider dashboard settings and external verification limits. No backend exists, and `generate_lead` is blocked.
 
 On 19 October 2026 the owner approved the policy drafts, operator Hamid trading as ElevateX Lab in Pakistan, WhatsApp privacy contact, inquiry-retention criteria and 180-day consent preference. The owner confirmed GA4 14-month retention, Enhanced Measurement off, and Clarity strict masking/consent settings. These are owner confirmations, not an independent dashboard inspection. Approved Cloudflare Workers Builds on `main` enable the consent interface; local/branch previews keep collection off. `PUBLIC_TRACKING_ENABLED=false` remains a build-time shutdown switch. `src/data/legal.ts` also requires a matching approved legal revision before activation.

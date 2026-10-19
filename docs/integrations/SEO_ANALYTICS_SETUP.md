@@ -1,5 +1,7 @@
 # Search verification and optional analytics
 
+**Current state:** optional providers are held off by `providerActivationVerified=false` after live verification. The owner's latest GA4 screenshot shows Enhanced Measurement on; the Clarity tag returned an empty 204 and its copied identifier/privacy settings need review. Environment flags alone cannot remove this source hold. See the legal release report and approval record before any reactivation.
+
 ## Current implementation
 
 Official origin: **https://elevatexlab.org**. This setup does not deploy the site, configure DNS, enable indexing or deliver inquiries.

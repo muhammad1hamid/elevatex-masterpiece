@@ -10,6 +10,8 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
     await page.evaluate(() => {
       document.documentElement.style.fontSize = '200%';
     });
+    // Check the enlarged layout after font swaps have settled on every platform.
+    await page.evaluate(() => document.fonts.ready);
     expect(
       await page.evaluate(() => document.documentElement.scrollWidth),
     ).toBeLessThanOrEqual(width);

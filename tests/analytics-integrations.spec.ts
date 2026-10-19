@@ -87,7 +87,20 @@ async function fixture(
     );
     if (!file.startsWith(candidate + path.sep)) return route.abort();
     try {
-      const body = await readFile(file);
+      let body = await readFile(file);
+      // Isolated provider-harness override only: every request is intercepted above.
+      // The shipped production gate stays false until real settings are verified.
+      if (file.endsWith('.html'))
+        body = Buffer.from(
+          body
+            .toString('utf8')
+            .replace('"enabled":false', '"enabled":true')
+            .replace(
+              /(<button[^>]*data-analytics-accept[^>]*) disabled(?:="")?/g,
+              '$1',
+            ),
+        );
+
       const contentType = file.endsWith('.html')
         ? 'text/html'
         : file.endsWith('.js')

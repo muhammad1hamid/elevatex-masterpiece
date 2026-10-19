@@ -42,6 +42,20 @@ const services = new Set([
 const consentKey = 'elevatex.analytics-consent';
 let initialized = false;
 
+function clearAnalyticsCookies(): void {
+  for (const name of document.cookie
+    .split(';')
+    .map((v) => v.trim().split('=')[0] ?? '')) {
+    if (!/^(_ga(?:_|$)|_clck$|_clsk$)/.test(name)) continue;
+    for (const domain of [
+      '',
+      `; Domain=${location.hostname}`,
+      `; Domain=.${location.hostname}`,
+    ])
+      document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax; Secure${domain}`;
+  }
+}
+
 /** Full-document Astro navigation. No router, second tag manager or automatic events. */
 export function initializeSiteTracking(): void {
   if (initialized) return;
@@ -104,7 +118,23 @@ export function initializeSiteTracking(): void {
       );
       ui.querySelector('[data-analytics-reject]')?.addEventListener(
         'click',
-        () => open(false),
+        () => {
+          clearAnalyticsCookies();
+          try {
+            localStorage.setItem(
+              consentKey,
+              JSON.stringify({
+                choice: 'denied',
+                version: config.consentVersion,
+                expires: Date.now() + 180 * 86400000,
+              }),
+            );
+            open(false);
+          } catch {
+            status.textContent =
+              'Analytics remain off. Your browser could not save the preference.';
+          }
+        },
       );
       ui.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') open(false);
@@ -191,17 +221,7 @@ export function initializeSiteTracking(): void {
     safeCall(() => window.gtag?.('consent', 'update', denied));
     for (const id of ['elevatex-ga4', 'elevatex-clarity'])
       document.getElementById(id)?.remove();
-    for (const name of document.cookie
-      .split(';')
-      .map((v) => v.trim().split('=')[0] ?? '')) {
-      if (!/^(_ga(?:_|$)|_clck$|_clsk$)/.test(name)) continue;
-      for (const domain of [
-        '',
-        `; Domain=${location.hostname}`,
-        `; Domain=.${location.hostname}`,
-      ])
-        document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax; Secure${domain}`;
-    }
+    clearAnalyticsCookies();
   };
   const openPanel = (open: boolean) => {
     panel.hidden = !open;

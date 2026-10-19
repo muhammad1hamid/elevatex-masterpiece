@@ -124,7 +124,7 @@ test('approval gate rejects drafts, missing facts and mismatched revisions', () 
     expect(isLegalApproved(record)).toBe(false);
 });
 
-test('approved production candidate enables consent UI but never inlines optional tags', async () => {
+test('approved production publishes policies while provider hold prevents activation', async () => {
   test.setTimeout(120_000);
   const output = 'test-results/legal-release-gate';
   execFileSync(
@@ -146,14 +146,14 @@ test('approved production candidate enables consent UI but never inlines optiona
     const html = await readFile(`${output}/${slug}/index.html`, 'utf8');
     expect(html).toContain('Last updated:');
     expect(html).toContain('2026-10-19');
-    expect(html).toContain('"enabled":true');
+    expect(html).toContain('"enabled":false');
     expect(html).not.toContain('unapproved policy draft');
     await expect(
       access(`${output}/review/legal/${slug}/index.html`),
     ).rejects.toThrow();
   }
   const html = await readFile(`${output}/index.html`, 'utf8');
-  expect(html).toContain('"enabled":true');
+  expect(html).toContain('"enabled":false');
   expect(html).toContain('href="/privacy/"');
   expect(html).not.toContain('src="https://www.googletagmanager.com/');
   expect(html).not.toContain('src="https://www.clarity.ms/');
@@ -204,4 +204,42 @@ test('Workers main activation, preview override and explicit shutdown are determ
   expect(preview.DEPLOYMENT_ENV).toBe('preview');
   expect(preview.PUBLIC_TRACKING_ENABLED).toBe('false');
   expect(shutdown.PUBLIC_TRACKING_ENABLED).toBe('false');
+});
+
+test('operational hold lets an earlier visitor withdraw their saved grant', async ({
+  page,
+  context,
+}) => {
+  await context.addInitScript(() =>
+    localStorage.setItem(
+      'elevatex.analytics-consent',
+      JSON.stringify({
+        choice: 'granted',
+        version: 'analytics-v1',
+        expires: Date.now() + 86400000,
+      }),
+    ),
+  );
+  await page.goto('/privacy/');
+  await context.addCookies([
+    {
+      name: '_ga',
+      value: 'synthetic-test-cookie',
+      url: 'http://127.0.0.1:4321',
+      secure: false,
+    },
+  ]);
+  await page.locator('footer [data-cookie-preferences]').click();
+  await expect(page.locator('[data-analytics-accept]')).toBeDisabled();
+  await page.locator('[data-analytics-reject]').click();
+  expect(
+    await page.evaluate(
+      () =>
+        JSON.parse(localStorage.getItem('elevatex.analytics-consent')!).choice,
+    ),
+  ).toBe('denied');
+  expect(
+    (await context.cookies()).some((cookie) => cookie.name === '_ga'),
+  ).toBe(false);
+  await expect(page.locator('#elevatex-ga4,#elevatex-clarity')).toHaveCount(0);
 });

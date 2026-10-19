@@ -38,7 +38,7 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
       const isolation = await page.evaluate(() => {
         const probes = [
           'body', 'body > :not(main)', 'main',
-          ...[...document.querySelectorAll('main > *')].map((element) => element.id ? `#${element.id}` : `main > .${[...element.classList].join('.')}`),
+          ...[...document.querySelectorAll('main > *')].map((_element, index) => `main > :nth-child(${index + 1})`),
           '.global-header', '.hero', '.hero__rim', '.hero__stage',
           '.hero__smoke-position', '.site-footer', '.site-footer__arc',
           '.global-header__mobile-navigation', 'svg',

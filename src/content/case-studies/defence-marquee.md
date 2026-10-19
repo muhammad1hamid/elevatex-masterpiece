@@ -4,6 +4,7 @@ title: Defence Marquee
 description: A venue website concept pairing celebration photography with event information, a filterable gallery and a visit enquiry path.
 industry: Weddings & events
 publishedDate: 2026-10-14
+updatedDate: 2026-10-18
 draft: false
 featured: false
 relatedServices: [web-development]
@@ -18,6 +19,11 @@ showcase:
     featured: true
     layout: events
     focus: Make space for the occasion.
+    indexSummary: Venue, event gallery and visit enquiries.
+    story:
+      decision: Lead with the venue setting; keep event information, gallery exploration and visit enquiries distinct.
+      inspect: Explore event options, inspect the photo filters and follow the visit-enquiry route.
+      limitation: Venue capacity, ratings and enquiry delivery are not verified agency evidence.
     details: [Venue presentation, Filterable photo gallery, Visit enquiries]
   image:
     src: /images/work/defence-marquee-1200.webp

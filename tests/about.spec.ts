@@ -56,7 +56,7 @@ test('complete About story, authentic founder and project evidence, metadata and
   ).toEqual(sections);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/about/',
+    'https://elevatexlab.org/about/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
@@ -95,10 +95,12 @@ test('complete About story, authentic founder and project evidence, metadata and
   for (const art of await page
     .locator('[data-media-category="ILLUSTRATIVE_EDITORIAL_ART"]')
     .all()) {
-    await expect(art.locator('figcaption')).toContainText(
-      /Illustrative art direction/,
-    );
+    await expect(art).toHaveAttribute('aria-hidden', 'true');
     await expect(art.locator('img')).toHaveAttribute('alt', '');
+  }
+  await expect(page.locator('[data-about-art-caption]')).toHaveCount(3);
+  for (const caption of await page.locator('[data-about-art-caption]').all()) {
+    await expect(caption).toContainText('Illustrative art direction');
   }
   await expect(
     page.locator('.about-project [data-media-provenance="verifiedScreenshot"]'),
@@ -117,6 +119,45 @@ test('complete About story, authentic founder and project evidence, metadata and
   expect(buffer.readUInt32BE(16)).toBe(1200);
   expect(buffer.readUInt32BE(20)).toBe(630);
   await expect(page.locator('footer')).toHaveCount(1);
+});
+
+test('art provenance stays readable in the text flow at normal and enlarged text sizes', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const width of [320, 390, 430, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const scale of [100, 200]) {
+      await page.goto(path);
+      await page.evaluate((value) => {
+        document.documentElement.style.fontSize = `${value}%`;
+      }, scale);
+      for (const caption of await page
+        .locator('[data-about-art-caption]')
+        .all()) {
+        await caption.scrollIntoViewIfNeeded();
+        await expect(caption).toBeVisible();
+        const geometry = await caption.evaluate((node) => {
+          const rect = node.getBoundingClientRect();
+          const section = node.closest('section')!.getBoundingClientRect();
+          const css = getComputedStyle(node);
+          return {
+            fontSize: parseFloat(css.fontSize),
+            position: css.position,
+            x: rect.x,
+            right: rect.right,
+            bottom: rect.bottom,
+            sectionBottom: section.bottom,
+          };
+        });
+        expect(geometry.fontSize).toBeGreaterThanOrEqual((14 * scale) / 100);
+        expect(geometry.position).toBe('static');
+        expect(geometry.x).toBeGreaterThanOrEqual(0);
+        expect(geometry.right).toBeLessThanOrEqual(width);
+        expect(geometry.bottom).toBeLessThanOrEqual(geometry.sectionBottom + 1);
+      }
+    }
+  }
 });
 
 for (const [width, height] of sizes)

@@ -134,48 +134,35 @@ export const webProjectStories: Readonly<Record<string, WebProjectStory>> = {
   },
 };
 
-export const technicalStandards = [
+export const websiteEvidenceNotes = [
   {
-    title: 'Responsive design',
-    description:
-      'Plan navigation, content hierarchy, imagery, and controls for the screens people actually use.',
+    title: 'A clear first decision',
+    text: 'The collection action leads the first screen; the showroom visit stays secondary. The headline and jewellery image establish the visual hierarchy.',
   },
   {
-    title: 'Performance',
-    description:
-      'Keep page weight and JavaScript purposeful, and measure important loading and interaction journeys where applicable.',
+    title: 'A distinct mobile composition',
+    text: 'The actual 390px capture stacks the headline and actions. Compact navigation and the bottom Explore, WhatsApp and Visit bar replace the full desktop row.',
   },
   {
-    title: 'Semantic HTML',
-    description:
-      'Use meaningful headings, landmarks, links, and native controls so the page has a clear underlying structure.',
+    title: 'A journey you can inspect',
+    text: 'The documented interface connects collection categories to a detail view. Open the study to compare those real screens and follow the live concept link.',
   },
-  {
-    title: 'Accessibility',
-    description:
-      'Consider keyboard access, visible focus, readable contrast, useful labels, and reduced motion throughout the build.',
-  },
-  {
-    title: 'Technical SEO',
-    description:
-      'Plan metadata, crawlable content, canonical URLs, internal links, and appropriate structured data within the agreed scope.',
-  },
-  {
-    title: 'Optimized media',
-    description:
-      'Choose suitable formats and responsive image sizes, reserve layout space, and defer media that is not needed immediately.',
-  },
-  {
-    title: 'Maintainable architecture',
-    description:
-      'Keep content, components, and styles organized so agreed updates and future additions have a clear place.',
-  },
-  {
-    title: 'Cross-browser QA',
-    description:
-      'Review agreed browsers, screen sizes, and key journeys before deployment, then address the issues found.',
-  },
-] as const satisfies readonly ContentItem[];
+] as const;
+
+export const technicalChecks = [
+  [
+    'Structure & access',
+    'Semantic HTML, keyboard access, visible focus and agreed device/browser checks.',
+  ],
+  [
+    'Loading & discovery',
+    'Right-sized media, purposeful scripts, metadata, internal links, crawlability and sitemap foundations.',
+  ],
+  [
+    'Maintenance & ownership',
+    'An agreed content-editing approach, documented handoff and defined hosting/support responsibilities.',
+  ],
+] as const;
 
 export const deliverableGroups = [
   {

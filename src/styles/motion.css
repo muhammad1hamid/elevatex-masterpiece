@@ -1,0 +1,144 @@
+/* All static content remains visible. Only successful pointer rendering hides the OS cursor. */
+.motion-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  contain: strict;
+}
+.motion-cursor > div {
+  position: absolute;
+  inset: 0 auto auto 0;
+}
+.motion-cursor i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  font-style: normal;
+}
+[data-cursor-dot] i {
+  width: 5px;
+  height: 5px;
+  background: #f0d6b1;
+  box-shadow: 0 0 0 1px #151411;
+  transition: scale 160ms var(--ease-standard);
+}
+[data-cursor-ring] i {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgb(240 214 177 / 80%);
+  color: #f7e5c9;
+  background: rgb(12 12 11 / 12%);
+  overflow: hidden;
+  transition:
+    width 240ms var(--ease-standard),
+    height 240ms var(--ease-standard),
+    scale 160ms var(--ease-standard),
+    background-color 200ms ease;
+}
+[data-cursor-label] {
+  font: 500 10px var(--font-body);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+.motion-cursor:is([data-state='view'], [data-state='label'])
+  [data-cursor-label] {
+  opacity: 1;
+}
+.motion-cursor[data-state='link'] [data-cursor-ring] i {
+  scale: 1.25;
+  background: rgb(240 214 177 / 10%);
+}
+.motion-cursor[data-state='link'] [data-cursor-dot] i {
+  scale: 0.6;
+}
+.motion-cursor:is([data-state='view'], [data-state='label'])
+  [data-cursor-ring]
+  i {
+  width: 88px;
+  height: 38px;
+  background: #151411;
+}
+.motion-cursor:is([data-state='view'], [data-state='label']) [data-cursor-dot] {
+  visibility: hidden;
+}
+.motion-cursor[data-pressed] [data-cursor-ring] i {
+  scale: 0.88;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html[data-cursor-ready],
+  html[data-cursor-ready] * {
+    cursor: none !important;
+  }
+  html[data-cursor-ready] :is(input, textarea, [contenteditable]) {
+    cursor: text !important;
+  }
+  html[data-cursor-ready]
+    :is(select, option, [data-cursor='native'], [data-cursor='native'] *) {
+    cursor: auto !important;
+  }
+  [data-magnetic-content] {
+    transition: translate 160ms var(--ease-standard);
+  }
+  [data-hover-image] img {
+    transition: scale 600ms var(--ease-standard);
+  }
+  [data-hover-image]:hover img {
+    scale: 1.018;
+  }
+  .global-header__navigation a::after {
+    transform: scaleX(0.55);
+    transition:
+      transform 280ms var(--ease-standard),
+      opacity 160ms;
+  }
+  .global-header__navigation a:is(:hover, [aria-current='page'])::after {
+    transform: scaleX(1);
+  }
+  .global-header__call:hover {
+    transform: none;
+  }
+  .site-footer__project:hover {
+    transform: none;
+  }
+  .service-actions a > span[aria-hidden] {
+    transition: translate 160ms var(--ease-standard);
+  }
+  .service-actions a:hover > span[aria-hidden] {
+    translate: 3px 0;
+  }
+}
+/* Stable hit areas are necessary with reduced motion too: disabling a lift's
+   transition alone can turn it into rapid enter/leave oscillation at an edge. */
+@media (hover: hover) and (pointer: fine) {
+  .global-header__call.global-header__call:hover,
+  .site-footer .site-footer__project:hover,
+  .hero__cta.hero__cta--primary:is(:hover, :active),
+  .final-cta .final-cta__primary:hover,
+  .inquiry-form .inquiry-form__review:not(:disabled):hover,
+  .site-footer .site-footer__group a:hover {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce),
+  (hover: none),
+  (pointer: coarse),
+  (forced-colors: active) {
+  .motion-cursor {
+    display: none !important;
+  }
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}

@@ -16,118 +16,43 @@ export const landingPages = {
   },
 } as const;
 
-export const anatomy = [
-  [
-    'Hook',
-    'Make the offer immediately clear.',
-    'Answer “What is this, and why should I care?” with a specific headline and a useful first screen.',
-  ],
-  [
-    'Context / problem',
-    'Start from the visitor’s situation.',
-    'Explain the problem or need the offer addresses, in language the intended audience recognizes.',
-  ],
-  [
-    'Value',
-    'Show what the offer changes.',
-    'Connect relevant features to practical benefits without promising an outcome you cannot support.',
-  ],
-  [
-    'Proof',
-    'Give the message a foundation.',
-    'Use legitimate examples, demonstrations, or verified evidence where available. Leave unsupported claims out.',
-  ],
-  [
-    'Offer',
-    'Make the decision concrete.',
-    'Explain what is included, who it is for, and the important boundaries of the offer.',
-  ],
-  [
-    'Objection handling',
-    'Resolve the remaining questions.',
-    'Address the uncertainties that matter before someone commits: fit, scope, process, and next steps.',
-  ],
-  [
-    'CTA',
-    'Make one next step obvious.',
-    'Use a clear action label and an appropriate destination. Ask only for information needed at this stage.',
-  ],
+export const landingEvidenceNotes = [
+  {
+    title: 'Offer → One treatment',
+    text: 'Visible now: a broad hair and beauty proposition. Proposed campaign adaptation: name one treatment and its intended audience; match the promise made by the incoming link.',
+  },
+  {
+    title: 'Evidence → Relevant, verified detail',
+    text: 'Visible now: studio imagery and demo trust labels. For a campaign, retain only evidence the business can substantiate and put it beside the offer. Screenshot ratings and review counts are not verified proof.',
+  },
+  {
+    title: 'Questions → Explain the commitment',
+    text: 'Proposed: state what the request includes, what is still subject to availability, and how a person will confirm it. Do not infer these answers from the image.',
+  },
+  {
+    title: 'Action → Request an appointment',
+    text: 'Visible now: appointment and call actions plus full-site navigation. Proposed: prioritize one appointment-request action, reduce competing destinations and explain the confirmation step. This adaptation is not built or measured.',
+  },
 ] as const;
 
-export const journey = [
+export const landingFit = [
   [
-    'Visitor arrives',
-    'A familiar starting point.',
-    'Match the page to the campaign or link that brought the visitor here.',
-    'The promise carries through.',
+    'One service offer',
+    'A campaign or ad about that same service',
+    'Request an inquiry',
+    'Service-specific scope and genuine evidence',
   ],
   [
-    'Understands the offer',
-    'Clarity before complexity.',
-    'State what is offered, who it is for, and what makes it relevant.',
-    'The headline does its job.',
-  ],
-  [
-    'Sees why it matters',
-    'Value with a purpose.',
-    'Connect the offer to a need the visitor actually has.',
-    'Benefits have context.',
-  ],
-  [
-    'Finds proof',
-    'A reason to believe.',
-    'Place legitimate evidence close to the claims it supports.',
-    'Evidence answers doubt.',
-  ],
-  [
-    'Resolves questions',
-    'Less uncertainty.',
-    'Explain the scope and answer the questions that affect the decision.',
-    'Important details stay visible.',
-  ],
-  [
-    'Takes action',
-    'A clear next step.',
-    'Keep the main action easy to find and explain what happens afterward.',
-    'The journey has a destination.',
-  ],
-] as const;
-
-export const useCases = [
-  [
-    'Lead generation',
-    'A relevant inquiry',
-    'Visitors evaluating a specific service',
-    'Send an inquiry',
-    'Clear offer, legitimate proof, and a concise inquiry flow.',
-  ],
-  [
-    'Service campaigns',
-    'Interest in one offer',
-    'People arriving from a focused campaign',
-    'Discuss the service',
-    'Message continuity, service scope, and useful answers.',
-  ],
-  [
-    'Product launches',
-    'Explain a new product',
-    'Prospective users discovering the product',
+    'A product launch',
+    'An announcement or relevant campaign link',
     'Request access',
-    'Product context, a demonstration, and availability details.',
+    'Availability, demonstration and access terms',
   ],
   [
-    'Paid advertising',
-    'A focused campaign destination',
-    'Visitors responding to an ad',
-    'Take the agreed campaign action',
-    'Ad-to-page consistency, mobile clarity, and relevant measurement.',
-  ],
-  [
-    'Events & early access',
-    'An informed registration',
-    'People considering an event or waitlist',
+    'An event or waitlist',
+    'An invitation or registration campaign',
     'Register interest',
-    'A clear proposition, participation details, and a short form.',
+    'Participation details and a concise request',
   ],
 ] as const;
 

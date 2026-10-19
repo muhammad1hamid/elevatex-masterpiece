@@ -2,6 +2,9 @@
 import Seo, { type Props as SeoProps } from '../components/seo/Seo.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
+import TrackingHead from '../components/integrations/TrackingHead.astro';
+import AnalyticsPreferences from '../components/integrations/AnalyticsPreferences.astro';
+import GlobalMotion from '../components/motion/GlobalMotion.astro';
 import SkipLink from '../components/ui/SkipLink.astro';
 import HeroBoot from '../components/hero/HeroBoot.astro';
 import HeroIntro from '../components/hero/HeroIntro.astro';
@@ -17,6 +20,7 @@ const { hero = false, ...seoProps } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0c0c0b" />
+    <TrackingHead />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       rel="preload"
@@ -29,7 +33,7 @@ const { hero = false, ...seoProps } = Astro.props;
     <slot name="head" />
     {hero && <HeroBoot />}
   </head>
-  <body id="page-top">
+  <body id="page-top" data-clarity-mask="true">
     {hero && <HeroIntro />}
     <SkipLink />
     <Header overlay={hero} />
@@ -37,5 +41,7 @@ const { hero = false, ...seoProps } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <AnalyticsPreferences />
+    <GlobalMotion />
   </body>
 </html>

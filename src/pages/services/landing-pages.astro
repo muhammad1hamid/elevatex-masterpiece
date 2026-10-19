@@ -4,12 +4,13 @@ import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import ServiceActions from '../../components/services/ServiceActions.astro';
 import ServiceFAQ from '../../components/services/ServiceFAQ.astro';
 import ServiceCTA from '../../components/services/ServiceCTA.astro';
+import ServiceEvidence from '../../components/services/ServiceEvidence.astro';
+import { infinityScreenshots } from '../../data/infinity-media';
 import Intro from '../../components/services/landing/LandingIntro.astro';
 import {
   landingPages,
-  anatomy,
-  journey,
-  useCases,
+  landingEvidenceNotes,
+  landingFit,
   landingProcess,
   landingDeliverables,
   landingFAQs,
@@ -233,52 +234,64 @@ const projects = (await featuredWork())
       <div class="container">
         <Intro
           id="landing-anatomy-heading"
-          eyebrow="Anatomy of a landing page"
-          heading="Every section should earn the next scroll."
-          lead="A deliberate sequence helps visitors understand the offer, see why it matters, resolve uncertainty, and know exactly what to do next."
+          eyebrow="A real screen, a focused-page reading"
+          heading="One offer. Evidence. One next step."
+          lead="Infinity Salon is an existing business-website concept. These authentic screens show its first impression; the adjacent notes propose how a focused treatment campaign could differ."
         />
-        <div class="lp-anatomy" data-anatomy>
-          <div class="lp-anatomy__top" aria-hidden="true">
-            <span>Offer / structure</span>
-            <span>07 purposeful sections</span>
-          </div>
-          {anatomy.map(([name, title, text], i) => (
-            <div class="lp-anatomy__row" data-anatomy-row>
-              <div class="lp-anatomy__annotation">
-                <span class="lp-index">
-                  0{i + 1} / {name}
-                </span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
-              <div
-                class:list={['lp-anatomy__region', `lp-anatomy__region--${i}`]}
-                aria-hidden="true"
-              >
-                <span>{name}</span>
-                {i === 0 ? (
-                  <strong>
-                    Your offer,
-                    <br />
-                    clearly expressed.
-                  </strong>
-                ) : i === 6 ? (
-                  <b>Take the next step →</b>
-                ) : (
-                  <div class="lp-wire">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                  </div>
-                )}
-              </div>
+        <ServiceEvidence
+          desktop={infinityScreenshots.desktop}
+          mobile={infinityScreenshots.mobile}
+          notes={landingEvidenceNotes}
+          caption="Authentic Infinity Salon concept captures / 15 October 2026. Proposed campaign adaptation — not built or measured. Demo ratings, reviews, locations and contact details are not independently verified."
+        />
+        <div class="lp-campaign-brief" id="landing-message">
+          <h3>Proposed campaign brief</h3>
+          <dl>
+            <div>
+              <dt>Offer</dt>
+              <dd>
+                One salon treatment; final scope and claims supplied by the
+                business.
+              </dd>
             </div>
-          ))}
+            <div>
+              <dt>Traffic input</dt>
+              <dd>
+                A treatment-specific ad or campaign link; no actual campaign is
+                claimed.
+              </dd>
+            </div>
+            <div>
+              <dt>Intended action</dt>
+              <dd>
+                Request an appointment, with availability confirmed by the
+                salon.
+              </dd>
+            </div>
+          </dl>
         </div>
-        <p class="lp-note">
-          A flexible framework. The sequence and length follow the offer,
-          audience, and evidence available.
+        <div class="lp-campaign-mobile" id="landing-mobile">
+          <h3>Mobile order: offer, action, context</h3>
+          <p>
+            The original mobile capture above shows a stacked headline and
+            appointment/call actions. A focused campaign should keep the chosen
+            action reachable, type readable and requests short; the final mobile
+            layout follows the agreed offer.
+          </p>
+        </div>
+        <p class="lp-note" id="landing-journey">
+          The sequence follows the visitor’s decision: understand the offer →
+          inspect relevant evidence → resolve scope questions → request the next
+          step. All annotations stay visible; no hover or staged reveal is
+          needed.
         </p>
+        <a
+          class="lp-text-link"
+          href="/work/infinity-salon/#finished-experience"
+        >
+          Inspect the original business website{' '}
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </section>
 
@@ -290,128 +303,37 @@ const projects = (await featuredWork())
       <div class="container">
         <Intro
           id="landing-types-heading"
-          eyebrow="Built around the goal"
-          heading="Different offers need different landing experiences."
-          lead="Start with the decision you want to support. Then shape the page around the people making it."
+          eyebrow="Check the fit"
+          heading="Match the offer, the arrival and the action."
+          lead="A focused page suits one decision. A broader website is useful when visitors need to explore several services or journeys."
         />
-        <div class="lp-types">
-          {useCases.map(([name, goal, visitor, action, emphasis], i) => (
-            <article>
-              <div>
-                <span class="lp-index">0{i + 1}</span>
-                <h3>{name}</h3>
-                <p>{emphasis}</p>
-              </div>
-              <dl>
-                <div>
-                  <dt>Goal</dt>
-                  <dd>{goal}</dd>
-                </div>
-                <div>
-                  <dt>Visitor</dt>
-                  <dd>{visitor}</dd>
-                </div>
-                <div>
-                  <dt>Primary action</dt>
-                  <dd>{action}</dd>
-                </div>
-              </dl>
-            </article>
-          ))}
+        <div
+          class="lp-fit-table"
+          role="region"
+          aria-label="Offer, traffic and action examples"
+          tabindex="0"
+        >
+          <table>
+            <caption>Examples of offer, traffic and action alignment</caption>
+            <thead>
+              <tr>
+                <th scope="col">Offer</th>
+                <th scope="col">Traffic input</th>
+                <th scope="col">Primary action</th>
+                <th scope="col">What the page needs</th>
+              </tr>
+            </thead>
+            <tbody>
+              {landingFit.map((row) => (
+                <tr>
+                  {row.map((cell, i) =>
+                    i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>,
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </div>
-    </section>
-
-    <section
-      class="lp-section lp-section--tonal"
-      id="landing-message"
-      aria-labelledby="landing-message-heading"
-    >
-      <div class="container">
-        <Intro
-          id="landing-message-heading"
-          eyebrow="Message first"
-          heading="If the message is unclear, better visuals will not save the page."
-          lead="Visual design supports persuasion. The visitor still needs to understand what is offered, who it is for, why it matters, and what to do."
-        />
-        <ol class="lp-message-hierarchy">
-          {[
-            ['Headline', 'What is the core promise?'],
-            ['Supporting copy', 'What needs explaining next?'],
-            ['Proof', 'Why should they believe it?'],
-            ['CTA', 'What should they do?'],
-          ].map(([label, text]) => (
-            <li>
-              <span>{label}</span>
-              <p>{text}</p>
-            </li>
-          ))}
-        </ol>
-        <div class="lp-message-example">
-          <p class="lp-eyebrow">A conceptual copy refinement</p>
-          <div>
-            <span class="lp-label">Vague</span>
-            <p>“Transform your business with innovative digital solutions.”</p>
-          </div>
-          <div>
-            <span class="lp-label">Focused</span>
-            <p>
-              “Get a focused landing page built around your campaign and one
-              clear conversion goal.”
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="lp-section"
-      id="landing-journey"
-      aria-labelledby="landing-journey-heading"
-    >
-      <div class="container">
-        <Intro
-          id="landing-journey-heading"
-          eyebrow="The conversion path"
-          heading="Attention is only the start. The journey matters next."
-          lead="Guide the visitor from first impression to meaningful action. Each step should make the next decision easier to understand."
-        />
-        <fieldset class="lp-journey" data-journey>
-          <legend>Select a stage to explore the journey</legend>
-          <div class="lp-journey__bar" aria-hidden="true">
-            <span>The visitor’s perspective</span>
-            <span>Arrival → Action</span>
-          </div>
-          {journey.map(([label, title, text, signal], i) => (
-            <div class="lp-journey__slice" data-journey-row>
-              <input
-                type="radio"
-                name="landing-journey"
-                id={`landing-stage-${i}`}
-                value={i}
-                checked={i === 0}
-                aria-describedby={`landing-stage-description-${i}`}
-              />
-              <label for={`landing-stage-${i}`}>
-                <span class="lp-index">0{i + 1}</span>
-                <span>{label}</span>
-                <span class="lp-journey__dot" aria-hidden="true"></span>
-              </label>
-              <div
-                class="lp-journey__detail"
-                id={`landing-stage-description-${i}`}
-              >
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <span class="lp-journey__signal">{signal}</span>
-              </div>
-            </div>
-          ))}
-        </fieldset>
-        <p class="lp-note">
-          Explore by scrolling, selecting a stage, or using the arrow keys. This
-          is an illustrative path, not a prediction of visitor behavior.
-        </p>
       </div>
     </section>
 
@@ -427,125 +349,29 @@ const projects = (await featuredWork())
           heading="A focused first impression. A considered next step."
           lead="Two concept website landing experiences, with different offers and inquiry paths. These illustrate design choices; they are not paid-campaign case studies or measured conversion results."
         />
-        <div class="lp-projects">
-          {projects.map((project) => {
-            const story = webProjectStories[project.id]!;
-            return (
-              <article class="lp-project">
-                <figure>
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcset={project.avifSrcSet}
-                      sizes="(min-width: 1280px) 730px, (min-width: 1024px) 55vw, calc(100vw - 2.5rem)"
-                    />
-                    <img
-                      src={project.image.src}
-                      srcset={project.webpSrcSet}
-                      sizes="(min-width: 1280px) 730px, (min-width: 1024px) 55vw, calc(100vw - 2.5rem)"
-                      width={project.image.width}
-                      height={project.image.height}
-                      loading="lazy"
-                      decoding="async"
-                      alt={`${project.title} concept landing screen showing the offer and inquiry action.`}
-                    />
-                  </picture>
-                  <figcaption>
-                    Demo / Concept — screenshot content is illustrative,
-                    including any claims or contact details.
-                  </figcaption>
-                </figure>
-                <div>
-                  <p class="lp-eyebrow">
-                    {project.typeLabel} / {project.industry}
-                  </p>
-                  <h3>{project.title}</h3>
-                  <p>{story.brief}</p>
-                  <dl>
-                    <div>
-                      <dt>What was built</dt>
-                      <dd>{story.implementation}</dd>
-                    </div>
-                    <div>
-                      <dt>Design direction</dt>
-                      <dd>{story.direction}</dd>
-                    </div>
-                    <div>
-                      <dt>Primary action / conversion logic</dt>
-                      <dd>
-                        {project.id === 'apex-detailing'
-                          ? 'Request a quote. Service detail supports the inquiry before the visitor shares their requirements.'
-                          : 'Request an appointment. Treatment information and studio imagery provide context for the booking inquiry.'}
-                      </dd>
-                    </div>
-                  </dl>
-                  <a
-                    class="lp-text-link"
-                    href={project.href}
-                    data-landing-project
-                  >
-                    Explore {project.title} concept{' '}
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
-              </article>
-            );
-          })}
+        <div class="lp-projects lp-projects--compact">
+          {projects.map((project) => (
+            <article class="lp-project">
+              <div>
+                <p class="lp-eyebrow">
+                  {project.typeLabel} / {project.industry}
+                </p>
+                <h3>{project.title}</h3>
+              </div>
+              <div>
+                <p>{webProjectStories[project.id]!.brief}</p>
+                <a
+                  class="lp-text-link"
+                  href={project.href}
+                  data-landing-project
+                >
+                  Explore {project.title} concept{' '}
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
-      </div>
-    </section>
-
-    <section
-      class="lp-section"
-      id="landing-mobile"
-      aria-labelledby="landing-mobile-heading"
-    >
-      <div class="container">
-        <Intro
-          id="landing-mobile-heading"
-          eyebrow="Mobile matters"
-          heading="The page has to persuade on a much smaller screen too."
-          lead="Mobile visitors see less at once. Content hierarchy, reading order, and touch targets need their own composition."
-        />
-        <div class="lp-responsive">
-          <div class="lp-responsive__wide">
-            <p class="lp-label">Desktop / room to explore</p>
-            <div class="lp-responsive__desktop">
-              <strong>
-                A clear offer.
-                <br />
-                Space for context.
-              </strong>
-              <div class="lp-responsive__art" aria-hidden="true"></div>
-              <span class="lp-example-action">Primary action →</span>
-              <p>Supporting evidence and useful details.</p>
-            </div>
-          </div>
-          <span class="lp-responsive__arrow" aria-hidden="true">
-            →
-          </span>
-          <div class="lp-responsive__narrow">
-            <p class="lp-label">Mobile / priorities first</p>
-            <div class="lp-responsive__phone">
-              <strong>
-                The offer.
-                <br />
-                The next step.
-              </strong>
-              <span class="lp-example-action">Primary action →</span>
-              <p>Relevant proof</p>
-              <p>Essential questions</p>
-              <p>Compact inquiry</p>
-            </div>
-          </div>
-        </div>
-        <ul class="lp-inline-list">
-          <li>Readable type</li>
-          <li>Prioritized content</li>
-          <li>Comfortable touch targets</li>
-          <li>Optimized media</li>
-          <li>Short, purposeful forms</li>
-        </ul>
       </div>
     </section>
 
@@ -742,7 +568,7 @@ const projects = (await featuredWork())
       eyebrow="Ready to turn the offer into a page?"
       heading="You already have the offer."
       emphasis="Now give it a page built around action."
-      supporting="Tell us what you are promoting, who the page is for, and what you want visitors to do next. We’ll help turn that into a focused landing experience."
+      supporting="Share the offer, who will see it, where visitors will come from, and the action you want them to take."
       source="landing_final_cta"
       primaryLabel="Start a Landing Page"
       secondaryLabel="Explore Our Work"

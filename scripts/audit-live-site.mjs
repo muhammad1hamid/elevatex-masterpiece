@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 
 // Read-only crawl. Does not run the legacy app or change remote infrastructure.
+// Historical .com migration crawler; deliberately not the current site identity.
 const origin = 'https://www.elevatexlab.com';
 const output = new URL('../docs/migration/', import.meta.url);
 await mkdir(new URL('snapshots/', output), { recursive: true });

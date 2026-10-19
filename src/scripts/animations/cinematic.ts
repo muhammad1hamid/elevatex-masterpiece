@@ -1,3 +1,4 @@
+import { motion } from '../../lib/motion/config';
 /** Finite enhancements over visible HTML. No pre-animation hidden state. */
 export function createCinematicMotion(root: HTMLElement) {
   const animations = new Map<Animation, Element>();
@@ -12,14 +13,22 @@ export function createCinematicMotion(root: HTMLElement) {
   ) => {
     if (
       !element ||
+      matchMedia(motion.reducedQuery).matches ||
       typeof element.animate !== 'function' ||
       element.contains(document.activeElement)
     )
       return;
     try {
-      const animation = element.animate(keyframes, {
-        duration: 780,
-        easing: 'cubic-bezier(.2,.8,.2,1)',
+      // Keep interactive text and fields at their authored contrast throughout
+      // an entrance. Their container may travel, but never fades through grey.
+      const controls = 'a[href], button, input, textarea, select';
+      const frames =
+        element.matches(controls) || element.querySelector(controls)
+          ? keyframes.map((frame) => ({ ...frame, opacity: 1 }))
+          : keyframes;
+      const animation = element.animate(frames, {
+        duration: motion.duration.editorial,
+        easing: motion.ease,
         fill: 'backwards',
         ...options,
       });
@@ -78,7 +87,7 @@ export function createCinematicMotion(root: HTMLElement) {
         { opacity: 0.25, transform: `translateY(${distance}px)` },
         { opacity: 1, transform: 'translateY(0)' },
       ],
-      { delay, duration: 820 },
+      { delay, duration: motion.duration.editorial },
     );
   const image = (element: Element | null, vertical = false, delay = 0) =>
     play(
@@ -90,7 +99,7 @@ export function createCinematicMotion(root: HTMLElement) {
         },
         { clipPath: 'inset(0 0 0 0)', opacity: 1 },
       ],
-      { delay, duration: 1100 },
+      { delay, duration: motion.duration.cinematic },
     );
   const sweep = (element: Element | null, delay = 0) =>
     play(

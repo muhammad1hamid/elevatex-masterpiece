@@ -1,6 +1,9 @@
 ---
 import { featuredWork } from '../../utils/content';
 import { webProjectStories } from '../../data/services/web-development';
+import ServiceEvidence from './ServiceEvidence.astro';
+import { qadeerScreenshots } from '../../data/qadeer-media';
+import { websiteEvidenceNotes } from '../../data/services/web-development';
 import ServiceActions from './ServiceActions.astro';
 const projects = (await featuredWork()).filter(
   (project) =>
@@ -38,62 +41,99 @@ const sizes =
             class:list={[
               'web-work__project',
               index === 1 && 'web-work__project--reverse',
+              project.id === 'qadeer-jewellers' && 'web-work__project--dossier',
             ]}
-            data-web-reveal
+            data-motion-reveal={
+              index % 2 ? 'cinematic-right' : 'cinematic-left'
+            }
           >
-            <figure class="web-work__figure">
-              <div class="web-work__chrome" aria-hidden="true">
-                <span>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                </span>
-                <span>{project.category}</span>
-                <span>{String(index + 1).padStart(2, '0')}</span>
+            {project.id === 'qadeer-jewellers' ? (
+              <div
+                class="web-work__dossier"
+                id="web-technical"
+                aria-labelledby="web-technical-heading"
+              >
+                <p class="web-service__eyebrow">Concept project / Jewellery</p>
+                <h3 id="web-technical-heading">Qadeer Jewellers</h3>
+                <p class="web-work__brief">
+                  Collection discovery, adapted for two very different screens.
+                </p>
+                <ServiceEvidence
+                  desktop={qadeerScreenshots.desktop}
+                  mobile={qadeerScreenshots.mobile}
+                  caption="Real concept website captures / 14 October 2026. Demo product details and business claims are not independently verified. No client results or underlying project stack are inferred."
+                  notes={websiteEvidenceNotes}
+                  noteLevel="h4"
+                />
+                <a
+                  class="web-service__text-link"
+                  href="/work/qadeer-jewellers/#finished-experience"
+                >
+                  Inspect the collection journey{' '}
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <a class="web-service__text-link" href={project.href}>
+                  Explore {project.title} concept{' '}
+                  <span aria-hidden="true">↗</span>
+                </a>
               </div>
-              <picture>
-                <source
-                  type="image/avif"
-                  srcset={project.avifSrcSet}
-                  sizes={sizes}
-                />
-                <img
-                  src={project.image.src}
-                  srcset={project.webpSrcSet}
-                  sizes={sizes}
-                  width={project.image.width}
-                  height={project.image.height}
-                  alt={`${project.title} website concept homepage in a desktop browser.`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
-              <figcaption>
-                {project.title} / {project.typeLabel}
-              </figcaption>
-            </figure>
-            <div class="web-work__story">
-              <p class="web-service__eyebrow">
-                {project.typeLabel} <span aria-hidden="true">·</span>{' '}
-                {project.industry}
-              </p>
-              <h3>{project.title}</h3>
-              <p class="web-work__brief">{story.brief}</p>
-              <dl>
-                <div>
-                  <dt>Design direction</dt>
-                  <dd>{story.direction}</dd>
+            ) : (
+              <>
+                <figure class="web-work__figure">
+                  <div class="web-work__chrome" aria-hidden="true">
+                    <span>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                    </span>
+                    <span>{project.category}</span>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcset={project.avifSrcSet}
+                      sizes={sizes}
+                    />
+                    <img
+                      src={project.image.src}
+                      srcset={project.webpSrcSet}
+                      sizes={sizes}
+                      width={project.image.width}
+                      height={project.image.height}
+                      alt={`${project.title} website concept homepage in a desktop browser.`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
+                  <figcaption>
+                    {project.title} / {project.typeLabel}
+                  </figcaption>
+                </figure>
+                <div class="web-work__story">
+                  <p class="web-service__eyebrow">
+                    {project.typeLabel} <span aria-hidden="true">·</span>{' '}
+                    {project.industry}
+                  </p>
+                  <h3>{project.title}</h3>
+                  <p class="web-work__brief">{story.brief}</p>
+                  <dl>
+                    <div>
+                      <dt>Design direction</dt>
+                      <dd>{story.direction}</dd>
+                    </div>
+                    <div>
+                      <dt>Interface includes</dt>
+                      <dd>{story.implementation}</dd>
+                    </div>
+                  </dl>
+                  <a class="web-service__text-link" href={project.href}>
+                    Explore {project.title} concept{' '}
+                    <span aria-hidden="true">↗</span>
+                  </a>
                 </div>
-                <div>
-                  <dt>Interface includes</dt>
-                  <dd>{story.implementation}</dd>
-                </div>
-              </dl>
-              <a class="web-service__text-link" href={project.href}>
-                Explore {project.title} concept{' '}
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
+              </>
+            )}
           </article>
         );
       })}

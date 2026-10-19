@@ -21,7 +21,9 @@ test('project screenshots decode and hero actions fit short desktop screens', as
         await link.evaluate((el) => el.getBoundingClientRect().bottom),
       ).toBeLessThanOrEqual(height!);
     }
-    for (const img of await page.locator('.lp-project img').all()) {
+    for (const img of await page
+      .locator('[data-service-evidence] img:visible')
+      .all()) {
       await img.scrollIntoViewIfNeeded();
       expect(
         await img.evaluate(async (image) => {
@@ -65,7 +67,7 @@ test('server-rendered content, metadata, schema and truthful work classification
   await page.goto(path);
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('h1')).toHaveText(landingPages.heading);
-  await expect(page.locator('[data-landing-page] > section')).toHaveCount(15);
+  await expect(page.locator('[data-landing-page] > section')).toHaveCount(12);
   await expect(page.locator('#landing-faq details')).toHaveCount(12);
   await expect(page.locator('.lp-project')).toHaveCount(2);
   for (const project of await page.locator('.lp-project').all())
@@ -80,7 +82,7 @@ test('server-rendered content, metadata, schema and truthful work classification
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    `https://www.elevatexlab.com${path}`,
+    `https://elevatexlab.org${path}`,
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
@@ -195,13 +197,12 @@ for (const width of [390, 1440]) {
     try {
       const page = await context.newPage();
       await page.goto(path);
-      for (const row of await page
-        .locator('.lp-anatomy__annotation,.lp-journey__detail')
-        .all())
+      for (const row of await page.locator('.service-evidence__notes li').all())
         await expect(row).toBeVisible();
-      await page.locator('#landing-stage-0').focus();
-      await page.keyboard.press('ArrowRight');
-      await expect(page.locator('#landing-stage-1')).toBeChecked();
+      await expect(page.locator('.service-evidence__notes li')).toHaveCount(4);
+      await expect(page.locator('#landing-anatomy')).toContainText(
+        'Proposed campaign adaptation',
+      );
       await page.locator('#landing-faq summary').last().click();
       await expect(page.locator('#landing-faq details').last()).toHaveAttribute(
         'open',
@@ -220,9 +221,12 @@ for (const width of [390, 1440]) {
     ).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('#main-content')).toBeFocused();
-    await page.locator('#landing-stage-0').focus();
-    await page.keyboard.press('ArrowRight');
-    await expect(page.locator('#landing-stage-1')).toBeChecked();
+    await page
+      .getByRole('region', { name: 'Offer, traffic and action examples' })
+      .focus();
+    await expect(
+      page.getByRole('region', { name: 'Offer, traffic and action examples' }),
+    ).toBeFocused();
     expect(
       (
         await new AxeBuilder({ page })
@@ -233,7 +237,7 @@ for (const width of [390, 1440]) {
   });
 }
 
-test('finite entrance, anatomy progression and manual journey override', async ({
+test('finite entrance leaves all evidence and campaign notes static', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -259,33 +263,13 @@ test('finite entrance, anatomy progression and manual journey override', async (
       ),
     )
     .toBe(0);
-  await page
-    .locator('[data-anatomy-row]')
-    .nth(3)
-    .evaluate((el) =>
-      window.scrollTo(
-        0,
-        scrollY + el.getBoundingClientRect().top - innerHeight * 0.55 + 10,
-      ),
-    );
-  await expect(page.locator('[data-anatomy-row]').nth(3)).toHaveClass(
-    /is-current/,
-  );
-  await page
-    .locator('[data-journey-row]')
-    .nth(3)
-    .evaluate((el) =>
-      window.scrollTo(
-        0,
-        scrollY + el.getBoundingClientRect().top - innerHeight * 0.55 + 10,
-      ),
-    );
-  await expect(page.locator('#landing-stage-3')).toBeChecked();
-  await page.locator('#landing-stage-0').focus();
-  await page.keyboard.press('Space');
-  await page.keyboard.press('ArrowRight');
-  await page.evaluate(() => window.scrollBy(0, 400));
-  await expect(page.locator('#landing-stage-1')).toBeChecked();
+  await page.locator('#landing-journey').scrollIntoViewIfNeeded();
+  await expect(page.locator('[name="landing-journey"]')).toHaveCount(0);
+  await expect(page.locator('.service-evidence__notes li')).toHaveCount(4);
+  for (const note of await page.locator('.service-evidence__notes li').all())
+    await expect(note).toBeVisible();
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(page.locator('.lp-canvas')).not.toHaveClass(/is-entered/);
 });
 
 test('mobile and reduced motion stay static with no external requests', async ({
@@ -300,9 +284,10 @@ test('mobile and reduced motion stay static with no external requests', async ({
     await page.setViewportSize({ width, height: 900 });
     await page.emulateMedia({ reducedMotion });
     await page.goto(path);
-    await page.locator('[data-journey-row]').last().scrollIntoViewIfNeeded();
-    await expect(page.locator('#landing-stage-0')).toBeChecked();
-    await expect(page.locator('.lp-anatomy__row.is-current')).toHaveCount(0);
+    await page.locator('#landing-journey').scrollIntoViewIfNeeded();
+    await expect(page.locator('[name="landing-journey"]')).toHaveCount(0);
+    for (const note of await page.locator('.service-evidence__notes li').all())
+      await expect(note).toBeVisible();
     expect(
       await page.evaluate(
         () =>

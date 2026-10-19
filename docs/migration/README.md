@@ -2,6 +2,8 @@
 
 Read-only audit captured 2026-10-06. Raw public responses are in `snapshots/`, response metadata in `live-audit.json`, and the advertised URL inventory in `url-inventory.csv`. This is a sitemap/HTTP crawl, not proof of Google indexing, traffic, backlinks or client-rendered content accuracy.
 
+**18 October 2026 domain decision:** the official new origin is `https://elevatexlab.org` (non-www). The .com URLs, responses and provisional-host recommendations below are historical records and are superseded for current canonical generation. Old-domain ownership and redirect availability are unverified. No historical mapping is active merely because the new origin is configured; see [current deployment preparation](../cloudflare.md).
+
 ## Findings
 
 - `https://elevatexlab.com/` resolves to `https://www.elevatexlab.com/`. Retain www provisionally; confirm Search Console properties and current host redirect status at cutover.

@@ -7,7 +7,7 @@ Read this file before modifying this repository. Preserve working code and make 
 - ElevateX is a premium digital systems agency: **Premium Digital Systems For Serious Growth.**
 - Supporting proposition: **We help ambitious businesses grow with high-converting websites, AI systems, and smart chatbots.**
 - The commercial services are Web Development, AI Automation, AI Chatbots, and Landing Pages. Do not advertise SEO/AEO/GEO as services without confirmation.
-- Current stage: Master Prompt #23 authorizes redesigning the single shared global footer, following the attached screenshot's navigation structure and the prompt's cinematic CTA, arc and oversized wordmark. Preserve page-specific CTAs and all main page content. Reuse verified navigation and the confirmed WhatsApp contact; omit unavailable social/email/legal destinations. Retain the existing design tokens, accessible static HTML and finite optional motion. The Contact backend remains deferred. Changes remain local until publication is authorized; no production cutover.
+- Current stage: Master Prompt #24 authorizes the shared cinematic motion engine, contextual desktop cursor, selective magnetic interactions and Lenis/GSAP synchronization. Preserve the approved hero, global footer, page layouts, content, verified navigation and WhatsApp contact. Extend existing page choreography without duplicate controllers. Keep native touch scrolling, live reduced-motion support and visible static HTML. The Contact backend remains deferred. Changes remain local until publication is authorized; no production cutover.
 - Use concrete, concise copy. Never fabricate clients, team members, contact details, testimonials, awards, statistics, locations, pricing, or results.
 
 ## Architecture and cost
@@ -40,7 +40,7 @@ Read this file before modifying this repository. Preserve working code and make 
 
 - Design content, conversion, accessibility, performance and SEO together. Render real HTML headings, answers, navigation and links; never bake primary text into images/canvas.
 - One clear H1, unique title/description, clean canonical, logical headings, descriptive URLs and contextual internal links per important page.
-- Use the centralized site configuration and SEO helpers. Current provisional canonical is `https://www.elevatexlab.com`, reflecting the live apex-to-www redirect observed on 2026-10-06. Reconcile hostnames at cutover.
+- Use the centralized site configuration and SEO helpers. The owner-approved canonical is `https://elevatexlab.org` (non-www). This replaces the earlier provisional .com identity; historical migration evidence retains its original URLs. Domain configuration does not authorize deployment, DNS changes or production indexing.
 - Preserve existing URLs and legitimate Pakistan relevance. Read `docs/migration/` before changing routes. Review KEEP/IMPROVE/MERGE/REDIRECT/REMOVE decisions; changed valuable URLs need relevant permanent redirects. Never blanket-redirect missing pages to the homepage.
 - Answers start with a direct, independently understandable 2–4 sentence response, then useful detail and evidence. Each service page has one commercial intent. No thin location pages, generic mass-produced articles or keyword-stuffed hero copy.
 - GEO is crawlability, entity clarity, useful original information, trustworthy authorship, citations, internal links and first-party evidence. No visibility promises or magic plugins; llms.txt is optional experimentation, not a ranking mechanism.

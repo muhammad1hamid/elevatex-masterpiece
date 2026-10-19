@@ -92,7 +92,7 @@ test('Insights and every article ship crawlable content, unique metadata and tru
     await expect(page.locator('footer')).toHaveCount(1);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       'href',
-      `https://www.elevatexlab.com${path}`,
+      `https://elevatexlab.org${path}`,
     );
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
       'content',
@@ -135,9 +135,9 @@ test('Insights and every article ship crawlable content, unique metadata and tru
         name: 'ElevateX',
       });
       expect(articleSchema?.author['@id']).toBe(
-        'https://www.elevatexlab.com/#organization',
+        'https://elevatexlab.org/#organization',
       );
-      expect(articleSchema?.url).toBe(`https://www.elevatexlab.com${path}`);
+      expect(articleSchema?.url).toBe(`https://elevatexlab.org${path}`);
       await expect(page.locator('h1')).toHaveText(article.title);
       await expect(page.locator('.insight-meta')).toContainText('By ElevateX');
       await expect(page.locator('.insight-cover figcaption')).toContainText(

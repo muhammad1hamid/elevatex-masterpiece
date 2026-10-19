@@ -1,7 +1,7 @@
 /** Verified brand facts only. Add contact/person/social fields after confirmation. */
 export const site = {
   name: 'ElevateX',
-  origin: 'https://www.elevatexlab.com',
+  origin: 'https://elevatexlab.org',
   language: 'en',
   locale: 'en_US',
   headline: 'Premium Digital Systems For Serious Growth.',

@@ -36,7 +36,7 @@ test('complete concept story, truthful artwork, metadata and schema arrive in HT
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/work/qadeer-jewellers/',
+    'https://elevatexlab.org/work/qadeer-jewellers/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
@@ -116,7 +116,7 @@ for (const [width, height] of sizes)
     const expected = width < 768 ? '/hero-mobile-' : '/art/hero-';
     expect(
       await page
-        .locator('#qadeer-hero img')
+        .locator('#qadeer-hero .campaign-hero__visual img')
         .evaluate((image) => (image as HTMLImageElement).currentSrc),
     ).toContain(expected);
   });

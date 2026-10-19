@@ -4,6 +4,7 @@ title: Fortress Events Complex
 description: An event venue website concept with immersive hall photography, celebration options and an event enquiry journey.
 industry: Weddings & events
 publishedDate: 2026-10-14
+updatedDate: 2026-10-18
 draft: false
 featured: false
 relatedServices: [web-development]
@@ -17,6 +18,7 @@ showcase:
   portfolio:
     featured: false
     focus: A setting for the story.
+    indexSummary: Event halls, celebration options and enquiries.
     details: [Hall presentation, Celebration options, Event enquiries]
   image:
     src: /images/work/fortress-vision-1200.webp

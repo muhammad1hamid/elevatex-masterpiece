@@ -12,7 +12,6 @@ import {
   automationUseCases,
   integrationGroups,
   automationBuildStages,
-  reliabilityPaths,
   automationDeliverables,
   automationFAQs,
 } from '../../data/services/ai-automation';
@@ -221,63 +220,7 @@ const breadcrumbs = [
         </div>
       </div>
     </section>
-    <section
-      class="automation-section automation-control"
-      id="automation-control"
-      aria-labelledby="automation-control-heading"
-    >
-      <div class="container">
-        <AutomationIntro
-          id="automation-control-heading"
-          eyebrow="Human control / 07"
-          heading="Automation where it helps. Human judgment where it matters."
-          lead="Workflows can include approval points, escalation rules, manual review, and clear boundaries around what the system is allowed to do. You decide which actions may proceed and which must wait for a person."
-        />
-        <div class="automation-decision">
-          <p class="automation-decision__origin">
-            <span aria-hidden="true">◇</span>Automation decision
-          </p>
-          <dl>
-            {[
-              [
-                'Safe / routine',
-                'Continue within the rules',
-                'Proceed only when required information and permissions are valid.',
-              ],
-              [
-                'Sensitive / unclear',
-                'Pause for human review',
-                'Let an authorized person approve, edit, decline, or take over.',
-              ],
-              [
-                'Failed / missing data',
-                'Take the fallback route',
-                'Ask for context, retry safely where appropriate, or escalate.',
-              ],
-            ].map(([condition, action, detail]) => (
-              <div>
-                <dt>{condition}</dt>
-                <dd>
-                  <strong>{action}</strong>
-                  <p>{detail}</p>
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <ul class="automation-small-principles">
-          {[
-            'Approvals',
-            'Escalation',
-            'Manual override',
-            'Validation',
-            'Clear boundaries',
-          ].map((item) => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      </div>
-    </section>
+
     <section
       class="automation-section"
       id="automation-integrations"
@@ -350,49 +293,7 @@ const breadcrumbs = [
         </ol>
       </div>
     </section>
-    <section
-      class="automation-section automation-reliability"
-      id="automation-reliability"
-      aria-labelledby="automation-reliability-heading"
-    >
-      <div class="container">
-        <AutomationIntro
-          id="automation-reliability-heading"
-          eyebrow="Built for real-world conditions / 10"
-          heading="A workflow needs a plan for when things do not go perfectly."
-          lead="Inputs can be incomplete, APIs can fail, and requests can be unexpected. We plan validation, error handling, and human escalation around the consequences of each action."
-        />
-        <dl class="automation-fallbacks">
-          {reliabilityPaths.map((path, index) => (
-            <div>
-              <dt>
-                <span class="automation-tag">
-                  Path {String(index + 1).padStart(2, '0')}
-                </span>
-                {path.condition}
-              </dt>
-              <dd>
-                <span aria-hidden="true">→</span>
-                <strong>{path.action}</strong>
-                <p>{path.detail}</p>
-              </dd>
-            </div>
-          ))}
-        </dl>
-        <div class="automation-reliability__notes">
-          <p>
-            <strong>Keep actions bounded.</strong> Rate limits, duplicate-action
-            prevention, input and data validation, and logs or observability are
-            considered where the workflow needs them.
-          </p>
-          <p>
-            <strong>Define access deliberately.</strong> Permissions, data
-            handling, retention, and external services should be designed around
-            the requirements of the specific workflow.
-          </p>
-        </div>
-      </div>
-    </section>
+
     <section
       class="automation-section automation-deliverables"
       id="automation-deliverables"
@@ -439,7 +340,7 @@ const breadcrumbs = [
       eyebrow="Ready to improve the workflow? / 13"
       heading="There’s probably a better way to run that process."
       emphasis="Let’s find it."
-      supporting="Show us where the repetitive work happens and we’ll help you explore what should be automated, what should stay manual, and how the systems can connect."
+      supporting="Describe one repeated task, the tools it passes through, and where someone must review or approve the next step."
       primaryLabel="Discuss an Automation"
       secondaryLabel="Explore Our Work"
       source="ai_automation_final_cta"

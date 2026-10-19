@@ -9,13 +9,15 @@ const { overlay = false } = Astro.props;
 const currentPath = Astro.url.pathname;
 const navigation = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services/' },
+  { label: 'Services', href: '/#services' },
   { label: 'Work', href: '/work/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
 ];
-const isCurrent = (href: string) =>
-  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+const isCurrent = (href: string) => {
+  if (href === '/#services') return currentPath.startsWith('/services/');
+  return href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+};
 ---
 
 <header
@@ -40,8 +42,8 @@ const isCurrent = (href: string) =>
       ))}
     </nav>
 
-    <a class="global-header__call" href="/contact/">
-      <span>Book a Call</span>
+    <a class="global-header__call" href="/contact/" data-magnetic>
+      <span data-magnetic-content>Discuss a Project</span>
       <svg
         width="19"
         height="19"
@@ -78,7 +80,7 @@ const isCurrent = (href: string) =>
           </a>
         ))}
         <a class="global-header__mobile-call" href="/contact/">
-          <span>Book a Call</span>
+          <span>Discuss a Project</span>
           <svg
             width="19"
             height="19"

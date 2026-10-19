@@ -17,7 +17,6 @@ const sections = [
   'web-types',
   'web-work',
   'web-build-process',
-  'web-technical',
   'web-redesign',
   'web-deliverables',
   'web-technology',
@@ -103,7 +102,7 @@ test('the complete service, heading hierarchy, and answers are delivered as HTML
     ['web-problems-heading', 'A website can look good and still fail its job.'],
     ['web-types-heading', 'Different businesses. Different websites.'],
     ['web-work-heading', 'A closer look at the craft.'],
-    ['web-technical-heading', 'Good design is only part of a good website.'],
+    ['web-technical-heading', 'Qadeer Jewellers'],
     ['web-redesign-heading', 'Keep what works. Improve what doesn’t.'],
     [
       'web-deliverables-heading',
@@ -282,13 +281,21 @@ test('selected work uses the verified concept identities and responsive local im
       project.getByRole('heading', { name, exact: true }),
     ).toBeVisible();
     await expect(project).toContainText('Concept project');
-    await expect(
-      project.locator('picture source[type="image/avif"]'),
-    ).toHaveAttribute('srcset', /480\.avif.+800\.avif.+1200\.avif/);
-    await expect(project.locator('img')).toHaveAttribute('width', '1200');
-    await expect(project.locator('img')).toHaveAttribute('height', '900');
-    await expect(project.locator('img')).toHaveAttribute('loading', 'lazy');
-    const image = project.locator('img');
+    if (index === 0) {
+      await expect(project.locator('[data-service-evidence]')).toHaveCount(1);
+      await expect(project).toContainText('14 October 2026');
+      await expect(project.locator('.service-evidence__notes li')).toHaveCount(
+        3,
+      );
+    } else {
+      await expect(
+        project.locator('picture source[type="image/avif"]'),
+      ).toHaveAttribute('srcset', /480\.avif.+800\.avif.+1200\.avif/);
+      await expect(project.locator('img')).toHaveAttribute('width', '1200');
+      await expect(project.locator('img')).toHaveAttribute('height', '900');
+    }
+    const image = project.locator('img').first();
+    await expect(image).toHaveAttribute('loading', 'lazy');
     await image.scrollIntoViewIfNeeded();
     await expect
       .poll(() =>
@@ -347,7 +354,7 @@ test('CTAs reach the contact preview and the completed Work page', async ({
     const html = await response.text();
     expect(html).toContain('noindex, follow');
     expect(html).toContain('Inquiry preview');
-    expect(html).toContain(`https://www.elevatexlab.com/${destination}/`);
+    expect(html).toContain(`https://elevatexlab.org/${destination}/`);
   }
   const workHtml = await (await request.get('/work/')).text();
   expect(workHtml).toContain('Work that speaks');
@@ -446,7 +453,7 @@ for (const [width, height] of viewports) {
               .filter((animation) => animation.playState === 'running').length,
         ),
     ).toBe(0);
-    const images = page.locator('[data-web-development] img');
+    const images = page.locator('[data-web-development] img:visible');
     for (const image of await images.all()) {
       await image.scrollIntoViewIfNeeded();
       await expect

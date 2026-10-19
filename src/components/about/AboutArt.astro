@@ -4,8 +4,14 @@ interface Props {
   name: keyof typeof aboutMedia;
   class?: string;
   priority?: boolean;
+  showCaption?: boolean;
 }
-const { name, class: className, priority = false } = Astro.props;
+const {
+  name,
+  class: className,
+  priority = false,
+  showCaption = true,
+} = Astro.props;
 const media = aboutMedia[name];
 const mobile = 'mobile' in media ? media.mobile : undefined;
 const set = (
@@ -20,6 +26,7 @@ const set = (
 <figure
   class:list={['about-art', className]}
   data-media-category="ILLUSTRATIVE_EDITORIAL_ART"
+  aria-hidden={!showCaption ? 'true' : undefined}
 >
   <div class="about-art__window" data-about-image>
     <div class="about-art__depth" data-about-parallax>
@@ -61,5 +68,5 @@ const set = (
     <span class="about-art__light" data-about-light aria-hidden="true"></span>
     <slot />
   </div>
-  <figcaption>{media.caption}</figcaption>
+  {showCaption && <figcaption>{media.caption}</figcaption>}
 </figure>

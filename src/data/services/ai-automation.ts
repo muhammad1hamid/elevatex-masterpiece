@@ -68,85 +68,84 @@ export const automationCapabilities = [
 export const inquirySteps = [
   {
     id: 'received',
-    title: 'Message received',
+    title: 'Receive the inquiry',
     kind: 'Input',
-    description: 'A supported form or channel receives the inquiry.',
+    description: 'Start with a request from a supported form or channel.',
     key: 'Example request',
     value: '“Hi, I’d like to know if you can help with a website redesign.”',
-    boundary: 'Accept only the fields the workflow needs.',
+    details: [
+      'Accept only the fields the workflow needs.',
+      'The current website and project goals have not been supplied.',
+    ],
+    boundary:
+      'A received request is not a qualified lead or an approved action.',
   },
   {
     id: 'intent',
-    title: 'Intent identified',
-    kind: 'AI assistance',
+    title: 'Interpret & validate',
+    kind: 'AI assistance + rules',
     description:
-      'Interpret the request against the supported service categories.',
-    key: 'Suggested intent',
-    value: 'Website redesign · New lead · Standard priority',
-    boundary: 'Unclear intent goes to review, rather than a guessed route.',
-  },
-  {
-    id: 'details',
-    title: 'Important details extracted',
-    kind: 'AI + validation',
-    description: 'Structure available information and identify missing fields.',
-    key: 'Available context',
-    value: 'Service: website redesign. Current site and scope: not supplied.',
+      'Suggest an intent, extract available details, then apply explicit rules.',
+    key: 'Structured context',
+    value: 'Website redesign · New inquiry · Current site and scope missing',
+    details: [
+      'AI suggests the supported service category; it does not decide permissions.',
+      'Validation preserves missing fields. Defined rules select a qualification response.',
+      'Unclear intent or an unsupported request goes to review.',
+    ],
     boundary:
       'Missing information stays missing; the system does not invent it.',
   },
   {
-    id: 'rule',
-    title: 'Workflow rule selected',
-    kind: 'Deterministic rule',
-    description: 'Use defined conditions to choose a permitted next action.',
-    key: 'Rule outcome',
+    id: 'approval',
+    title: 'Review the draft',
+    kind: 'Human checkpoint',
+    description:
+      'An authorized person checks the proposed response and next action.',
+    key: 'Example draft / Not sent',
     value:
-      'Prepare qualification response. Ask for the current website and goals.',
-    boundary: 'Requests outside the agreed rules are escalated.',
+      '“Please share your current website and what you would like to improve.”',
+    details: [
+      'The reviewer can approve, edit or decline the draft.',
+      'In this example, sending and any supported system update wait for approval.',
+      'Expired approval stops the action.',
+    ],
+    boundary:
+      'A prepared message is not a sent message. Uncertain or sensitive actions stay paused.',
   },
   {
     id: 'record',
-    title: 'CRM / database updated',
-    kind: 'Integration',
-    description: 'Validate the record before updating the connected system.',
+    title: 'Make a permitted update',
+    kind: 'Validated integration',
+    description:
+      'Only an approved, valid record may reach the connected system.',
     key: 'Proposed record',
     value:
-      'Website redesign inquiry · Needs qualification · Draft response pending',
-    boundary: 'Check for duplicates and confirm the update was accepted.',
-  },
-  {
-    id: 'response',
-    title: 'Response prepared',
-    kind: 'Draft',
-    description:
-      'Prepare a response using the available context and approved guidance.',
-    key: 'Example draft',
-    value:
-      '“Please share your current website and what you would like to improve.”',
-    boundary: 'A prepared message is not a sent message.',
-  },
-  {
-    id: 'approval',
-    title: 'Human approval if required',
-    kind: 'Human checkpoint',
-    description:
-      'Pause sensitive or uncertain actions for an authorized reviewer.',
-    key: 'Approval required',
-    value: 'A reviewer can approve, edit, or decline the prepared action.',
+      'Website redesign inquiry · Needs qualification · Review status attached',
+    details: [
+      'Check access, required fields and duplicates before a write.',
+      'Confirm the connected system accepted the update.',
+      'A rejected or timed-out write is not reported as successful.',
+    ],
     boundary:
-      'In this example, sending waits for approval. Expired approval stops the action.',
+      'On failure, preserve the inquiry for review; retry only when safe and without creating a duplicate.',
   },
   {
     id: 'followup',
-    title: 'Follow-up scheduled',
-    kind: 'Scheduling',
+    title: 'Notify & follow up',
+    kind: 'Confirmed continuation',
     description:
-      'After approval, schedule the agreed next step and record its status.',
+      'Notify the owner of the confirmed status and schedule only the agreed next step.',
     key: 'Controlled continuation',
-    value: 'Follow up only if no reply arrives within the agreed interval.',
+    value:
+      'Owner receives the accepted result or an exception needing attention.',
+    details: [
+      'Only after confirmation may an agreed follow-up be scheduled.',
+      'Follow up only if no reply arrives within the agreed interval.',
+      'Cancel on reply, opt-out or manual closure; failed actions return to review.',
+    ],
     boundary:
-      'Cancel on reply, opt-out, or manual closure. Failed actions follow the fallback path.',
+      'Notification must distinguish a completed update from a failed or pending one.',
   },
 ] as const;
 
@@ -234,30 +233,6 @@ export const automationBuildStages = [
     description:
       'Review behavior in use and refine it where agreed support includes this.',
     outcome: 'An agreed handoff and support plan',
-  },
-] as const;
-
-export const reliabilityPaths = [
-  {
-    condition: 'Normal path',
-    action: 'Complete & confirm',
-    detail: 'Validate the input and confirm the system accepted the action.',
-  },
-  {
-    condition: 'Missing information',
-    action: 'Ask, wait, or review',
-    detail: 'Request the required details or pass the item to a person.',
-  },
-  {
-    condition: 'Integration failure',
-    action: 'Retry within limits',
-    detail:
-      'Use bounded retries where safe, then a fallback or human escalation.',
-  },
-  {
-    condition: 'Sensitive action',
-    action: 'Require approval',
-    detail: 'Pause before a high-impact change or sensitive communication.',
   },
 ] as const;
 

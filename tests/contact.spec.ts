@@ -49,13 +49,19 @@ test('Contact ships semantic static content, accurate metadata and an explicit r
     'Contact — Start a Website or AI Project | ElevateX',
   );
   await expect(page.locator('h1')).toHaveCount(1);
+  const whatsapp = page.locator('.contact-methods a');
+  await expect(whatsapp).toHaveAccessibleName(
+    'Chat on WhatsApp +92 335 6709222',
+  );
+  await expect(whatsapp).toHaveAccessibleDescription('Opens in a new tab.');
+  await expect(whatsapp).toHaveAttribute('href', 'https://wa.me/923356709222');
   await expect(page.locator('h1')).toContainText('Great ideas start');
   await expect(page.locator('h1')).toContainText('with a conversation.');
   await expect(page.locator('footer')).toHaveCount(1);
   await expect(page.locator('[data-contact-page] img')).toHaveCount(0);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/contact/',
+    'https://elevatexlab.org/contact/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
@@ -90,6 +96,13 @@ test('local validation preserves details, focuses the first error and never send
   page,
 }) => {
   await page.goto(path);
+  // Complete the optional first-interaction motion import before watching form
+  // traffic. The submission itself must still make zero network requests.
+  await page.mouse.move(200, 200);
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-smooth-scroll',
+    'lenis',
+  );
   const requests: string[] = [];
   page.on('request', (request) =>
     requests.push(`${request.method()} ${request.url()}`),

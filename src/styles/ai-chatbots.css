@@ -458,18 +458,7 @@
   padding-inline: 2rem;
   margin-top: 0;
 }
-.conversation:has(input[value='0']:checked) [data-conversation-state='0'],
-.conversation:has(input[value='1']:checked) [data-conversation-state='1'],
-.conversation:has(input[value='2']:checked) [data-conversation-state='2'],
-.conversation:has(input[value='3']:checked) [data-conversation-state='3'] {
-  display: block;
-}
-.conversation:has(input[value='0']:checked) [data-conversation-message='0'],
-.conversation:has(input[value='1']:checked) [data-conversation-message='1'],
-.conversation:has(input[value='2']:checked) [data-conversation-message='2'],
-.conversation:has(input[value='3']:checked) [data-conversation-message='3'] {
-  border-color: var(--color-gold);
-}
+
 .chat-browser {
   border: 1px solid var(--border-accent);
   border-radius: var(--radius-frame);
@@ -1174,5 +1163,74 @@
   .chat-preview,
   .conversation {
     border-color: CanvasText;
+  }
+}
+.conversation__source,
+.conversation__boundaries {
+  padding: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.conversation__source blockquote {
+  margin: 1rem 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--color-gold);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+.conversation__source > p:last-child,
+.conversation__boundaries > p {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-top: 1rem;
+}
+.conversation__source a,
+.conversation__boundaries a {
+  display: inline-block;
+  padding-block: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--color-gold-soft);
+}
+.conversation__boundaries {
+  border-block: 1px solid var(--border-accent);
+  margin-bottom: 1.5rem;
+}
+.conversation__boundaries h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.conversation__boundaries dl,
+.chat-boundary-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin-block: 1.5rem 0;
+}
+.conversation__boundaries dl > div,
+.chat-boundary-map > div {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+}
+.conversation__boundaries dt,
+.chat-boundary-map dt {
+  margin-bottom: 0.75rem;
+  color: var(--color-gold-soft);
+}
+.conversation__boundaries dd,
+.chat-boundary-map dd {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+@media (max-width: 767px) {
+  .conversation__source,
+  .conversation__boundaries {
+    padding: 1.25rem;
+  }
+  .conversation__boundaries dl,
+  .chat-boundary-map {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
   }
 }

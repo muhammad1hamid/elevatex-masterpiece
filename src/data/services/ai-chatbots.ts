@@ -1,4 +1,5 @@
 import type { ServiceFAQItem } from './types';
+import { webDevelopmentFAQs } from './web-development';
 
 export const aiChatbots = {
   path: '/services/ai-chatbots/',
@@ -16,6 +17,13 @@ export const aiChatbots = {
   },
 } as const;
 
+export const conversationSource = {
+  title: 'Web Development / Forms, booking tools and third-party services',
+  href: '/services/web-development/#web-faq',
+  text: webDevelopmentFAQs.find((item) => item.id === 'website-integrations')!
+    .answer,
+} as const;
+
 export const conversation = [
   {
     role: 'Customer',
@@ -29,8 +37,8 @@ export const conversation = [
   },
   {
     role: 'ElevateX assistant',
-    text: 'Absolutely. Do you mainly need the site to showcase services, take booking requests, or both? And do you already use a booking tool?',
-    label: 'A useful question',
+    text: 'A website can showcase services and support appointment requests. A booking-tool connection depends on supported access and agreed scope. Do you need either or both, and do you already use a booking tool?',
+    label: 'A grounded reply',
     intent: 'Clarify the website scope',
     business: 'Beauty salon',
     requirement: 'Services, booking requests, or both',
@@ -40,7 +48,7 @@ export const conversation = [
   {
     role: 'Customer',
     text: 'Both. We want to show our treatments and let people request an appointment. We currently confirm appointments by phone.',
-    label: 'Context collected',
+    label: 'A structured draft',
     intent: 'New project',
     business: 'Beauty salon',
     requirement: 'Service pages + appointment requests',
@@ -50,8 +58,8 @@ export const conversation = [
   },
   {
     role: 'ElevateX assistant',
-    text: 'That gives us a clear starting point: treatment pages and an appointment-request flow, with your team confirming availability. Would you like to share a preferred contact method so someone at ElevateX can discuss the scope?',
-    label: 'A considered next step',
+    text: 'That gives us a clear starting point: treatment pages and an appointment-request flow, with your team confirming availability. I cannot confirm a booking integration, availability, price or timeline from this conversation. Would you like to share a preferred contact method for human review of the scope?',
+    label: 'Human handoff',
     intent: 'Website project inquiry',
     business: 'Beauty salon',
     requirement: 'Treatment pages + appointment-request flow',
@@ -92,14 +100,6 @@ export const chatbotCapabilities = [
     title: 'An agreed action',
     text: 'Prepare an inquiry or order draft and connect supported business actions after required checks.',
   },
-] as const;
-
-export const handoffPaths = [
-  ['Normal question', 'Answer from approved information'],
-  ['Unclear request', 'Ask a focused clarification'],
-  ['High-value inquiry', 'Offer a follow-up with a person'],
-  ['Sensitive issue', 'Pause and hand over context'],
-  ['Understanding fails', 'Explain the limit and offer another route'],
 ] as const;
 
 export const chatbotProcess = [

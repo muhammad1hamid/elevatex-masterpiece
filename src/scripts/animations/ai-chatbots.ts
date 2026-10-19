@@ -62,7 +62,8 @@ export function initializeChatbots(): void {
       hero?.classList.remove('is-entered');
       conversation?.classList.remove('is-progressing');
       messages.forEach((m) => m.classList.remove('is-current'));
-      if (!manual && radios[3]) radios[3].checked = true;
+      const last = radios.at(-1);
+      if (!manual && last) last.checked = true;
     } else schedule();
   };
   const observer =

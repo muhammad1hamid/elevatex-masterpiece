@@ -35,7 +35,7 @@ test('complete truthful concept study, metadata and schema are server rendered',
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/work/infinity-salon/',
+    'https://elevatexlab.org/work/infinity-salon/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',

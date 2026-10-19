@@ -5,7 +5,7 @@ const root = '#start-a-project';
 const headline =
   'Have an idea worth building? Let’s turn it into something real.';
 const description =
-  'Whether you need a premium website, AI automation, or a smarter customer experience, tell us what you’re working on and we’ll help you figure out the right next step.';
+  'Tell us what you want to build or improve, who it needs to serve, and the next step visitors or your team should be able to take.';
 
 test('final CTA is static semantic content after FAQ with two valid navigation links', async ({
   page,

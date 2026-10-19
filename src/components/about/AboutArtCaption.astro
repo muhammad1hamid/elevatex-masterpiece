@@ -1,0 +1,16 @@
+---
+import { aboutMedia } from '../../data/about-media';
+
+interface Props {
+  name: keyof typeof aboutMedia;
+}
+
+const { name } = Astro.props;
+const [label, detail] = aboutMedia[name].caption.split(' / ');
+---
+
+<p class="about-art-caption" data-about-art-caption={name}>
+  <span class="about-art-caption__label">{label}</span>
+  {' / '}
+  {detail}
+</p>

@@ -2,27 +2,20 @@
 import type { GetStaticPaths } from 'astro';
 import '../styles/fonts.css';
 
-// Preview handoffs only. Production routes require approved page content.
+// Preserve existing Services bookmarks in every build. Navigation links directly
+// to the real homepage section; this noindex handoff is not a service overview.
 export const getStaticPaths = (() => {
-  if (import.meta.env.DEPLOYMENT_ENV === 'production') return [];
-
   return [
-    { destination: 'services', target: '/#services', external: false },
-  ].map(({ destination, ...props }) => ({
-    params: { destination },
-    props,
-  }));
+    { params: { destination: 'services' }, props: { target: '/#services' } },
+  ];
 }) satisfies GetStaticPaths;
 
 interface Props {
   target: string;
-  external: boolean;
 }
 
-const { target, external } = Astro.props;
-const label = external
-  ? 'Continue to the current ElevateX website'
-  : 'Continue to ElevateX services';
+const { target } = Astro.props;
+const label = 'Continue to ElevateX services';
 ---
 
 <!doctype html>

@@ -9,7 +9,6 @@ import ConversationExperience from '../../components/services/chatbots/Conversat
 import {
   aiChatbots,
   chatbotCapabilities,
-  handoffPaths,
   chatbotProcess,
   chatbotDeliverables,
   chatbotFAQs,
@@ -249,67 +248,12 @@ const breadcrumbs = [
           id="chatbot-conversation-heading"
           eyebrow="Inside the conversation / 05"
           heading="From a simple message to a useful next step."
-          lead="A well-designed chatbot does more than generate text. It identifies what the person needs, gathers the right context, and moves the conversation toward an appropriate outcome."
+          lead="Read a salon website inquiry beside the exact service information it uses. Follow the grounded answer, the structured draft and the point where a person must take over."
         />
         <ConversationExperience />
       </div>
     </section>
-    <section
-      class="chat-section"
-      id="chatbot-website"
-      aria-labelledby="chatbot-website-heading"
-    >
-      <div class="container">
-        <Intro
-          id="chatbot-website-heading"
-          eyebrow="Website chatbots / 06"
-          heading="Help visitors find answers without making them search."
-          lead="A website chatbot can guide visitors through common questions, services, project inquiries, or support paths while keeping the conversation connected to the website experience."
-        />
-        <div class="chat-browser">
-          <div class="chat-browser__bar">
-            <span aria-hidden="true">○ ○ ○</span>
-            <span>Illustrative website experience</span>
-          </div>
-          <div class="chat-browser__body">
-            <div class="chat-browser__page">
-              <p class="chat-label">ElevateX / Services</p>
-              <h3>A website built around your business.</h3>
-              <p>Explore service information. Get a clearer starting point.</p>
-              <ul>
-                <li>Services & approach</li>
-                <li>Common project questions</li>
-                <li>Contact & next steps</li>
-              </ul>
-              <a href="/services/web-development/">
-                Explore Web Development <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-            <div class="chat-browser__conversation">
-              <p class="chat-label">Conversation with page context</p>
-              <div class="chat-message chat-message--customer">
-                <p class="chat-label">Customer</p>
-                <p>Where can I read about the website build process?</p>
-              </div>
-              <div class="chat-message">
-                <p class="chat-label">ElevateX assistant</p>
-                <p>
-                  The Web Development page explains the process and what a
-                  project can include. It’s a useful starting point before
-                  discussing your scope.
-                </p>
-              </div>
-              <p class="chat-label">Source: approved service content</p>
-            </div>
-          </div>
-        </div>
-        <p class="chat-note">
-          Service questions, qualification, contact collection and support
-          routing can share the website experience. The chatbot only uses
-          information and access provided to it.
-        </p>
-      </div>
-    </section>
+
     <section
       class="chat-section"
       id="chatbot-whatsapp"
@@ -366,168 +310,7 @@ const breadcrumbs = [
         </p>
       </div>
     </section>
-    <section
-      class="chat-section"
-      id="chatbot-action"
-      aria-labelledby="chatbot-action-heading"
-    >
-      <div class="container">
-        <Intro
-          id="chatbot-action-heading"
-          eyebrow="Beyond the reply / 08"
-          heading="The best conversation ends with a useful action."
-          lead="Depending on the workflow, information from a conversation can be structured, routed, stored, sent to another system, or handed to a person for the next step."
-        />
-        <ol class="chat-action-path">
-          {['Message', 'Understand', 'Collect', 'Decide', 'Action'].map(
-            (label, i) => (
-              <li>
-                <span class="chat-label">0{i + 1}</span>
-                <strong>{label}</strong>
-              </li>
-            ),
-          )}
-        </ol>
-        <ul class="chat-action-outcomes">
-          {[
-            'Create a lead',
-            'Update a CRM',
-            'Prepare an order draft',
-            'Notify a team',
-            'Request human review',
-            'Schedule an agreed follow-up',
-          ].map((action) => (
-            <li>{action}</li>
-          ))}
-        </ul>
-        <p class="chat-note">
-          Actions require the relevant integration, permissions and validation.
-          They are defined per project.
-        </p>
-        <p class="chat-related">
-          The chatbot handles the conversation. Automation can handle what
-          happens next.{' '}
-          <a href="/services/ai-automation/">
-            Explore AI Automation <span aria-hidden="true">→</span>
-          </a>
-        </p>
-      </div>
-    </section>
-    <section
-      class="chat-section"
-      id="chatbot-handoff"
-      aria-labelledby="chatbot-handoff-heading"
-    >
-      <div class="container">
-        <Intro
-          id="chatbot-handoff-heading"
-          eyebrow="Human when it matters / 09"
-          heading="Some conversations should not stay automated."
-          lead="Chatbots can handle repeatable interactions, but unclear, sensitive, unusual, or high-value conversations may be better passed to a person with the context already organized."
-        />
-        <div class="chat-handoff">
-          <dl class="chat-handoff__paths">
-            {handoffPaths.map(([condition, action]) => (
-              <div>
-                <dt>{condition}</dt>
-                <dd>
-                  <span aria-hidden="true">↳</span>
-                  {action}
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <aside class="chat-handoff__summary">
-            <p class="chat-label">Illustrative handoff brief</p>
-            <h3>
-              Pick up the conversation.
-              <br />
-              Keep the context.
-            </h3>
-            <dl>
-              <div>
-                <dt>Customer name</dt>
-                <dd>Not provided</dd>
-              </div>
-              <div>
-                <dt>Intent</dt>
-                <dd>Salon website inquiry</dd>
-              </div>
-              <div>
-                <dt>Important details</dt>
-                <dd>
-                  Treatments and appointment requests; team confirms
-                  availability.
-                </dd>
-              </div>
-              <div>
-                <dt>Previous messages</dt>
-                <dd>
-                  Relevant conversation attached when permission and retention
-                  rules allow.
-                </dd>
-              </div>
-              <div>
-                <dt>Next step</dt>
-                <dd>Request permission for a human follow-up.</dd>
-              </div>
-            </dl>
-            <p>
-              Handoff depends on team availability and the agreed channel. No
-              instant human response is promised.
-            </p>
-          </aside>
-        </div>
-      </div>
-    </section>
-    <section
-      class="chat-section"
-      id="chatbot-knowledge"
-      aria-labelledby="chatbot-knowledge-heading"
-    >
-      <div class="container">
-        <Intro
-          id="chatbot-knowledge-heading"
-          eyebrow="The right context / 10"
-          heading="A useful chatbot needs more than a clever prompt."
-          lead="Reliable responses depend on what information the chatbot can access, what instructions it follows, and where its boundaries are defined."
-        />
-        <div class="chat-knowledge">
-          <div class="chat-knowledge__sources">
-            <p class="chat-label">Approved information</p>
-            <p>
-              Website content · Services · FAQs · Menus · Product information ·
-              Approved documents · Scoped structured data
-            </p>
-          </div>
-          <div class="chat-knowledge__engine">
-            <span aria-hidden="true">↓</span>
-            <h3>Conversation engine</h3>
-            <p>Use relevant information within agreed access.</p>
-            <span aria-hidden="true">↓</span>
-          </div>
-          <div class="chat-knowledge__controls">
-            <p class="chat-label">Controls around every response</p>
-            <ul>
-              <li>Clear instructions</li>
-              <li>Defined boundaries</li>
-              <li>Workflow rules</li>
-              <li>Human handoff</li>
-            </ul>
-          </div>
-          <p class="chat-knowledge__response">
-            An answer, a clarification, or a responsible handoff.
-          </p>
-        </div>
-        <p class="chat-note">
-          AI-generated responses can be incorrect or incomplete. Clear source
-          material, scoped instructions, appropriate validation and human
-          escalation help manage situations where mistakes matter. Context
-          retention is project-specific; unlimited memory and unrestricted
-          private-data access are not assumed.
-        </p>
-      </div>
-    </section>
+
     <section
       class="chat-section"
       id="chatbot-integrations"
@@ -536,32 +319,36 @@ const breadcrumbs = [
       <div class="container">
         <Intro
           id="chatbot-integrations-heading"
-          eyebrow="Connected conversations / 11"
-          heading="The conversation can connect to the systems behind the business."
-          lead="Depending on the project, chatbots can work with websites, messaging channels, forms, CRM tools, spreadsheets, databases, APIs, webhooks, and other supported systems."
+          eyebrow="Channel, source, action"
+          heading="Agree each connection separately."
+          lead="A channel carries the conversation. Knowledge supplies answers. A supported integration permits an agreed action; access to one does not imply access to the others."
         />
-        <div class="chat-connections">
-          <p class="chat-connections__core">Conversation</p>
-          <dl>
-            <div>
-              <dt>Where people talk</dt>
-              <dd>Website · Supported WhatsApp setup · Email · Forms</dd>
-            </div>
-            <div>
-              <dt>Where context lives</dt>
-              <dd>CRM · Google Sheets · Scoped database access</dd>
-            </div>
-            <div>
-              <dt>Where work continues</dt>
-              <dd>API · Webhook · Internal dashboard</dd>
-            </div>
-          </dl>
-        </div>
-        <p class="chat-note">
-          Connections depend on supported interfaces, permissions and platform
-          requirements. Tool access and data movement are reviewed before
-          implementation.
-        </p>
+        <dl class="chat-boundary-map">
+          <div id="chatbot-website">
+            <dt>Channel</dt>
+            <dd>
+              Website chat or a supported messaging setup. WhatsApp requires
+              eligible business access and platform setup; a personal account is
+              not assumed integrable.
+            </dd>
+          </div>
+          <div>
+            <dt>Knowledge</dt>
+            <dd>
+              Approved website pages, FAQs, service or product details, menus
+              and scoped documents. Sources need an owner and updates; unlimited
+              memory and private-data access are not assumed.
+            </dd>
+          </div>
+          <div>
+            <dt>Action</dt>
+            <dd>
+              Lead capture, routing, CRM updates, order drafts or agreed
+              follow-ups require a supported API, webhook or connector,
+              validation and the relevant permissions.
+            </dd>
+          </div>
+        </dl>
       </div>
     </section>
     <section
@@ -644,7 +431,7 @@ const breadcrumbs = [
       eyebrow="Ready to start a conversation? / 15"
       heading="Your chatbot should do more than generate a reply."
       emphasis="It should move things forward."
-      supporting="Tell us which customer conversations happen repeatedly and what you want to happen next. We’ll help you explore the right chatbot experience."
+      supporting="Bring a few recurring customer questions, the information a chatbot can use, and the point where your team should take over."
       primaryLabel="Discuss a Chatbot"
       secondaryLabel="Explore Our Work"
       source="ai_chatbot_final_cta"

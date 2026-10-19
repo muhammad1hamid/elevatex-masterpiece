@@ -1,0 +1,25 @@
+/* Native details keep keyboard, grouping and no-JS behavior. Browsers without
+   intrinsic-size interpolation retain their normal, usable disclosure. */
+@supports (interpolate-size: allow-keywords) and
+  selector(details::details-content) {
+  @media (prefers-reduced-motion: no-preference) {
+    :is(.faq-item, .service-faq, .build-evidence, .work-tile)
+      details::details-content {
+      interpolate-size: allow-keywords;
+      block-size: 0;
+      opacity: 0;
+      overflow: clip;
+      /* This small, requested disclosure exception also applies on mobile,
+         where optional decorative CSS transitions are otherwise disabled. */
+      transition:
+        block-size 420ms var(--ease-standard),
+        opacity 220ms ease,
+        content-visibility 420ms allow-discrete !important;
+    }
+    :is(.faq-item, .service-faq, .build-evidence, .work-tile)
+      details[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+}

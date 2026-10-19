@@ -767,3 +767,101 @@
     padding-block: var(--section-mobile);
   }
 }
+.work-decisions > div + div {
+  margin-top: 1rem;
+}
+.work-decisions dt {
+  color: var(--color-gold-soft);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  margin-bottom: 0.4rem;
+}
+.work-decisions dd {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+.work-feature--events .work-decisions dt {
+  color: #60513a;
+}
+.work-feature--events .work-decisions dd {
+  color: #4c4840;
+}
+.work-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+.work-grid .work-tile {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr) minmax(10rem, 0.45fr);
+  gap: 2.5rem;
+  align-items: center;
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--border-default);
+  margin-top: 0;
+}
+.work-grid .work-tile[hidden] {
+  display: none;
+}
+.work-tile__summary {
+  min-width: 0;
+}
+.work-tile__summary .work-tile__meta {
+  justify-content: flex-start;
+  margin: 0 0 0.75rem;
+}
+.work-tile__summary h3 {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  margin: 0 0 0.6rem;
+}
+.work-tile__summary > p {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  margin: 0;
+}
+.work-tile__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.work-tile__actions .work-link {
+  gap: 1rem;
+  margin-top: 0;
+}
+@media (max-width: 1023px) {
+  .work-grid .work-tile {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 1rem 1.5rem;
+  }
+  .work-tile > a:first-child {
+    grid-row: 1 / span 2;
+    align-self: start;
+  }
+  .work-tile__actions {
+    grid-column: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .work-grid .work-tile {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 0.75rem 1rem;
+  }
+  .work-tile__summary .work-tile__meta {
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .work-tile__summary h3 {
+    font-size: 1.35rem;
+  }
+  .work-tile__summary > p {
+    font-size: 0.875rem;
+  }
+  .work-tile .work-browser__bar {
+    display: none;
+  }
+}

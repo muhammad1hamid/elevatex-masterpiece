@@ -4,6 +4,7 @@ title: Classic Detailers
 description: An automotive website concept presenting paint protection, detailing services and a guided quote enquiry.
 industry: Automotive
 publishedDate: 2026-10-08
+updatedDate: 2026-10-18
 draft: false
 featured: true
 relatedServices:
@@ -13,6 +14,11 @@ showcase:
     featured: true
     layout: automotive
     focus: Precision, from the first impression.
+    indexSummary: Paint protection, detailing and a guided quote.
+    story:
+      decision: Explain protection and detailing choices before asking visitors for vehicle and enquiry details.
+      inspect: Compare the service routes, transformation interface and guided quote steps without submitting an enquiry.
+      limitation: The interface does not establish manufacturer affiliation, delivered enquiries or commercial results.
     details:
       - Service clarity
       - Transformation gallery
@@ -31,29 +37,36 @@ showcase:
 projectStudy:
   version: 1
   slug: apex-detailing-studio
-  displayName: Apex Detailing Studio
+  displayName: Classic Detailers
   presentation: precision
   theme: automotive
   draft: false
   publishedDate: 2026-10-15
-  pageTitle: Apex Detailing Studio — Website Design Showcase
-  description: Explore the Apex Detailing Studio website concept, currently branded Classic Detailers, through real interface captures, responsive layouts and service discovery.
+  updatedDate: 2026-10-18
+  pageTitle: Classic Detailers — Website Design Showcase
+  description: Explore the Classic Detailers automotive website concept through authentic interface captures, responsive layouts, service discovery and a guided quote enquiry.
   socialImage:
     src: /images/social/apex-detailing-studio.png
-    alt: Apex Detailing Studio concept study by ElevateX with the actual Classic Detailers website interface.
+    alt: Classic Detailers concept study by ElevateX with an authentic website interface capture.
     width: 1200
     height: 630
   hero:
     id: apex-hero
     titleId: apex-title
     variant: immersive-photo
-    eyebrow: Selected work / Apex Detailing Studio
+    eyebrow: Selected work / Classic Detailers
     statement:
       - Precision in every detail.
     description: A closer look at an automotive website concept built around bold visual presentation, clear service communication, and a focused digital experience.
     image:
       media: hero
       sizes: 100vw
+    evidencePreview:
+      media: desktop
+      mobileMedia: mobile
+      target: website-showcase
+      label: See the actual website
+      summary: Paint protection, detailing and a guided quote.
     classificationSuffix: Automotive / Detailing
     classificationSeparator: dot
     artLabel: Illustrative Art Direction
@@ -330,7 +343,7 @@ projectStudy:
         lines:
           - A digital experience
           - shaped around precision.
-      intro: Apex Detailing Studio is the portfolio title for an automotive website concept whose live demo currently uses Classic Detailers branding. The website presents ceramic coating, paint protection film, paint correction and interior services, then connects visitors with a guided quote enquiry. This study examines the visible demo; the supplied automotive photographs provide a separate illustrative art direction.
+      intro: Classic Detailers is an automotive website concept presenting ceramic coating, paint protection film, paint correction and interior services, then connecting visitors with a guided quote enquiry. This study examines the visible demo; the supplied automotive photographs provide a separate illustrative art direction.
       type: overview
       variant: wide-studio
       facts:
@@ -351,7 +364,7 @@ projectStudy:
       image:
         media: studio
         sizes: '(max-width: 767px) 90vw, 90vw'
-      evidenceNote: Website inspected on 15 October 2026. Demo reviews, locations, certifications and business results have not been independently verified.
+      evidenceNote: Originally supplied as Apex Detailing Studio. Website inspected on 15 October 2026. Demo reviews, locations, certifications and business results have not been independently verified.
     - id: website-showcase
       eyebrow: The digital experience / 02
       heading:

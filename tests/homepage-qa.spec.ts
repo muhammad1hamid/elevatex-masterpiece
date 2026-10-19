@@ -10,9 +10,51 @@ test('enlarged text preserves the full homepage and usable mobile navigation', a
     await page.evaluate(() => {
       document.documentElement.style.fontSize = '200%';
     });
-    expect(
-      await page.evaluate(() => document.documentElement.scrollWidth),
-    ).toBeLessThanOrEqual(width);
+    // Check the enlarged layout after font swaps have settled on every platform.
+    await page.evaluate(() => document.fonts.ready);
+    const layout = await page.evaluate(() => ({
+      width: document.documentElement.scrollWidth,
+      outside: [...document.querySelectorAll('body *')]
+        .filter((element) => {
+          const box = element.getBoundingClientRect();
+          return (
+            box.width > 0 && (box.right > innerWidth + 0.1 || box.left < -0.1)
+          );
+        })
+        .slice(0, 35)
+        .map((element) => ({
+          tag: element.tagName,
+          class: element.getAttribute('class'),
+          right: element.getBoundingClientRect().right,
+          left: element.getBoundingClientRect().left,
+          position: getComputedStyle(element).position,
+          parent: element.parentElement?.className,
+          parentOverflow:
+            element.parentElement &&
+            getComputedStyle(element.parentElement).overflowX,
+        })),
+    }));
+    expect(layout.width, JSON.stringify(layout)).toBeLessThanOrEqual(width);
+    const questionLines = await page
+      .locator('.faq-item__question')
+      .evaluateAll((questions) =>
+        questions.map((question) => {
+          const range = document.createRange();
+          range.selectNodeContents(question);
+          return {
+            question: question.textContent,
+            edge: question.getBoundingClientRect().right,
+            lines: [...range.getClientRects()].map((line) => line.right),
+          };
+        }),
+      );
+    for (const question of questionLines) {
+      for (const right of question.lines) {
+        expect(right, question.question ?? '').toBeLessThanOrEqual(
+          question.edge + 0.5,
+        );
+      }
+    }
     await expect(page.locator('main > section')).toHaveCount(10);
     await page.locator('#faq').scrollIntoViewIfNeeded();
     const question = page.locator('.faq-item summary').last();

@@ -35,6 +35,8 @@ const { context, section: s } = Astro.props,
   {next && (
     <a
       href={context.nextHref}
+      data-cursor="view"
+      data-hover-image
       class={framed ? `${p}-next__preview` : `${p}-next__image`}
       aria-label={`Explore the ${next.title} concept in Selected Work`}
     >

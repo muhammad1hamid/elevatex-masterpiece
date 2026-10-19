@@ -1,0 +1,85 @@
+---
+{
+  'title': 'A review boundary you can inspect.',
+  'description': 'An internal example from this ElevateX website: selecting Review the draft exposes the proposed response and the point where a person decides what may happen next.',
+  'draft': false,
+  'permission': 'confirmed',
+  'kind': 'internal-interface-check',
+  'recordedAt': '2026-10-18T11:40:37.889Z',
+  'baseCommit': '36e2e73dc685bd2945ac9260071c2a59a67d161e',
+  'sourceVersion': '586032a7fe55995ef193e032d04e6f605337eeb42ba760641c621408059174f5',
+  'sourceFiles':
+    [
+      {
+        'path': 'src/components/services/automation/InquiryWorkflow.astro',
+        'sha256': '5d6ee542b1ed6da8a7ee6ac784ba768e8ece1d8c0773dddff3cca90f345569a3',
+      },
+      {
+        'path': 'src/scripts/animations/ai-automation.ts',
+        'sha256': 'ae58ba12985ecfda8f63119d412131165cbe5e6a1caf228d38216a7025c1465f',
+      },
+      {
+        'path': 'src/styles/ai-automation.css',
+        'sha256': 'ac5f9da434ef3f2661d73242944704d237814692e0f95b0ac8642911070f972f',
+      },
+    ],
+  'environment':
+    [
+      'Installed Chrome 155.0.8059.84',
+      'Local static preview at 127.0.0.1:4321',
+      '390px and 1440px viewports',
+      'Reduced motion; JavaScript enabled',
+    ],
+  'method':
+    [
+      'Open the local AI Automation service page with the recorded viewport and reduced motion.',
+      'Use keyboard focus and Space to select Review the draft; record the checked native control and its visible explanation.',
+      'Inspect the radio markup, CSS selection rule and the existing manual-selection guard in the fingerprinted source files.',
+    ],
+  'observations':
+    [
+      {
+        'title': 'Native selection',
+        'text': 'A standard radio control selects this explanation. The checked control and its visible detail were recorded together.',
+      },
+      {
+        'title': 'A draft stays a draft',
+        'text': 'The interface exposes the proposed reply and approve, edit or decline instructions. Selecting it sends no message and writes no customer record.',
+      },
+      {
+        'title': 'Manual control',
+        'text': 'The existing enhancement stops optional scroll progression when focus or a user selection takes control. The native interface remains available without that enhancement.',
+      },
+    ],
+  'limitations':
+    [
+      'This is a local interface observation and source inspection, not a live automation deployment, a performance benchmark or a client result.',
+      'Backend delivery and external integrations are not exercised.',
+    ],
+  'excerpt':
+    {
+      'path': 'src/components/services/automation/InquiryWorkflow.astro',
+      'code': "<input\n              class=\"inquiry-step__radio\"\n              type=\"radio\"\n              name=\"inquiry-step\"\n              id={`inquiry-${step.id}`}\n              value={step.id}\n              aria-describedby={`inquiry-${step.id}-description`}\n              checked={index === 0}\n            />",
+    },
+  'desktop':
+    {
+      'base': '/images/evidence/inquiry-approval-desktop',
+      'widths': [640, 1200],
+      'width': 1214,
+      'height': 304,
+      'alt': 'Actual ElevateX local inquiry demo with Review the draft selected, exposing the prepared reply and the human approval boundary.',
+    },
+  'mobile':
+    {
+      'base': '/images/evidence/inquiry-approval-mobile',
+      'widths': [316],
+      'width': 316,
+      'height': 544,
+      'alt': 'Actual ElevateX local inquiry demo with Review the draft selected, exposing the prepared reply and the human approval boundary.',
+    },
+  'caption': 'Actual local ElevateX interface capture / 18 October 2026. Human-review stage selected in an illustrative workflow; no live action or customer data.',
+  'recordPath': '/evidence/inquiry-approval.json',
+}
+---
+
+The owner approved this exact internal example for the normal Work and About pages on 18 October 2026. Its capture, source and method concern the local interface only. It does not assert business results or successful delivery. Deployment remains a separate decision.

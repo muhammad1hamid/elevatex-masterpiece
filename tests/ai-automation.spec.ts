@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test';
 import {
   aiAutomation,
   automationFAQs,
+  inquirySteps,
 } from '../src/data/services/ai-automation';
 
 const path = '/services/ai-automation/';
@@ -49,10 +50,8 @@ test('automation content and its boundaries are delivered as readable HTML', asy
     'automation-capabilities',
     'automation-workflow',
     'automation-use-cases',
-    'automation-control',
     'automation-integrations',
     'automation-build',
-    'automation-reliability',
     'automation-deliverables',
     'automation-faq',
     'automation-cta',
@@ -97,7 +96,7 @@ test('metadata, social asset and schema describe this service without unsupporte
     'content',
     'noindex, follow',
   );
-  const canonical = `https://www.elevatexlab.com${path}`;
+  const canonical = `https://elevatexlab.org${path}`;
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
     canonical,
@@ -124,7 +123,7 @@ test('metadata, social asset and schema describe this service without unsupporte
   expect(service['name']).toBe('AI Automation');
   expect(service['url']).toBe(canonical);
   expect(service['provider']).toEqual({
-    '@id': 'https://www.elevatexlab.com/#organization',
+    '@id': 'https://elevatexlab.org/#organization',
   });
   for (const key of [
     'aggregateRating',
@@ -142,7 +141,7 @@ test('metadata, social asset and schema describe this service without unsupporte
   expect(buffer.readUInt32BE(20)).toBe(630);
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     'content',
-    `https://www.elevatexlab.com${aiAutomation.image.src}`,
+    `https://elevatexlab.org${aiAutomation.image.src}`,
   );
 });
 
@@ -216,7 +215,9 @@ for (const [width, height] of widths)
         }),
       );
     for (const offset of eyebrowOffsets) expect(offset).toBeLessThanOrEqual(1);
-    await expect(page.locator('.inquiry-step')).toHaveCount(8);
+    await expect(page.locator('.inquiry-step')).toHaveCount(
+      inquirySteps.length,
+    );
     const overflow = await page
       .locator(
         '[data-ai-automation] h1,[data-ai-automation] h2,.inquiry-step,.automation-story,.automation-deliverables__layers li',
@@ -250,7 +251,7 @@ for (const width of [390, 1440]) {
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       const radios = page.locator('.inquiry-step__radio');
       await radios.first().focus();
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < inquirySteps.length; i++) {
         if (i) await page.keyboard.press('ArrowRight');
         await expect(radios.nth(i)).toBeChecked();
         const value = await radios.nth(i).getAttribute('value');

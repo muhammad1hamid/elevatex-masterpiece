@@ -101,6 +101,7 @@ test('keyboard skip link moves focus to content', async ({ page }) => {
 
 test('page works with JavaScript disabled and reduced motion', async ({
   browser,
+  baseURL,
 }) => {
   const context = await browser.newContext({
     javaScriptEnabled: false,
@@ -108,7 +109,8 @@ test('page works with JavaScript disabled and reduced motion', async ({
     viewport: { width: 375, height: 812 },
   });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4321/');
+  if (!baseURL) throw new Error('A local preview base URL is required.');
+  await page.goto(baseURL);
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(
     page.getByRole('link', { name: 'See Our Work', exact: true }),
@@ -184,4 +186,74 @@ test('404 has useful navigation and is noindex', async ({ page }) => {
     'content',
     'noindex, follow',
   );
+});
+
+for (const width of [390, 1440]) {
+  test(`Services navigation uses the real section and native focus at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/services/web-development/');
+    const navigation = page.getByRole('navigation', {
+      name: width < 1024 ? 'Mobile' : 'Primary',
+      exact: true,
+    });
+    if (width < 1024) await page.locator('[data-menu-toggle]').click();
+    const services = navigation.getByRole('link', {
+      name: 'Services',
+      exact: true,
+    });
+    await expect(services).toHaveAttribute('href', '/#services');
+    await expect(services).toHaveAttribute('aria-current', 'page');
+    await services.click();
+    await expect(page).toHaveURL(/\/#services$/);
+    await expect(page.locator('#services')).toBeInViewport();
+    await expect(page.locator('#services')).toBeFocused();
+    await expect(page.locator('[data-mobile-menu]')).not.toHaveAttribute(
+      'open',
+    );
+    if (width < 1024) {
+      await page.locator('[data-menu-toggle]').click();
+      await page
+        .getByRole('navigation', { name: 'Mobile', exact: true })
+        .getByRole('link', { name: 'Home', exact: true })
+        .click();
+      await page.locator('[data-menu-toggle]').click();
+      await page
+        .getByRole('navigation', { name: 'Mobile', exact: true })
+        .getByRole('link', { name: 'Services', exact: true })
+        .click();
+      await expect(page.locator('[data-mobile-menu]')).not.toHaveAttribute(
+        'open',
+      );
+      await expect(page.locator('#services')).toBeFocused();
+    }
+  });
+}
+
+test('Services compatibility remains noindex and leaves implemented pages on this host', async ({
+  page,
+  request,
+}) => {
+  const response = await request.get('/services/');
+  const html = await response.text();
+  expect(response.status()).toBe(200);
+  expect(html).toContain('content="noindex, follow"');
+  expect(html).toContain('content="0;url=/#services"');
+  await page.goto('/services/');
+  await expect(page).toHaveURL(/\/#services$/);
+  for (const path of [
+    '/work/',
+    '/about/',
+    '/contact/',
+    '/services/web-development/',
+    '/services/ai-automation/',
+    '/services/ai-chatbots/',
+    '/services/landing-pages/',
+  ]) {
+    const route = await request.get(path, { maxRedirects: 0 });
+    expect(route.status()).toBe(200);
+    expect(await route.text()).not.toContain('http-equiv="refresh"');
+  }
 });

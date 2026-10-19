@@ -28,15 +28,15 @@ test('complete concept story, truthful artwork, metadata and schema arrive in HT
     /<astro-island|<iframe|<canvas|<video|<form|aggregateRating|"@type":"Product"|"@type":"Review"/,
   );
   await page.goto(path);
-  await expect(page.locator('h1')).toHaveText('Apex Detailing Studio.');
+  await expect(page.locator('h1')).toHaveText('Classic Detailers.');
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('[data-case-study] > section')).toHaveCount(10);
   await expect(page).toHaveTitle(
-    'Apex Detailing Studio — Website Design Showcase | ElevateX',
+    'Classic Detailers — Website Design Showcase | ElevateX',
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/work/apex-detailing-studio/',
+    'https://elevatexlab.org/work/apex-detailing-studio/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
@@ -76,7 +76,12 @@ test('complete concept story, truthful artwork, metadata and schema arrive in HT
     schemas
       .find((schema) => schema['@type'] === 'BreadcrumbList')
       .itemListElement.map((item: { name: string }) => item.name),
-  ).toEqual(['Home', 'Work', 'Apex Detailing Studio']);
+  ).toEqual(['Home', 'Work', 'Classic Detailers']);
+  await expect(page.locator('#project-overview')).toContainText(
+    'Originally supplied as Apex Detailing Studio.',
+  );
+  expect(story.name).toContain('Classic Detailers');
+  expect(story.dateModified).toBe('2026-10-18T00:00:00.000Z');
   const image = await request.get('/images/social/apex-detailing-studio.png');
   const buffer = await image.body();
   expect(image.ok()).toBe(true);
@@ -116,7 +121,7 @@ for (const [width, height] of sizes)
     const expected = '/images/work/apex/hero-';
     expect(
       await page
-        .locator('#apex-hero img')
+        .locator('#apex-hero .precision-hero__visual img')
         .evaluate((image) => (image as HTMLImageElement).currentSrc),
     ).toContain(expected);
   });

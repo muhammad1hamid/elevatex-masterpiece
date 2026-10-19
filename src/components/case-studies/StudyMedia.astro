@@ -7,10 +7,31 @@ interface Props {
   class?: string | undefined;
   eager?: boolean;
   motion?: StudyMotion | undefined;
+  mobileMedia?: string | undefined;
+  alt?: string | undefined;
 }
-const { context, image, class: className, eager = false, motion } = Astro.props;
+const {
+  context,
+  image,
+  class: className,
+  eager = false,
+  motion,
+  mobileMedia,
+  alt,
+} = Astro.props;
 const media = context.study.media[image.media];
 if (!media) throw new Error(`Missing media ${image.media}`);
+const mobile = mobileMedia ? context.study.media[mobileMedia] : media.mobile;
+if (mobileMedia && !mobile)
+  throw new Error(`Missing mobile media ${mobileMedia}`);
+if (
+  mobileMedia &&
+  (media.category !== 'AUTHENTIC_SCREENSHOT' ||
+    context.study.media[mobileMedia]?.category !== 'AUTHENTIC_SCREENSHOT')
+)
+  throw new Error(
+    'An interface preview requires authentic desktop and mobile captures.',
+  );
 if (image.browser && media.category !== 'AUTHENTIC_SCREENSHOT')
   throw new Error('Browser frames require authentic screenshots.');
 const set = (
@@ -39,13 +60,14 @@ const sizes = image.sizes ?? '(max-width: 767px) 90vw, 85vw';
   class:list={[
     'case-media',
     className,
-    { 'case-media--art-directed': Boolean(media.mobile) },
+    { 'case-media--art-directed': Boolean(mobile) },
   ]}
   data-media-provenance={provenance}
   data-media-category={media.category}
   data-media-position={media.position}
   data-study-motion={motion}
-  style={`--media-aspect:${aspect};--media-fit:${media.fit};--media-focal:${media.focalPoint.x}% ${media.focalPoint.y}%;${media.mobile ? `--mobile-aspect:${media.mobile.width}/${media.mobile.height};` : ''}`}
+  data-motion-reveal={eager ? 'soft-unveil' : undefined}
+  style={`--media-aspect:${aspect};--media-fit:${media.fit};--media-focal:${media.focalPoint.x}% ${media.focalPoint.y}%;${mobile ? `--mobile-aspect:${mobile.width}/${mobile.height};` : ''}`}
 >
   <div class:list={{ 'case-frame': image.browser }}>
     {image.browser && (
@@ -58,23 +80,23 @@ const sizes = image.sizes ?? '(max-width: 767px) 90vw, 85vw';
       </div>
     )}
     <picture>
-      {media.mobile && (
+      {mobile && (
         <>
           <source
             media="(max-width: 767px)"
             type="image/avif"
-            srcset={set(media.mobile, 'avif')}
+            srcset={set(mobile, 'avif')}
             sizes="100vw"
-            width={media.mobile.width}
-            height={media.mobile.height}
+            width={mobile.width}
+            height={mobile.height}
           />
           <source
             media="(max-width: 767px)"
             type="image/webp"
-            srcset={set(media.mobile, 'webp')}
+            srcset={set(mobile, 'webp')}
             sizes="100vw"
-            width={media.mobile.width}
-            height={media.mobile.height}
+            width={mobile.width}
+            height={mobile.height}
           />
         </>
       )}
@@ -85,7 +107,7 @@ const sizes = image.sizes ?? '(max-width: 767px) 90vw, 85vw';
         sizes={sizes}
         width={media.width}
         height={media.height}
-        alt={media.alt}
+        alt={alt ?? media.alt}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
         fetchpriority={eager ? 'high' : 'auto'}

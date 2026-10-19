@@ -3,6 +3,7 @@
   "name": "elevatex-masterpiece",
   "compatibility_date": "2026-10-06",
   "workers_dev": true,
+  // Future approved custom domain: elevatexlab.org (apex). Bind only at cutover.
   "assets": {
     "directory": "./dist",
     "html_handling": "force-trailing-slash",

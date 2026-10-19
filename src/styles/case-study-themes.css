@@ -28,3 +28,82 @@
 .case-study .case-media[data-media-position='center'] {
   margin-inline: auto;
 }
+.case-study .study-evidence {
+  max-width: 40rem;
+  margin: 1.75rem auto 0;
+  text-align: left;
+}
+.study-evidence__link {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: center;
+  padding: 0.875rem;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-medium);
+  background: #11110fe6;
+  color: var(--color-text);
+  text-decoration: none;
+}
+.study-evidence__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+.study-evidence__copy strong {
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: var(--study-accent);
+}
+.study-evidence__copy > span:last-child {
+  color: var(--color-muted);
+}
+.study-evidence__label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+.case-study .study-evidence__source {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
+}
+.study-evidence__source a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+.study-evidence .case-media {
+  border: 1px solid var(--border-default);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.study-evidence .case-media img {
+  display: block;
+}
+.case-study[data-study-theme='automotive'] .study-evidence__link {
+  border-color: var(--border-default);
+  background: #111313;
+}
+.case-study[data-study-theme='beauty'] .study-evidence__link {
+  border-radius: var(--radius-large);
+}
+@media (max-width: 767px) {
+  .study-evidence__link {
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.875rem;
+  }
+  .study-evidence__copy > span:last-child {
+    font-size: 0.875rem;
+  }
+  .study-evidence__copy strong {
+    font-size: 1rem;
+  }
+  .case-study .study-evidence .case-media--art-directed img {
+    aspect-ratio: var(--mobile-aspect);
+  }
+}

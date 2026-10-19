@@ -1,7 +1,13 @@
 ---
 import AboutHeading from './AboutHeading.astro';
 import AboutArt from './AboutArt.astro';
+import AboutArtCaption from './AboutArtCaption.astro';
+import BuildEvidencePanel from '../evidence/BuildEvidencePanel.astro';
 import { aboutWorkflow } from '../../data/about';
+interface Props {
+  evidenceReview?: boolean;
+}
+const { evidenceReview = false } = Astro.props;
 ---
 
 <section
@@ -13,7 +19,7 @@ import { aboutWorkflow } from '../../data/about';
     class="about-approach__stage about-scene__backdrop"
     data-about-scene="workspace"
   >
-    <AboutArt name="workspace" />
+    <AboutArt name="workspace" showCaption={false} />
   </div>
   <div class="container about-scene__content">
     <AboutHeading
@@ -46,5 +52,7 @@ import { aboutWorkflow } from '../../data/about';
         </ol>
       </div>
     </div>
+    <AboutArtCaption name="workspace" />
+    <BuildEvidencePanel placement="about" includeDraft={evidenceReview} />
   </div>
 </section>

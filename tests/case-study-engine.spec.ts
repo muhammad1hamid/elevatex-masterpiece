@@ -6,6 +6,43 @@ const fixture = JSON.parse(
   readFileSync('tests/fixtures/cinematic-study.json', 'utf8'),
 );
 const copy = () => structuredClone(fixture.projectStudy);
+test('optional evidence placement preserves version-one entries and validates real sources and targets', () => {
+  const original = cinematicStudySchema.parse(copy());
+  expect(original.hero.evidencePreview).toBeUndefined();
+  const study = copy();
+  study.hero.evidencePreview = {
+    media: 'interface',
+    mobileMedia: 'interface',
+    target: study.sections[0].id,
+    label: 'See the actual website',
+    summary: 'A genuine test capture.',
+  };
+  expect(cinematicStudySchema.safeParse(study).success).toBe(true);
+  for (const mutation of [
+    (s: ReturnType<typeof copy>) => {
+      s.hero.evidencePreview.media = 'missing';
+    },
+    (s: ReturnType<typeof copy>) => {
+      s.hero.evidencePreview.mobileMedia = 'missing';
+    },
+    (s: ReturnType<typeof copy>) => {
+      s.hero.evidencePreview.target = s.hero.id;
+    },
+    (s: ReturnType<typeof copy>) => {
+      s.media.interface.category = 'CONCEPT_VISUAL';
+    },
+    (s: ReturnType<typeof copy>) => {
+      delete s.media.interface.sourceUrl;
+    },
+    (s: ReturnType<typeof copy>) => {
+      delete s.media.interface.capturedAt;
+    },
+  ]) {
+    const changed = structuredClone(study);
+    mutation(changed);
+    expect(cinematicStudySchema.safeParse(changed).success).toBe(false);
+  }
+});
 test('a draft data-only study supports optional chapters, typed themes and a minimal hero', () => {
   const study = cinematicStudySchema.parse(copy());
   expect(study.sections.map((s) => s.type)).toEqual([

@@ -37,7 +37,7 @@ test('complete content, conversation provenance and metadata are server rendered
   await page.goto(path);
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('h1')).toHaveText(aiChatbots.heading);
-  await expect(page.locator('[data-ai-chatbots] > section')).toHaveCount(15);
+  await expect(page.locator('[data-ai-chatbots] > section')).toHaveCount(11);
   await expect(page.locator('#chatbot-faq details')).toHaveCount(12);
   await expect(page.locator('#chatbot-whatsapp')).toContainText('Product Demo');
   await expect(page.locator('#chatbot-whatsapp')).toContainText(
@@ -56,7 +56,7 @@ test('complete content, conversation provenance and metadata are server rendered
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    `https://www.elevatexlab.com${path}`,
+    `https://elevatexlab.org${path}`,
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',

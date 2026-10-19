@@ -4,6 +4,7 @@ title: Infinity Salon
 description: A salon website concept bringing treatments, studio imagery and appointment enquiries into one considered experience.
 industry: Beauty & wellness
 publishedDate: 2026-10-08
+updatedDate: 2026-10-18
 draft: false
 featured: true
 relatedServices:
@@ -14,6 +15,7 @@ projectStudy:
   theme: beauty
   draft: false
   publishedDate: 2026-10-15
+  updatedDate: 2026-10-18
   pageTitle: Infinity Salon — Beauty Website Design Showcase
   description: Explore the Infinity Salon website concept through beauty-focused design, real interface captures, responsive layouts and appointment enquiry details.
   socialImage:
@@ -36,6 +38,12 @@ projectStudy:
       showCaption: true
       sizes: '(max-width: 767px) 90vw, (max-width: 1200px) 60vw, 704px'
       browser: false
+    evidencePreview:
+      media: desktop
+      mobileMedia: mobile
+      target: website-showcase
+      label: See the actual website
+      summary: Treatments, gallery and appointment enquiries.
     classificationSuffix: Beauty & digital experience
     classificationSeparator: dot
     margins:
@@ -507,6 +515,11 @@ showcase:
     featured: true
     layout: beauty
     focus: A little more room for beauty.
+    indexSummary: Treatments, gallery and appointment enquiries.
+    story:
+      decision: Use a light palette and studio imagery while keeping treatment information and appointment actions readable.
+      inspect: Explore treatments and the gallery, then inspect the appointment-request interface.
+      limitation: An appointment request is not a confirmed booking. Demo ratings and request delivery are unverified.
     details:
       - Treatment discovery
       - Studio gallery

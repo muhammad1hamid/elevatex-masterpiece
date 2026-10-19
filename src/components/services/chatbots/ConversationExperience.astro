@@ -1,9 +1,22 @@
 ---
-import { conversation } from '../../../data/services/ai-chatbots';
+import {
+  conversation,
+  conversationSource,
+} from '../../../data/services/ai-chatbots';
+// Integer indices keep native selection styles in sync with the transcript.
+const selectionStyles = conversation
+  .map(
+    (_, index) => `
+  .conversation:has(input[value='${index}']:checked) [data-conversation-state='${index}'] { display: block; }
+  .conversation:has(input[value='${index}']:checked) [data-conversation-message='${index}'] { border-color: var(--color-gold); }
+`,
+  )
+  .join('');
 ---
 
 <fieldset class="conversation" data-conversation>
   <legend>Explore the example conversation</legend>
+  <style is:inline set:html={selectionStyles} />
   <div class="conversation__bar">
     <span>Website project inquiry</span>
     <span>Illustrative conversation · No live chat</span>
@@ -17,14 +30,29 @@ import { conversation } from '../../../data/services/ai-chatbots';
           name="conversation-stage"
           id={`conversation-stage-${i}`}
           value={i}
-          checked={i === 3}
+          checked={i === conversation.length - 1}
         />
         <label for={`conversation-stage-${i}`}>
-          <span>0{i + 1}</span>
+          <span>
+            {String(i + 1).padStart(2, '0')} /{' '}
+            {String(conversation.length).padStart(2, '0')}
+          </span>
           {step.label}
         </label>
       </div>
     ))}
+  </div>
+  <div class="conversation__source" id="chatbot-knowledge">
+    <p class="chat-label">Source used by this illustrative conversation</p>
+    <blockquote>{conversationSource.text}</blockquote>
+    <a href={conversationSource.href}>
+      {conversationSource.title} <span aria-hidden="true">↗</span>
+    </a>
+    <p>
+      Only this service scope and the customer’s messages are available here. AI
+      answers can be incorrect or incomplete; unknown facts require
+      clarification or a person.
+    </p>
   </div>
   <div class="conversation__body">
     <ol class="conversation__transcript">
@@ -69,6 +97,42 @@ import { conversation } from '../../../data/services/ai-chatbots';
         </div>
       ))}
     </aside>
+  </div>
+  <div class="conversation__boundaries" id="chatbot-action">
+    <h3>What may happen next</h3>
+    <dl>
+      <div>
+        <dt>Known</dt>
+        <dd>
+          Treatments and appointment requests are wanted. The salon currently
+          confirms by phone. No booking integration is confirmed.
+        </dd>
+      </div>
+      <div>
+        <dt>Draft only</dt>
+        <dd>
+          The structured inquiry is ready for review. With consent and a
+          supported connection, an agreed workflow could create a lead or notify
+          the owner. Nothing is saved or sent in this demo.
+        </dd>
+      </div>
+      <div id="chatbot-handoff">
+        <dt>Human review</dt>
+        <dd>
+          A person must confirm scope, tools, price and timing. Missing or
+          sensitive information, unknown answers and unsupported actions pause
+          the conversation. No instant staff availability is promised.
+        </dd>
+      </div>
+    </dl>
+    <p>
+      Contact details are requested only with agreement. Context sharing and
+      retention follow the project’s permissions.{' '}
+      <a href="/services/ai-automation/">
+        Explore the workflow behind a conversation{' '}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </p>
   </div>
   <p class="chat-note">
     An illustrative sequence. No message is sent, lead stored, or appointment

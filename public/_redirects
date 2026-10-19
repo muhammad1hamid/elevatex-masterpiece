@@ -1,0 +1,6 @@
+# Canonical website: https://elevatexlab.org
+# Keep page aliases relative so previews and localhost stay on their own host.
+# Configure www-to-apex at the Cloudflare zone; no .com ownership is assumed.
+# Work, About and Contact are real pages, not redirects to old homepage fragments.
+/services /#services 302
+/services/ /#services 302

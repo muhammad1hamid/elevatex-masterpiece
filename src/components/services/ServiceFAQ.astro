@@ -142,6 +142,7 @@ const {
     border: 1px solid var(--border-default);
     border-radius: var(--radius-frame);
     background: #101110;
+    transition: border-color var(--duration-normal) ease;
   }
   .service-faq details[open] {
     border-color: var(--border-accent);
@@ -174,6 +175,7 @@ const {
     height: 2rem;
     border: 1px solid var(--border-accent);
     border-radius: 50%;
+    transition: background-color var(--duration-normal) ease;
   }
   .service-faq__indicator::before,
   .service-faq__indicator::after {
@@ -187,6 +189,9 @@ const {
   }
   .service-faq__indicator::after {
     transform: rotate(90deg);
+    transition:
+      transform var(--duration-normal) var(--ease-standard),
+      opacity var(--duration-normal) ease;
   }
   details[open] .service-faq__indicator {
     background: var(--color-gold-soft);
@@ -195,7 +200,8 @@ const {
     background: #171716;
   }
   details[open] .service-faq__indicator::after {
-    display: none;
+    transform: rotate(0);
+    opacity: 0;
   }
   .service-faq__answer {
     margin: 0 1.25rem 1.25rem 3.75rem;

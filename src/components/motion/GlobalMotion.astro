@@ -1,0 +1,23 @@
+---
+import '../../styles/motion.css';
+---
+
+<div class="motion-cursor" data-motion-cursor hidden aria-hidden="true">
+  <div data-cursor-dot>
+    <i></i>
+  </div>
+  <div data-cursor-ring>
+    <i>
+      <span data-cursor-label></span>
+    </i>
+  </div>
+</div>
+<script>
+  import { initializeMotionEngine } from '../../lib/motion/engine';
+  let cleanup = initializeMotionEngine();
+  document.addEventListener('astro:before-swap', () => cleanup());
+  document.addEventListener('astro:page-load', () => {
+    cleanup();
+    cleanup = initializeMotionEngine();
+  });
+</script>

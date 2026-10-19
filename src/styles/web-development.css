@@ -1227,3 +1227,51 @@
     border-color: LinkText;
   }
 }
+.web-work__project.web-work__project--dossier {
+  display: block;
+}
+.web-work__dossier > h3 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 500;
+}
+.web-work__dossier > .web-work__brief {
+  margin-block: 1rem 2rem;
+}
+.web-work__dossier > a {
+  margin-right: 2rem;
+  margin-top: 1.5rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.web-scope-checks {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-accent);
+}
+.web-scope-checks h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.web-scope-checks dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin-block: 1.5rem;
+}
+.web-scope-checks dt {
+  margin-bottom: 0.75rem;
+}
+.web-scope-checks dd,
+.web-scope-checks > p {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin: 0;
+}
+@media (max-width: 767px) {
+  .web-scope-checks dl {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}

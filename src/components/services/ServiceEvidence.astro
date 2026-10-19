@@ -1,0 +1,194 @@
+---
+import type { ProjectMedia } from '../../data/qadeer-media';
+
+interface Props {
+  desktop: ProjectMedia;
+  mobile: ProjectMedia;
+  caption: string;
+  notes: readonly { title: string; text: string }[];
+  noteLevel?: 'h3' | 'h4';
+}
+const {
+  desktop,
+  mobile,
+  caption,
+  notes,
+  noteLevel: NoteHeading = 'h3',
+} = Astro.props;
+const sources = (media: ProjectMedia, format: string) =>
+  media.widths
+    .map((width) => `${media.base}-${width}.${format} ${width}w`)
+    .join(', ');
+---
+
+<div class="service-evidence" data-service-evidence>
+  <figure>
+    <div class="service-evidence__screens">
+      <div>
+        <p class="service-evidence__device">
+          <span>
+            Desktop / {desktop.width} × {desktop.height}
+          </span>
+          <span>
+            Mobile / {mobile.width} × {mobile.height}
+          </span>
+        </p>
+        <picture>
+          <source
+            media="(max-width: 767px)"
+            type="image/avif"
+            srcset={sources(mobile, 'avif')}
+            width={mobile.width}
+            height={mobile.height}
+          />
+          <source
+            media="(max-width: 767px)"
+            type="image/webp"
+            srcset={sources(mobile, 'webp')}
+            width={mobile.width}
+            height={mobile.height}
+          />
+          <source
+            type="image/avif"
+            srcset={sources(desktop, 'avif')}
+            sizes="(min-width: 1280px) 660px, (min-width: 1024px) 48vw, 65vw"
+          />
+          <img
+            src={`${desktop.base}-${desktop.width}.webp`}
+            srcset={sources(desktop, 'webp')}
+            sizes="(min-width: 1280px) 660px, (min-width: 1024px) 48vw, 65vw"
+            width={desktop.width}
+            height={desktop.height}
+            alt={`${desktop.alt} The narrow-screen source shows the actual mobile layout.`}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+      <div class="service-evidence__mobile">
+        <p class="service-evidence__device">
+          Mobile / {mobile.width} × {mobile.height}
+        </p>
+        <picture>
+          <source type="image/avif" srcset={sources(mobile, 'avif')} />
+          <img
+            src={`${mobile.base}-${mobile.width}.webp`}
+            width={mobile.width}
+            height={mobile.height}
+            alt={mobile.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+    </div>
+    <figcaption>{caption}</figcaption>
+  </figure>
+  <ol class="service-evidence__notes">
+    {notes.map((note, index) => (
+      <li>
+        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <div>
+          <NoteHeading>{note.title}</NoteHeading>
+          <p>{note.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .service-evidence {
+    display: grid;
+    grid-template-columns: minmax(0, 2.3fr) minmax(15rem, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+  figure {
+    margin: 0;
+    min-width: 0;
+  }
+  .service-evidence__screens {
+    display: grid;
+    grid-template-columns: minmax(0, 3.3fr) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+  .service-evidence__screens > div {
+    min-width: 0;
+  }
+  picture,
+  img {
+    display: block;
+    width: 100%;
+  }
+  img {
+    height: auto;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-medium);
+  }
+  .service-evidence__device {
+    font-size: var(--text-small);
+    color: var(--color-muted);
+    margin: 0 0 0.75rem;
+  }
+  .service-evidence__device span:last-child {
+    display: none;
+  }
+  figcaption {
+    font-size: var(--text-small);
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin-top: 1rem;
+  }
+  .service-evidence__notes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .service-evidence__notes li {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border-accent);
+  }
+  .service-evidence__notes li > span {
+    color: var(--color-gold);
+    font-size: var(--text-small);
+  }
+  .service-evidence__notes :is(h3, h4) {
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+  }
+  .service-evidence__notes p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin: 0;
+  }
+  @media (max-width: 1023px) {
+    .service-evidence {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .service-evidence__screens {
+      display: block;
+      max-width: 24rem;
+      margin-inline: auto;
+    }
+    .service-evidence__mobile,
+    .service-evidence__device span:first-child {
+      display: none;
+    }
+    .service-evidence__device span:last-child {
+      display: inline;
+    }
+    .service-evidence__screens > div:first-child img {
+      aspect-ratio: 390 / 844;
+    }
+  }
+</style>

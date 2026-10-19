@@ -23,9 +23,12 @@ const {
     class="service-actions__primary"
     href={contactLinkForService(Astro.url.pathname, primaryHref)}
     data-cta-source={source}
+    data-magnetic
   >
     {primaryLabel}
-    <span aria-hidden="true">→</span>
+    <span aria-hidden="true" data-magnetic-content>
+      →
+    </span>
   </a>
   {secondary && (
     <a

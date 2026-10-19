@@ -1,5 +1,12 @@
 import { spawnSync } from 'node:child_process';
-import { access, mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
+import {
+  access,
+  mkdir,
+  readFile,
+  readdir,
+  unlink,
+  writeFile,
+} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import path from 'node:path';
 
@@ -92,7 +99,7 @@ try {
   // Completed services and Work are approved routes; preview handoffs
   // and the homepage retain their existing publication gates.
   const servicePath = '/services/web-development/';
-  const serviceCanonical = `https://www.elevatexlab.com${servicePath}`;
+  const serviceCanonical = `https://elevatexlab.org${servicePath}`;
   const serviceHtml = await readFile(
     `${output}${servicePath}index.html`,
     'utf8',
@@ -123,7 +130,7 @@ try {
     [
       'property',
       'og:image',
-      'https://www.elevatexlab.com/images/social/web-development.png',
+      'https://elevatexlab.org/images/social/web-development.png',
     ],
     ['property', 'og:image:width', '1200'],
     ['property', 'og:image:height', '630'],
@@ -133,7 +140,7 @@ try {
     [
       'name',
       'twitter:image',
-      'https://www.elevatexlab.com/images/social/web-development.png',
+      'https://elevatexlab.org/images/social/web-development.png',
     ],
   ]) {
     const tag = serviceHtml.match(
@@ -167,10 +174,7 @@ try {
   const website = byType('WebSite')[0];
   const webPage = byType('WebPage')[0];
   const service = byType('Service')[0];
-  assert.equal(
-    organization['@id'],
-    'https://www.elevatexlab.com/#organization',
-  );
+  assert.equal(organization['@id'], 'https://elevatexlab.org/#organization');
   assert.equal(service.name, 'Web Development');
   assert.equal(service.url, serviceCanonical);
   assert.equal(service.description, description);
@@ -184,7 +188,7 @@ try {
       '@type': 'ListItem',
       position: 1,
       name: 'Home',
-      item: 'https://www.elevatexlab.com/',
+      item: 'https://elevatexlab.org/',
     },
     {
       '@type': 'ListItem',
@@ -232,10 +236,10 @@ try {
       'utf8',
     );
     assert.match(html, /index, follow, max-image-preview:large/);
-    assert.ok(html.includes(`https://www.elevatexlab.com/insights/${slug}/`));
+    assert.ok(html.includes(`https://elevatexlab.org/insights/${slug}/`));
     assert.match(
       html,
-      /"@type":"Organization","@id":"https:\/\/www\.elevatexlab\.com\/#organization","name":"ElevateX"/,
+      /"@type":"Organization","@id":"https:\/\/elevatexlab\.org\/#organization","name":"ElevateX"/,
     );
     assert.match(html, /"datePublished":"2026-10-16T00:00:00.000Z"/);
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1);
@@ -245,10 +249,9 @@ try {
   assert.match(sitemap, /\/insights\/qa-published-fixture\//);
   assert.match(sitemap, /\/work\/qa-case-fixture\//);
   assert.equal(sitemap.split(`<loc>${serviceCanonical}</loc>`).length - 1, 1);
-  assert.doesNotMatch(sitemap, /<loc>https:\/\/www\.elevatexlab\.com\/<\/loc>/);
+  assert.doesNotMatch(sitemap, /<loc>https:\/\/elevatexlab\.org\/<\/loc>/);
   assert.doesNotMatch(sitemap, /qa-draft-fixture|qa-scheduled-fixture/);
-  const automationCanonical =
-    'https://www.elevatexlab.com/services/ai-automation/';
+  const automationCanonical = 'https://elevatexlab.org/services/ai-automation/';
   const automationHtml = await readFile(
     `${output}/services/ai-automation/index.html`,
     'utf8',
@@ -306,7 +309,7 @@ try {
     sitemap.split(`<loc>${automationCanonical}</loc>`).length - 1,
     1,
   );
-  const chatbotCanonical = 'https://www.elevatexlab.com/services/ai-chatbots/';
+  const chatbotCanonical = 'https://elevatexlab.org/services/ai-chatbots/';
   const chatbotHtml = await readFile(
     `${output}/services/ai-chatbots/index.html`,
     'utf8',
@@ -358,10 +361,9 @@ try {
   assert.equal(sitemap.split(`<loc>${chatbotCanonical}</loc>`).length - 1, 1);
   for (const alias of ['chatbots', 'ai-chatbot', 'chatbot-development'])
     assert.ok(
-      !sitemap.includes(`<loc>https://www.elevatexlab.com/${alias}/</loc>`),
+      !sitemap.includes(`<loc>https://elevatexlab.org/${alias}/</loc>`),
     );
-  const landingCanonical =
-    'https://www.elevatexlab.com/services/landing-pages/';
+  const landingCanonical = 'https://elevatexlab.org/services/landing-pages/';
   const landingHtml = await readFile(
     `${output}/services/landing-pages/index.html`,
     'utf8',
@@ -417,7 +419,7 @@ try {
     'services/landing-page',
   ]) {
     assert.ok(
-      !sitemap.includes(`<loc>https://www.elevatexlab.com/${alias}/</loc>`),
+      !sitemap.includes(`<loc>https://elevatexlab.org/${alias}/</loc>`),
     );
     await assert.rejects(access(`${output}/${alias}/index.html`));
   }
@@ -435,9 +437,8 @@ try {
   assert.match(qadeerHtml, /"@type":"CreativeWork"/);
   assert.equal([...qadeerHtml.matchAll(/<h1\b/g)].length, 1);
   assert.equal(
-    sitemap.split(
-      '<loc>https://www.elevatexlab.com/work/qadeer-jewellers/</loc>',
-    ).length - 1,
+    sitemap.split('<loc>https://elevatexlab.org/work/qadeer-jewellers/</loc>')
+      .length - 1,
     1,
   );
   const infinityHtml = await readFile(
@@ -455,7 +456,7 @@ try {
   assert.match(infinityHtml, /"datePublished":"2026-10-15T00:00:00.000Z"/);
   assert.equal([...infinityHtml.matchAll(/<h1\b/g)].length, 1);
   assert.equal(
-    sitemap.split('<loc>https://www.elevatexlab.com/work/infinity-salon/</loc>')
+    sitemap.split('<loc>https://elevatexlab.org/work/infinity-salon/</loc>')
       .length - 1,
     1,
   );
@@ -465,15 +466,15 @@ try {
   );
   assert.match(
     apexHtml,
-    /Apex Detailing Studio — Website Design Showcase \| ElevateX/,
+    /Classic Detailers — Website Design Showcase \| ElevateX/,
   );
   assert.match(apexHtml, /index, follow, max-image-preview:large/);
-  assert.match(apexHtml, /currently uses Classic Detailers branding/);
+  assert.match(apexHtml, /Originally supplied as Apex Detailing Studio/);
   assert.match(apexHtml, /"@type":"CreativeWork"/);
   assert.equal([...apexHtml.matchAll(/<h1\b/g)].length, 1);
   assert.equal(
     sitemap.split(
-      '<loc>https://www.elevatexlab.com/work/apex-detailing-studio/</loc>',
+      '<loc>https://elevatexlab.org/work/apex-detailing-studio/</loc>',
     ).length - 1,
     1,
   );
@@ -505,7 +506,7 @@ try {
   assert.match(workHtml, /"@type":"ItemList"/);
   assert.equal([...workHtml.matchAll(/<h1\b/g)].length, 1);
   assert.equal(
-    sitemap.split('<loc>https://www.elevatexlab.com/work/</loc>').length - 1,
+    sitemap.split('<loc>https://elevatexlab.org/work/</loc>').length - 1,
     1,
   );
   for (const id of ['defence-marquee', 'fortress-vision', 'bridal-house']) {
@@ -545,10 +546,10 @@ try {
   assert.equal(aboutFounder.worksFor['@id'], aboutOrganization['@id']);
   assert.equal(
     aboutSchemas.find((item) => item['@type'] === 'AboutPage').url,
-    'https://www.elevatexlab.com/about/',
+    'https://elevatexlab.org/about/',
   );
   assert.equal(
-    sitemap.split('<loc>https://www.elevatexlab.com/about/</loc>').length - 1,
+    sitemap.split('<loc>https://elevatexlab.org/about/</loc>').length - 1,
     1,
   );
   const contactHtml = await readFile(`${output}/contact/index.html`, 'utf8');
@@ -558,13 +559,11 @@ try {
   );
   assert.match(contactHtml, /noindex, follow/);
   assert.match(contactHtml, /"@type":"ContactPage"/);
-  assert.match(contactHtml, /https:\/\/www\.elevatexlab\.com\/contact\//);
+  assert.match(contactHtml, /https:\/\/elevatexlab\.org\/contact\//);
   assert.match(contactHtml, /Inquiry preview — sending is not available yet/);
   assert.doesNotMatch(contactHtml, /http-equiv="refresh"|type="submit"/);
   assert.equal([...contactHtml.matchAll(/<h1\b/g)].length, 1);
-  assert.ok(
-    !sitemap.includes('<loc>https://www.elevatexlab.com/contact/</loc>'),
-  );
+  assert.ok(!sitemap.includes('<loc>https://elevatexlab.org/contact/</loc>'));
   for (const slug of [
     'web-development',
     'ai-automation',
@@ -578,11 +577,14 @@ try {
     assert.ok(html.includes(`/contact/?service=${slug}`));
   }
   for (const destination of ['services']) {
-    await assert.rejects(access(`${output}/${destination}/index.html`));
+    const handoff = await readFile(
+      `${output}/${destination}/index.html`,
+      'utf8',
+    );
+    assert.match(handoff, /noindex, follow/);
+    assert.match(handoff, /http-equiv="refresh" content="0;url=\/#services"/);
     assert.ok(
-      !sitemap.includes(
-        `<loc>https://www.elevatexlab.com/${destination}/</loc>`,
-      ),
+      !sitemap.includes(`<loc>https://elevatexlab.org/${destination}/</loc>`),
     );
   }
   assert.match(robots, /User-agent: OAI-SearchBot\nAllow: \//);
@@ -596,6 +598,56 @@ try {
     /<button[^>]*data-motion-replay/,
     'Local animation review controls must not ship in production HTML',
   );
+  for (const route of ['work', 'about']) {
+    const html = await readFile(`${output}/${route}/index.html`, 'utf8');
+    assert.doesNotMatch(
+      html,
+      /data-evidence-review="true"|LOCAL REVIEW — NOT APPROVED/,
+      'Private review labels must remain outside normal HTML.',
+    );
+    assert.equal(
+      [...html.matchAll(/\bdata-build-evidence(?=[\s=>])/g)].length,
+      1,
+      'Each normal placement must contain the exact approved panel once.',
+    );
+    assert.match(html, /A review boundary you can inspect\./);
+    assert.match(html, /not a live automation deployment/);
+  }
+  for (const route of [
+    'qa-build-evidence-work',
+    'qa-build-evidence-about',
+    'work/inquiry-approval',
+  ])
+    await assert.rejects(access(`${output}/${route}/index.html`));
+  assert.doesNotMatch(sitemap, /qa-build-evidence|inquiry-approval/);
+  const approvedEvidence = JSON.parse(
+    await readFile(`${output}/evidence/inquiry-approval.json`, 'utf8'),
+  );
+  assert.equal(approvedEvidence.draft, false);
+  assert.equal(approvedEvidence.permission, 'confirmed');
+  assert.equal(
+    approvedEvidence.sourceVersion,
+    '586032a7fe55995ef193e032d04e6f605337eeb42ba760641c621408059174f5',
+  );
+  for (const media of [approvedEvidence.desktop, approvedEvidence.mobile])
+    for (const width of media.widths)
+      for (const format of ['avif', 'webp'])
+        await access(`${output}${media.base}-${width}.${format}`);
+  // Independent migration expectation: check every generated document, including
+  // dynamic articles/studies, without changing normal preview indexing gates.
+  for (const entry of await readdir(output, { recursive: true })) {
+    if (!/\.(?:html|xml|txt)$/.test(entry)) continue;
+    const text = await readFile(path.join(output, entry), 'utf8');
+    assert.doesNotMatch(
+      text,
+      /https?:\/\/(?:www\.)?elevatexlab\.com\b/i,
+      `Old first-party domain emitted in ${entry}`,
+    );
+    assert.doesNotMatch(text, /https?:\/\/www\.elevatexlab\.org\b/i);
+  }
+  const domainFeed = await readFile(`${output}/insights/rss.xml`, 'utf8');
+  assert.ok(domainFeed.includes('https://elevatexlab.org/insights/'));
+  assert.ok(sitemap.includes('<loc>https://elevatexlab.org/'));
   console.log(
     'Publication integration passed: services, About/founder graph, approved routes, case-study evidence, drafts, scheduling, sitemap and production robots.',
   );

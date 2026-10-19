@@ -1,0 +1,55 @@
+---
+import type { StudyContext } from '../../lib/case-study/context';
+import StudyMedia from './StudyMedia.astro';
+interface Props {
+  context: StudyContext;
+}
+const { context } = Astro.props;
+const preview = context.study.hero.evidencePreview;
+const media = preview ? context.study.media[preview.media] : undefined;
+const capturedAt = media?.capturedAt;
+const date = capturedAt?.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+{preview && media && (
+  <aside
+    class="study-evidence"
+    aria-label={`${context.name}: actual website evidence`}
+    data-study-evidence
+  >
+    <a class="study-evidence__link" href={`#${preview.target}`}>
+      <StudyMedia
+        context={context}
+        image={{
+          media: preview.media,
+          browser: false,
+          showCaption: false,
+          sizes: '160px',
+        }}
+        mobileMedia={preview.mobileMedia}
+        alt={`${context.name} concept website interface; real desktop and mobile captures.`}
+      />
+      <span class="study-evidence__copy">
+        <span class="study-evidence__label">
+          {context.classification} / Actual website
+        </span>
+        <strong>
+          {preview.label} <span aria-hidden="true">↓</span>
+        </strong>
+        <span>{preview.summary}</span>
+      </span>
+    </a>
+    <p class="study-evidence__source">
+      Captured <time datetime={capturedAt?.toISOString()}>{date}</time>.{' '}
+      <a href={media.sourceUrl} target="_blank" rel="noopener noreferrer">
+        Source: {context.browserLabel}
+        <span class="sr-only"> (opens in a new tab)</span>
+      </a>
+    </p>
+  </aside>
+)}

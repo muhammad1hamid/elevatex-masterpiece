@@ -17,7 +17,12 @@ export function canonicalUrl(path: string): string {
 }
 
 export function pageTitle(title: string): string {
-  if (title === site.name || title.startsWith(`${site.name} — `)) return title;
+  if (
+    title === site.name ||
+    title.startsWith(`${site.name} — `) ||
+    title.endsWith(` | ${site.name} Lab`)
+  )
+    return title;
   return `${title} | ${site.name}`;
 }
 

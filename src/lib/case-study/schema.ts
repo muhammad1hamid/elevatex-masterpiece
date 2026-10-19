@@ -322,6 +322,15 @@ export const cinematicStudySchema = z
         .object({ start: z.array(text), end: z.array(text) })
         .optional(),
       indexLink: z.object({ label: text, href }).optional(),
+      evidencePreview: z
+        .object({
+          media: slug,
+          mobileMedia: slug.optional(),
+          target: anchor,
+          label: text,
+          summary: text,
+        })
+        .optional(),
     }),
     media: z.record(slug, studyMediaSchema),
     sections: z.array(studySectionSchema).min(1).max(20),
@@ -427,6 +436,28 @@ export const cinematicStudySchema = z
       }
     };
     inspect(study.hero.image);
+    if (study.hero.evidencePreview) {
+      const preview = study.hero.evidencePreview;
+      inspect(preview, true);
+      if (preview.mobileMedia) inspect({ media: preview.mobileMedia }, true);
+      if (
+        !study.sections.some(
+          (section) =>
+            section.id === preview.target &&
+            [
+              'website-showcase',
+              'responsive-showcase',
+              'technical-story',
+              'final-showcase',
+            ].includes(section.type),
+        )
+      )
+        ctx.addIssue({
+          code: 'custom',
+          message:
+            'An evidence preview must target an existing interface-evidence section.',
+        });
+    }
     for (const section of study.sections) {
       if ('image' in section)
         inspect(

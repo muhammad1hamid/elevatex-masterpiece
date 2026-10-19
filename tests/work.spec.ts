@@ -17,7 +17,7 @@ test('server content, authentic media, metadata and project classification', asy
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/work/',
+    'https://elevatexlab.org/work/',
   );
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
@@ -115,7 +115,7 @@ test('filters work by keyboard, announce results and restore all projects', asyn
   await expect(page.locator('.work-tile:visible')).toHaveCount(6);
 });
 
-test('desktop entrance finishes; mobile motion stays off and intros are centered', async ({
+test('desktop entrance finishes; mobile reveals settle quickly and intros are centered', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
@@ -147,7 +147,11 @@ test('desktop entrance finishes; mobile motion stays off and intros are centered
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.reload();
-  expect(await page.evaluate(() => document.getAnimations().length)).toBe(0);
+  await expect
+    .poll(() => page.evaluate(() => document.getAnimations().length), {
+      timeout: 1500,
+    })
+    .toBe(0);
 });
 
 for (const width of [390, 1440])

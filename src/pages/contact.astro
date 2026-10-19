@@ -73,12 +73,15 @@ import '../styles/contact.css';
                 href={method.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${method.label} at ${method.detail} (opens in a new tab)`}
+                aria-describedby={`contact-${method.kind}-new-tab`}
               >
-                <span class="contact-eyebrow">{method.label}</span>
+                <span class="contact-eyebrow">{method.label}</span>{' '}
                 <span>{method.detail}</span>
                 <span aria-hidden="true">↗</span>
               </a>
+              <span class="sr-only" id={`contact-${method.kind}-new-tab`}>
+                Opens in a new tab.
+              </span>
             </li>
           ))}
         </ul>

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
 import ServiceActions from '../../components/services/ServiceActions.astro';
 import ProjectPreview from '../../components/work/ProjectPreview.astro';
+import BuildEvidencePanel from '../../components/evidence/BuildEvidencePanel.astro';
 import Atmosphere from '../../components/work/Atmosphere.astro';
 import { publishedWork } from '../../utils/content';
 import { workMetadata, workCapabilities } from '../../data/work';
@@ -56,7 +57,7 @@ const breadcrumbs = [
         <p class="work-kicker">
           Selected work <span>/ ElevateX</span>
         </p>
-        <h1 id="work-title">
+        <h1 id="work-title" data-motion-reveal="text">
           Work that speaks
           <br />
           <span>for itself.</span>
@@ -110,7 +111,7 @@ const breadcrumbs = [
     >
       <header class="container work-intro">
         <p class="work-kicker">Featured projects / 01</p>
-        <h2 id="featured-title">
+        <h2 id="featured-title" data-motion-reveal="text">
           Different industries.
           <br />
           <span>Distinct digital experiences.</span>
@@ -136,7 +137,12 @@ const breadcrumbs = [
           aria-labelledby={`title-${project.id}`}
         >
           <div class="container work-feature__layout">
-            <div class="work-feature__visual">
+            <div
+              class="work-feature__visual"
+              data-motion-reveal={
+                index % 2 ? 'cinematic-right' : 'cinematic-left'
+              }
+            >
               <Atmosphere name={project.portfolio!.layout!} />
               <ProjectPreview
                 project={project}
@@ -151,14 +157,32 @@ const breadcrumbs = [
               <h3 id={`title-${project.id}`}>{project.title}</h3>
               <p class="work-feature__focus">{project.portfolio!.focus}</p>
               <p>{project.description}</p>
-              <ul class="work-details">
-                {project.portfolio!.details.map((detail) => (
-                  <li>{detail}</li>
-                ))}
-              </ul>
+              {project.portfolio!.story ? (
+                <dl class="work-details work-decisions">
+                  <div>
+                    <dt>Design choice</dt>
+                    <dd>{project.portfolio!.story.decision}</dd>
+                  </div>
+                  <div>
+                    <dt>Inspect the interface</dt>
+                    <dd>{project.portfolio!.story.inspect}</dd>
+                  </div>
+                  <div>
+                    <dt>What this does not establish</dt>
+                    <dd>{project.portfolio!.story.limitation}</dd>
+                  </div>
+                </dl>
+              ) : (
+                <ul class="work-details">
+                  {project.portfolio!.details.map((detail) => (
+                    <li>{detail}</li>
+                  ))}
+                </ul>
+              )}
               <p class="work-service">{project.serviceNames.join(' · ')}</p>
               <a
                 class="work-link"
+                data-cursor="view"
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -172,6 +196,7 @@ const breadcrumbs = [
               {project.caseStudyHref && (
                 <a
                   class="work-link work-case-link"
+                  data-cursor="view"
                   href={project.caseStudyHref}
                 >
                   View Case Study <span aria-hidden="true">→</span>
@@ -184,6 +209,7 @@ const breadcrumbs = [
       ))}
     </section>
 
+    <BuildEvidencePanel />
     <section class="work-interlude" aria-labelledby="interlude-title">
       <Atmosphere name="gallery" />
       <div class="container">
@@ -210,8 +236,8 @@ const breadcrumbs = [
           <span>you want to see.</span>
         </h2>
         <p>
-          Browse the collection by industry, then open a live concept to explore
-          the experience for yourself.
+          Use this index to compare industries and find a live concept or its
+          study. The featured stories above explain the design choices.
         </p>
       </header>
       <div
@@ -236,46 +262,58 @@ const breadcrumbs = [
       </p>
       <div class="work-grid" id="work-results">
         {projects.map((project, index) => (
-          <article class="work-tile" data-industry={project.industry}>
+          <article
+            class="work-tile"
+            data-industry={project.industry}
+            data-motion-reveal="editorial-up"
+          >
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Explore ${project.title} concept (opens in a new tab)`}
+              data-cursor="view"
+              data-hover-image
             >
               <ProjectPreview
                 project={project}
-                sizes="(max-width: 767px) 90vw, 48vw"
+                sizes="(max-width: 767px) 88px, (max-width: 1023px) 160px, 224px"
                 decorative
               />
             </a>
-            <div class="work-tile__meta">
-              <p class="work-kicker">
-                {String(index + 1).padStart(2, '0')} / {project.industry}
-              </p>
-              <span class="work-type">{project.typeLabel}</span>
+            <div class="work-tile__summary">
+              <div class="work-tile__meta">
+                <p class="work-kicker">
+                  {String(index + 1).padStart(2, '0')} / {project.industry}
+                </p>
+                <span class="work-type">{project.typeLabel}</span>
+              </div>
+              <h3>{project.title}</h3>
+              <p>{project.portfolio?.indexSummary ?? project.description}</p>
             </div>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <p class="work-service">{project.serviceNames.join(' · ')}</p>
-            <a
-              class="work-link"
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Live Project <span aria-hidden="true">↗</span>
-              <span class="sr-only">
-                {' '}
-                — {project.title} (opens in a new tab)
-              </span>
-            </a>
-            {project.caseStudyHref && (
-              <a class="work-link work-case-link" href={project.caseStudyHref}>
-                View Case Study <span aria-hidden="true">→</span>
-                <span class="sr-only"> — {project.title}</span>
+            <div class="work-tile__actions">
+              <a
+                class="work-link"
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Live Project <span aria-hidden="true">↗</span>
+                <span class="sr-only">
+                  {' '}
+                  — {project.title} (opens in a new tab)
+                </span>
               </a>
-            )}
+              {project.caseStudyHref && (
+                <a
+                  class="work-link work-case-link"
+                  href={project.caseStudyHref}
+                >
+                  View Case Study <span aria-hidden="true">→</span>
+                  <span class="sr-only"> — {project.title}</span>
+                </a>
+              )}
+            </div>
           </article>
         ))}
       </div>

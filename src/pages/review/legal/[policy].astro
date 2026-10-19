@@ -1,0 +1,21 @@
+---
+import { legalPublished } from '../../../data/legal';
+import type { GetStaticPaths } from 'astro';
+import LegalLayout from '../../../components/legal/LegalLayout.astro';
+import { legalPolicies, type LegalPolicy } from '../../../lib/legal/policies';
+export const getStaticPaths = (() =>
+  !legalPublished &&
+  import.meta.env.LEGAL_REVIEW === 'true' &&
+  import.meta.env.DEPLOYMENT_ENV !== 'production'
+    ? legalPolicies.map((policy) => ({
+        params: { policy: policy.slug },
+        props: { policy },
+      }))
+    : []) satisfies GetStaticPaths;
+interface Props {
+  policy: LegalPolicy;
+}
+const { policy } = Astro.props;
+---
+
+<LegalLayout policy={policy} review />

@@ -1,3 +1,4 @@
+import { legalPublished, legalLinks } from './legal';
 import { serviceOverview } from './services';
 import { staticPages } from './site';
 import { verifiedContactMethods } from './contact';
@@ -15,7 +16,7 @@ export interface FooterGroup {
 }
 
 export const footerStatement =
-  'Thoughtful websites, practical AI systems, and digital experiences built with purpose.';
+  'Web development, AI automation, chatbots, and focused landing pages.';
 
 /** Dedicated pages take precedence; upcoming services use real homepage content. */
 export const footerServices: readonly FooterLink[] = serviceOverview.map(
@@ -47,8 +48,7 @@ export const pendingFooterRoutes = [
   ...serviceOverview
     .filter(({ plannedHref }) => !publishedServices.has(plannedHref))
     .map(({ plannedHref }) => plannedHref),
-  '/privacy/',
-  '/terms/',
+  ...(legalPublished ? [] : legalLinks.map(({ href }) => href)),
 ] as const;
 
-// No verified social profiles, email, location or legal pages are available.
+// No verified social profiles, email or office address are available.

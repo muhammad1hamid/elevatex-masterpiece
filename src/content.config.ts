@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { serviceSlugs } from './data/site';
 import { cinematicStudySchema } from './lib/case-study/schema';
+import { buildEvidenceSchema } from './lib/build-evidence/schema';
 import { insightTopics } from './data/insight-topics';
 
 const text = z.string().trim().min(1);
@@ -28,6 +29,10 @@ const showcase = z.object({
         .optional(),
       focus: text,
       details: z.array(text).min(1),
+      indexSummary: text.optional(),
+      story: z
+        .object({ decision: text, inspect: text, limitation: text })
+        .optional(),
       mobileImage: media
         .extend({ provenance: z.literal('verifiedScreenshot') })
         .optional(),
@@ -148,4 +153,8 @@ const caseStudies = defineCollection({
     }),
 });
 
-export const collections = { insights, caseStudies };
+const buildEvidence = defineCollection({
+  loader: glob({ base: './src/content/build-evidence', pattern: '**/*.md' }),
+  schema: buildEvidenceSchema,
+});
+export const collections = { insights, caseStudies, buildEvidence };

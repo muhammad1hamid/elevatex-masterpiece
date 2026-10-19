@@ -1,0 +1,250 @@
+---
+import { getEntry } from 'astro:content';
+import { existsSync } from 'node:fs';
+interface Props {
+  placement?: 'work' | 'about';
+  includeDraft?: boolean;
+}
+const { placement = 'work', includeDraft = false } = Astro.props;
+const entry = await getEntry('buildEvidence', 'inquiry-approval');
+const record = entry?.data;
+const visible =
+  record &&
+  (includeDraft || (!record.draft && record.permission === 'confirmed'));
+if (record && visible && !includeDraft) {
+  for (const media of [record.desktop, record.mobile])
+    for (const width of media.widths)
+      for (const format of ['avif', 'webp'])
+        if (!existsSync(`public${media.base}-${width}.${format}`))
+          throw new Error(
+            'Approved build evidence is missing its public media.',
+          );
+  if (!existsSync(`public${record.recordPath}`))
+    throw new Error('Approved build evidence is missing its source record.');
+}
+const Container = placement === 'about' ? 'aside' : 'section';
+const Heading = placement === 'about' ? 'h3' : 'h2';
+const headingId = `${placement}-build-evidence-title`;
+const sources = (
+  media: { base: string; widths: readonly number[] },
+  format: string,
+) =>
+  media.widths
+    .map((width) => `${media.base}-${width}.${format} ${width}w`)
+    .join(', ');
+---
+
+{visible && record && (
+  <Container
+    class:list={['build-evidence', { container: placement === 'work' }]}
+    aria-labelledby={headingId}
+    data-build-evidence
+    data-evidence-review={includeDraft ? 'true' : undefined}
+  >
+    {includeDraft && (
+      <p class="build-evidence__review">
+        LOCAL REVIEW — NOT APPROVED FOR PUBLICATION
+      </p>
+    )}
+    <header>
+      <p class="build-evidence__eyebrow">Internal build / ElevateX</p>
+      <Heading id={headingId}>{record.title}</Heading>
+      <p>{record.description}</p>
+    </header>
+    <div class="build-evidence__body">
+      <figure>
+        <picture>
+          <source
+            media="(max-width: 767px)"
+            type="image/avif"
+            srcset={sources(record.mobile, 'avif')}
+            width={record.mobile.width}
+            height={record.mobile.height}
+          />
+          <source
+            media="(max-width: 767px)"
+            type="image/webp"
+            srcset={sources(record.mobile, 'webp')}
+            width={record.mobile.width}
+            height={record.mobile.height}
+          />
+          <source
+            type="image/avif"
+            srcset={sources(record.desktop, 'avif')}
+            sizes="(min-width: 1280px) 720px, (min-width: 1024px) 55vw, 90vw"
+          />
+          <img
+            src={`${record.desktop.base}-${record.desktop.widths.at(-1)}.webp`}
+            srcset={sources(record.desktop, 'webp')}
+            sizes="(min-width: 1280px) 720px, (min-width: 1024px) 55vw, 90vw"
+            width={record.desktop.width}
+            height={record.desktop.height}
+            alt={record.desktop.alt}
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <figcaption>{record.caption}</figcaption>
+      </figure>
+      <dl>
+        {record.observations.map((note) => (
+          <div>
+            <dt>{note.title}</dt>
+            <dd>{note.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    <p class="build-evidence__limit">{record.limitations.join(' ')}</p>
+    <details>
+      <summary>Inspect the source and method</summary>
+      <p>
+        Recorded{' '}
+        <time datetime={record.recordedAt.toISOString()}>
+          {record.recordedAt.toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            timeZone: 'UTC',
+          })}
+        </time>
+        . {record.environment.join(' · ')}
+      </p>
+      <ol>
+        {record.method.map((step) => (
+          <li>{step}</li>
+        ))}
+      </ol>
+      <p>Exact source excerpt / {record.excerpt.path}</p>
+      <pre><code>{record.excerpt.code}</code></pre>
+      <a href={record.recordPath}>
+        Open the versioned evidence record <span aria-hidden="true">↗</span>
+      </a>
+    </details>
+  </Container>
+)}
+
+<style>
+  .build-evidence {
+    padding-block: var(--section-md);
+    color: var(--color-text);
+  }
+  aside.build-evidence {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-large);
+    background: #10100ff5;
+  }
+  header {
+    max-width: 48rem;
+    margin-bottom: 2rem;
+  }
+  .build-evidence__eyebrow,
+  .build-evidence__review {
+    color: var(--color-gold-soft);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  .build-evidence__review {
+    border-bottom: 1px solid var(--border-accent);
+    padding-bottom: 1rem;
+  }
+  header :is(h2, h3) {
+    font: 500 clamp(1.75rem, 3vw, 2.75rem)/1.15 var(--font-heading);
+    margin-bottom: 1rem;
+  }
+  header > p:last-child {
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+  .build-evidence__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+  figure {
+    margin: 0;
+    min-width: 0;
+  }
+  picture,
+  img {
+    display: block;
+    width: 100%;
+  }
+  img {
+    height: auto;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-medium);
+  }
+  figcaption {
+    margin-top: 1rem;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  dl {
+    margin: 0;
+  }
+  dl > div {
+    padding-block: 1rem;
+    border-top: 1px solid var(--border-accent);
+  }
+  dt {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--color-gold-soft);
+  }
+  dd {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+  .build-evidence__limit {
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    max-width: 80ch;
+  }
+  details {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-accent);
+  }
+  summary {
+    cursor: pointer;
+    min-height: 44px;
+    padding-block: 0.75rem;
+  }
+  details > :not(summary) {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin-top: 1rem;
+  }
+  details a {
+    color: var(--color-gold-soft);
+    display: inline-block;
+    padding-block: 0.75rem;
+  }
+  pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    padding: 1.25rem;
+    background: #080908;
+    border: 1px solid var(--border-default);
+  }
+  @media (max-width: 1023px) {
+    .build-evidence__body {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+  }
+  @media (max-width: 767px) {
+    aside.build-evidence {
+      padding: 1.25rem;
+    }
+  }
+</style>

@@ -2,6 +2,7 @@
 import Breadcrumbs from '../ui/Breadcrumbs.astro';
 import ServiceActions from '../services/ServiceActions.astro';
 import AboutArt from './AboutArt.astro';
+import AboutArtCaption from './AboutArtCaption.astro';
 ---
 
 <section
@@ -11,7 +12,7 @@ import AboutArt from './AboutArt.astro';
   data-about-hero
 >
   <div class="about-hero__stage" data-about-scene="hero">
-    <AboutArt name="hero" priority />
+    <AboutArt name="hero" priority showCaption={false} />
   </div>
   <div class="container about-hero__copy">
     <Breadcrumbs
@@ -47,6 +48,7 @@ import AboutArt from './AboutArt.astro';
         source="about-hero"
       />
     </div>
+    <AboutArtCaption name="hero" />
   </div>
   <div class="container about-hero__annotation" aria-hidden="true">
     <span>Design / Engineering / AI</span>

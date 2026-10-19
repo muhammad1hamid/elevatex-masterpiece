@@ -2,6 +2,7 @@
 import type { StudyContext } from '../../lib/case-study/context';
 import Breadcrumbs from '../ui/Breadcrumbs.astro';
 import StudyMedia from './StudyMedia.astro';
+import StudyEvidenceRail from './StudyEvidenceRail.astro';
 interface Props {
   context: StudyContext;
   breadcrumbs: { name: string; path: string }[];
@@ -24,11 +25,14 @@ const target =
   <div class={`container ${p}-hero__copy`}>
     <Breadcrumbs items={breadcrumbs} />
     <p class={`${p}-kicker`}>{h.eyebrow}</p>
-    <h1 id={h.titleId}>{name}.</h1>
+    <h1 id={h.titleId} data-motion-reveal="text">
+      {name}.
+    </h1>
     <p class={`${p}-hero__statement`}>
       {h.statement.map((line, index) => (
         <>
           {index > 0 && <br />}
+          {index > 0 && ' '}
           {index === 0 ? line : <span>{line}</span>}
         </>
       ))}
@@ -53,6 +57,7 @@ const target =
       {h.classificationSeparator === 'slash' ? ' / ' : ' · '}
       {h.classificationSuffix}
     </p>
+    {h.evidencePreview && <StudyEvidenceRail context={context} />}
   </div>
   {h.variant === 'portrait-arch' && h.image ? (
     <>

@@ -1,6 +1,7 @@
 ---
 import AboutHeading from './AboutHeading.astro';
 import AboutArt from './AboutArt.astro';
+import AboutArtCaption from './AboutArtCaption.astro';
 import { aboutThinking } from '../../data/about';
 ---
 
@@ -13,7 +14,7 @@ import { aboutThinking } from '../../data/about';
     class="about-philosophy__stage about-scene__backdrop"
     data-about-scene="philosophy"
   >
-    <AboutArt name="philosophy">
+    <AboutArt name="philosophy" showCaption={false}>
       <svg
         class="about-philosophy__drawing"
         viewBox="0 0 1280 720"
@@ -62,5 +63,6 @@ import { aboutThinking } from '../../data/about';
         </li>
       ))}
     </ol>
+    <AboutArtCaption name="philosophy" />
   </div>
 </section>

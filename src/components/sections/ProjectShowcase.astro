@@ -13,10 +13,11 @@ const sizes =
 
 <article
   class:list={['project', { 'project--featured': index === 1 }]}
-  data-proof-reveal
+  data-motion-reveal="editorial-up"
 >
   <a
     class="project__link"
+    data-cursor="view"
     href={project.href}
     aria-labelledby={`${project.id}-title ${project.id}-action`}
   >

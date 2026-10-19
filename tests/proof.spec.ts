@@ -104,11 +104,17 @@ for (const width of [
       expect(boxes[1]!.x).toBeGreaterThan(boxes[0]!.x + boxes[0]!.width);
       expect(boxes[2]!.x).toBeGreaterThan(boxes[1]!.x + boxes[1]!.width);
     }
-    expect(
-      await page
-        .locator('#proof')
-        .evaluate((section) => section.getAnimations({ subtree: true }).length),
-    ).toBe(0);
+    // The approved shared engine has a finite, quiet mobile reveal. Verify
+    // that it settles instead of assuming it is absent immediately on entry.
+    await expect
+      .poll(() =>
+        page
+          .locator('#proof')
+          .evaluate(
+            (section) => section.getAnimations({ subtree: true }).length,
+          ),
+      )
+      .toBe(0);
     for (const img of await page.locator('.project img').all()) {
       await expect(img).toHaveAttribute('loading', 'lazy');
       await expect(img).toHaveAttribute('decoding', 'async');

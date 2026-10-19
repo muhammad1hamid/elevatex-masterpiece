@@ -155,23 +155,26 @@
 .about-hero .about-art img {
   object-position: 50% 59%;
 }
-.about-art figcaption {
+.about-art figcaption,
+.about-art-caption {
   color: var(--color-muted);
-  font-size: 0.6875rem;
-  line-height: 1.7;
+  font-size: var(--text-small);
+  line-height: 1.65;
   text-align: center;
+}
+.about-art figcaption {
   padding: 1rem var(--gutter) 0;
 }
-.about-hero .about-art figcaption,
-.about-scene .about-art figcaption {
-  position: absolute;
-  z-index: 3;
-  inset: auto var(--gutter) 1.25rem;
-  max-width: none;
-  padding: 0;
-  color: #c5c0b5;
-  font-size: 0.625rem;
-  text-align: right;
+.about-art-caption {
+  max-width: 48rem;
+  margin: 2.5rem auto 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  text-wrap: pretty;
+}
+.about-art-caption__label {
+  color: var(--color-gold-soft);
+  font-weight: 500;
 }
 .about-art__light {
   position: absolute;
@@ -885,13 +888,8 @@
   .about-hero__annotation {
     display: none;
   }
-  .about-art figcaption {
-    font-size: 0.625rem;
-  }
-  .about-hero .about-art figcaption,
-  .about-scene .about-art figcaption {
-    text-align: center;
-    font-size: 0.5625rem;
+  .about-art-caption {
+    margin-top: 2rem;
   }
   .about-story__body {
     grid-template-columns: 1fr;

@@ -18,7 +18,7 @@ featured: false
 author:
   name: ElevateX
   type: Organization
-  url: https://www.elevatexlab.com/about/
+  url: https://elevatexlab.org/about/
 category: Web Development
 tags: [user experience, digital strategy]
 quickAnswer: A useful, independently understandable answer in two to four sentences.
@@ -88,7 +88,7 @@ Reading time is an approximate prose estimate at 220 words per minute, excluding
 
 `draft` defaults to `true`. Set `draft: false` only after editorial approval. The shared publication gate also excludes future `publishedDate` values from routes, listings, recommendations, sitemap and RSS. Dates render in UTC; date-only values become midnight UTC. A rebuild is needed when scheduled content becomes eligible. `updatedDate` must not precede publication and changes only for a real revision; it does not schedule a draft revision.
 
-Canonicals use `https://www.elevatexlab.com` and trailing slashes. Metadata, Article/Organization relationships and breadcrumbs derive from content. Preview builds remain noindex. Approved published Insights become indexable and enter the sitemap only in a production-environment build. This does not authorise deployment or activate analytics.
+Canonicals use `https://elevatexlab.org` and trailing slashes. Metadata, Article/Organization relationships and breadcrumbs derive from content. Preview builds remain noindex. Approved published Insights become indexable and enter the sitemap only in a production-environment build. This does not authorise deployment or activate analytics.
 
 Run sequentially from the repository:
 

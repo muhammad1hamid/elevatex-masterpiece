@@ -8,7 +8,9 @@ async function expectFinalScene(page: Page) {
   await expect(page.locator('#hero-title')).toHaveText(heroTitle);
   await expect(page.locator('#hero-title')).toBeVisible();
   await expect(
-    page.getByRole('link', { name: 'Book a Free Call', exact: true }),
+    page
+      .locator('.hero')
+      .getByRole('link', { name: 'Discuss a Project', exact: true }),
   ).toBeVisible();
   for (const selector of ['.hero__pedestal', '.hero__laptop']) {
     const object = page.locator(selector);
@@ -27,7 +29,9 @@ test('hero copy and calls to action are semantic and exact', async ({
   await expect(page.locator('h1 em')).toHaveText('Growth.');
   await expect(page.getByText(heroDescription, { exact: true })).toBeVisible();
   await expect(
-    page.getByRole('link', { name: 'Book a Free Call', exact: true }),
+    page
+      .locator('.hero')
+      .getByRole('link', { name: 'Discuss a Project', exact: true }),
   ).toHaveAttribute('href', '/contact/');
   await expect(
     page.getByRole('link', { name: 'See Our Work', exact: true }),
@@ -152,7 +156,9 @@ test('failed JavaScript downloads retain useful content and a final scene', asyn
     'static',
   );
   await expect(
-    page.getByRole('link', { name: 'Book a Free Call', exact: true }),
+    page
+      .locator('.hero')
+      .getByRole('link', { name: 'Discuss a Project', exact: true }),
   ).toHaveAttribute('href', '/contact/');
 });
 
@@ -191,7 +197,8 @@ for (const width of [320, 375, 390, 393, 430]) {
       .getByText(heroDescription, { exact: true })
       .boundingBox();
     const primary = await page
-      .getByRole('link', { name: 'Book a Free Call', exact: true })
+      .locator('.hero')
+      .getByRole('link', { name: 'Discuss a Project', exact: true })
       .boundingBox();
     const secondary = await page
       .getByRole('link', { name: 'See Our Work', exact: true })
@@ -251,12 +258,14 @@ test('mobile menu supports keyboard activation and Escape', async ({
   await expect(navigation).toBeHidden();
 });
 
-test('non-hero pages do not download the cinematic animation runtime', async ({
+test('non-hero pages omit the hero runtime and defer desktop animation downloads', async ({
   page,
 }) => {
   const downloadedScripts: Promise<string>[] = [];
+  const downloadedScriptUrls: string[] = [];
   page.on('response', (response) => {
     if (response.request().resourceType() === 'script') {
+      downloadedScriptUrls.push(response.url());
       downloadedScripts.push(response.text());
     }
   });
@@ -264,7 +273,12 @@ test('non-hero pages do not download the cinematic animation runtime', async ({
   await expect(page.locator('[data-hero-root]')).toHaveCount(0);
   const scriptSources = await Promise.all(downloadedScripts);
   expect(scriptSources.join('\n')).not.toMatch(
-    /elevatexIntroSeen:v2|gsap|WebGLRenderer|__REACT_DEVTOOLS_GLOBAL_HOOK__/i,
+    /elevatexIntroSeen:v2|WebGLRenderer|__REACT_DEVTOOLS_GLOBAL_HOOK__/i,
+  );
+  // Shared motion loaders mention lazy chunk filenames. Their text is not
+  // evidence that GSAP or ScrollTrigger has actually been downloaded.
+  expect(downloadedScriptUrls).not.toContainEqual(
+    expect.stringMatching(/\/(?:gsap|ScrollTrigger)[.-]/i),
   );
 });
 

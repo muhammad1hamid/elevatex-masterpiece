@@ -4,6 +4,7 @@ title: Qadeer Jewellers
 description: A jewellery website concept pairing collection browsing with a clear path to a showroom visit.
 industry: Jewellery
 publishedDate: 2026-10-08
+updatedDate: 2026-10-18
 draft: false
 featured: true
 relatedServices:
@@ -14,6 +15,7 @@ projectStudy:
   theme: jewellery
   draft: false
   publishedDate: 2026-10-14
+  updatedDate: 2026-10-18
   pageTitle: Qadeer Jewellers — Website Design Showcase
   description: Explore the Qadeer Jewellers website concept through real desktop and mobile captures, collection browsing, visual design and selected interface details.
   socialImage:
@@ -36,6 +38,12 @@ projectStudy:
       showCaption: true
       sizes: 100vw
       browser: false
+    evidencePreview:
+      media: desktop
+      mobileMedia: mobile
+      target: website-showcase
+      label: See the actual website
+      summary: Jewellery collections and showroom enquiries.
     classificationSuffix: Web Development
     classificationSeparator: slash
     artLabel: Illustrative Art Direction
@@ -466,6 +474,11 @@ showcase:
     featured: true
     layout: jewellery
     focus: The detail deserves the spotlight.
+    indexSummary: Jewellery collections and showroom enquiries.
+    story:
+      decision: Let the jewellery lead; keep collection discovery and a showroom visit as distinct choices.
+      inspect: Open a collection category and its detail view. Compare the compact mobile navigation and bottom action bar.
+      limitation: Product details and showroom claims belong to the concept; business outcomes are unverified.
     details:
       - Collection browsing
       - Product-led imagery

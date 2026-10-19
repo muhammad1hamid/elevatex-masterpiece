@@ -49,11 +49,10 @@ test('Contact ships semantic static content, accurate metadata and an explicit r
     'Contact — Start a Website or AI Project | ElevateX',
   );
   await expect(page.locator('h1')).toHaveCount(1);
-  const whatsapp = page.locator('.contact-methods a');
+  const whatsapp = page.locator('.contact-methods a[href^="https://wa.me/"]');
   await expect(whatsapp).toHaveAccessibleName(
-    'Chat on WhatsApp +92 335 6709222',
+    'Chat on WhatsApp (opens in a new tab)',
   );
-  await expect(whatsapp).toHaveAccessibleDescription('Opens in a new tab.');
   await expect(whatsapp).toHaveAttribute('href', 'https://wa.me/923356709222');
   await expect(page.locator('h1')).toContainText('Great ideas start');
   await expect(page.locator('h1')).toContainText('with a conversation.');

@@ -1,11 +1,8 @@
 ---
 import { site } from '../../data/site';
 import { legalLinks, legalPublished } from '../../data/legal';
-import {
-  footerGroups,
-  footerStatement,
-  footerContactMethods,
-} from '../../data/footer';
+import ContactChannels from '../ui/ContactChannels.astro';
+import { footerGroups, footerStatement } from '../../data/footer';
 import '../../styles/footer.css';
 const year = new Date().getFullYear();
 ---
@@ -82,20 +79,9 @@ const year = new Date().getFullYear();
         <a class="site-footer__text-link" href="/contact/">
           Get in Touch <span aria-hidden="true">↗</span>
         </a>
-        {footerContactMethods.map((method) => (
-          <a
-            class="site-footer__contact"
-            href={method.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${method.label} ${method.detail} (opens in a new tab)`}
-          >
-            <span>
-              {method.label} <span aria-hidden="true">↗</span>
-            </span>
-            <span class="site-footer__number">{method.detail}</span>
-          </a>
-        ))}
+        <div class="site-footer__channels">
+          <ContactChannels />
+        </div>
       </div>
     </div>
     <div class="site-footer__scene" aria-hidden="true" data-footer-scene>

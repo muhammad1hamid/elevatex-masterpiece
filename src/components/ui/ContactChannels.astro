@@ -1,0 +1,83 @@
+---
+import { verifiedContactMethods } from '../../data/contact';
+import { socialProfiles } from '../../data/social';
+import SocialIcon from './SocialIcon.astro';
+const whatsapp = verifiedContactMethods.find(({ kind }) => kind === 'whatsapp');
+---
+
+<div class="contact-channels">
+  {whatsapp && (
+    <a
+      class="contact-channels__whatsapp"
+      href={whatsapp.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${whatsapp.label} (opens in a new tab)`}
+    >
+      <SocialIcon name="whatsapp" />
+      <span>{whatsapp.label}</span>
+    </a>
+  )}
+  <nav class="contact-channels__social" aria-label="Social profiles">
+    {socialProfiles.map(({ icon, label, href }) => (
+      <a
+        class="contact-channels__icon"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${label} (opens in a new tab)`}
+      >
+        <SocialIcon name={icon} />
+      </a>
+    ))}
+  </nav>
+</div>
+
+<style>
+  .contact-channels,
+  .contact-channels__social {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .contact-channels a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-pill);
+    color: var(--color-gold-soft);
+    text-decoration: none;
+    transition:
+      color var(--duration-fast),
+      background-color var(--duration-fast),
+      border-color var(--duration-fast);
+  }
+  .contact-channels__whatsapp {
+    max-width: 100%;
+    gap: 0.625rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+  .contact-channels__whatsapp svg {
+    flex-shrink: 0;
+  }
+  .contact-channels__icon {
+    width: 44px;
+  }
+  .contact-channels a:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+  }
+  @media (hover: hover) {
+    .contact-channels a:hover {
+      color: var(--color-text);
+      background-color: var(--color-surface);
+      border-color: var(--color-gold);
+    }
+  }
+</style>

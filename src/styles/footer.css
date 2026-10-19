@@ -214,27 +214,8 @@
 .site-footer__top > span {
   transition: transform 220ms;
 }
-.site-footer__contact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.375rem;
-  min-height: 44px;
-  max-width: max-content;
-  font-size: 0.8125rem;
-  line-height: 1.65;
+.site-footer__channels {
   margin-top: 1rem;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-.site-footer__contact > span:first-child {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--color-gold-soft);
-}
-.site-footer__number {
-  color: var(--color-muted);
-  font-variant-numeric: tabular-nums;
 }
 .site-footer a:focus-visible {
   outline: 2px solid var(--color-focus);
@@ -349,9 +330,6 @@
   .site-footer__text-link:hover > span {
     transform: translate(2px, -2px);
   }
-  .site-footer__contact:hover .site-footer__number {
-    color: var(--color-text);
-  }
   .site-footer__top:hover {
     color: var(--color-gold-soft);
   }
@@ -420,9 +398,6 @@
   .site-footer__conversation {
     max-width: 25rem;
     margin-top: 1rem;
-  }
-  .site-footer__contact {
-    margin-top: 0.75rem;
   }
   .site-footer__scene {
     margin-top: 2.75rem;

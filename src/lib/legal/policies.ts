@@ -126,7 +126,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         id: 'requests',
         title: 'Privacy questions and requests',
         paragraphs: [
-          'Contact +92 335 6709222 on WhatsApp and explain the information or processing you are asking about. Share only enough detail to identify the relevant conversation. We may need proportionate information to check that a request concerns your own information.',
+          'Contact us on WhatsApp and explain the information or processing you are asking about. Share only enough detail to identify the relevant conversation. We may need proportionate information to check that a request concerns your own information.',
           'Depending on the law that applies, you may have rights to ask for access, correction, deletion, restriction or objection, to withdraw consent, or to complain to a relevant authority. Applicable rights and exceptions depend on the circumstances; this page does not promise that every request can be fulfilled without a lawful reason to retain information.',
         ],
         links: [
@@ -216,7 +216,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         id: 'privacy',
         title: 'Privacy and contact',
         paragraphs: [
-          'The Privacy Policy and Cookie Policy explain website information handling and optional analytics choices. Contact ElevateX Lab on WhatsApp at +92 335 6709222 if you have a question about website use.',
+          'The Privacy Policy and Cookie Policy explain website information handling and optional analytics choices. Contact ElevateX Lab on WhatsApp if you have a question about website use.',
         ],
         links: [
           { label: 'Privacy Policy', href: '/privacy/' },
@@ -300,7 +300,7 @@ export const legalPolicies: readonly LegalPolicy[] = [
         id: 'more',
         title: 'Further questions',
         paragraphs: [
-          'The Privacy Policy explains the wider information-handling context. For a privacy question, contact ElevateX Lab in Pakistan on WhatsApp at +92 335 6709222.',
+          'The Privacy Policy explains the wider information-handling context. For a privacy question, contact ElevateX Lab in Pakistan on WhatsApp.',
         ],
         links: [
           { label: 'Privacy Policy', href: '/privacy/' },

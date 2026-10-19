@@ -114,7 +114,7 @@ test('shared footer renders accurate brand content, a project CTA and real desti
       ...new Set(links.map((link) => link.getAttribute('href')!)),
     ]);
   for (const href of hrefs) {
-    if (href.startsWith('https://wa.me/')) continue;
+    if (href.startsWith('https://')) continue;
     const url = new URL(href, 'http://127.0.0.1:4321/contact/');
     const response = await request.get(url.pathname);
     expect(response.status(), href).toBe(200);

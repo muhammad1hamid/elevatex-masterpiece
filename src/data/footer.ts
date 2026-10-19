@@ -51,4 +51,4 @@ export const pendingFooterRoutes = [
   ...(legalPublished ? [] : legalLinks.map(({ href }) => href)),
 ] as const;
 
-// No verified social profiles, email or office address are available.
+// Owner-supplied social profiles are centralized in social.ts. No verified email or office address is available.

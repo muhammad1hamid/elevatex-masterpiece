@@ -4,6 +4,7 @@ import ContactHero from '../components/contact/ContactHero.astro';
 import ContactHeading from '../components/contact/ContactHeading.astro';
 import InquiryForm from '../components/contact/InquiryForm.astro';
 import ContactNextSteps from '../components/contact/ContactNextSteps.astro';
+import ContactChannels from '../components/ui/ContactChannels.astro';
 import { contactMetadata, verifiedContactMethods } from '../data/contact';
 import {
   organizationSchema,
@@ -64,27 +65,11 @@ import '../styles/contact.css';
           eyebrow="Prefer another way? / 03"
           first="Let’s talk"
           second="on WhatsApp."
-          intro="Have a project in mind? Start a conversation with us on WhatsApp."
+          intro="Have a project in mind? Start a conversation on WhatsApp, or follow our work."
         />
-        <ul class="contact-methods">
-          {verifiedContactMethods.map((method) => (
-            <li data-contact-row>
-              <a
-                href={method.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-describedby={`contact-${method.kind}-new-tab`}
-              >
-                <span class="contact-eyebrow">{method.label}</span>{' '}
-                <span>{method.detail}</span>
-                <span aria-hidden="true">↗</span>
-              </a>
-              <span class="sr-only" id={`contact-${method.kind}-new-tab`}>
-                Opens in a new tab.
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div class="contact-methods" data-contact-row>
+          <ContactChannels />
+        </div>
       </section>
     )}
     <section

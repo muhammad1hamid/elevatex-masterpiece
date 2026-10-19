@@ -51,7 +51,9 @@ Content entries default to `draft: true`. Public entries must have `draft: false
 
 Indexing requires both `DEPLOYMENT_ENV=production` and page approval (static route `indexable`, or a published content entry). Preview pages send noindex through HTML and Cloudflare headers, and have an empty sitemap. Robots allows fetching so crawlers can see noindex; use authentication for confidential previews. See [Google's noindex guidance](https://developers.google.com/search/docs/crawling-indexing/block-indexing).
 
-Production canonicals provisionally use `https://www.elevatexlab.com`, matching the existing live redirect. No live DNS, redirect or site content has been changed. Read [migration review](docs/migration/README.md) before launch.
+The official canonical origin is `https://elevatexlab.org` (non-www), centralized in `src/data/site.ts`. Astro, SEO/schema, sitemap, robots and RSS use this configuration. Preview stays noindex; Home and Contact still require their separate production-indexing approval. No DNS, deployment or old-domain redirects have been changed. Read [deployment preparation](docs/cloudflare.md) and the [historical migration review](docs/migration/README.md) before launch.
+
+Earlier dated implementation notes and migration snapshots retain the old .com URLs as historical evidence; they do not override the current origin. Future social-image export scripts use the centralized hostname; approved existing raster imagery is preserved.
 
 ## Next stages
 

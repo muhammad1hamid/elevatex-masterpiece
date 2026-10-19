@@ -347,7 +347,7 @@ test('CTAs reach the contact preview and the completed Work page', async ({
     const html = await response.text();
     expect(html).toContain('noindex, follow');
     expect(html).toContain('Inquiry preview');
-    expect(html).toContain(`https://www.elevatexlab.com/${destination}/`);
+    expect(html).toContain(`https://elevatexlab.org/${destination}/`);
   }
   const workHtml = await (await request.get('/work/')).text();
   expect(workHtml).toContain('Work that speaks');

@@ -1,0 +1,21 @@
+---
+import { integrations, trackingReady } from '../../data/integrations';
+import { site } from '../../data/site';
+const configuration = JSON.stringify({
+  ...integrations,
+  enabled: trackingReady,
+  origin: site.origin,
+  path: Astro.url.pathname,
+}).replace(/</g, '\\u003c');
+---
+
+<meta name="msvalidate.01" content={integrations.bing} />
+<script
+  id="site-tracking-config"
+  type="application/json"
+  set:html={configuration}
+/>
+<script>
+  import { initializeSiteTracking } from '../../scripts/site-tracking';
+  initializeSiteTracking();
+</script>

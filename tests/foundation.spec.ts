@@ -101,6 +101,7 @@ test('keyboard skip link moves focus to content', async ({ page }) => {
 
 test('page works with JavaScript disabled and reduced motion', async ({
   browser,
+  baseURL,
 }) => {
   const context = await browser.newContext({
     javaScriptEnabled: false,
@@ -108,7 +109,8 @@ test('page works with JavaScript disabled and reduced motion', async ({
     viewport: { width: 375, height: 812 },
   });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4321/');
+  if (!baseURL) throw new Error('A local preview base URL is required.');
+  await page.goto(baseURL);
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(
     page.getByRole('link', { name: 'See Our Work', exact: true }),

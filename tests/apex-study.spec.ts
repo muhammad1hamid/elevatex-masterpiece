@@ -36,7 +36,7 @@ test('complete concept story, truthful artwork, metadata and schema arrive in HT
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/work/apex-detailing-studio/',
+    'https://elevatexlab.org/work/apex-detailing-studio/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',

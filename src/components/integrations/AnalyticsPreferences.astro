@@ -1,0 +1,98 @@
+---
+import { trackingReady } from '../../data/integrations';
+---
+
+{trackingReady && (
+  <aside class="analytics-preferences" data-analytics-preferences hidden>
+    <button
+      type="button"
+      data-analytics-manage
+      aria-controls="analytics-choice"
+    >
+      Analytics preferences
+    </button>
+    <section
+      id="analytics-choice"
+      aria-labelledby="analytics-choice-title"
+      hidden
+    >
+      <h2 id="analytics-choice-title">Your analytics choice.</h2>
+      <p>
+        With your permission, Google Analytics measures site use and Microsoft
+        Clarity records masked interactions to help improve the website.
+        Optional tracking stays off until you accept. Advertising storage and
+        personalization stay off.
+      </p>
+      <p>
+        <a href="/privacy/">Read our Privacy Policy</a>. You can change your
+        choice here later. Withdrawal reloads this page.
+      </p>
+      <div class="analytics-preferences__actions">
+        <button type="button" data-analytics-accept>
+          Accept analytics
+        </button>
+        <button type="button" data-analytics-reject>
+          Reject analytics
+        </button>
+        <button type="button" data-analytics-close>
+          Close preferences
+        </button>
+      </div>
+      <p role="status" data-analytics-status />
+    </section>
+  </aside>
+)}
+
+<style>
+  .analytics-preferences[hidden],
+  .analytics-preferences [hidden] {
+    display: none;
+  }
+  .analytics-preferences {
+    position: fixed;
+    inset: auto 1rem 1rem auto;
+    z-index: 90;
+    max-width: min(32rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 2rem);
+    overflow: auto;
+    color: #f3f0e9;
+    background: #151614;
+    border: 1px solid #615b4b;
+    border-radius: 1rem;
+    padding: 1rem;
+    font: 1rem/1.5 var(--font-body);
+  }
+  .analytics-preferences h2 {
+    font: 500 1.4rem/1.2 var(--font-heading);
+    margin: 1rem 0;
+  }
+  .analytics-preferences p {
+    margin: 1rem 0;
+  }
+  .analytics-preferences a {
+    color: #e8d7b3;
+    text-decoration: underline;
+  }
+  .analytics-preferences__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .analytics-preferences button {
+    cursor: pointer;
+    color: inherit;
+    background: transparent;
+    border: 1px solid #a99c7f;
+    border-radius: 0.5rem;
+    min-height: 44px;
+    padding: 0.6rem 0.8rem;
+    font: inherit;
+  }
+  .analytics-preferences button:hover {
+    border-color: #f0dec0;
+  }
+  .analytics-preferences button:focus-visible {
+    outline: 2px solid #f0dec0;
+    outline-offset: 3px;
+  }
+</style>

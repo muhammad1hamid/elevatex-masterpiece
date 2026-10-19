@@ -97,7 +97,7 @@ test('metadata, social asset and schema describe this service without unsupporte
     'content',
     'noindex, follow',
   );
-  const canonical = `https://www.elevatexlab.com${path}`;
+  const canonical = `https://elevatexlab.org${path}`;
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
     canonical,
@@ -124,7 +124,7 @@ test('metadata, social asset and schema describe this service without unsupporte
   expect(service['name']).toBe('AI Automation');
   expect(service['url']).toBe(canonical);
   expect(service['provider']).toEqual({
-    '@id': 'https://www.elevatexlab.com/#organization',
+    '@id': 'https://elevatexlab.org/#organization',
   });
   for (const key of [
     'aggregateRating',
@@ -142,7 +142,7 @@ test('metadata, social asset and schema describe this service without unsupporte
   expect(buffer.readUInt32BE(20)).toBe(630);
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
     'content',
-    `https://www.elevatexlab.com${aiAutomation.image.src}`,
+    `https://elevatexlab.org${aiAutomation.image.src}`,
   );
 });
 

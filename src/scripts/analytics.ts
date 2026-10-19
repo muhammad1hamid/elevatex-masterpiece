@@ -1,5 +1,6 @@
 /** No adapter or third-party script is loaded by default. Never pass personal data. */
 export type BusinessEvent =
+  | TrackingEvent
   | 'ai_chatbot_hero_cta'
   | 'ai_chatbot_conversation_view'
   | 'ai_chatbot_whatsapp_section'
@@ -28,7 +29,20 @@ export interface EventContext {
   path: string;
   source: 'direct' | 'organic' | 'ai_referral' | 'other';
   label?: string;
+  service_slug?: string;
+  page_type?: string;
+  cta_location?: string;
+  project_category?: string;
+  content_slug?: string;
 }
+export type TrackingEvent =
+  | 'service_cta_click'
+  | 'portfolio_open'
+  | 'live_project_click'
+  | 'contact_form_start'
+  | 'whatsapp_click'
+  | 'article_cta_click'
+  | 'generate_lead';
 export type AnalyticsAdapter = (
   event: BusinessEvent,
   context: EventContext,
@@ -39,5 +53,14 @@ export function configureAnalytics(next: AnalyticsAdapter | undefined): void {
 }
 export function trackEvent(event: BusinessEvent, context: EventContext): void {
   // Strip queries/fragments to avoid leaking identifiers from inbound links.
-  adapter?.(event, { ...context, path: context.path.split(/[?#]/)[0] ?? '/' });
+  // No backend acceptance exists. A click or successful frontend review is not a lead.
+  if (event === 'generate_lead') return;
+  try {
+    adapter?.(event, {
+      ...context,
+      path: context.path.split(/[?#]/)[0] ?? '/',
+    });
+  } catch {
+    // Optional measurement must never interrupt the underlying action.
+  }
 }

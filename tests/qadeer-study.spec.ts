@@ -36,7 +36,7 @@ test('complete concept story, truthful artwork, metadata and schema arrive in HT
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/work/qadeer-jewellers/',
+    'https://elevatexlab.org/work/qadeer-jewellers/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',

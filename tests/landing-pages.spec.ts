@@ -80,7 +80,7 @@ test('server-rendered content, metadata, schema and truthful work classification
   );
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    `https://www.elevatexlab.com${path}`,
+    `https://elevatexlab.org${path}`,
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',

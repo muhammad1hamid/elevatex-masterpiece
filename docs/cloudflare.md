@@ -20,7 +20,7 @@ No payment-dependent feature is required by this foundation. Check account eligi
 - Set `DEPLOYMENT_ENV=production` **at build time** and approve completed static routes in `src/data/site.ts`. Page metadata must read this same registry, as the homepage already does.
 - Set the intentional GPTBot policy; search bots and OAI-SearchBot remain allowed in production.
 - Build in an isolated production job. Never reuse production `dist/` for an unprotected preview host: indexable HTML is baked into that output.
-- Keep only the selected canonical hostname indexable. Redirect the apex to www preserving path/query in a Cloudflare zone redirect rule; this requires access to the actual zone and is not simulated in `_redirects`.
+- Keep only the selected canonical hostname indexable. Redirect www.elevatexlab.org to elevatexlab.org preserving path/query in a Cloudflare zone redirect rule; this requires access to the actual zone and is not simulated in `_redirects`.
 - Generate verified path redirects in `public/_redirects` only after destinations exist. Confirm no chains, loops or homepage blanket redirects.
 - Test Cloudflare's actual HTTP status, headers, asset caching, 404 and slash redirects; Astro preview alone does not emulate all edge behavior.
 - Complete browser/accessibility/content/performance QA. Then bind the real hostname and run a post-cutover crawl before sitemap submission.
@@ -34,3 +34,7 @@ No CSP is claimed yet: later GSAP, Turnstile, analytics and forms need an explic
 When the contact feature is built, use a narrowly routed Worker/function with server-only secret bindings and native HTML fallback. Add the Astro Cloudflare adapter only if actual on-demand Astro routes are required. Static pages need no SSR runtime.
 
 References: [headers](https://developers.cloudflare.com/workers/static-assets/headers/), [HTML handling](https://developers.cloudflare.com/workers/static-assets/routing/advanced/html-handling/).
+
+## Optional analytics and Pages Git setup
+
+The official origin is `https://elevatexlab.org` (non-www). Optional tracking remains disabled. Follow [the integration setup and owner checklist](integrations/SEO_ANALYTICS_SETUP.md) for the static Pages build, consent gates, preview protection and separately authorized Git/domain setup. The existing Wrangler file is a Workers static-assets target, not proof of an existing Pages Git project.

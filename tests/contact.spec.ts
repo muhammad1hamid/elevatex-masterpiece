@@ -55,7 +55,7 @@ test('Contact ships semantic static content, accurate metadata and an explicit r
   await expect(page.locator('[data-contact-page] img')).toHaveCount(0);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/contact/',
+    'https://elevatexlab.org/contact/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',

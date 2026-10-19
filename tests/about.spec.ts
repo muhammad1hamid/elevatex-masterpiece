@@ -56,7 +56,7 @@ test('complete About story, authentic founder and project evidence, metadata and
   ).toEqual(sections);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/about/',
+    'https://elevatexlab.org/about/',
   );
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',

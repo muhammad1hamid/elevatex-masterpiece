@@ -6,11 +6,11 @@ No recipient, booking URL or confirmed business email was supplied. Do not inven
 
 Required decisions: recipient/inbox or storage destination, booking destination, retention rules and privacy text. Never log raw form messages in analytics. Legal documents require real business/data-processing facts.
 
-## Measurement — disabled
+## Measurement — configured, activation disabled
 
-`src/scripts/analytics.ts` is an optional typed event boundary with no installed adapter and no client import. Supported events cover call/work/contact clicks, form starts and confirmed successful submissions, and navigation between services, work and insights. Attribution accepts organic/AI/direct/other categories without recording inbound query strings. Only invoke a form success event after confirmed server success.
+The owner supplied GA4, Clarity and Bing identifiers. The shared integration uses `src/scripts/analytics.ts` and a consent-aware provider loader; optional collection remains disabled by default and on previews. The static Bing tag is installed independently of consent. See [setup and owner checklist](integrations/SEO_ANALYTICS_SETUP.md) for exact IDs, environment gates, allowed events, masking, provider dashboard settings and external verification limits. No backend exists, and `generate_lead` is blocked.
 
-Prepare Search Console and Bing ownership verification once the owner provides verified tokens. Choose Cloudflare Web Analytics as the lightweight baseline; assess Microsoft Clarity and consent/retention requirements before enabling it. Do not stack duplicate trackers. Archived live HTML records an existing Google Analytics identifier; confirm account access and continuity before deciding whether to retain it.
+GSC ownership and provider dashboard receipt remain unverified. Do not install an additional GA/GTM/Clarity or Cloudflare analytics tracker over this setup. Archived live identifiers are historical; the owner's current supplied IDs are the integration source. Privacy policy, consent, retention and provider settings require approval before collection is activated.
 
 ## Search and AI crawlers
 
@@ -20,6 +20,6 @@ Preview robots permits crawling so engines can observe HTML/header noindex; it d
 
 ## IndexNow — explicit, dry-run first
 
-`npm run indexnow -- https://www.elevatexlab.com/changed-path/` prepares a dry run after a production build. `--submit` additionally requires `INDEXNOW_KEY` and a matching public verification file. The script checks origin, removes duplicate URLs, rejects query/fragment URLs, verifies the key file and submits only the listed URLs. Removed URLs may be listed. Do not run this on every build; use it after actual publication, significant edits or removals.
+`npm run indexnow -- https://elevatexlab.org/changed-path/` prepares a dry run after a production build. `--submit` additionally requires `INDEXNOW_KEY` and a matching public verification file. The script checks origin, removes duplicate URLs, rejects query/fragment URLs, verifies the key file and submits only the listed URLs. Removed URLs may be listed. Do not run this on every build; use it after actual publication, significant edits or removals.
 
 The verification key is intended to be publicly served, unlike contact service secrets. Store operational configuration outside source until the key has been selected. Submission does not guarantee indexing. See [IndexNow protocol](https://www.indexnow.org/documentation).

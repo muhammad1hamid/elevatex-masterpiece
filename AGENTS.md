@@ -40,7 +40,7 @@ Read this file before modifying this repository. Preserve working code and make 
 
 - Design content, conversion, accessibility, performance and SEO together. Render real HTML headings, answers, navigation and links; never bake primary text into images/canvas.
 - One clear H1, unique title/description, clean canonical, logical headings, descriptive URLs and contextual internal links per important page.
-- Use the centralized site configuration and SEO helpers. Current provisional canonical is `https://www.elevatexlab.com`, reflecting the live apex-to-www redirect observed on 2026-10-06. Reconcile hostnames at cutover.
+- Use the centralized site configuration and SEO helpers. The owner-approved canonical is `https://elevatexlab.org` (non-www). This replaces the earlier provisional .com identity; historical migration evidence retains its original URLs. Domain configuration does not authorize deployment, DNS changes or production indexing.
 - Preserve existing URLs and legitimate Pakistan relevance. Read `docs/migration/` before changing routes. Review KEEP/IMPROVE/MERGE/REDIRECT/REMOVE decisions; changed valuable URLs need relevant permanent redirects. Never blanket-redirect missing pages to the homepage.
 - Answers start with a direct, independently understandable 2–4 sentence response, then useful detail and evidence. Each service page has one commercial intent. No thin location pages, generic mass-produced articles or keyword-stuffed hero copy.
 - GEO is crawlability, entity clarity, useful original information, trustworthy authorship, citations, internal links and first-party evidence. No visibility promises or magic plugins; llms.txt is optional experimentation, not a ranking mechanism.

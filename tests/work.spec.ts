@@ -17,7 +17,7 @@ test('server content, authentic media, metadata and project classification', asy
   await expect(page.locator('h1')).toHaveCount(1);
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.elevatexlab.com/work/',
+    'https://elevatexlab.org/work/',
   );
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',

@@ -210,6 +210,8 @@
 }
 
 .faq-item__question {
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: var(--color-text);
   font-size: clamp(1rem, 1.2vw, 1.1875rem);
   font-weight: 500;

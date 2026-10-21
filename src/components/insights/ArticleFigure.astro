@@ -1,0 +1,52 @@
+---
+import media from '../../../public/images/insights/ai-slop-media.json';
+interface Props {
+  base: string;
+  alt: string;
+  caption: string;
+}
+const { base, alt, caption } = Astro.props;
+const asset = media.find((item) => item.base === base);
+if (!asset) throw new Error(`Missing editorial media: ${base}`);
+const image = asset.images.find((item) => item.src.endsWith('1200.webp'))!;
+const srcset = (format: string) =>
+  asset.images
+    .filter((item) => item.src.endsWith(format))
+    .map((item) => `${item.src} ${item.width}w`)
+    .join(', ');
+const sizes = '(max-width: 767px) calc(100vw - 2.5rem), 760px';
+---
+
+<figure class="article-figure">
+  <picture>
+    <source type="image/avif" srcset={srcset('.avif')} sizes={sizes} />
+    <img
+      src={image.src}
+      srcset={srcset('.webp')}
+      sizes={sizes}
+      width={image.width}
+      height={image.height}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+    />
+  </picture>
+  <figcaption>{caption}</figcaption>
+</figure>
+<style>
+  .article-figure {
+    margin: 2.5rem 0;
+  }
+  .article-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+  }
+  .article-figure figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+</style>

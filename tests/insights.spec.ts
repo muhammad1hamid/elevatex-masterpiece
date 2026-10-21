@@ -10,13 +10,18 @@ const insightPreviews = readdirSync('src/content/insights')
       title: string;
       description: string;
       featured: boolean;
+      publishedDate: string;
     };
     return { ...data, id: file.replace(/\.mdx?$/, '') };
   })
   .sort(
     (a, b) =>
-      Number(b.featured) - Number(a.featured) || a.id.localeCompare(b.id),
-  );
+      Number(b.featured) - Number(a.featured) ||
+      new Date(b.publishedDate).getTime() -
+        new Date(a.publishedDate).getTime() ||
+      a.id.localeCompare(b.id),
+  )
+  .slice(0, 3);
 
 test('homepage insights follows the founder and uses the published collection', async ({
   page,
@@ -126,7 +131,7 @@ test('insights and archive remain useful without JavaScript', async ({
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
     'Ideas worth building on.',
   );
-  await expect(page.locator('[data-journal-story]')).toHaveCount(3);
+  await expect(page.locator('[data-journal-story]')).toHaveCount(4);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
     'content',
     'noindex, follow',

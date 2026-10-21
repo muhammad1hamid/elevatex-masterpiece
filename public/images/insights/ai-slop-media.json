@@ -1,0 +1,230 @@
+[
+  {
+    "base": "ai-slop-wide",
+    "original": {
+      "width": 1681,
+      "height": 936
+    },
+    "images": [
+      {
+        "src": "/images/insights/ai-slop-wide-480.webp",
+        "width": 480,
+        "height": 267,
+        "bytes": 30766
+      },
+      {
+        "src": "/images/insights/ai-slop-wide-480.avif",
+        "width": 480,
+        "height": 267,
+        "bytes": 14598
+      },
+      {
+        "src": "/images/insights/ai-slop-wide-720.webp",
+        "width": 720,
+        "height": 401,
+        "bytes": 54214
+      },
+      {
+        "src": "/images/insights/ai-slop-wide-720.avif",
+        "width": 720,
+        "height": 401,
+        "bytes": 25380
+      },
+      {
+        "src": "/images/insights/ai-slop-wide-768.webp",
+        "width": 768,
+        "height": 428,
+        "bytes": 59076
+      },
+      {
+        "src": "/images/insights/ai-slop-wide-768.avif",
+        "width": 768,
+        "height": 428,
+        "bytes": 27715
+      },
+      {
+        "src": "/images/insights/ai-slop-wide-1200.webp",
+        "width": 1200,
+        "height": 668,
+        "bytes": 107826
+      },
+      {
+        "src": "/images/insights/ai-slop-wide-1200.avif",
+        "width": 1200,
+        "height": 668,
+        "bytes": 48985
+      }
+    ]
+  },
+  {
+    "base": "ai-slop-discovery",
+    "original": {
+      "width": 1536,
+      "height": 1024
+    },
+    "images": [
+      {
+        "src": "/images/insights/ai-slop-discovery-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 28274
+      },
+      {
+        "src": "/images/insights/ai-slop-discovery-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 13498
+      },
+      {
+        "src": "/images/insights/ai-slop-discovery-720.webp",
+        "width": 720,
+        "height": 480,
+        "bytes": 50728
+      },
+      {
+        "src": "/images/insights/ai-slop-discovery-720.avif",
+        "width": 720,
+        "height": 480,
+        "bytes": 24295
+      },
+      {
+        "src": "/images/insights/ai-slop-discovery-768.webp",
+        "width": 768,
+        "height": 512,
+        "bytes": 54936
+      },
+      {
+        "src": "/images/insights/ai-slop-discovery-768.avif",
+        "width": 768,
+        "height": 512,
+        "bytes": 26355
+      },
+      {
+        "src": "/images/insights/ai-slop-discovery-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 100248
+      },
+      {
+        "src": "/images/insights/ai-slop-discovery-1200.avif",
+        "width": 1200,
+        "height": 800,
+        "bytes": 48616
+      }
+    ]
+  },
+  {
+    "base": "ai-slop-workflow",
+    "original": {
+      "width": 1589,
+      "height": 990
+    },
+    "images": [
+      {
+        "src": "/images/insights/ai-slop-workflow-480.webp",
+        "width": 480,
+        "height": 299,
+        "bytes": 37238
+      },
+      {
+        "src": "/images/insights/ai-slop-workflow-480.avif",
+        "width": 480,
+        "height": 299,
+        "bytes": 17773
+      },
+      {
+        "src": "/images/insights/ai-slop-workflow-720.webp",
+        "width": 720,
+        "height": 449,
+        "bytes": 69400
+      },
+      {
+        "src": "/images/insights/ai-slop-workflow-720.avif",
+        "width": 720,
+        "height": 449,
+        "bytes": 32715
+      },
+      {
+        "src": "/images/insights/ai-slop-workflow-768.webp",
+        "width": 768,
+        "height": 478,
+        "bytes": 76636
+      },
+      {
+        "src": "/images/insights/ai-slop-workflow-768.avif",
+        "width": 768,
+        "height": 478,
+        "bytes": 36288
+      },
+      {
+        "src": "/images/insights/ai-slop-workflow-1200.webp",
+        "width": 1200,
+        "height": 748,
+        "bytes": 142874
+      },
+      {
+        "src": "/images/insights/ai-slop-workflow-1200.avif",
+        "width": 1200,
+        "height": 748,
+        "bytes": 69015
+      }
+    ]
+  },
+  {
+    "base": "ai-slop-verification",
+    "original": {
+      "width": 1676,
+      "height": 939
+    },
+    "images": [
+      {
+        "src": "/images/insights/ai-slop-verification-480.webp",
+        "width": 480,
+        "height": 269,
+        "bytes": 28942
+      },
+      {
+        "src": "/images/insights/ai-slop-verification-480.avif",
+        "width": 480,
+        "height": 269,
+        "bytes": 13441
+      },
+      {
+        "src": "/images/insights/ai-slop-verification-720.webp",
+        "width": 720,
+        "height": 403,
+        "bytes": 52314
+      },
+      {
+        "src": "/images/insights/ai-slop-verification-720.avif",
+        "width": 720,
+        "height": 403,
+        "bytes": 23760
+      },
+      {
+        "src": "/images/insights/ai-slop-verification-768.webp",
+        "width": 768,
+        "height": 430,
+        "bytes": 57102
+      },
+      {
+        "src": "/images/insights/ai-slop-verification-768.avif",
+        "width": 768,
+        "height": 430,
+        "bytes": 25988
+      },
+      {
+        "src": "/images/insights/ai-slop-verification-1200.webp",
+        "width": 1200,
+        "height": 672,
+        "bytes": 105214
+      },
+      {
+        "src": "/images/insights/ai-slop-verification-1200.avif",
+        "width": 1200,
+        "height": 672,
+        "bytes": 46568
+      }
+    ]
+  }
+]

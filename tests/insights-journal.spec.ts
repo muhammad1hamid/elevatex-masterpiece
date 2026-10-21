@@ -124,8 +124,8 @@ test('Insights and every article ship crawlable content, unique metadata and tru
       );
       expect(
         schema.find((item) => item['@type'] === 'ItemList')?.numberOfItems,
-      ).toBe(3);
-      await expect(page.locator('[data-journal-story]')).toHaveCount(3);
+      ).toBe(4);
+      await expect(page.locator('[data-journal-story]')).toHaveCount(4);
     } else {
       const article = articles.find(({ slug }) => path.includes(slug))!;
       const articleSchema = schema.find((item) => item['@type'] === 'Article');
@@ -185,7 +185,7 @@ test('topic controls are keyboard accessible, show only represented categories a
   await page.goto('/insights/');
   const filters = page.locator('[data-journal-filters]');
   await expect(filters).toBeVisible();
-  await expect(filters.getByRole('button')).toHaveCount(4);
+  await expect(filters.getByRole('button')).toHaveCount(5);
   const all = filters.locator('[data-journal-filter="all"]');
   await expect(all).toHaveAttribute('aria-pressed', 'true');
   for (const { category } of articles) {
@@ -213,7 +213,7 @@ test('topic controls are keyboard accessible, show only represented categories a
     .getByRole('link', { name: 'Explore Insights', exact: true })
     .click();
   await expect(all).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('[data-journal-story]:visible')).toHaveCount(3);
+  await expect(page.locator('[data-journal-story]:visible')).toHaveCount(4);
   await expect(page.locator('#featured-insight')).toBeInViewport();
 });
 
@@ -228,7 +228,7 @@ test('all articles, sources and contents links remain usable without JavaScript'
   try {
     await page.goto('http://127.0.0.1:4321/insights/');
     await expect(page.locator('[data-journal-filters]')).toBeHidden();
-    await expect(page.locator('[data-journal-story]')).toHaveCount(3);
+    await expect(page.locator('[data-journal-story]')).toHaveCount(4);
     for (const { slug } of articles) {
       const path = `/insights/${slug}/`;
       await expect(

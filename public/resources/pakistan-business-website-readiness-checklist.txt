@@ -1,0 +1,84 @@
+ELEVATEX: BUSINESS WEBSITE READINESS CHECKLIST
+For service businesses serving Pakistan
+Version: 23 October 2026
+
+Companion guide:
+https://elevatexlab.org/insights/what-makes-a-website-convert-in-2026/
+
+Use this editable worksheet before commissioning or reviewing a website.
+Mark each item PASS, NEEDS WORK, NOT CHECKED or NOT APPLICABLE. A tick is
+not a score or a certification. Keep a short evidence record for each
+important decision. This worksheet does not predict rankings or sales.
+
+Business: __________________________  Review date: __________________
+Review owner: ______________________  Page reviewed: ________________
+Audience: __________________________  Main visitor task: ____________
+
+A. THE OFFER
+[ ] 01. A new visitor can explain the actual service in their own words.
+[ ] 02. The page identifies the intended customer and the limits of scope.
+[ ] 03. The primary button describes what its destination actually does.
+[ ] 04. Each important claim has evidence the visitor can inspect.
+[ ] 05. Concept projects and demonstrations are clearly labelled.
+[ ] 06. Every testimonial, client name or result has permission and a source.
+
+B. SERVING CUSTOMERS IN PAKISTAN
+[ ] 07. Service coverage matches where the business genuinely operates.
+[ ] 08. No office, local address, certification or affiliation is invented.
+[ ] 09. Language choices match what the team can actually support.
+[ ] 10. If Urdu is included, a fluent reader checks meaning and right-to-left layout.
+[ ] 11. Any published prices state the actual currency and approved inclusions.
+[ ] 12. Contact details, business hours and availability are accurate.
+[ ] 13. Any WhatsApp link opens the intended business conversation on a real phone.
+[ ] 14. Someone owns incoming enquiries, including those received out of hours.
+
+C. MOBILE AND ACCESSIBILITY
+[ ] 15. The complete task works on a real phone without horizontal scrolling.
+[ ] 16. Text remains readable when enlarged; menus and notices do not cover actions.
+[ ] 17. Keyboard users can reach, identify and activate every important control.
+[ ] 18. Form fields have visible labels and errors explain how to recover.
+[ ] 19. Essential text, contact routes and navigation work without JavaScript.
+[ ] 20. Reduced motion does not remove content or block the visitor's task.
+[ ] 21. Images reserve space and meaningful images have useful text alternatives.
+
+D. ENQUIRIES AND FOLLOW-THROUGH
+[ ] 22. An actual test submission reaches the person responsible for responding.
+[ ] 23. The success state matches what the system has really accepted.
+[ ] 24. A failed delivery has a useful recovery route or accurate explanation.
+[ ] 25. Server-side validation and practical abuse controls protect the form.
+[ ] 26. Only information needed for the next decision is requested.
+[ ] 27. Privacy information explains the actual handling of the enquiry.
+[ ] 28. Analytics do not receive names, email addresses or message contents.
+
+E. SEARCH DISCOVERY AND MAINTENANCE
+[ ] 29. Approved public pages have one clear H1 and useful titles/descriptions.
+[ ] 30. Canonicals use the chosen HTTPS hostname and point to the right page.
+[ ] 31. Approved public pages are indexable; private/draft pages stay protected.
+[ ] 32. HTTP and alternate-host URLs redirect to the chosen HTTPS hostname.
+[ ] 33. Important pages have relevant internal links and work when opened directly.
+[ ] 34. Sitemap entries are canonical, successful, approved public pages.
+[ ] 35. Important old URLs have reviewed equivalent destinations when moved.
+[ ] 36. A maintenance owner can update content, check enquiries and recover a release.
+
+EVIDENCE RECORD (COPY FOR EACH ISSUE)
+Item number: _______________________  Status: _______________________
+Observed problem: __________________________________________________
+Evidence or test performed: ________________________________________
+Action: ____________________________________________________________
+Owner: _____________________________  Due date: _____________________
+Recheck result and date: ____________________________________________
+
+PRIORITY
+First: a broken enquiry, inaccessible essential task or misleading claim.
+Next: discovery, content clarity and evidence gaps.
+Then: visual refinements that support the visitor's decision.
+
+Planning guidance from ElevateX. This checklist is not a legal,
+accessibility or security certification. Do not include customer or
+confidential business information in a publicly shared copy.
+
+Supporting standards and guidance:
+W3C labels: https://www.w3.org/WAI/tutorials/forms/labels/
+W3C form feedback: https://www.w3.org/WAI/tutorials/forms/notifications/
+Web Vitals: https://web.dev/articles/vitals
+Google indexing: https://developers.google.com/search/docs/crawling-indexing/block-indexing

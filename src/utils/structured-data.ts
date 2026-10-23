@@ -1,4 +1,5 @@
 import { site } from '../data/site';
+import { socialProfiles } from '../data/social';
 import { founder } from '../data/founder';
 import { canonicalUrl } from './seo';
 
@@ -16,6 +17,8 @@ export function organizationSchema(): JsonLd {
     '@type': 'Organization',
     '@id': organizationId,
     name: site.name,
+    alternateName: 'ElevateX Lab',
+    sameAs: socialProfiles.map((profile) => profile.href),
     url: `${site.origin}/`,
     description: site.description,
     founder: {

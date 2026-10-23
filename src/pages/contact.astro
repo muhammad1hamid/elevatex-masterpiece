@@ -1,4 +1,5 @@
 ---
+import { staticPages } from '../data/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactHero from '../components/contact/ContactHero.astro';
 import ContactHeading from '../components/contact/ContactHeading.astro';
@@ -17,7 +18,9 @@ import '../styles/contact.css';
 
 <BaseLayout
   {...contactMetadata}
-  indexable={false}
+  indexable={
+    staticPages.find((page) => page.path === '/contact/')?.indexable ?? false
+  }
   schema={[
     organizationSchema(),
     websiteSchema(),

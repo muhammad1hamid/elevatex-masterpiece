@@ -27,7 +27,7 @@ showcase:
     details: [Venue presentation, Filterable photo gallery, Visit enquiries]
   image:
     src: /images/work/defence-marquee-1200.webp
-    alt: Real Defence Marquee website concept showing an ivory-draped wedding venue and a Book a Visit call to action.
+    alt: Defence Marquee venue website concept showing a decorated wedding hall with visit and gallery links.
     width: 1200
     height: 900
     provenance: verifiedScreenshot

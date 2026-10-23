@@ -30,6 +30,12 @@ const { hero = false, ...seoProps } = Astro.props;
       crossorigin
     />
     <Seo {...seoProps} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="ElevateX Insights"
+      href={`${site.origin}/insights/rss.xml`}
+    />
     <slot name="head" />
     {hero && <HeroBoot />}
   </head>

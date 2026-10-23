@@ -11,7 +11,7 @@ export const aiChatbots = {
     'ElevateX builds AI chatbot experiences that can understand common requests, collect useful information, guide customers, and connect conversations with the next business action.',
   image: {
     src: '/images/social/ai-chatbots.png',
-    alt: 'ElevateX AI Chatbots — conversation, context, and a considered next step.',
+    alt: 'ElevateX AI chatbot example connecting a salon website enquiry to context gathering and human follow-up.',
     width: 1200,
     height: 630,
   },

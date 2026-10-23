@@ -1,5 +1,5 @@
 ---
-import { site } from '../../data/site';
+import { site, homepageMetadata } from '../../data/site';
 import { canIndex, canonicalUrl, pageTitle } from '../../utils/seo';
 import type { JsonLd as JsonLdType } from '../../utils/structured-data';
 import JsonLd from './JsonLd.astro';
@@ -19,7 +19,7 @@ const {
   path,
   indexable = false,
   type = 'website',
-  image,
+  image = homepageMetadata.image,
   schema = [],
 } = Astro.props;
 const canonical = canonicalUrl(path);

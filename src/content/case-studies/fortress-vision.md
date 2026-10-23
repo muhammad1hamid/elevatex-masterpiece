@@ -22,7 +22,7 @@ showcase:
     details: [Hall presentation, Celebration options, Event enquiries]
   image:
     src: /images/work/fortress-vision-1200.webp
-    alt: Real Fortress Events Complex website concept with chandelier-lit hall photography and event enquiry links.
+    alt: Fortress Events Complex website concept showing a chandelier-lit hall with venue and event enquiry links.
     width: 1200
     height: 900
     provenance: verifiedScreenshot

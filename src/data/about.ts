@@ -6,7 +6,7 @@ export const aboutMetadata = {
   path: '/about/',
   image: {
     src: '/images/social/elevatex-about.png',
-    alt: 'About ElevateX — Built with intention. Driven by what’s possible. Illustrative architectural studio artwork.',
+    alt: 'ElevateX About cover with the words Built with intention and an illustrated architectural design workspace.',
     width: 1200,
     height: 630,
   },

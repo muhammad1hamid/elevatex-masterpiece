@@ -33,7 +33,7 @@ export const webDevelopment = {
     'ElevateX designs and develops modern websites built around your business, your audience, and the actions you want visitors to take — with careful attention to design, performance, responsiveness, and technical quality.',
   image: {
     src: '/images/social/web-development.png',
-    alt: 'ElevateX Web Development with a responsive website browser composition.',
+    alt: 'ElevateX web development cover showing matching desktop and mobile website layouts.',
     width: 1200,
     height: 630,
   },

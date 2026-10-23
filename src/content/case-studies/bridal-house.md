@@ -22,7 +22,7 @@ showcase:
     details: [Collection browsing, Rental presentation, Consultation enquiries]
   image:
     src: /images/work/bridal-house-1200.webp
-    alt: Real Bridal House website concept presenting bridal fashion and collection discovery.
+    alt: Bridal House fashion website concept showing an embroidered bridal dress with collection and consultation links.
     width: 1200
     height: 900
     provenance: verifiedScreenshot

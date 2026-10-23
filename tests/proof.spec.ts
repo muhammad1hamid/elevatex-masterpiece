@@ -46,7 +46,7 @@ test('proof follows the hero in server HTML with accurate concepts and no invent
     );
     await expect(
       page.locator('.project__link').nth(index),
-    ).toHaveAccessibleName(`${titles[index]} View Project`);
+    ).toHaveAccessibleName(new RegExp(`${titles[index]} .*View Project`));
   }
   await expect(
     page.getByRole('link', { name: 'Explore Selected Work' }),

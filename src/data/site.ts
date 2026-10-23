@@ -38,13 +38,13 @@ export const services: ReadonlyArray<{ slug: ServiceSlug; name: string }> = [
 
 /** Set indexable only after that page has approved, useful public content. */
 export const staticPages = [
-  { path: '/', indexable: false },
+  { path: '/', indexable: true },
   { path: '/services/web-development/', indexable: true },
   { path: '/services/ai-automation/', indexable: true },
   { path: '/services/ai-chatbots/', indexable: true },
   { path: '/services/landing-pages/', indexable: true },
   { path: '/work/', indexable: true },
   { path: '/about/', indexable: true },
-  // Contact indexing remains a separate owner decision from delivery activation.
-  { path: '/contact/', indexable: false },
+  // SEO phase 1: useful public contact page with a verified WhatsApp alternative.
+  { path: '/contact/', indexable: true },
 ] as const;

@@ -82,3 +82,9 @@ For future updates: commit the reviewed source, push main, wait for the automati
 ## Authorized contact Worker — 19 October 2026
 
 `worker/index.ts` now handles /api/contact using the same Worker and Git deployment. ASSETS serves static pages; run_worker_first is limited to /api/*. Two native rate-limit bindings and existing runtime secret bindings protect delivery. See [contact operations](integrations/CONTACT_DELIVERY.md) for configuration, limits, shutdown and delivery semantics. This supersedes the earlier future-backend guidance; it does not authorize unrelated DNS or indexing changes.
+
+## Authorized SEO and image-description release — 23 October 2026
+
+The owner requested pushing the current reviewed changes to `main`. This release includes the central production indexability decisions for Home and Contact, default social metadata, RSS discovery, existing organization profiles, accessible project links, contextual service/Insight links, the business-website readiness worksheet and improved image descriptions. It supersedes the earlier Home/Contact indexing hold for these completed pages. Preview builds and deliberately excluded routes retain noindex.
+
+Use the existing Git-triggered Workers Build. Confirm the pushed commit through `/release.json` and inspect the released pages; do not replace this flow with a manual Wrangler publication. The source release changes no DNS records, hostname redirect rules, legacy-domain mappings, secrets, contact-delivery implementation or analytics controls. The observed HTTP/www problems remain a separate zone-owner action. See [the release record](seo/RELEASE_2026-10-23.md) for scope and checks.

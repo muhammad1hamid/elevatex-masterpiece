@@ -31,7 +31,7 @@ showcase:
   verification: Owner confirmed concept status in this chat. Supplied as Apex Detailing Studio; public site title and wordmark currently say Classic Detailers. Inspected in Chrome; HTTP 200. Ceramic coating, paint protection, transformation interface and guided quote enquiry observed. No outcomes or demo testimonials reused as agency proof.
   image:
     src: /images/work/apex-detailing-1200.webp
-    alt: Classic Detailers automotive website concept showing a black SUV and paint protection services.
+    alt: Classic Detailers automotive website concept showing a black SUV with quote and vehicle transformation links.
     width: 1200
     height: 900
 projectStudy:
@@ -47,7 +47,7 @@ projectStudy:
   description: Explore the Classic Detailers automotive website concept through authentic interface captures, responsive layouts, service discovery and a guided quote enquiry.
   socialImage:
     src: /images/social/apex-detailing-studio.png
-    alt: Classic Detailers concept study by ElevateX with an authentic website interface capture.
+    alt: ElevateX Classic Detailers concept study cover with an automotive website screenshot and a black SUV.
     width: 1200
     height: 630
   hero:

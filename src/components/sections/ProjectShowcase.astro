@@ -15,12 +15,7 @@ const sizes =
   class:list={['project', { 'project--featured': index === 1 }]}
   data-motion-reveal="editorial-up"
 >
-  <a
-    class="project__link"
-    data-cursor="view"
-    href={project.href}
-    aria-labelledby={`${project.id}-title ${project.id}-action`}
-  >
+  <a class="project__link" data-cursor="view" href={project.href}>
     <figure class="project__figure">
       <div class="project__frame">
         <div class="project__chrome" aria-hidden="true">

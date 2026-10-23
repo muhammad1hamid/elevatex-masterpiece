@@ -10,7 +10,7 @@ export const landingPages = {
     'ElevateX designs and develops focused landing pages that combine clear messaging, strong visual hierarchy, responsive design, and a deliberate path toward the action that matters.',
   image: {
     src: '/images/social/landing-pages.png',
-    alt: 'ElevateX Landing Pages — one page, one clear goal, built around action.',
+    alt: 'ElevateX landing page structure showing an offer, supporting message, proof and one next step.',
     width: 1200,
     height: 630,
   },

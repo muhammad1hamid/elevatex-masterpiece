@@ -96,8 +96,8 @@ try {
   assert.match(article, /index, follow, max-image-preview:large/);
   assert.match(caseStudy, /Test source/);
 
-  // Completed services and Work are approved routes; preview handoffs
-  // and the homepage retain their existing publication gates.
+  // Completed public pages are eligible in the production candidate;
+  // preview handoffs and draft content retain their publication gates.
   const servicePath = '/services/web-development/';
   const serviceCanonical = `https://elevatexlab.org${servicePath}`;
   const serviceHtml = await readFile(
@@ -249,7 +249,7 @@ try {
   assert.match(sitemap, /\/insights\/qa-published-fixture\//);
   assert.match(sitemap, /\/work\/qa-case-fixture\//);
   assert.equal(sitemap.split(`<loc>${serviceCanonical}</loc>`).length - 1, 1);
-  assert.doesNotMatch(sitemap, /<loc>https:\/\/elevatexlab\.org\/<\/loc>/);
+  assert.match(sitemap, /<loc>https:\/\/elevatexlab\.org\/<\/loc>/);
   assert.doesNotMatch(sitemap, /qa-draft-fixture|qa-scheduled-fixture/);
   const automationCanonical = 'https://elevatexlab.org/services/ai-automation/';
   const automationHtml = await readFile(
@@ -557,7 +557,7 @@ try {
     contactHtml,
     /Contact — Start a Website or AI Project \| ElevateX/,
   );
-  assert.match(contactHtml, /noindex, follow/);
+  assert.match(contactHtml, /index, follow, max-image-preview:large/);
   assert.match(contactHtml, /"@type":"ContactPage"/);
   assert.match(contactHtml, /https:\/\/elevatexlab\.org\/contact\//);
   assert.match(contactHtml, /Share your details securely/);
@@ -570,7 +570,8 @@ try {
   );
   assert.doesNotMatch(contactHtml, /http-equiv="refresh"|type="submit"/);
   assert.equal([...contactHtml.matchAll(/<h1\b/g)].length, 1);
-  assert.ok(!sitemap.includes('<loc>https://elevatexlab.org/contact/</loc>'));
+  assert.ok(sitemap.includes('<loc>https://elevatexlab.org/contact/</loc>'));
+  assert.ok(sitemap.includes('<loc>https://elevatexlab.org/</loc>'));
   for (const slug of [
     'web-development',
     'ai-automation',
@@ -598,7 +599,7 @@ try {
   assert.match(robots, /User-agent: GPTBot\nAllow: \//);
   assert.match(
     await readFile(`${output}/index.html`, 'utf8'),
-    /noindex, follow/,
+    /index, follow, max-image-preview:large/,
   );
   assert.doesNotMatch(
     await readFile(`${output}/index.html`, 'utf8'),

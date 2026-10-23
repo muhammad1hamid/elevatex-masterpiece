@@ -20,7 +20,7 @@ projectStudy:
   description: Explore the Infinity Salon website concept through beauty-focused design, real interface captures, responsive layouts and appointment enquiry details.
   socialImage:
     src: /images/social/infinity-salon.png
-    alt: Infinity Salon concept website study by ElevateX, with a genuine interface preview.
+    alt: ElevateX Infinity Salon concept study cover with a hair salon website screenshot and appointment enquiry buttons.
     width: 1200
     height: 630
   hero:
@@ -526,7 +526,7 @@ showcase:
       - Appointment enquiries
     mobileImage:
       src: /images/work/infinity-salon-mobile.webp
-      alt: Infinity Salon's actual mobile homepage, with a stacked headline, salon photograph and appointment links.
+      alt: Mobile Infinity Salon website concept with hair styling photography, an appointment enquiry button and a call link.
       width: 390
       height: 844
       provenance: verifiedScreenshot
@@ -538,7 +538,7 @@ showcase:
   verification: Owner confirmed concept status in this chat. Public site inspected in Chrome; HTTP 200. Hair and beauty services, studio gallery and appointment enquiry interface observed. Ratings and testimonials on the demo are not ElevateX proof.
   image:
     src: /images/work/infinity-salon-1200.webp
-    alt: Infinity Salon website concept with warm salon photography and an appointment booking call to action.
+    alt: Infinity Salon website concept showing a hair styling scene with appointment enquiry and call buttons.
     width: 1200
     height: 900
 ---

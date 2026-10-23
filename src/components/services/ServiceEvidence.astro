@@ -4,6 +4,7 @@ import type { ProjectMedia } from '../../data/qadeer-media';
 interface Props {
   desktop: ProjectMedia;
   mobile: ProjectMedia;
+  alt: string;
   caption: string;
   notes: readonly { title: string; text: string }[];
   noteLevel?: 'h3' | 'h4';
@@ -11,6 +12,7 @@ interface Props {
 const {
   desktop,
   mobile,
+  alt,
   caption,
   notes,
   noteLevel: NoteHeading = 'h3',
@@ -59,7 +61,7 @@ const sources = (media: ProjectMedia, format: string) =>
             sizes="(min-width: 1280px) 660px, (min-width: 1024px) 48vw, 65vw"
             width={desktop.width}
             height={desktop.height}
-            alt={`${desktop.alt} The narrow-screen source shows the actual mobile layout.`}
+            alt={alt}
             loading="lazy"
             decoding="async"
           />

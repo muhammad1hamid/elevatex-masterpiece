@@ -7,7 +7,7 @@ export const workMetadata = {
     src: '/images/social/work.png',
     width: 1200,
     height: 630,
-    alt: 'ElevateX Selected Work — genuine previews of concept websites.',
+    alt: 'ElevateX website concepts for Qadeer Jewellers, Infinity Salon and Classic Detailers.',
   },
 } as const;
 

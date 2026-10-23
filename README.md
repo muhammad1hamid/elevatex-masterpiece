@@ -45,13 +45,13 @@ docs/                   Architecture, deployment, integrations and migration evi
 
 ## Publishing rules
 
-The homepage is a non-indexable hero preview with progressively enhanced motion and navigation. Content remains useful without JavaScript. Fonts and artwork are self-hosted; analytics and forms remain disabled. Temporary noindex [preview navigation handoffs](docs/hero-navigation.md) connect planned routes to existing content and are excluded from production.
+Local builds default to a noindex preview. Approved public pages, including Home and Contact, become eligible for indexing only in a production build through the central page registry. Content remains useful without JavaScript, and fonts and artwork are self-hosted. Contact delivery and consent-gated analytics retain their existing runtime controls. The `/services/` compatibility handoff remains excluded from the sitemap; the four service detail pages own their commercial intents.
 
 Content entries default to `draft: true`. Public entries must have `draft: false` and a non-future `publishedDate`; their filename/optional `slug` must be lowercase words separated by hyphens. Markdown body headings start at H2. Docs templates are outside content collections. Actual editorial dates supply sitemap `lastmod`.
 
 Indexing requires both `DEPLOYMENT_ENV=production` and page approval (static route `indexable`, or a published content entry). Preview pages send noindex through HTML and Cloudflare headers, and have an empty sitemap. Robots allows fetching so crawlers can see noindex; use authentication for confidential previews. See [Google's noindex guidance](https://developers.google.com/search/docs/crawling-indexing/block-indexing).
 
-The official canonical origin is `https://elevatexlab.org` (non-www), centralized in `src/data/site.ts`. Astro, SEO/schema, sitemap, robots and RSS use this configuration. Preview stays noindex; Home and Contact still require their separate production-indexing approval. No DNS, deployment or old-domain redirects have been changed. Read [deployment preparation](docs/cloudflare.md) and the [historical migration review](docs/migration/README.md) before launch.
+The official canonical origin is `https://elevatexlab.org` (non-www), centralized in `src/data/site.ts`. Astro, SEO/schema, sitemap, robots and RSS use this configuration. The owner authorized the current SEO, authority-resource and image-description release to `main` on 23 October 2026; see [the release record](docs/seo/RELEASE_2026-10-23.md). Preview stays noindex. This source release makes no DNS or old-domain redirect changes. Read [deployment preparation](docs/cloudflare.md) and the [historical migration review](docs/migration/README.md) before changing hosting or legacy URLs.
 
 Earlier dated implementation notes and migration snapshots retain the old .com URLs as historical evidence; they do not override the current origin. Future social-image export scripts use the centralized hostname; approved existing raster imagery is preserved.
 

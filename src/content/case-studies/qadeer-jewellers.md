@@ -20,7 +20,7 @@ projectStudy:
   description: Explore the Qadeer Jewellers website concept through real desktop and mobile captures, collection browsing, visual design and selected interface details.
   socialImage:
     src: /images/social/qadeer-jewellers.png
-    alt: ElevateX Qadeer Jewellers concept project study with a genuine website preview.
+    alt: ElevateX Qadeer Jewellers concept study cover with a gold jewellery website screenshot.
     width: 1200
     height: 630
   hero:
@@ -491,7 +491,7 @@ showcase:
   verification: Owner confirmed concept status in this chat. Public site inspected in Chrome; HTTP 200. Gold, diamond and bridal collections, galleries and showroom visit calls to action observed. No checkout or business outcomes claimed.
   image:
     src: /images/work/qadeer-jewellers-1200.webp
-    alt: Qadeer Jewellers website concept with gold jewellery photography and The Art of Legacy headline.
+    alt: Qadeer Jewellers website concept showing gold jewellery, The Art of Legacy headline and collection and showroom visit links.
     width: 1200
     height: 900
 ---

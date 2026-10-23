@@ -10,7 +10,7 @@ export const aiAutomation = {
     'ElevateX designs practical AI-powered workflows that help businesses handle repetitive tasks, organize information, connect tools, and move routine processes forward more efficiently.',
   image: {
     src: '/images/social/ai-automation.png',
-    alt: 'ElevateX AI Automation — clear inputs, considered logic, human control.',
+    alt: 'ElevateX AI automation workflow: receive an input, validate a decision and coordinate an action, with human control.',
     width: 1200,
     height: 630,
   },

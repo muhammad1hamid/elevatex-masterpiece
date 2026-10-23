@@ -61,6 +61,7 @@ const sizes =
                 <ServiceEvidence
                   desktop={qadeerScreenshots.desktop}
                   mobile={qadeerScreenshots.mobile}
+                  alt="Qadeer Jewellers concept homepage with gold jewellery, The Art of Legacy headline and collection and showroom visit links."
                   caption="Real concept website captures / 14 October 2026. Demo product details and business claims are not independently verified. No client results or underlying project stack are inferred."
                   notes={websiteEvidenceNotes}
                   noteLevel="h4"
@@ -101,7 +102,7 @@ const sizes =
                       sizes={sizes}
                       width={project.image.width}
                       height={project.image.height}
-                      alt={`${project.title} website concept homepage in a desktop browser.`}
+                      alt={project.image.alt}
                       loading="lazy"
                       decoding="async"
                     />

@@ -77,8 +77,11 @@ test('process is sixth with complete server-rendered copy and the approved conta
   ).toHaveCount(0);
   await expect(page.locator('#process .process-visual img')).toHaveCount(5);
   await expect(
-    page.locator('#process .process-visual img[alt=""]'),
-  ).toHaveCount(5);
+    page.locator(
+      '#process .process-visual img:not([alt]), #process .process-visual img[alt=""]',
+    ),
+  ).toHaveCount(0);
+  await expect(page.locator('.process-visual').getByRole('img')).toHaveCount(0);
   expect(
     await page.locator('#process .process-visual img').evaluateAll((images) =>
       images.map((image) => ({

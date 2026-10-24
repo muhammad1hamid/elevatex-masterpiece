@@ -82,10 +82,11 @@ test('scene layers are decorative and reserve image dimensions', async ({
   for (const image of images) {
     expect(image.width).toBeGreaterThan(0);
     expect(image.height).toBeGreaterThan(0);
-    expect(image.alt).toBe('');
+    expect(image.alt?.trim()).toBeTruthy();
     expect(image.decorative).toBe(true);
     expect(image.loaded).toBe(true);
   }
+  await expect(page.locator('.hero').getByRole('img')).toHaveCount(0);
   await expect(
     page.locator(
       '.hero [aria-hidden="true"] a, .hero [aria-hidden="true"] button',

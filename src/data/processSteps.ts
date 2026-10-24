@@ -7,6 +7,7 @@ export interface ProcessStep {
   details: string[];
   outcome: string;
   visual: string;
+  visualAlt: string;
   visualWidth: number;
   visualHeight: number;
 }
@@ -22,6 +23,8 @@ export const processSteps: ProcessStep[] = [
     details: ['Business goals', 'Audience needs', 'Project requirements'],
     outcome: 'Clear project direction',
     visual: '/images/process/process-discover.webp',
+    visualAlt:
+      'Discovery illustration with audience research, project requirements and a tablet dashboard.',
     visualWidth: 1240,
     visualHeight: 1240,
   },
@@ -39,6 +42,8 @@ export const processSteps: ProcessStep[] = [
     ],
     outcome: 'A considered build plan',
     visual: '/images/process/process-strategize.webp',
+    visualAlt:
+      'Website strategy diagram connecting scope, structure and a technical plan.',
     visualWidth: 1240,
     visualHeight: 1240,
   },
@@ -52,6 +57,8 @@ export const processSteps: ProcessStep[] = [
     details: ['Visual direction', 'Responsive layouts', 'User experience'],
     outcome: 'An approved design direction',
     visual: '/images/process/process-design.webp',
+    visualAlt:
+      'Website design illustration showing wireframes developing into a finished page layout.',
     visualWidth: 1240,
     visualHeight: 1240,
   },
@@ -65,6 +72,8 @@ export const processSteps: ProcessStep[] = [
     details: ['Development', 'Integrations', 'Quality assurance'],
     outcome: 'A tested working build',
     visual: '/images/process/process-develop.webp',
+    visualAlt:
+      'Development illustration with code, a website preview and build, integration and QA stages.',
     visualWidth: 1240,
     visualHeight: 1240,
   },
@@ -78,6 +87,8 @@ export const processSteps: ProcessStep[] = [
     details: ['Launch checks', 'Deployment', 'Handoff and next steps'],
     outcome: 'A ready-to-use solution',
     visual: '/images/process/process-launch.webp',
+    visualAlt:
+      'Launch illustration with a responsive website displayed on a laptop and phone.',
     visualWidth: 1200,
     visualHeight: 800,
   },
